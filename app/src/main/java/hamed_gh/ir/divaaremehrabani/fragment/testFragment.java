@@ -28,7 +28,6 @@ public class testFragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_information, container, false);
 
         ButterKnife.bind(this, rootView);
-        init("پیشخوان");
 
         //-- load data ---
 //        name.setText(AppController.getStoredString("FirstName"));

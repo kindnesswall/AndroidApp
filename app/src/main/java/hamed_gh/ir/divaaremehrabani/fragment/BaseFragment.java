@@ -25,7 +25,7 @@ public class BaseFragment extends Fragment {
     private ImageView mFirstIV;
     private ImageView mSecondIV;
 
-    protected void init(String title){
+    protected void init(){
         context = getActivity();
         mainActivity = (AppCompatActivity) getActivity();
 
@@ -36,7 +36,6 @@ public class BaseFragment extends Fragment {
         mFirstIV = (ImageView)toolbarLayout.findViewById(R.id.toolbar_first_iv);
 
         mToolbarTitleTextView = (TextView) toolbarLayout.findViewById(R.id.toolbar_title_textView);
-        mToolbarTitleTextView.setText(title);
 
         setHowToBack();
     }
