@@ -1,14 +1,9 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,11 +28,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.AppController;
-import hamed_gh.ir.divaaremehrabani.fragment.BaseFragment;
-import hamed_gh.ir.divaaremehrabani.fragment.testFragment;
 import hamed_gh.ir.divaaremehrabani.helper.MaterialDialogBuilder;
 import hamed_gh.ir.divaaremehrabani.helper.MetricConverter;
-import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 
 /**
  * Created by Hamed on 4/3/16.
@@ -62,40 +54,37 @@ public class BaseActivity extends AppCompatActivity {
     protected TextView mToolbarTitleTextView;
     private ImageView mFirstIV;
     private ImageView mSecondIV;
-    private String userType;
     public Drawer drawer;
     protected int headerBgColor;
     private Toolbar mToolbar;
-    private int newActivity;
     private boolean showDrawerMenu = false;
 
     public PrimaryDrawerItem logoutDrawerItem;
-    public PrimaryDrawerItem homeDrawerItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        Toasti.showL("در حال حاضر ابردانش با خطا با مواجه شده است و نیاز به راه اندازی مجدد دارد.");
-                        Looper.loop();
-                    }
-                }.start();
-                try
-                {
-                    Thread.sleep(4000); // Let the Toast display before app will get shutdown
-                }
-                catch (InterruptedException e) {    }
-                System.exit(2);
-            }
-        });
+//        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+//            @Override
+//            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
+//
+//                new Thread() {
+//                    @Override
+//                    public void run() {
+//                        Looper.prepare();
+//                        Toasti.showL("custom message after fail!");
+//                        Looper.loop();
+//                    }
+//                }.start();
+//                try
+//                {
+//                    Thread.sleep(4000); // Let the Toast display before app will get shutdown
+//                }
+//                catch (InterruptedException e) {    }
+//                System.exit(2);
+//            }
+//        });
     }
 
     public boolean showingDrawerMenu() {
@@ -110,10 +99,12 @@ public class BaseActivity extends AppCompatActivity {
 
         context = this;
 
-        // -- set Toolbar ---
+	    setContentView(layoutResID);
+
+	    // -- set Toolbar ---
         toolbarLayout = (RelativeLayout) findViewById(R.id.toolbar);
         mToolbar = (Toolbar) toolbarLayout.findViewById(R.id.main_toolbar);
-        mToolbar.setBackgroundColor(getResources().getColor(headerBgColor));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         setSupportActionBar(mToolbar);
         try {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -127,9 +118,7 @@ public class BaseActivity extends AppCompatActivity {
         mFirstIV = (ImageView) toolbarLayout.findViewById(R.id.toolbar_first_iv);
     }
 
-    protected void setDrawer(int newAct) {
-
-        newActivity = newAct;
+    protected void setDrawer() {
 
         // -- set Drawer --
 
@@ -171,41 +160,15 @@ public class BaseActivity extends AppCompatActivity {
                     }
                 });
 
-        homeDrawerItem = new PrimaryDrawerItem().withName(getString(R.string.app_name))
-                .withIcon(R.mipmap.ic_launcher).withIconTintingEnabled(true)
-                .withTextColor(darkWhite)
-                .withIconColor(darkWhite);
-
         logoutDrawerItem = new PrimaryDrawerItem().withName(context.getString(R.string.logout))
                 .withIcon(R.mipmap.icon_logout).withIconTintingEnabled(true)
                 .withTextColor(darkWhite)
                 .withIconColor(darkWhite);
 
-        if (userType.equals("student")) {
-
-            drawerBuilder
-                    .addDrawerItems(
-		                    homeDrawerItem,
-                            logoutDrawerItem
-                    );
-
-        } else if (userType.equals("parent")) {
-
-            drawerBuilder
-                    .addDrawerItems(
-		                    homeDrawerItem,
-                            logoutDrawerItem
-                    );
-
-        } else if (userType.equals("teacher")) {
-
-            drawerBuilder
-                    .addDrawerItems(
-		                    homeDrawerItem,
-                            logoutDrawerItem
-                    );
-
-        }
+	    drawerBuilder
+			    .addDrawerItems(
+					    logoutDrawerItem
+			    );
 
         drawer = drawerBuilder.build();
 //        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
@@ -262,101 +225,17 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void displayView(int position) {
 
-        Fragment fragment = null;
-        Intent intent;
-        String title = getString(R.string.app_name);
-        if (userType.equals("login")) {
-            switch (position - 1) {
-                case 0:
-                    BaseActivity.howToBack = HowToBack.NOTHING;
-                    showLogoutDialog();
-                    position = -1;
-                    break;
-
-                default:
-                    break;
-            }
-        } else if (userType.equals("logout")) {
-            switch (position - 1) {
-                case 0:
-                    fragment = new testFragment();
-                    title = "پیشخوان";
-                    TAG = "InformationFragment";
-                    break;
-                case 3:
-                    BaseActivity.howToBack = HowToBack.NOTHING;
-                    showLogoutDialog();
-                    position = -1;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        setFragment(fragment, title, position);
+	    switch (position) {
+		    case 1:
+			    BaseActivity.howToBack = HowToBack.NOTHING;
+			    showLogoutDialog();
+			    break;
+		    default:
+			    break;
+	    }
     }
 
-    protected void setFragment(Fragment fragment, String title, int position) {
-        if (newActivity == 1) {
-            if (position != -1) { //not log out
-                Intent intent = new Intent(this, MainActivity.class);
-                Bundle mBundle = new Bundle();
-                mBundle.putInt("FRAGMENT", position);
-                intent.putExtras(mBundle);
-                startActivity(intent);
-                finish();
-            }
-        } else if (fragment != null) {
 
-            Bundle args = new Bundle();
-            args.putString("how_to_back", "HOME");
-            fragment.setArguments(args);
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
-                String name = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-
-                if (name.equals(title)) { //just close drawer when I choose current fragment
-                    if (drawer != null) {
-                        drawer.closeDrawer();
-                    }
-                    return;
-                }
-                String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
-                if (getSupportFragmentManager().findFragmentByTag(tag) != null)
-                    fragmentTransaction.remove(getSupportFragmentManager().findFragmentByTag(tag));
-            }
-            fragmentTransaction.replace(R.id.container_body, fragment, title);
-            fragmentTransaction.addToBackStack(title);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            mToolbarTitleTextView.setText(title);
-            if (drawer != null) {
-                drawer.closeDrawer();
-            }
-        }
-    }
-
-    protected void replaceFragment(BaseFragment newFragment, String title, String howToBack){
-        Bundle args = new Bundle();
-        args.putString("how_to_back", howToBack);
-        newFragment.setArguments(args);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (fragmentManager.getBackStackEntryCount() != 0) {
-            String tag = getSupportFragmentManager().getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-            if (fragmentManager.findFragmentByTag(tag) != null)
-                fragmentTransaction.remove(fragmentManager.findFragmentByTag(tag));
-        }
-
-        fragmentTransaction.replace(R.id.container_body, newFragment, title);
-        fragmentTransaction.addToBackStack( title);
-        fragmentTransaction.commit();
-    }
 
     public void showLogoutDialog() {
         MaterialDialog.Builder builder = MaterialDialogBuilder.create(this);

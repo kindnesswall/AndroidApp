@@ -1,10 +1,7 @@
 package hamed_gh.ir.divaaremehrabani.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -87,42 +84,6 @@ public class BaseFragment extends Fragment {
 
     protected void firstBtnListener(){
         mainActivity.onBackPressed();
-    }
-
-    protected void replaceFragment(BaseFragment newFragment, String title, String howToBack){
-
-        Bundle args = new Bundle();
-        args.putString("how_to_back", howToBack);
-        newFragment.setArguments(args);
-
-        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (fragmentManager.getBackStackEntryCount() != 0) {
-            String tag = mainActivity.getSupportFragmentManager().getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-            if (fragmentManager.findFragmentByTag(tag) != null)
-                fragmentTransaction.remove(fragmentManager.findFragmentByTag(tag));
-        }
-
-        fragmentTransaction.replace(R.id.container_body, newFragment, title);
-        fragmentTransaction.addToBackStack( title);
-        fragmentTransaction.commit();
-    }
-
-    protected void replaceFragment(BaseFragment newFragment, String title, Bundle args){
-
-        newFragment.setArguments(args);
-
-        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (fragmentManager.getBackStackEntryCount() != 0) {
-            String tag = mainActivity.getSupportFragmentManager().getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-            if (fragmentManager.findFragmentByTag(tag) != null)
-                fragmentTransaction.remove(fragmentManager.findFragmentByTag(tag));
-        }
-
-        fragmentTransaction.replace(R.id.container_body, newFragment, title);
-        fragmentTransaction.addToBackStack( title);
-        fragmentTransaction.commit();
     }
 
 }
