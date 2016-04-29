@@ -235,8 +235,6 @@ public class BaseActivity extends AppCompatActivity {
 	    }
     }
 
-
-
     public void showLogoutDialog() {
         MaterialDialog.Builder builder = MaterialDialogBuilder.create(this);
 

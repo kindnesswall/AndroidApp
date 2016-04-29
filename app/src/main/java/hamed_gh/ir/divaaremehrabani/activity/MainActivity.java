@@ -34,11 +34,11 @@ public class MainActivity extends BaseActivity {
 
 		BaseActivity.howToBack = HowToBack.NOTHING;
 
-		setupViewPager(viewPager);
-		tabLayout.setupWithViewPager(viewPager);
-
 		setShowDrawerMenu(true);
 		setDrawer();
+
+		setupViewPager(viewPager);
+		tabLayout.setupWithViewPager(viewPager);
 	}
 
 	private void setupViewPager(ViewPager viewPager) {

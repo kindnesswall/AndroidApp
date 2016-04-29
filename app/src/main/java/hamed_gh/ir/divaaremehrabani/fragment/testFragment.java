@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -18,8 +17,6 @@ public class testFragment extends BaseFragment {
 
     @Bind(R.id.name)
     TextView name;
-
-    RelativeLayout toolbarLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
