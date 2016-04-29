@@ -17,7 +17,7 @@
 		app:contentInsetRight="0dp"
 		app:contentInsetStart="0dp"/>
 
-	<ir.abredanesh.customview.textview.TextViewIranSansRegular
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/toolbar_title_textView"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
