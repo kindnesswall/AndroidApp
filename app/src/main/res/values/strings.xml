@@ -1,3 +1,5 @@
 <resources>
 	<string name="app_name">DivaareMehrabani</string>
+	<string name="action_menu">منو</string>
+	<string name="logout">خروج</string>
 </resources>
