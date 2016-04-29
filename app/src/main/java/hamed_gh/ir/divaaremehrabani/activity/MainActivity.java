@@ -1,7 +1,9 @@
-package hamed_gh.ir.divaaremehrabani;
+package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import hamed_gh.ir.divaaremehrabani.R;
 
 public class MainActivity extends AppCompatActivity {
 

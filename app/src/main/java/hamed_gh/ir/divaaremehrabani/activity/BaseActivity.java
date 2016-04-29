@@ -31,7 +31,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import hamed_gh.ir.divaaremehrabani.MainActivity;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.AppController;
 import hamed_gh.ir.divaaremehrabani.fragment.BaseFragment;
