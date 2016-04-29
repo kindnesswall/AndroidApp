@@ -10,9 +10,14 @@
 	android:paddingTop="@dimen/activity_vertical_margin"
 	tools:context="hamed_gh.ir.divaaremehrabani.MainActivity">
 
-	<TextView
-		android:id="@+id/textview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Hello World!"/>
+	<include
+		android:id="@+id/toolbar"
+		layout="@layout/toolbar"/>
+
+	<FrameLayout
+		android:id="@+id/container_body"
+		android:layout_width="fill_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"/>
+
 </RelativeLayout>
