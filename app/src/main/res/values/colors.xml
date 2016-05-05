@@ -41,4 +41,9 @@
 	<!--<color name="material_drawer_dark_selected_text">@color/material_drawer_primary</color>-->
 	<color name="material_drawer_dark_header_selection_text">#FFF</color>
 
+
+	<!-- progress view -->
+	<color name="blue_level">#5389bc</color>
+	<color name="blue_circle_unselected_level">#98b8d7</color>
+
 </resources>

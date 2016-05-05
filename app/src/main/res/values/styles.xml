@@ -44,4 +44,9 @@
 		<!-- <item name="android:background">@color/color_primary</item> -->
 	</style>
 
+	<style name="InDeterminateCircularProgressDrawableStyle" parent="Material.Drawable.CircularProgress">
+		<item name="cpd_strokeColor"> @color/blue_level  </item>
+		<item name="cpd_strokeSecondaryColor"> @color/blue_circle_unselected_level  </item>
+	</style>
+
 </resources>

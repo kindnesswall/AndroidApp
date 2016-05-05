@@ -1,24 +1,32 @@
 package hamed_gh.ir.divaaremehrabani.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import butterknife.Bind;
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.adapter.RecyclerViewAdapter;
+import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import hamed_gh.ir.divaaremehrabani.model.MyModel;
 
 /**
  * Created by 5 on 02/21/2016.
  */
 public class testFragment extends BaseFragment {
 
-    @Bind(R.id.name)
-    TextView name;
+	private RecyclerView mRecyclerView;
+	private RecyclerViewAdapter adapter;
 
-    @Override
+	private ArrayList<MyModel> list = new ArrayList<>();
+	private int pageNumber = 0;
+
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +34,20 @@ public class testFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
 
-        //-- load data ---
-//        name.setText(AppController.getStoredString("FirstName"));
+		/* Initialize recyclerview */
+	    mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+	    adapter = new RecyclerViewAdapter(context, list );
+	    mRecyclerView.setAdapter(adapter);
+	    mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-//        AppController.loadImg(profileIV);
-//
-//        ((BaseActivity)mainActivity).drawer.setSelection(((BaseActivity)mainActivity).dashboardDrawerItem,false);
+	    mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+		    @Override
+		    public void onLoadMore(int page, int totalItemsCount) {
+			    // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+			    pageNumber++;
+		    }
+	    });
+
         return rootView;
     }
 }
