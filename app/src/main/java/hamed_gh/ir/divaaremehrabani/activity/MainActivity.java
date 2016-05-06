@@ -43,10 +43,10 @@ public class MainActivity extends BaseActivity {
 
 	private void setupViewPager(ViewPager viewPager) {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(new testFragment(), "کتاب");
-		adapter.addFragment(new testFragment(), "پوشاک");
-		adapter.addFragment(new testFragment(), "لوازم");
-		adapter.addFragment(new testFragment(), "غذا");
+		adapter.addFragment(new testFragment(), getString(R.string.book));
+		adapter.addFragment(new testFragment(), getString(R.string.clothes));
+		adapter.addFragment(new testFragment(), getString(R.string.accessories));
+		adapter.addFragment(new testFragment(), getString(R.string.food));
 		viewPager.setAdapter(adapter);
 	}
 
