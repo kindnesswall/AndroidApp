@@ -65,7 +65,6 @@ public class testFragment extends BaseFragment {
 		call.enqueue(new Callback<PhotoGalleryResponse>() {
 			@Override
 			public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
-				Toasti.showS("onResponse");
 				progressView.setVisibility(View.INVISIBLE);
 
 				try {
@@ -88,7 +87,6 @@ public class testFragment extends BaseFragment {
 
 			@Override
 			public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
-				Toasti.showS("onFailure");
 				progressView.setVisibility(View.INVISIBLE);
 				mRecyclerView.setVisibility(View.INVISIBLE);
 				mMessageTextView.setText("خطا در دریافت اطلاعات");

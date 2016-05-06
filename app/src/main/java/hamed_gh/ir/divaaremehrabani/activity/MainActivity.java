@@ -14,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.fragment.testFragment;
+import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 
 public class MainActivity extends BaseActivity {
 
@@ -39,15 +40,23 @@ public class MainActivity extends BaseActivity {
 
 		setupViewPager(viewPager);
 		tabLayout.setupWithViewPager(viewPager);
+		Toasti.showS(viewPager.getCurrentItem()+"");
 	}
 
-	private void setupViewPager(ViewPager viewPager) {
+	@Override
+	protected void onResume() {
+		super.onResume();
+		viewPager.setCurrentItem(3);
+	}
+
+	private void setupViewPager( ViewPager viewPager) {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(new testFragment(), getString(R.string.book));
-		adapter.addFragment(new testFragment(), getString(R.string.clothes));
-		adapter.addFragment(new testFragment(), getString(R.string.accessories));
 		adapter.addFragment(new testFragment(), getString(R.string.food));
+		adapter.addFragment(new testFragment(), getString(R.string.accessories));
+		adapter.addFragment(new testFragment(), getString(R.string.clothes));
+		adapter.addFragment(new testFragment(), getString(R.string.book));
 		viewPager.setAdapter(adapter);
+
 	}
 
 	class ViewPagerAdapter extends FragmentPagerAdapter {

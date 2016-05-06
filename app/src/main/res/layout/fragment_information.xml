@@ -35,7 +35,8 @@
 
 		android:textSize="14sp"
 		android:padding="5dp"
-		android:visibility="gone"
-		android:textColor="@color/dark_white"/>
+		android:textColor="@color/dark_white"
+
+		android:text="درحال بارگزاری"/>
 
 </RelativeLayout>
