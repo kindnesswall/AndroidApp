@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.ArrayList;
 
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.model.Gallery;
 
 /**
@@ -56,6 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(MyHolder myHolder,final int i) {
 
 	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
+	    ImageLoader.getInstance().displayImage(URIs.DOMAIN+galleries.get(i).getImageSrc(), myHolder.mImageView);
 
     }
 
