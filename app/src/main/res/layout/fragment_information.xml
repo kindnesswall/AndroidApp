@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -15,16 +14,6 @@
 		android:scrollbars="vertical"
 		android:visibility="invisible"/>
 
-	<ir.abredanesh.customview.textview.TextViewIranSansRegular
-		android:id="@+id/nothing_to_load_textview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerInParent="true"
-		android:textSize="14sp"
-		android:padding="5dp"
-		android:visibility="gone"
-		android:textColor="@color/dark_white"/>
-
 	<com.rey.material.widget.ProgressView
 		android:layout_width="36dp"
 		android:layout_height="36dp"
@@ -35,5 +24,18 @@
 		app:pv_circular="true"
 		app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"
 		app:pv_progressMode="indeterminate"/>
+
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/message_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@id/fragment_progressBar"
+		android:layout_centerHorizontal="true"
+
+		android:textSize="14sp"
+		android:padding="5dp"
+		android:visibility="gone"
+		android:textColor="@color/dark_white"/>
 
 </RelativeLayout>

@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 		adapter.addFragment(new testFragment(), "کتاب");
 		adapter.addFragment(new testFragment(), "پوشاک");
+		adapter.addFragment(new testFragment(), "لوازم");
+		adapter.addFragment(new testFragment(), "غذا");
 		viewPager.setAdapter(adapter);
 	}
 

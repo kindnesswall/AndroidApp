@@ -26,17 +26,29 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import java.io.IOException;
+
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.AppController;
+import hamed_gh.ir.divaaremehrabani.app.RestAPI;
+import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.helper.MaterialDialogBuilder;
 import hamed_gh.ir.divaaremehrabani.helper.MetricConverter;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Hamed on 4/3/16.
  */
 public class BaseActivity extends AppCompatActivity {
 
-    public enum HowToBack{
+	public RestAPI service;
+
+	public enum HowToBack{
         HOME,
         NOTHING,
         BACK
@@ -65,26 +77,36 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-//            @Override
-//            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-//
-//                new Thread() {
-//                    @Override
-//                    public void run() {
-//                        Looper.prepare();
-//                        Toasti.showL("custom message after fail!");
-//                        Looper.loop();
-//                    }
-//                }.start();
-//                try
-//                {
-//                    Thread.sleep(4000); // Let the Toast display before app will get shutdown
-//                }
-//                catch (InterruptedException e) {    }
-//                System.exit(2);
-//            }
-//        });
+//	    OkHttpClient httpClient = new OkHttpClient();
+	    OkHttpClient httpClient = new OkHttpClient.Builder()
+			    .addInterceptor(
+					    new Interceptor() {
+						    @Override
+						    public Response intercept(Interceptor.Chain chain) throws IOException {
+							    Request request = chain.request().newBuilder()
+							    .addHeader("token", "s:s").build();
+							    return chain.proceed(request);
+						    }
+					    }).build();
+
+//	    httpClient.networkInterceptors().add(new Interceptor() {
+//		    @Override
+//		    public Response intercept(Chain chain) throws IOException {
+//			    Request request = chain.request().newBuilder().addHeader("token", "s:s").build();
+//			    return chain.proceed(request);
+//		    }
+//	    });
+
+//	    Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(url).client(httpClient).build();
+
+	    //Creating Rest Services
+	    Retrofit retrofit = new Retrofit.Builder()
+			    .baseUrl(URIs.API)
+			    .addConverterFactory(GsonConverterFactory.create())
+			    .client(httpClient).build();
+
+	    service = retrofit.create(RestAPI.class);
+
     }
 
     public boolean showingDrawerMenu() {
