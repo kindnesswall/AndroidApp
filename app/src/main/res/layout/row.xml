@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/row_imageview"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/book_default" />
 
-	<ImageView
-		android:id="@+id/row_imageview"
-		android:layout_width="90dp"
-		android:layout_height="90dp"
-		android:layout_alignParentRight="true"
-	    android:layout_margin="10dp"
-	    android:src="@drawable/book_default"
-		/>
+    <hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/row_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/row_imageview"
+        android:layout_toRightOf="@id/row_imageview"
 
-	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/row_title_textview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_toLeftOf="@id/row_imageview"
-		android:layout_alignTop="@id/row_imageview"
-
-		android:text="کتاب"/>
+        android:text="کتاب" />
 
 </RelativeLayout>
