@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity {
 		adapter.addFragment(new testFragment(), getString(R.string.clothes));
 		adapter.addFragment(new testFragment(), getString(R.string.book));
 		viewPager.setAdapter(adapter);
-
 	}
 
 	class ViewPagerAdapter extends FragmentPagerAdapter {
