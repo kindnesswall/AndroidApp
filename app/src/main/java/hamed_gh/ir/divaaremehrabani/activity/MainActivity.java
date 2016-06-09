@@ -1,11 +1,16 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +56,22 @@ public class MainActivity extends BaseActivity {
 
 	private void setupViewPager( ViewPager viewPager) {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(new testFragment(), getString(R.string.food));
-		adapter.addFragment(new testFragment(), getString(R.string.accessories));
-		adapter.addFragment(new testFragment(), getString(R.string.clothes));
-		adapter.addFragment(new testFragment(), getString(R.string.book));
+		adapter.addFragment(new testFragment());
+		adapter.addFragment(new testFragment());
+		adapter.addFragment(new testFragment());
+		adapter.addFragment(new testFragment());
 		viewPager.setAdapter(adapter);
 	}
 
 	class ViewPagerAdapter extends FragmentPagerAdapter {
 		private final List<Fragment> mFragmentList = new ArrayList<>();
-		private final List<String> mFragmentTitleList = new ArrayList<>();
+
+		private int[] imageResId = {
+				R.drawable.ic_person_white_24dp,
+				R.drawable.ic_search_white_24dp,
+				R.drawable.ic_list_white_24dp,
+				R.drawable.ic_home_white_24dp
+		};
 
 		public ViewPagerAdapter(FragmentManager manager) {
 			super(manager);
@@ -76,14 +87,18 @@ public class MainActivity extends BaseActivity {
 			return mFragmentList.size();
 		}
 
-		public void addFragment(Fragment fragment, String title) {
+		public void addFragment(Fragment fragment) {
 			mFragmentList.add(fragment);
-			mFragmentTitleList.add(title);
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return mFragmentTitleList.get(position);
+			Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
+			image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+			SpannableString sb = new SpannableString(" ");
+			ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+			sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			return sb;
 		}
 	}
 }
