@@ -34,10 +34,11 @@ public class DetailActivity extends AppCompatActivity {
 		ButterKnife.bind(this);
 
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
+		setupViewPager(viewPager);
+		indicator.setViewPager(viewPager);
 
-        setupViewPager(viewPager);
 	}
+
 
 	private void setupViewPager( ViewPager viewPager) {
         CustomPagerAdapter adapter = new CustomPagerAdapter(this);
