@@ -2,8 +2,9 @@
 	<string name="app_name">DivaareMehrabani</string>
 	<string name="action_menu">منو</string>
 	<string name="logout">خروج</string>
+
 	<string name="book">کتاب</string>
 	<string name="clothes">پوشاک</string>
 	<string name="accessories">لوازم</string>
-	<string name="food">نذری</string>
+	<string name="food">غذای نذری</string>
 </resources>

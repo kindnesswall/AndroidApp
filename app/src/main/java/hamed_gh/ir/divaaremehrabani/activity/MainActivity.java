@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.RestAPI;
 import hamed_gh.ir.divaaremehrabani.app.URIs;
+import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import okhttp3.Interceptor;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 		adapter.addFragment(new HomeFragment());
 		adapter.addFragment(new HomeFragment());
-		adapter.addFragment(new HomeFragment());
+		adapter.addFragment(new CategoriesFragment());
 		adapter.addFragment(new HomeFragment());
 		viewPager.setAdapter(adapter);
 	}
