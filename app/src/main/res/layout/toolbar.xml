@@ -17,6 +17,16 @@
 		app:contentInsetRight="0dp"
 		app:contentInsetStart="0dp"/>
 
+	<ImageView
+		android:id="@+id/toolbar_app_icon"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:padding="8dp"
+		android:layout_centerVertical="true"
+
+		android:layout_alignParentRight="true"
+		android:src="@drawable/ic_pink_heart"/>
+
 	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/toolbar_title_textView"
 		android:layout_width="match_parent"
@@ -24,31 +34,41 @@
 		android:ellipsize="end"
 		android:singleLine="true"
 		android:gravity="center_vertical|right"
-		android:layout_marginRight="50dp"
-		android:layout_toRightOf="@+id/toolbar_second_iv"
+
+		android:layout_toRightOf="@+id/toolbar_new_gift_btn"
+
 		android:text="Toolbar Title"
 		android:textColor="#FFFFFF"
 		android:textSize="16sp"
-		android:visibility="visible" />
+		android:visibility="gone" />
 
-	<ImageView
-		android:id="@+id/toolbar_first_iv"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:padding="12dp"
-		android:layout_centerVertical="true"
-		android:layout_alignParentLeft="true"
-		android:visibility="gone"
-		android:src="@mipmap/ic_arrow_back_white_24dp"/>
+	<RelativeLayout
+		android:id="@+id/toolbar_new_gift_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:clickable="true"
+		android:background="?attr/selectableItemBackground"
+		android:layout_alignParentLeft="true">
 
-	<ImageView
-		android:id="@+id/toolbar_second_iv"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-        android:padding="12dp"
-		android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/toolbar_first_iv"
-		android:visibility="gone"
-        android:src="@mipmap/ic_arrow_back_white_24dp"/>
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/toolbar_new_gift_btn_tv"
+			android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="هدیه جدید"
+		    android:layout_alignParentLeft="true"
+		    android:layout_centerVertical="true"
+		    android:layout_marginLeft="8dp"
+			/>
+
+		<ImageView
+			android:id="@+id/toolbar_new_gift_btn_ic"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:padding="12dp"
+			android:layout_centerVertical="true"
+			android:layout_toRightOf="@id/toolbar_new_gift_btn_tv"
+			android:src="@drawable/ic_add_white_24dp"/>
+
+	</RelativeLayout>
 
 </RelativeLayout>

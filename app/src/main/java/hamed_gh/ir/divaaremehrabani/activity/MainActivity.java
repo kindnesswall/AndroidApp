@@ -1,5 +1,6 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,40 +9,97 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.app.RestAPI;
+import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.fragment.testFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
 	@Bind(R.id.viewpager)
 	ViewPager viewPager;
 
 	@Bind(R.id.tabs)
 	TabLayout tabLayout;
+	public RestAPI service;
+	private Context context;
+	private Toolbar mToolbar;
+	private TextView mToolbarTitleTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		init(R.layout.activity_main);
-		setToolbarTitle("دیوار مهربانی");
+		//	    OkHttpClient httpClient = new OkHttpClient();
+		OkHttpClient httpClient = new OkHttpClient.Builder()
+				.addInterceptor(
+						new Interceptor() {
+							@Override
+							public Response intercept(Interceptor.Chain chain) throws IOException {
+								Request request = chain.request().newBuilder()
+										.addHeader("token", "s:s").build();
+								return chain.proceed(request);
+							}
+						}).build();
+
+//	    httpClient.networkInterceptors().add(new Interceptor() {
+//		    @Override
+//		    public Response intercept(Chain chain) throws IOException {
+//			    Request request = chain.request().newBuilder().addHeader("token", "s:s").build();
+//			    return chain.proceed(request);
+//		    }
+//	    });
+
+//	    Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(url).client(httpClient).build();
+
+		//Creating Rest Services
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl(URIs.API)
+				.addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
+
+		service = retrofit.create(RestAPI.class);
+
+
+		context = this;
+
+		setContentView(R.layout.activity_main);
+
+		// -- set Toolbar ---
+		mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+		setSupportActionBar(mToolbar);
+		try {
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		} catch (Exception e) {
+
+		}
+
+		mToolbarTitleTextView = (TextView) findViewById(R.id.toolbar_title_textView);
+
+		mToolbarTitleTextView.setText("دیوار مهربانی");
 
 		ButterKnife.bind(this);
-
-		BaseActivity.howToBack = HowToBack.NOTHING;
-
-		setShowDrawerMenu(true);
-		setDrawer();
 
 		setupViewPager(viewPager);
 		tabLayout.setupWithViewPager(viewPager);
