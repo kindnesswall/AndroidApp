@@ -17,7 +17,8 @@
 
 			android:paddingBottom="8dp"
 			android:scrollbars="vertical"
-			android:visibility="invisible"/>
+			android:visibility="invisible"
+			android:background="@color/grey_200"/>
 
 	</android.support.v4.widget.SwipeRefreshLayout>
 

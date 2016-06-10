@@ -49,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
 	    MyHolder mh = new MyHolder(v);
 
         return mh;
@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyHolder myHolder,final int i) {
 
-	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
+//	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
 	    ImageLoader.getInstance().displayImage(URIs.DOMAIN+galleries.get(i).getImageSrc(), myHolder.mImageView);
 
     }

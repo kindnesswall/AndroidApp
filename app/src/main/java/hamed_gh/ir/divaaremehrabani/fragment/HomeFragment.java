@@ -21,7 +21,6 @@ import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.activity.MainActivity;
 import hamed_gh.ir.divaaremehrabani.adapter.RecyclerViewAdapter;
 import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
-import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import hamed_gh.ir.divaaremehrabani.model.Gallery;
 import hamed_gh.ir.divaaremehrabani.model.Meta;
 import hamed_gh.ir.divaaremehrabani.model.PhotoGalleryResponse;
@@ -32,7 +31,7 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class testFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
 	@Bind(R.id.recycler_view)
 	RecyclerView mRecyclerView;
