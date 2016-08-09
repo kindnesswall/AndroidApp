@@ -13,6 +13,10 @@
 	<color name="blue_circle_unselected_level">#98b8d7</color>
 
 
+	<color name="bb_inActiveBottomBarItemColor">#747474</color>
+	<color name="bb_darkBackgroundColor">#212121</color>
+	<color name="bb_tabletRightBorderDark">#505050</color>
+
 	<!--
     Google Material Design Color Palette for Android http://www.google.com/design/spec/style/color.html#color-ui-color-palette
     Spreadsheet used to create this reosurce - http://bit.ly/mdcolor_spreadsheet

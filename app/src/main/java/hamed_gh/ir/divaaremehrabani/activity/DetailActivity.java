@@ -14,12 +14,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
+import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import me.relex.circleindicator.CircleIndicator;
 

@@ -1,6 +1,7 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.content.Context;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -14,17 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
+import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
@@ -69,7 +70,14 @@ public class BottomBarActivity extends AppCompatActivity {
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noTopOffset();
+        mBottomBar.useFixedMode();
+        mBottomBar.setTypeFace("fonts/iran_sans_regular.ttf");
         mBottomBar.setItems(R.menu.menu_bottombar);
+        mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        int color = getResources().getColor(R.color.white);
+
+        ((ImageView)mBottomBar.findViewById(R.id.bb_bottom_bar_icon)).setColorFilter(color);
+
 
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
@@ -109,10 +117,11 @@ public class BottomBarActivity extends AppCompatActivity {
 
         // Setting colors for different tabs when there's more than three of them.
         // You can set colors for tabs in three different ways as shown below.
-        mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
-        mBottomBar.mapColorForTab(1, 0xFF5D4037);
-        mBottomBar.mapColorForTab(2, "#7B1FA2");
-        mBottomBar.mapColorForTab(3, "#FF5252");
+//        mBottomBar.mapColorForTab(0, "#7B1FA2");//ContextCompat.getColor(this, R.color.colorAccent));
+//        mBottomBar.mapColorForTab(1, "#7B1FA2");
+////        mBottomBar.mapColorForTab(1, 0xFF5D4037);
+//        mBottomBar.mapColorForTab(2, "#7B1FA2");
+//        mBottomBar.mapColorForTab(3, "#FF5252");
 //         ATTENTION: This was auto-generated to implement the App Indexing API.
 //         See https://g.co/AppIndexing/AndroidStudio for more information.
 
