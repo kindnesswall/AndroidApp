@@ -79,13 +79,6 @@
 
     </RelativeLayout>
 
-    <!--<View-->
-    <!--android:id="@+id/myView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@id/main_toolbar"-->
-    <!--android:background="@color/deep_purple_300" />-->
-
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/container_body"
         android:layout_width="match_parent"

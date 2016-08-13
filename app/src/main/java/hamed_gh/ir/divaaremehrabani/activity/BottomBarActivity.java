@@ -32,6 +32,8 @@ import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
+import hamed_gh.ir.divaaremehrabani.fragment.MyWallFragment;
+import hamed_gh.ir.divaaremehrabani.fragment.SearchFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -125,16 +127,22 @@ public class BottomBarActivity extends AppCompatActivity {
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.bottomBarHome) {
                     Toasti.showS("Home selected");
-//                    setFragment(new HomeFragment(),"Home");
+                    setFragment(new HomeFragment(),HomeFragment.class.getName());
                     // The user reselected item number one, scroll your content to top.
                 }else if (menuItemId == R.id.bottomBarCategories) {
                     Toasti.showS("Catagories selected");
+                    setFragment(new CategoriesFragment(),CategoriesFragment.class.getName());
+
                     // The user selected item number one.
                 }else if (menuItemId == R.id.bottomBarSearch) {
                     Toasti.showS("Search selected");
+                    setFragment(new SearchFragment(),SearchFragment.class.getName());
+
                     // The user selected item number one.
                 }else if (menuItemId == R.id.bottomBarMyWall) {
                     Toasti.showS("MyWall selected");
+                    setFragment(new MyWallFragment(),MyWallFragment.class.getName());
+
                     // The user selected item number one.
                 }
             }
