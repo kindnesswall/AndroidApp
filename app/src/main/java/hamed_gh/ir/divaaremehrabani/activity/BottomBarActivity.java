@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.RestAPI;
@@ -44,12 +45,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BottomBarActivity extends AppCompatActivity {
 
-//	@Bind(R.id.viewpager)
-//	ViewPager viewPager;
+    @Bind(R.id.main_toolbar) Toolbar mToolbar;
+    @Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
 
-	private Context context;
-	private Toolbar mToolbar;
-	private TextView mToolbarTitleTextView;
+    private Context context;
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -57,14 +56,7 @@ public class BottomBarActivity extends AppCompatActivity {
     private BottomBar mBottomBar;
     public RestAPI service;
 
-    @Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		context = this;
-
-		setContentView(R.layout.activity_bottombar);
-
+    private void retrofitInitialization(){
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
@@ -83,23 +75,20 @@ public class BottomBarActivity extends AppCompatActivity {
                 .client(httpClient).build();
 
         service = retrofit.create(RestAPI.class);
+    }
 
-		// -- set Toolbar ---
-        RelativeLayout toolbar_layout = (RelativeLayout)findViewById(R.id.toolbar_layout);
-		mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-		setSupportActionBar(mToolbar);
-		try {
-			getSupportActionBar().setDisplayShowTitleEnabled(false);
-		} catch (Exception e) {
+    private void settingToolbar(){
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(mToolbar);
+        try {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        } catch (Exception e) {
 
-		}
-		mToolbarTitleTextView = (TextView) findViewById(R.id.toolbar_title_textView);
+        }
+        mToolbarTitleTextView.setText("دیوار مهربانی");
+    }
 
-		mToolbarTitleTextView.setText("دیوار مهربانی");
-
-        setFragment(new HomeFragment(),"Home");
-
+    private void settingBottomBar(Bundle savedInstanceState){
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noTopOffset();
         mBottomBar.useFixedMode();
@@ -153,21 +142,22 @@ public class BottomBarActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        // Setting colors for different tabs when there's more than three of them.
-        // You can set colors for tabs in three different ways as shown below.
-//        mBottomBar.mapColorForTab(0, "#7B1FA2");//ContextCompat.getColor(this, R.color.colorAccent));
-//        mBottomBar.mapColorForTab(1, "#7B1FA2");
-////        mBottomBar.mapColorForTab(1, 0xFF5D4037);
-//        mBottomBar.mapColorForTab(2, "#7B1FA2");
-//        mBottomBar.mapColorForTab(3, "#FF5252");
-//         ATTENTION: This was auto-generated to implement the App Indexing API.
-//         See https://g.co/AppIndexing/AndroidStudio for more information.
+    @Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bottombar);
+        ButterKnife.bind(this);
 
-//		ButterKnife.bind(this);
+        context = this;
 
-//		setupViewPager(viewPager);
-//		Toasti.showS(viewPager.getCurrentItem() + "");
+        retrofitInitialization();
+        settingToolbar();
+
+        setFragment(new HomeFragment(),"Home");
+
+        settingBottomBar(savedInstanceState);
 
 	}
 
@@ -183,7 +173,6 @@ public class BottomBarActivity extends AppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		viewPager.setCurrentItem(3);
 	}
 
     public void setFragment(Fragment fragment, String title) {
@@ -192,17 +181,6 @@ public class BottomBarActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//            if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
-//                String name = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-
-//                if (name.equals(title)) { //just close drawer when I choose current fragment
-//
-//                    return;
-//                }
-//                String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
-//                if (getSupportFragmentManager().findFragmentByTag(tag) != null)
-//                    fragmentTransaction.remove(getSupportFragmentManager().findFragmentByTag(tag));
-//            }
             fragmentTransaction.replace(R.id.container_body, fragment, title);
             fragmentTransaction.addToBackStack(title);
             fragmentTransaction.commit();
@@ -213,91 +191,4 @@ public class BottomBarActivity extends AppCompatActivity {
         }
     }
 
-	private void setupViewPager(ViewPager viewPager) {
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(new HomeFragment());
-		adapter.addFragment(new HomeFragment());
-		adapter.addFragment(new CategoriesFragment());
-		adapter.addFragment(new HomeFragment());
-		viewPager.setAdapter(adapter);
-	}
-
-//	@Override
-//	public void onStart() {
-//		super.onStart();
-//
-//		// ATTENTION: This was auto-generated to implement the App Indexing API.
-//		// See https://g.co/AppIndexing/AndroidStudio for more information.
-//		client.connect();
-//		Action viewAction = Action.newAction(
-//				Action.TYPE_VIEW, // TODO: choose an action type.
-//				"BottomBar Page", // TODO: Define a title for the content shown.
-//				// TODO: If you have web page content that matches this app activity's content,
-//				// make sure this auto-generated web page URL is correct.
-//				// Otherwise, set the URL to null.
-//				Uri.parse("http://host/path"),
-//				// TODO: Make sure this auto-generated app URL is correct.
-//				Uri.parse("android-app://hamed_gh.ir.divaaremehrabani.activity/http/host/path")
-//		);
-//		AppIndex.AppIndexApi.start(client, viewAction);
-//	}
-//
-//	@Override
-//	public void onStop() {
-//		super.onStop();
-//
-//		// ATTENTION: This was auto-generated to implement the App Indexing API.
-//		// See https://g.co/AppIndexing/AndroidStudio for more information.
-//		Action viewAction = Action.newAction(
-//				Action.TYPE_VIEW, // TODO: choose an action type.
-//				"BottomBar Page", // TODO: Define a title for the content shown.
-//				// TODO: If you have web page content that matches this app activity's content,
-//				// make sure this auto-generated web page URL is correct.
-//				// Otherwise, set the URL to null.
-//				Uri.parse("http://host/path"),
-//				// TODO: Make sure this auto-generated app URL is correct.
-//				Uri.parse("android-app://hamed_gh.ir.divaaremehrabani.activity/http/host/path")
-//		);
-//		AppIndex.AppIndexApi.end(client, viewAction);
-//		client.disconnect();
-//	}
-
-	class ViewPagerAdapter extends FragmentPagerAdapter {
-		private final List<Fragment> mFragmentList = new ArrayList<>();
-
-		private int[] imageResId = {
-				R.drawable.ic_person_white_24dp,
-				R.drawable.ic_search_white_24dp,
-				R.drawable.ic_list_white_24dp,
-				R.drawable.ic_home_white_24dp
-		};
-
-		public ViewPagerAdapter(FragmentManager manager) {
-			super(manager);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return mFragmentList.get(position);
-		}
-
-		@Override
-		public int getCount() {
-			return mFragmentList.size();
-		}
-
-		public void addFragment(Fragment fragment) {
-			mFragmentList.add(fragment);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
-			image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-			SpannableString sb = new SpannableString(" ");
-			ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-			sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			return sb;
-		}
-	}
 }
