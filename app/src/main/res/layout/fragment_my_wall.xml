@@ -3,7 +3,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-
 	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"

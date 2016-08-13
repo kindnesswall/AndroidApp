@@ -65,7 +65,6 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_bottombar);
 
-//	    OkHttpClient httpClient = new OkHttpClient();
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
@@ -76,16 +75,6 @@ public class BottomBarActivity extends AppCompatActivity {
                                 return chain.proceed(request);
                             }
                         }).build();
-
-//	    httpClient.networkInterceptors().add(new Interceptor() {
-//		    @Override
-//		    public Response intercept(Chain chain) throws IOException {
-//			    Request request = chain.request().newBuilder().addHeader("token", "s:s").build();
-//			    return chain.proceed(request);
-//		    }
-//	    });
-
-//	    Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(url).client(httpClient).build();
 
         //Creating Rest Services
         Retrofit retrofit = new Retrofit.Builder()
