@@ -8,6 +8,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,16 +20,25 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.app.RestAPI;
+import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BottomBarActivity extends AppCompatActivity {
 
@@ -43,6 +53,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
 	 */
     private BottomBar mBottomBar;
+    public RestAPI service;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +63,35 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_bottombar);
 
+//	    OkHttpClient httpClient = new OkHttpClient();
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(
+                        new Interceptor() {
+                            @Override
+                            public Response intercept(Interceptor.Chain chain) throws IOException {
+                                Request request = chain.request().newBuilder()
+                                        .addHeader("token", "s:s").build();
+                                return chain.proceed(request);
+                            }
+                        }).build();
+
+//	    httpClient.networkInterceptors().add(new Interceptor() {
+//		    @Override
+//		    public Response intercept(Chain chain) throws IOException {
+//			    Request request = chain.request().newBuilder().addHeader("token", "s:s").build();
+//			    return chain.proceed(request);
+//		    }
+//	    });
+
+//	    Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(url).client(httpClient).build();
+
+        //Creating Rest Services
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URIs.API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient).build();
+
+        service = retrofit.create(RestAPI.class);
 
 		// -- set Toolbar ---
         RelativeLayout toolbar_layout = (RelativeLayout)findViewById(R.id.toolbar_layout);
@@ -67,6 +107,7 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		mToolbarTitleTextView.setText("دیوار مهربانی");
 
+        setFragment(new HomeFragment(),"Home");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.noTopOffset();
@@ -84,6 +125,7 @@ public class BottomBarActivity extends AppCompatActivity {
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.bottomBarHome) {
                     Toasti.showS("Home selected");
+//                    setFragment(new HomeFragment(),"Home");
                     // The user reselected item number one, scroll your content to top.
                 }else if (menuItemId == R.id.bottomBarCategories) {
                     Toasti.showS("Catagories selected");
@@ -146,6 +188,33 @@ public class BottomBarActivity extends AppCompatActivity {
 		super.onResume();
 //		viewPager.setCurrentItem(3);
 	}
+
+    public void setFragment(Fragment fragment, String title) {
+        try {
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+//            if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+//                String name = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
+
+//                if (name.equals(title)) { //just close drawer when I choose current fragment
+//
+//                    return;
+//                }
+//                String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+//                if (getSupportFragmentManager().findFragmentByTag(tag) != null)
+//                    fragmentTransaction.remove(getSupportFragmentManager().findFragmentByTag(tag));
+//            }
+            fragmentTransaction.replace(R.id.container_body, fragment, title);
+            fragmentTransaction.addToBackStack(title);
+            fragmentTransaction.commit();
+
+        } catch (Exception e) {
+            //Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+            // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+        }
+    }
 
 	private void setupViewPager(ViewPager viewPager) {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
