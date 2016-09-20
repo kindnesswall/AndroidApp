@@ -19,7 +19,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.activity.BottomBarActivity;
-import hamed_gh.ir.divaaremehrabani.activity.MainActivity;
 import hamed_gh.ir.divaaremehrabani.adapter.RecyclerViewAdapter;
 import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import hamed_gh.ir.divaaremehrabani.model.Gallery;
@@ -82,7 +81,7 @@ public class HomeFragment extends BaseFragment {
 			}
 		});
 
-        sendRequest();
+		sendRequest();
 
 		return rootView;
 	}
@@ -94,7 +93,7 @@ public class HomeFragment extends BaseFragment {
 		pageNumber = 1;
 		galleries.clear();
 
-        sendRequest();
+		sendRequest();
 
 		// Load complete
 		onItemsLoadComplete();
@@ -108,42 +107,42 @@ public class HomeFragment extends BaseFragment {
 		mSwipeRefreshLayout.setRefreshing(false);
 	}
 
-    void sendRequest(){
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize", "10");
-        params.put("pageNo", "1");
+	void sendRequest() {
+		Map<String, String> params = new HashMap<>();
+		params.put("pageSize", "10");
+		params.put("pageNo", "1");
 
-        Call<PhotoGalleryResponse> call = ((BottomBarActivity) context).service.getPhotoGallery(params);
+		Call<PhotoGalleryResponse> call = ((BottomBarActivity) context).service.getPhotoGallery(params);
 
-        call.enqueue(new Callback<PhotoGalleryResponse>() {
-            @Override
-            public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
-                progressView.setVisibility(View.INVISIBLE);
+		call.enqueue(new Callback<PhotoGalleryResponse>() {
+			@Override
+			public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
+				progressView.setVisibility(View.INVISIBLE);
 
-                try {
-                    Meta meta = response.body().getMeta();
-                    if (meta.getErrorCode() == 1000) {
-                        galleries.addAll(response.body().getData().getGallery());
-                        adapter.notifyDataSetChanged();
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        mMessageTextView.setVisibility(View.INVISIBLE);
-                    }else {
-                        mMessageTextView.setVisibility(View.VISIBLE);
-                        mRecyclerView.setVisibility(View.INVISIBLE);
-                    }
+				try {
+					Meta meta = response.body().getMeta();
+					if (meta.getErrorCode() == 1000) {
+						galleries.addAll(response.body().getData().getGallery());
+						adapter.notifyDataSetChanged();
+						mRecyclerView.setVisibility(View.VISIBLE);
+						mMessageTextView.setVisibility(View.INVISIBLE);
+					} else {
+						mMessageTextView.setVisibility(View.VISIBLE);
+						mRecyclerView.setVisibility(View.INVISIBLE);
+					}
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-            }
+			}
 
-            @Override
-            public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
-                progressView.setVisibility(View.INVISIBLE);
-                mRecyclerView.setVisibility(View.INVISIBLE);
-                mMessageTextView.setText("خطا در دریافت اطلاعات");
-            }
-        });
-    }
+			@Override
+			public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
+				progressView.setVisibility(View.INVISIBLE);
+				mRecyclerView.setVisibility(View.INVISIBLE);
+				mMessageTextView.setText("خطا در دریافت اطلاعات");
+			}
+		});
+	}
 }

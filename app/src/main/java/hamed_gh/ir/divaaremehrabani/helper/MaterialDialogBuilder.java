@@ -10,12 +10,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
  */
 public class MaterialDialogBuilder {
 
-	public static MaterialDialog.Builder create(Context ctx){
+	public static MaterialDialog.Builder create(Context ctx) {
 		boolean HAS_RTL = DeviceInfo.hasSupportRTL();
 
-		GravityEnum dir,btnDir;
+		GravityEnum dir, btnDir;
 
-		if (HAS_RTL){
+		if (HAS_RTL) {
 			if (DeviceInfo.isRTL()) {
 				dir = GravityEnum.START;
 				btnDir = GravityEnum.START;
@@ -23,7 +23,7 @@ public class MaterialDialogBuilder {
 				dir = GravityEnum.START;
 				btnDir = GravityEnum.END;
 			}
-		}else {
+		} else {
 			dir = GravityEnum.END;
 			btnDir = GravityEnum.END;
 		}

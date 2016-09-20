@@ -28,7 +28,6 @@ public class MyWallFragment extends BaseFragment {
 		init();
 
 
-
 		return rootView;
 	}
 }

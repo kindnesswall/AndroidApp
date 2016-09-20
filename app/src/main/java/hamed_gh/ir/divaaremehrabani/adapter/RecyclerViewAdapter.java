@@ -22,11 +22,38 @@ import hamed_gh.ir.divaaremehrabani.model.Gallery;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
-    private ArrayList<Gallery> galleries;
+	String schoolId, childID;
+	private ArrayList<Gallery> galleries;
+	private Context mContext;
+	private FragmentActivity activity;
 
-    private Context mContext;
-    String schoolId, childID;
-    private FragmentActivity activity;
+	public RecyclerViewAdapter(Context context, ArrayList<Gallery> galleries) {
+		this.galleries = galleries;
+		this.mContext = context;
+	}
+
+	@Override
+	public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
+		MyHolder mh = new MyHolder(v);
+
+		return mh;
+	}
+
+	@Override
+	public void onBindViewHolder(MyHolder myHolder, final int i) {
+
+//	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
+		ImageLoader.getInstance().displayImage(URIs.DOMAIN + galleries.get(i).getImageSrc(), myHolder.mImageView);
+
+	}
+
+	@Override
+	public int getItemCount() {
+
+		return (null != galleries ? galleries.size() : 0);
+
+	}
 
 	public class MyHolder extends RecyclerView.ViewHolder {
 
@@ -41,32 +68,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 		}
 
 	}
-
-    public RecyclerViewAdapter(Context context, ArrayList<Gallery> galleries) {
-        this.galleries = galleries;
-        this.mContext = context;
-    }
-
-    @Override
-    public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
-	    MyHolder mh = new MyHolder(v);
-
-        return mh;
-    }
-
-    @Override
-    public void onBindViewHolder(MyHolder myHolder,final int i) {
-
-//	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
-	    ImageLoader.getInstance().displayImage(URIs.DOMAIN+galleries.get(i).getImageSrc(), myHolder.mImageView);
-
-    }
-
-    @Override
-    public int getItemCount() {
-
-	    return (null != galleries ? galleries.size() : 0);
-
-    }
 }

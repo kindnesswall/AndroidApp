@@ -3,7 +3,6 @@ package hamed_gh.ir.divaaremehrabani.activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,14 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.RestAPI;
 import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
-import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //	@Bind(R.id.viewpager)
 //	ViewPager viewPager;
 
-//	@Bind(R.id.tabs)
+	//	@Bind(R.id.tabs)
 //	TabLayout tabLayout;
 	public RestAPI service;
 	private Context context;
@@ -113,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //		viewPager.setCurrentItem(3);
 	}
 
-	private void setupViewPager( ViewPager viewPager) {
+	private void setupViewPager(ViewPager viewPager) {
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 		adapter.addFragment(new HomeFragment());
 		adapter.addFragment(new HomeFragment());

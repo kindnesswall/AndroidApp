@@ -35,7 +35,7 @@ public class CategoriesFragment extends BaseFragment {
 		/* Initialize recyclerview */
 		adapter = new CategoriesAdapter(context);
 		mRecyclerView.setAdapter(adapter);
-		mRecyclerView.setLayoutManager(new GridLayoutManager(context,2));
+		mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
 		return rootView;
 	}

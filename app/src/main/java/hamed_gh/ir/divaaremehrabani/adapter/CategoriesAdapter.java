@@ -48,8 +48,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
 	@Override
 	public void onBindViewHolder(CategoryHolder categoryHolder, final int i) {
 
-	    categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
-	    categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
+		categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
+		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
 
 	}
 

@@ -4,11 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-//import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
+//import com.crashlytics.android.Crashlytics;
 
 //import io.fabric.sdk.android.Fabric;
 
@@ -60,7 +61,7 @@ public class AppController extends Application {
 		return AppController.context;
 	}
 
-	public static synchronized AppController getInstance(){
+	public static synchronized AppController getInstance() {
 		return mInstance;
 	}
 
@@ -78,7 +79,7 @@ public class AppController extends Application {
 		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
 				.cacheInMemory(true)
 				.cacheOnDisk(true)
-				.displayer(new FadeInBitmapDisplayer(500,true,true,true))
+				.displayer(new FadeInBitmapDisplayer(500, true, true, true))
 				.build();
 
 		// Create global configuration and initialize ImageLoader with this config

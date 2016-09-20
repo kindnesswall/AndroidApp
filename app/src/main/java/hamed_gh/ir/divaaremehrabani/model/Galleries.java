@@ -15,18 +15,14 @@ public class Galleries {
 	private ArrayList<Gallery> gallery = new ArrayList<Gallery>();
 
 	/**
-	 *
-	 * @return
-	 * The gallery
+	 * @return The gallery
 	 */
 	public ArrayList<Gallery> getGallery() {
 		return gallery;
 	}
 
 	/**
-	 *
-	 * @param gallery
-	 * The gallery
+	 * @param gallery The gallery
 	 */
 	public void setGallery(ArrayList<Gallery> gallery) {
 		this.gallery = gallery;

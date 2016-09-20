@@ -3,6 +3,7 @@ package hamed_gh.ir.divaaremehrabani.model;
 /**
  * Created by Hamed on 5/6/16.
  */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -34,126 +35,98 @@ public class Gallery {
 	private String CreateDate;
 
 	/**
-	 *
-	 * @return
-	 * The GalleryId
+	 * @return The GalleryId
 	 */
 	public String getGalleryId() {
 		return GalleryId;
 	}
 
 	/**
-	 *
-	 * @param GalleryId
-	 * The GalleryId
+	 * @param GalleryId The GalleryId
 	 */
 	public void setGalleryId(String GalleryId) {
 		this.GalleryId = GalleryId;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The Title
+	 * @return The Title
 	 */
 	public String getTitle() {
 		return Title;
 	}
 
 	/**
-	 *
-	 * @param Title
-	 * The Title
+	 * @param Title The Title
 	 */
 	public void setTitle(String Title) {
 		this.Title = Title;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The Description
+	 * @return The Description
 	 */
 	public Object getDescription() {
 		return Description;
 	}
 
 	/**
-	 *
-	 * @param Description
-	 * The Description
+	 * @param Description The Description
 	 */
 	public void setDescription(Object Description) {
 		this.Description = Description;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The ImageSrc
+	 * @return The ImageSrc
 	 */
 	public String getImageSrc() {
 		return ImageSrc;
 	}
 
 	/**
-	 *
-	 * @param ImageSrc
-	 * The ImageSrc
+	 * @param ImageSrc The ImageSrc
 	 */
 	public void setImageSrc(String ImageSrc) {
 		this.ImageSrc = ImageSrc;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The FileSrc
+	 * @return The FileSrc
 	 */
 	public String getFileSrc() {
 		return FileSrc;
 	}
 
 	/**
-	 *
-	 * @param FileSrc
-	 * The FileSrc
+	 * @param FileSrc The FileSrc
 	 */
 	public void setFileSrc(String FileSrc) {
 		this.FileSrc = FileSrc;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The IsNew
+	 * @return The IsNew
 	 */
 	public Boolean getIsNew() {
 		return IsNew;
 	}
 
 	/**
-	 *
-	 * @param IsNew
-	 * The IsNew
+	 * @param IsNew The IsNew
 	 */
 	public void setIsNew(Boolean IsNew) {
 		this.IsNew = IsNew;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The CreateDate
+	 * @return The CreateDate
 	 */
 	public String getCreateDate() {
 		return CreateDate;
 	}
 
 	/**
-	 *
-	 * @param CreateDate
-	 * The CreateDate
+	 * @param CreateDate The CreateDate
 	 */
 	public void setCreateDate(String CreateDate) {
 		this.CreateDate = CreateDate;

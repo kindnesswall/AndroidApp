@@ -27,117 +27,117 @@ public class DetailActivity extends AppCompatActivity {
 	@Bind(R.id.viewpager)
 	ViewPager viewPager;
 
-    @Bind(R.id.container_body)
-    FrameLayout c;
+	@Bind(R.id.container_body)
+	FrameLayout c;
 
 	int[] mResources = {
 			R.drawable.rectangle_blue,
 			R.drawable.rectangle_red
 	};
-    private BottomBar mBottomBar;
+	private BottomBar mBottomBar;
 
-    @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+		setContentView(R.layout.activity_detail);
 
 		ButterKnife.bind(this);
 
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+		CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
 		setupViewPager(viewPager);
 		indicator.setViewPager(viewPager);
 
 
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
+		mBottomBar = BottomBar.attach(this, savedInstanceState);
 //        mBottomBar.noTopOffset();
-        mBottomBar.setItems(R.menu.menu_bottombar);
+		mBottomBar.setItems(R.menu.menu_bottombar);
 
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.bottomBarHome) {
-                    Toasti.showS("Home selected");
-                    // The user reselected item number one, scroll your content to top.
-                }else if (menuItemId == R.id.bottomBarCategories) {
-                    Toasti.showS("Catagories selected");
-                    // The user selected item number one.
-                }else if (menuItemId == R.id.bottomBarSearch) {
-                    Toasti.showS("Search selected");
-                    // The user selected item number one.
-                }else if (menuItemId == R.id.bottomBarMyWall) {
-                    Toasti.showS("MyWall selected");
-                    // The user selected item number one.
-                }
-            }
+		mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+			@Override
+			public void onMenuTabSelected(@IdRes int menuItemId) {
+				if (menuItemId == R.id.bottomBarHome) {
+					Toasti.showS("Home selected");
+					// The user reselected item number one, scroll your content to top.
+				} else if (menuItemId == R.id.bottomBarCategories) {
+					Toasti.showS("Catagories selected");
+					// The user selected item number one.
+				} else if (menuItemId == R.id.bottomBarSearch) {
+					Toasti.showS("Search selected");
+					// The user selected item number one.
+				} else if (menuItemId == R.id.bottomBarMyWall) {
+					Toasti.showS("MyWall selected");
+					// The user selected item number one.
+				}
+			}
 
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.bottomBarHome) {
-                    Toasti.showS("Home reselected");
-                    // The user reselected item number one, scroll your content to top.
-                }else if (menuItemId == R.id.bottomBarCategories) {
-                    Toasti.showS("Catagories reselected");
-                    // The user selected item number one.
-                }else if (menuItemId == R.id.bottomBarSearch) {
-                    Toasti.showS("Search reselected");
-                    // The user selected item number one.
-                }else if (menuItemId == R.id.bottomBarMyWall) {
-                    Toasti.showS("MyWall reselected");
-                    // The user selected item number one.
-                }
-            }
-        });
+			@Override
+			public void onMenuTabReSelected(@IdRes int menuItemId) {
+				if (menuItemId == R.id.bottomBarHome) {
+					Toasti.showS("Home reselected");
+					// The user reselected item number one, scroll your content to top.
+				} else if (menuItemId == R.id.bottomBarCategories) {
+					Toasti.showS("Catagories reselected");
+					// The user selected item number one.
+				} else if (menuItemId == R.id.bottomBarSearch) {
+					Toasti.showS("Search reselected");
+					// The user selected item number one.
+				} else if (menuItemId == R.id.bottomBarMyWall) {
+					Toasti.showS("MyWall reselected");
+					// The user selected item number one.
+				}
+			}
+		});
 
-        // Setting colors for different tabs when there's more than three of them.
-        // You can set colors for tabs in three different ways as shown below.
-        mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
-        mBottomBar.mapColorForTab(1, 0xFF5D4037);
-        mBottomBar.mapColorForTab(2, "#7B1FA2");
-        mBottomBar.mapColorForTab(3, "#FF5252");
+		// Setting colors for different tabs when there's more than three of them.
+		// You can set colors for tabs in three different ways as shown below.
+		mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
+		mBottomBar.mapColorForTab(1, 0xFF5D4037);
+		mBottomBar.mapColorForTab(2, "#7B1FA2");
+		mBottomBar.mapColorForTab(3, "#FF5252");
 	}
 
 
-	private void setupViewPager( ViewPager viewPager) {
-        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
+	private void setupViewPager(ViewPager viewPager) {
+		CustomPagerAdapter adapter = new CustomPagerAdapter(this);
 		viewPager.setAdapter(adapter);
 	}
 
 
-    class CustomPagerAdapter extends PagerAdapter {
+	class CustomPagerAdapter extends PagerAdapter {
 
-        Context mContext;
-        LayoutInflater mLayoutInflater;
+		Context mContext;
+		LayoutInflater mLayoutInflater;
 
-        public CustomPagerAdapter(Context context) {
-            mContext = context;
-            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+		public CustomPagerAdapter(Context context) {
+			mContext = context;
+			mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
 
-        @Override
-        public int getCount() {
-            return mResources.length;
-        }
+		@Override
+		public int getCount() {
+			return mResources.length;
+		}
 
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == ((RelativeLayout) object);
-        }
+		@Override
+		public boolean isViewFromObject(View view, Object object) {
+			return view == ((RelativeLayout) object);
+		}
 
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
 
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
-            imageView.setImageResource(mResources[position]);
+			ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+			imageView.setImageResource(mResources[position]);
 
-            container.addView(itemView);
+			container.addView(itemView);
 
-            return itemView;
-        }
+			return itemView;
+		}
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((RelativeLayout) object);
-        }
-    }
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((RelativeLayout) object);
+		}
+	}
 }

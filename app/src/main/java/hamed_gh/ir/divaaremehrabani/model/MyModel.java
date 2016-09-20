@@ -5,7 +5,7 @@ package hamed_gh.ir.divaaremehrabani.model;
  */
 public class MyModel {
 
-	String imageUrl,title;
+	String imageUrl, title;
 
 	public String getTitle() {
 		return title;

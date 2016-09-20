@@ -15,6 +15,6 @@ public interface RestAPI {
 
 	@POST("Gallery/GetPhotoGallery")
 	@FormUrlEncoded
-	Call<PhotoGalleryResponse> getPhotoGallery(@FieldMap Map<String,String> params);
+	Call<PhotoGalleryResponse> getPhotoGallery(@FieldMap Map<String, String> params);
 
 }

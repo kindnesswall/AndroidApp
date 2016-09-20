@@ -16,36 +16,28 @@ public class PhotoGalleryResponse {
 	private Meta meta;
 
 	/**
-	 *
-	 * @return
-	 * The data
+	 * @return The data
 	 */
 	public Galleries getData() {
 		return data;
 	}
 
 	/**
-	 *
-	 * @param data
-	 * The data
+	 * @param data The data
 	 */
 	public void setData(Galleries data) {
 		this.data = data;
 	}
 
 	/**
-	 *
-	 * @return
-	 * The meta
+	 * @return The meta
 	 */
 	public Meta getMeta() {
 		return meta;
 	}
 
 	/**
-	 *
-	 * @param meta
-	 * The meta
+	 * @param meta The meta
 	 */
 	public void setMeta(Meta meta) {
 		this.meta = meta;

@@ -19,7 +19,7 @@ public class CategoryHolder extends RecyclerView.ViewHolder {
 	public CategoryHolder(View itemView) {
 		super(itemView);
 
-		mCategoryIc = (ImageView)itemView.findViewById(R.id.cell_category_ic);
+		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
 		mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
 	}
 
