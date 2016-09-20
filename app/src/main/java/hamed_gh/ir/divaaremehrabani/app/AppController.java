@@ -4,13 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
-import io.fabric.sdk.android.Fabric;
+//import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Hamed on 4/3/16.
@@ -67,7 +67,7 @@ public class AppController extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Fabric.with(this, new Crashlytics());
+//		Fabric.with(this, new Crashlytics());
 
 		mInstance = this;
 		AppController.context = getApplicationContext();

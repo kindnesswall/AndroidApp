@@ -37,11 +37,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-	@Bind(R.id.viewpager)
-	ViewPager viewPager;
+//	@Bind(R.id.viewpager)
+//	ViewPager viewPager;
 
-	@Bind(R.id.tabs)
-	TabLayout tabLayout;
+//	@Bind(R.id.tabs)
+//	TabLayout tabLayout;
 	public RestAPI service;
 	private Context context;
 	private Toolbar mToolbar;
@@ -102,15 +102,15 @@ public class MainActivity extends AppCompatActivity {
 
 		ButterKnife.bind(this);
 
-		setupViewPager(viewPager);
-		tabLayout.setupWithViewPager(viewPager);
-		Toasti.showS(viewPager.getCurrentItem()+"");
+//		setupViewPager(viewPager);
+//		tabLayout.setupWithViewPager(viewPager);
+//		Toasti.showS(viewPager.getCurrentItem()+"");
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		viewPager.setCurrentItem(3);
+//		viewPager.setCurrentItem(3);
 	}
 
 	private void setupViewPager( ViewPager viewPager) {

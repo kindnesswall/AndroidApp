@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/message_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@id/fragment_progressBar"
+		android:layout_centerHorizontal="true"
+
+		android:textSize="14sp"
+		android:padding="5dp"
+		android:textColor="@color/dark_white"
+
+		android:text="دیوار من"/>
+
+</RelativeLayout>

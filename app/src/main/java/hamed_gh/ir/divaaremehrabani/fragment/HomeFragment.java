@@ -18,6 +18,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.activity.BottomBarActivity;
 import hamed_gh.ir.divaaremehrabani.activity.MainActivity;
 import hamed_gh.ir.divaaremehrabani.adapter.RecyclerViewAdapter;
 import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
@@ -112,7 +113,7 @@ public class HomeFragment extends BaseFragment {
         params.put("pageSize", "10");
         params.put("pageNo", "1");
 
-        Call<PhotoGalleryResponse> call = ((MainActivity) context).service.getPhotoGallery(params);
+        Call<PhotoGalleryResponse> call = ((BottomBarActivity) context).service.getPhotoGallery(params);
 
         call.enqueue(new Callback<PhotoGalleryResponse>() {
             @Override
