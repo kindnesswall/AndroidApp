@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
+import hamed_gh.ir.divaaremehrabani.fragment.MyDialogFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.MyWallFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.SearchFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
@@ -39,6 +42,9 @@ public class BottomBarActivity extends AppCompatActivity {
 	Toolbar mToolbar;
 	@Bind(R.id.toolbar_title_textView)
 	TextView mToolbarTitleTextView;
+
+	@Bind(R.id.toolbar_new_gift_btn)RelativeLayout toolbarNewGiftBtn;
+
 	private Context context;
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -149,6 +155,16 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		settingBottomBar(savedInstanceState);
 
+		toolbarNewGiftBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				FragmentManager fm = getSupportFragmentManager();
+				MyDialogFragment myDialogFragment = new MyDialogFragment();
+				myDialogFragment.show(fm, "fragment_name");
+
+			}
+		});
 	}
 
 	@Override
