@@ -7,6 +7,7 @@
 	<color name="black">#FF000000</color>
 	<color name="white">#FFFFFF</color>
 	<color name="dark_white">#737373</color>
+	<color name="transparent">#00737373</color>
 
 	<!-- progress view -->
 	<color name="blue_level">#5389bc</color>

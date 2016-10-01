@@ -2,13 +2,15 @@ package hamed_gh.ir.divaaremehrabani.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.adapter.ChooseCityAdapter;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -23,17 +25,10 @@ public class MyDialogFragment extends DialogFragment {
 
 		ButterKnife.bind(this, rootView);
 
-		try {
-			FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-
-			String title = MyDialogFragment.class.getName();
-			fragmentTransaction.replace(R.id.dialog_container, new HomeFragment(), title);
-			fragmentTransaction.addToBackStack(title);
-			fragmentTransaction.commit();
-
-		} catch (Exception e) {
-
-		}
+		RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_city_recyclerview);
+		ChooseCityAdapter chooseCityAdapter = new ChooseCityAdapter(getContext());
+		recyclerView.setAdapter(chooseCityAdapter);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		return rootView;
 	}

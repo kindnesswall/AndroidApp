@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/rw_choose_city_name_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="تهران"
+		android:layout_alignParentRight="true"/>
+
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/rw_choose_city_ur_here_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:text="(شما اینجا هستید)"/>
+
+</RelativeLayout>

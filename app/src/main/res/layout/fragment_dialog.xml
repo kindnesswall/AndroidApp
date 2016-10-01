@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-	android:id="@+id/dialog_container"
-	android:layout_height="match_parent"
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android"/>
+	android:layout_height="match_parent">
+
+
+	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/choose_city_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="right"
+		android:paddingBottom="16dp"
+		android:paddingRight="10dp"
+		android:paddingTop="16dp"
+		android:text="انتخاب شهر"
+		android:textColor="@color/colorPrimary"/>
+
+
+	<hamed_gh.ir.divaaremehrabani.customviews.edit_text.EditTextIranSans
+		android:id="@+id/choose_city_et"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/choose_city_text"
+		android:layout_margin="5dp"
+
+		android:drawableRight="@mipmap/ic_launcher"
+
+		android:gravity="right"
+		android:hint="جستجوی شهر..."
+		android:padding="5dp"/>
+
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/choose_city_recyclerview"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+
+		android:layout_below="@id/choose_city_et"/>
+
+</RelativeLayout>
