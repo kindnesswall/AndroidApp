@@ -27,7 +27,6 @@ public class MyWallFragment extends BaseFragment {
 		ButterKnife.bind(this, rootView);
 		init();
 
-
 		return rootView;
 	}
 }

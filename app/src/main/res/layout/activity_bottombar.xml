@@ -84,6 +84,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_layout"
-        android:background="@color/deep_purple_300" />
+        android:background="@color/transparent" />
 
 </RelativeLayout>
