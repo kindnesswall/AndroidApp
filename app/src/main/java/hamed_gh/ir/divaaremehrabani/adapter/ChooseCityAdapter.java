@@ -17,10 +17,10 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityHolder> {
 
 	String schoolId, childID;
 	private int[] iconRes = {
-			R.drawable.ic_books,
-			R.drawable.ic_jumper,
-			R.drawable.ic_dining_room,
-			R.drawable.ic_sofa
+			R.mipmap.ic_books,
+			R.mipmap.ic_jumper,
+			R.mipmap.ic_dining_room,
+			R.mipmap.ic_sofa
 	};
 
 	private int[] categoriesTitleRes = {

@@ -46,7 +46,7 @@
 		android:layout_alignRight="@id/row_title_textview"
 		android:layout_below="@id/row_title_textview"
 		android:layout_marginTop="8dp"
-		android:src="@drawable/ic_location_on_black_18dp" />
+		android:src="@mipmap/ic_location_on_black_18dp" />
 
 	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/row_ad_gift_location_tv"

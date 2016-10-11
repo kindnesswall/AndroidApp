@@ -73,7 +73,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/toolbar_new_gift_btn_tv"
                 android:padding="12dp"
-                android:src="@drawable/ic_add_white_24dp" />
+                android:src="@mipmap/ic_add_white_24dp" />
 
         </RelativeLayout>
 

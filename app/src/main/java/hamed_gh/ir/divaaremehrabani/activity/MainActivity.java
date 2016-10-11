@@ -123,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
 		private final List<Fragment> mFragmentList = new ArrayList<>();
 
 		private int[] imageResId = {
-				R.drawable.ic_person_white_24dp,
-				R.drawable.ic_search_white_24dp,
-				R.drawable.ic_list_white_24dp,
-				R.drawable.ic_home_white_24dp
+				R.mipmap.ic_person_white_24dp,
+				R.mipmap.ic_search_white_24dp,
+				R.mipmap.ic_list_white_24dp,
+				R.mipmap.ic_home_white_24dp
 		};
 
 		public ViewPagerAdapter(FragmentManager manager) {

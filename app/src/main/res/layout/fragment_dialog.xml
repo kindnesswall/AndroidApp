@@ -24,7 +24,7 @@
 		android:layout_below="@id/choose_city_text"
 		android:layout_margin="5dp"
 
-		android:drawableRight="@mipmap/ic_launcher"
+		android:drawableRight="@mipmap/ic_search_white_24dp"
 
 		android:gravity="right"
 		android:hint="جستجوی شهر..."
