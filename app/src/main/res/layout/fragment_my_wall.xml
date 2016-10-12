@@ -3,233 +3,289 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<RelativeLayout
-		android:id="@+id/my_gift_lay"
+	<!--<android.support.v7.widget.RecyclerView-->
+	<!--android:id="@+id/mywall_recyclerview"-->
+	<!--android:layout_width="match_parent"-->
+	<!--android:layout_height="match_parent"/>-->
+
+	<com.andexert.library.RippleView
+		android:id="@+id/my_gift_ripple"
+		rv_centered="false"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-			android:id="@+id/my_gift_txt_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
-
-			android:text=""
-			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
-			android:textColor="@color/icon_black"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/my_gift_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/my_gift_txt_icon"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="هدیه‌های من"/>
+		android:layout_height="wrap_content">
 
 		<RelativeLayout
-			android:layout_alignParentBottom="true"
+			android:id="@+id/my_gift_lay"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="@color/divider"/>
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:background="?android:attr/selectableItemBackground">
 
-	</RelativeLayout>
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+				android:id="@+id/my_gift_txt_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 
-	<RelativeLayout
-		android:id="@+id/bookmark_lay"
-		android:layout_below="@id/my_gift_lay"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:text=""
+				android:textColor="@color/icon_black"
+				android:textSize="@dimen/my_wall_mainlist_icon_txt_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/my_gift_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/my_gift_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="هدیه‌های من"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider" />
+
+		</RelativeLayout>
+	</com.andexert.library.RippleView>
+
+	<com.andexert.library.RippleView
+		android:id="@+id/bookmark_ripple"
+		rv_centered="false"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-			android:id="@+id/bookmark_txt_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@mipmap/ic_bookmark_white_24dp"
-
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
-
-			android:text=""
-
-			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
-			android:textColor="@color/icon_black"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/bookmark_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/bookmark_txt_icon"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="نشان‌شده‌ها"/>
+		android:layout_height="wrap_content"
+		android:layout_below="@id/my_gift_ripple">
 
 		<RelativeLayout
-			android:layout_alignParentBottom="true"
+			android:id="@+id/bookmark_lay"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="@color/divider"
-			android:visibility="gone"/>
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/my_gift_lay"
+			android:background="?android:attr/selectableItemBackground">
 
-	</RelativeLayout>
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+				android:id="@+id/bookmark_txt_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
 
-	<RelativeLayout
-		android:id="@+id/location_lay"
-		android:layout_below="@id/bookmark_lay"
+				android:layout_centerVertical="true"
+				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+				android:src="@mipmap/ic_bookmark_white_24dp"
+
+				android:text=""
+
+				android:textColor="@color/icon_black"
+				android:textSize="@dimen/my_wall_mainlist_icon_txt_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/bookmark_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/bookmark_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="نشان‌شده‌ها"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider"
+				android:visibility="gone" />
+
+		</RelativeLayout>
+	</com.andexert.library.RippleView>
+
+	<com.andexert.library.RippleView
+		android:id="@+id/location_ripple"
+		rv_centered="false"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-			android:id="@+id/location_txt_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
-
-			android:text=""
-			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
-			android:textColor="@color/icon_black"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/location_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/location_txt_icon"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="شهر:"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/location_tv"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="2dp"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/location_txt"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="تهران"/>
+		android:layout_height="wrap_content"
+		android:layout_below="@id/bookmark_ripple">
 
 		<RelativeLayout
-			android:layout_alignParentBottom="true"
+			android:id="@+id/location_lay"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="@color/divider"
-			android:visibility="visible"/>
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/bookmark_lay"
+			android:background="?android:attr/selectableItemBackground">
 
-	</RelativeLayout>
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+				android:id="@+id/location_txt_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 
-	<RelativeLayout
-		android:id="@+id/rules_lay"
-		android:layout_below="@id/location_lay"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:text=""
+				android:textColor="@color/icon_black"
+				android:textSize="@dimen/my_wall_mainlist_icon_txt_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/location_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/location_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="شهر:"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/location_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/location_txt"
+				android:gravity="center"
+				android:paddingRight="2dp"
+				android:text="تهران"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider"
+				android:visibility="visible" />
+
+		</RelativeLayout>
+	</com.andexert.library.RippleView>
+
+	<com.andexert.library.RippleView
+		android:id="@+id/rules_ripple"
+		rv_centered="false"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-			android:id="@+id/rules_txt_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
-
-			android:text=""
-			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
-			android:textColor="@color/icon_black"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/rules_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/rules_txt_icon"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="قوانین"/>
+		android:layout_height="wrap_content"
+		android:layout_below="@id/location_ripple">
 
 		<RelativeLayout
-			android:layout_alignParentBottom="true"
+			android:id="@+id/rules_lay"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="@color/divider"
-			android:visibility="invisible"/>
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/location_lay"
+			android:background="?android:attr/selectableItemBackground">
 
-	</RelativeLayout>
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+				android:id="@+id/rules_txt_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 
-	<RelativeLayout
-		android:id="@+id/about_lay"
-		android:layout_below="@id/rules_lay"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:text=""
+				android:textColor="@color/icon_black"
+				android:textSize="@dimen/my_wall_mainlist_icon_txt_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/rules_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/rules_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="قوانین"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider"
+				android:visibility="invisible" />
+
+		</RelativeLayout>
+
+	</com.andexert.library.RippleView>
+
+	<com.andexert.library.RippleView
+		android:id="@+id/about_ripple"
+		rv_centered="false"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-			android:id="@+id/about_txt_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
-
-			android:text=""
-			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
-			android:textColor="@color/icon_black"/>
-
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/about_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
-			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
-			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/about_txt_icon"
-			android:gravity="center"
-
-			android:textColor="@color/icon_black"
-
-			android:text="درباره دیوار مهربانی"/>
+		android:layout_height="wrap_content"
+		android:layout_below="@id/rules_ripple">
 
 		<RelativeLayout
-			android:layout_alignParentBottom="true"
+			android:id="@+id/about_lay"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="@color/divider"
-			android:visibility="invisible"/>
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:background="?android:attr/selectableItemBackground">
 
-	</RelativeLayout>
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+				android:id="@+id/rw_mywall_txt_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:text=""
+				android:textColor="@color/icon_black"
+				android:textSize="@dimen/my_wall_mainlist_icon_txt_size" />
+
+			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/about_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/rw_mywall_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="درباره دیوار مهربانی"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size" />
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider"
+				android:visibility="invisible" />
+
+		</RelativeLayout>
+
+	</com.andexert.library.RippleView>
+
 </RelativeLayout>

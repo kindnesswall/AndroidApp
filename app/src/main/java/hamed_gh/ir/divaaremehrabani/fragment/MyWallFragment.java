@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 
@@ -15,18 +13,18 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class MyWallFragment extends BaseFragment {
 
-	@Bind(R.id.my_gift_txt)
-	TextView mMessageTextView;
+//    @Bind(R.id.my_gift_txt)
+//    TextView mMessageTextView;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_my_wall, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View rootView = inflater.inflate(R.layout.fragment_my_wall, container, false);
 
-		ButterKnife.bind(this, rootView);
-		init();
+        ButterKnife.bind(this, rootView);
+        init();
 
-		return rootView;
-	}
+        return rootView;
+    }
 }
