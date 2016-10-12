@@ -3,23 +3,12 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<!--<android.support.v7.widget.RecyclerView-->
-	<!--android:id="@+id/mywall_recyclerview"-->
-	<!--android:layout_width="match_parent"-->
-	<!--android:layout_height="match_parent"/>-->
-
-	<com.andexert.library.RippleView
-		android:id="@+id/my_gift_ripple"
-		rv_centered="false"
-		android:layout_width="match_parent"
-
-		android:layout_height="wrap_content">
-
 		<RelativeLayout
 			android:id="@+id/my_gift_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true">
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/my_gift_txt_icon"
@@ -56,22 +45,15 @@
 				android:background="@color/divider" />
 
 		</RelativeLayout>
-	</com.andexert.library.RippleView>
-
-	<com.andexert.library.RippleView
-		android:id="@+id/bookmark_ripple"
-		rv_centered="false"
-		android:layout_width="match_parent"
-
-		android:layout_height="wrap_content"
-		android:layout_below="@id/my_gift_ripple">
 
 		<RelativeLayout
 			android:id="@+id/bookmark_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/my_gift_lay"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+			>
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/bookmark_txt_icon"
@@ -111,22 +93,15 @@
 				android:visibility="gone" />
 
 		</RelativeLayout>
-	</com.andexert.library.RippleView>
-
-	<com.andexert.library.RippleView
-		android:id="@+id/location_ripple"
-		rv_centered="false"
-		android:layout_width="match_parent"
-
-		android:layout_height="wrap_content"
-		android:layout_below="@id/bookmark_ripple">
 
 		<RelativeLayout
 			android:id="@+id/location_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/bookmark_lay"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+			>
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/location_txt_icon"
@@ -179,22 +154,15 @@
 				android:visibility="visible" />
 
 		</RelativeLayout>
-	</com.andexert.library.RippleView>
-
-	<com.andexert.library.RippleView
-		android:id="@+id/rules_ripple"
-		rv_centered="false"
-		android:layout_width="match_parent"
-
-		android:layout_height="wrap_content"
-		android:layout_below="@id/location_ripple">
 
 		<RelativeLayout
 			android:id="@+id/rules_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/location_lay"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+			>
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/rules_txt_icon"
@@ -233,21 +201,14 @@
 
 		</RelativeLayout>
 
-	</com.andexert.library.RippleView>
-
-	<com.andexert.library.RippleView
-		android:id="@+id/about_ripple"
-		rv_centered="false"
-		android:layout_width="match_parent"
-
-		android:layout_height="wrap_content"
-		android:layout_below="@id/rules_ripple">
-
 		<RelativeLayout
 			android:id="@+id/about_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+
+			android:layout_below="@id/rules_lay">
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/rw_mywall_txt_icon"
@@ -285,7 +246,5 @@
 				android:visibility="invisible" />
 
 		</RelativeLayout>
-
-	</com.andexert.library.RippleView>
 
 </RelativeLayout>
