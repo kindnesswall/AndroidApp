@@ -8,15 +8,18 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<ImageView
-			android:id="@+id/my_gift_iv"
-			android:layout_width="@dimen/my_wall_mainlist_icon_size"
-			android:layout_height="@dimen/my_wall_mainlist_icon_size"
-			android:src="@mipmap/ic_person_white_24dp"
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/my_gift_txt_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"/>
+			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+			android:text=""
+			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
+			android:textColor="@color/icon_black"/>
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/my_gift_txt"
@@ -26,10 +29,10 @@
 			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
 			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
 			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/my_gift_iv"
+			android:layout_toLeftOf="@id/my_gift_txt_icon"
 			android:gravity="center"
 
-			android:textColor="@color/dark_white"
+			android:textColor="@color/icon_black"
 
 			android:text="هدیه‌های من"/>
 
@@ -37,7 +40,7 @@
 			android:layout_alignParentBottom="true"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="@color/dark_white"/>
+			android:background="@color/divider"/>
 
 	</RelativeLayout>
 
@@ -47,15 +50,20 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<ImageView
-			android:id="@+id/bookmark_iv"
-			android:layout_width="@dimen/my_wall_mainlist_icon_size"
-			android:layout_height="@dimen/my_wall_mainlist_icon_size"
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/bookmark_txt_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:src="@mipmap/ic_bookmark_white_24dp"
 
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"/>
+			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+			android:text=""
+
+			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
+			android:textColor="@color/icon_black"/>
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/bookmark_txt"
@@ -65,10 +73,10 @@
 			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
 			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
 			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/bookmark_iv"
+			android:layout_toLeftOf="@id/bookmark_txt_icon"
 			android:gravity="center"
 
-			android:textColor="@color/dark_white"
+			android:textColor="@color/icon_black"
 
 			android:text="نشان‌شده‌ها"/>
 
@@ -76,7 +84,7 @@
 			android:layout_alignParentBottom="true"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="@color/dark_white"
+			android:background="@color/divider"
 			android:visibility="gone"/>
 
 	</RelativeLayout>
@@ -87,15 +95,18 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/my_wall_mainlist_row_height">
 
-		<ImageView
-			android:id="@+id/location_iv"
-			android:layout_width="@dimen/my_wall_mainlist_icon_size"
-			android:layout_height="@dimen/my_wall_mainlist_icon_size"
-			android:src="@mipmap/ic_location_on_black_18dp"
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/location_txt_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true"
-			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"/>
+			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+			android:text=""
+			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
+			android:textColor="@color/icon_black"/>
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/location_txt"
@@ -105,10 +116,10 @@
 			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
 			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
 			android:layout_centerVertical="true"
-			android:layout_toLeftOf="@id/location_iv"
+			android:layout_toLeftOf="@id/location_txt_icon"
 			android:gravity="center"
 
-			android:textColor="@color/dark_white"
+			android:textColor="@color/icon_black"
 
 			android:text="شهر:"/>
 
@@ -123,7 +134,7 @@
 			android:layout_toLeftOf="@id/location_txt"
 			android:gravity="center"
 
-			android:textColor="@color/dark_white"
+			android:textColor="@color/icon_black"
 
 			android:text="تهران"/>
 
@@ -131,9 +142,94 @@
 			android:layout_alignParentBottom="true"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="@color/dark_white"
-			android:visibility="gone"/>
+			android:background="@color/divider"
+			android:visibility="visible"/>
 
 	</RelativeLayout>
 
+	<RelativeLayout
+		android:id="@+id/rules_lay"
+		android:layout_below="@id/location_lay"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/my_wall_mainlist_row_height">
+
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/rules_txt_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+			android:text=""
+			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
+			android:textColor="@color/icon_black"/>
+
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/rules_txt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
+			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+			android:layout_centerVertical="true"
+			android:layout_toLeftOf="@id/rules_txt_icon"
+			android:gravity="center"
+
+			android:textColor="@color/icon_black"
+
+			android:text="قوانین"/>
+
+		<RelativeLayout
+			android:layout_alignParentBottom="true"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@color/divider"
+			android:visibility="invisible"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/about_lay"
+		android:layout_below="@id/rules_lay"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/my_wall_mainlist_row_height">
+
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/about_txt_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+			android:text=""
+			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"
+			android:textColor="@color/icon_black"/>
+
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/about_txt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:textSize="@dimen/my_wall_mainlist_tv_text_size"
+			android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+			android:layout_centerVertical="true"
+			android:layout_toLeftOf="@id/about_txt_icon"
+			android:gravity="center"
+
+			android:textColor="@color/icon_black"
+
+			android:text="درباره دیوار مهربانی"/>
+
+		<RelativeLayout
+			android:layout_alignParentBottom="true"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@color/divider"
+			android:visibility="invisible"/>
+
+	</RelativeLayout>
 </RelativeLayout>

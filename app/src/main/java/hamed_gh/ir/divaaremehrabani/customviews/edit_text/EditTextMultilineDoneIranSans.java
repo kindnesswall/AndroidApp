@@ -32,7 +32,7 @@ public class EditTextMultilineDoneIranSans extends EditText {
 
     private void setFont() {
         Typeface iranSans = Typeface.createFromAsset(getContext().getAssets(),
-                "fonts/iran_sans_regular.ttf");
+                "fonts/IRANSansMobile_Light-4.1.ttf");
         setTypeface(iranSans, Typeface.NORMAL);
 
     }

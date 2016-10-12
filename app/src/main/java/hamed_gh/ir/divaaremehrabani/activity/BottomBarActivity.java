@@ -88,7 +88,7 @@ public class BottomBarActivity extends AppCompatActivity {
 		mBottomBar = BottomBar.attach(this, savedInstanceState);
 		mBottomBar.noTopOffset();
 		mBottomBar.useFixedMode();
-		mBottomBar.setTypeFace("fonts/iran_sans_regular.ttf");
+		mBottomBar.setTypeFace("fonts/IRANSansMobile_Light-4.1.ttf");
 		mBottomBar.setItems(R.menu.menu_bottombar);
 		mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 		int color = getResources().getColor(R.color.white);
