@@ -10,4 +10,7 @@
 	<string name="select_ur_gift_categorty">لطفا دسته‌بندی هدیه خود را انتخاب کنید.</string>
 	<string name="gift_category">دسته‌بندی هدیه</string>
 	<string name="send">ارسال</string>
+	<string name="my_wall">دیوار من</string>
+	<string name="categories">دسته‌بندی‌ها</string>
+	<string name="search">جستجو</string>
 </resources>

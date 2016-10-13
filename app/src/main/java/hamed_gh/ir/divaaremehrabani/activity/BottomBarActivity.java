@@ -39,7 +39,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	public RestAPI service;
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;
-	@Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
+	@Bind(R.id.toolbar_title_textView) public TextView mToolbarTitleTextView;
 	@Bind(R.id.toolbar_new_gift_btn_tv) TextView mToolbarNewGiftBtnTv;
 
 	private Context context;
@@ -93,21 +93,25 @@ public class BottomBarActivity extends AppCompatActivity {
 			@Override
 			public void onMenuTabSelected(@IdRes int menuItemId) {
 				if (menuItemId == R.id.bottomBarHome) {
-					Toasti.showS("Home selected");
-					setFragment(new HomeFragment(), HomeFragment.class.getName());
+
+                    mToolbarTitleTextView.setText("همه هدیه‌های تهران");
+                    setFragment(new HomeFragment(), HomeFragment.class.getName());
 					// The user reselected item number one, scroll your content to top.
 				} else if (menuItemId == R.id.bottomBarCategories) {
-					Toasti.showS("Catagories selected");
+
+					mToolbarTitleTextView.setText(R.string.categories);
 					setFragment(new CategoriesFragment(), CategoriesFragment.class.getName());
 
 					// The user selected item number one.
 				} else if (menuItemId == R.id.bottomBarSearch) {
-					Toasti.showS("Search selected");
+
+					mToolbarTitleTextView.setText(R.string.search);
 					setFragment(new SearchFragment(), SearchFragment.class.getName());
 
 					// The user selected item number one.
 				} else if (menuItemId == R.id.bottomBarMyWall) {
-					Toasti.showS("MyWall selected");
+
+                    mToolbarTitleTextView.setText(R.string.my_wall);
 					setFragment(new MyWallFragment(), MyWallFragment.class.getName());
 
 					// The user selected item number one.

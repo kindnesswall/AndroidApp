@@ -37,16 +37,19 @@
 			android:id="@+id/toolbar_title_textView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+
 			android:layout_toRightOf="@+id/toolbar_new_gift_btn"
+			android:layout_toLeftOf="@id/toolbar_app_icon"
+
 			android:ellipsize="end"
 			android:gravity="center_vertical|right"
 
-			android:singleLine="true"
+			android:maxLines="1"
 
 			android:text="Toolbar Title"
 			android:textColor="#FFFFFF"
 			android:textSize="16sp"
-			android:visibility="gone" />
+			android:visibility="visible" />
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_new_gift_btn_tv"
