@@ -52,27 +52,18 @@
 			android:id="@+id/toolbar_new_gift_btn_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="56dp"
-
 			android:layout_alignParentLeft="true"
-			android:background="?attr/selectableItemBackground"
-			android:clickable="true"
-			android:drawableRight="@mipmap/ic_add_white_24dp"
 
+			android:drawableRight="@mipmap/ic_action_action_done"
 			android:gravity="center_vertical"
-
 			android:paddingLeft="14dp"
-			android:paddingRight="14dp"
 
-			android:text="هدیه جدید"
-			android:textColor="#FFFFFF" />
+			android:paddingRight="14dp"
+			android:text="ارسال"
+
+			android:textColor="#FFFFFF"
+			android:textSize="13dp" />
 
 	</RelativeLayout>
-
-	<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/container_body"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@id/toolbar_layout"
-		android:background="@color/transparent" />
 
 </RelativeLayout>

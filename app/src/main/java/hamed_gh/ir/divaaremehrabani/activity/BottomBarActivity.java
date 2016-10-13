@@ -1,6 +1,7 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -39,16 +39,10 @@ public class BottomBarActivity extends AppCompatActivity {
 	public RestAPI service;
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;
-	@Bind(R.id.toolbar_title_textView)
-	TextView mToolbarTitleTextView;
-
-	@Bind(R.id.toolbar_new_gift_btn)RelativeLayout toolbarNewGiftBtn;
-
+	@Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
+	@Bind(R.id.toolbar_new_gift_btn_tv) TextView mToolbarNewGiftBtnTv;
+	
 	private Context context;
-	/**
-	 * ATTENTION: This was auto-generated to implement the App Indexing API.
-	 * See https://g.co/AppIndexing/AndroidStudio for more information.
-	 */
 	private BottomBar mBottomBar;
 
 	private void retrofitInitialization() {
@@ -154,11 +148,11 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		settingBottomBar(savedInstanceState);
 
-		toolbarNewGiftBtn.setOnClickListener(new View.OnClickListener() {
+		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-
+			startActivity(new Intent(context,RegisterGiftActivity.class));
 
 			}
 		});
