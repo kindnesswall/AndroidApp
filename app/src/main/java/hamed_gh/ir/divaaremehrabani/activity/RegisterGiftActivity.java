@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -32,12 +33,20 @@ public class RegisterGiftActivity extends AppCompatActivity {
     @Bind(R.id.main_toolbar)
     Toolbar mToolbar;
 
-    @Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
-    @Bind(R.id.toolbar_send_btn_tv) TextView mToolbarSendBtnTv;
-    @Bind(R.id.choose_category_btn) Button mChooseCategoryBtn;
+    @Bind(R.id.toolbar_title_textView)
+    TextView mToolbarTitleTextView;
 
-//    @Bind(R.id.toolbar_new_gift_btn)
-//    RelativeLayout toolbarNewGiftBtn;
+    @Bind(R.id.toolbar_send_btn_tv)
+    TextView mToolbarSendBtnTv;
+
+    @Bind(R.id.choose_category_btn)
+    Button mChooseCategoryBtn;
+
+    @Bind(R.id.toolbar_back_iv)
+    ImageView mBackBtn;
+
+    @Bind(R.id.toolbar_cancel_iv)
+    ImageView mCancelBtn;
 
     private Context context;
 
@@ -70,7 +79,7 @@ public class RegisterGiftActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-        mToolbarTitleTextView.setText("دیوار مهربانی");
+//        mToolbarTitleTextView.setText("دیوار مهربانی");
     }
 
     @Override
@@ -91,11 +100,26 @@ public class RegisterGiftActivity extends AppCompatActivity {
             }
         });
 
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        mCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         mChooseCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getSupportFragmentManager();
-                ChooseCategoryDialogFragment chooseCategoryDF= new ChooseCategoryDialogFragment();
+                ChooseCategoryDialogFragment chooseCategoryDF = new ChooseCategoryDialogFragment();
                 chooseCategoryDF.show(fm, chooseCategoryDF.getClass().getName());
             }
         });
