@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.holder.ChooseCityHolder;
+import hamed_gh.ir.divaaremehrabani.model.Place;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -31,10 +34,12 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityHolder> {
 	};
 
 	private Context mContext;
+	private ArrayList<Place> places;
 	private FragmentActivity activity;
 
-	public ChooseCityAdapter(Context context) {
+	public ChooseCityAdapter(Context context, ArrayList<Place> places) {
 		this.mContext = context;
+		this.places = places;
 	}
 
 	@Override
@@ -48,7 +53,8 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityHolder> {
 	@Override
 	public void onBindViewHolder(ChooseCityHolder chooseCityHolder, final int i) {
 
-//		categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
+		chooseCityHolder.getCityNameTv().setText(places.get(i).name);
+//		categoryHolder.getCityNameTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
 //		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
 
 	}
@@ -56,7 +62,7 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityHolder> {
 	@Override
 	public int getItemCount() {
 
-		return 20;
+		return places.size();
 
 	}
 }

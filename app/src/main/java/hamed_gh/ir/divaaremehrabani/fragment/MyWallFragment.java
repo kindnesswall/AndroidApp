@@ -1,10 +1,13 @@
 package hamed_gh.ir.divaaremehrabani.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 
@@ -16,6 +19,9 @@ public class MyWallFragment extends BaseFragment {
 //    @Bind(R.id.my_gift_txt)
 //    TextView mMessageTextView;
 
+    @Bind(R.id.location_lay)
+    RelativeLayout locationLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,6 +30,15 @@ public class MyWallFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         init();
+
+        locationLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MyDialogFragment myDialogFragment = new MyDialogFragment();
+                myDialogFragment.show(fm, "fragment_name");
+            }
+        });
 
         return rootView;
     }

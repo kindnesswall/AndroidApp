@@ -2,7 +2,6 @@ package hamed_gh.ir.divaaremehrabani.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import hamed_gh.ir.divaaremehrabani.R;
@@ -12,22 +11,21 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class ChooseCityHolder extends RecyclerView.ViewHolder {
 
-	private ImageView mCategoryIc;
-	private TextView mCategoryTv;
-
+	private TextView mCityNameTv;
+	private TextView mURHereTxt;
 
 	public ChooseCityHolder(View itemView) {
 		super(itemView);
 
-		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
-		mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
+		mCityNameTv = (TextView) itemView.findViewById(R.id.rw_choose_city_name_tv);
+		mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_city_ur_here_tv);
 	}
 
-	public ImageView getmCategoryIc() {
-		return mCategoryIc;
+	public TextView getCityNameTv() {
+		return mCityNameTv;
 	}
 
-	public TextView getmCategoryTv() {
-		return mCategoryTv;
+	public TextView getURHereTxt() {
+		return mURHereTxt;
 	}
 }

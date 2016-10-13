@@ -24,7 +24,6 @@ import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
-import hamed_gh.ir.divaaremehrabani.fragment.MyDialogFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.MyWallFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.SearchFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
@@ -159,9 +158,7 @@ public class BottomBarActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 
-				FragmentManager fm = getSupportFragmentManager();
-				MyDialogFragment myDialogFragment = new MyDialogFragment();
-				myDialogFragment.show(fm, "fragment_name");
+
 
 			}
 		});
