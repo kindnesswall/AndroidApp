@@ -9,6 +9,8 @@
 	<color name="register_gift_warning_text">#F40000</color>
 	<color name="register_gift_bg">#DFDFDF</color>
 
+	<color name="no_internet_bg">#FBFDDA</color>
+
 	<!-- colors from divar -->
 
 	<color name="colorAccent">#FF4081</color>

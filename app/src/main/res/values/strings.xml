@@ -13,4 +13,5 @@
 	<string name="my_wall">دیوار من</string>
 	<string name="categories">دسته‌بندی‌ها</string>
 	<string name="search">جستجو</string>
+	<string name="no_internet_connection">اتصال به اینترنت برقرار نیست</string>
 </resources>
