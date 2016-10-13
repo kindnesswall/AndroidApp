@@ -35,8 +35,8 @@ public class MyWallFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                MyDialogFragment myDialogFragment = new MyDialogFragment();
-                myDialogFragment.show(fm, "fragment_name");
+                ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
+                chooseCityDialogFragment.show(fm, "fragment_name");
             }
         });
 

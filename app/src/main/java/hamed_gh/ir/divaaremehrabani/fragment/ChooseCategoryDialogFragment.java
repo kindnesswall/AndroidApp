@@ -24,13 +24,13 @@ import hamed_gh.ir.divaaremehrabani.model.Places;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class MyDialogFragment extends DialogFragment {
+public class ChooseCategoryDialogFragment extends DialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_dialog, container, false);
+		View rootView = inflater.inflate(R.layout.dialogfragment_choose_category, container, false);
 
 		ButterKnife.bind(this, rootView);
 
@@ -56,16 +56,8 @@ public class MyDialogFragment extends DialogFragment {
 		Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).name);
 		Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).level);
 
-//		Iterator<Place> it = allPlaces.getPlaces().iterator();
-//		while (it.hasNext()) {
-//
-//			if (it.next().level.equals("level2")) {
-//
-//			}
-//		}
-
 		for (Place thisPlace : allPlaces.getPlaces()) {
-			if (thisPlace.level.equals("place2")) {
+			if (thisPlace.level.equals("place3") && thisPlace.container_id == 5 ) {
 				level2.addPlace(thisPlace);
 			}
 		}

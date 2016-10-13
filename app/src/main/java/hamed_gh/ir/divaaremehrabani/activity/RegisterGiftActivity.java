@@ -2,9 +2,11 @@ package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -14,6 +16,8 @@ import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.app.RestAPI;
 import hamed_gh.ir.divaaremehrabani.app.URIs;
+import hamed_gh.ir.divaaremehrabani.fragment.ChooseCategoryDialogFragment;
+import hamed_gh.ir.divaaremehrabani.helper.Toasti;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,6 +34,7 @@ public class RegisterGiftActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
     @Bind(R.id.toolbar_send_btn_tv) TextView mToolbarSendBtnTv;
+    @Bind(R.id.choose_category_btn) Button mChooseCategoryBtn;
 
 //    @Bind(R.id.toolbar_new_gift_btn)
 //    RelativeLayout toolbarNewGiftBtn;
@@ -82,7 +87,16 @@ public class RegisterGiftActivity extends AppCompatActivity {
         mToolbarSendBtnTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toasti.showS("ارسال");
+            }
+        });
 
+        mChooseCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                ChooseCategoryDialogFragment chooseCategoryDF= new ChooseCategoryDialogFragment();
+                chooseCategoryDF.show(fm, chooseCategoryDF.getClass().getName());
             }
         });
     }

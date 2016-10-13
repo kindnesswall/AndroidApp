@@ -13,7 +13,7 @@ public class Place {
     public String name;
     public String level;
     String ordering;
-    String container_id;
+    public Integer container_id;
 
     @SerializedName("long")
     String longitude;
