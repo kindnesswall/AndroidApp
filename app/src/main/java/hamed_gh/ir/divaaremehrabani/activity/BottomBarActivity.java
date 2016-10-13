@@ -41,7 +41,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	Toolbar mToolbar;
 	@Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
 	@Bind(R.id.toolbar_new_gift_btn_tv) TextView mToolbarNewGiftBtnTv;
-	
+
 	private Context context;
 	private BottomBar mBottomBar;
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -29,11 +28,11 @@ public class RegisterGiftActivity extends AppCompatActivity {
     @Bind(R.id.main_toolbar)
     Toolbar mToolbar;
 
-    @Bind(R.id.toolbar_title_textView)
-    TextView mToolbarTitleTextView;
+    @Bind(R.id.toolbar_title_textView) TextView mToolbarTitleTextView;
+    @Bind(R.id.toolbar_send_btn_tv) TextView mToolbarSendBtnTv;
 
-    @Bind(R.id.toolbar_new_gift_btn)
-    RelativeLayout toolbarNewGiftBtn;
+//    @Bind(R.id.toolbar_new_gift_btn)
+//    RelativeLayout toolbarNewGiftBtn;
 
     private Context context;
 
@@ -80,7 +79,7 @@ public class RegisterGiftActivity extends AppCompatActivity {
         retrofitInitialization();
         settingToolbar();
 
-        toolbarNewGiftBtn.setOnClickListener(new View.OnClickListener() {
+        mToolbarSendBtnTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

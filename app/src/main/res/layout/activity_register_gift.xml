@@ -49,7 +49,7 @@
 			android:visibility="gone" />
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/toolbar_new_gift_btn_tv"
+			android:id="@+id/toolbar_send_btn_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="56dp"
 			android:layout_alignParentLeft="true"
