@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#A62625</color>
-	<color name="colorPrimaryDark">#A62625</color>
+
+	<!-- colors from divar -->
+	<color name="colorPrimary">#93161D</color>
+	<color name="colorPrimaryDark">@color/colorPrimary</color>
+	
+	<color name="register_gift_warning_background">#FBC3C6</color>
+	<color name="register_gift_warning_text">#F40000</color>
+	<color name="register_gift_bg">#DFDFDF</color>
+
+	<!-- colors from divar -->
+
 	<color name="colorAccent">#FF4081</color>
 
 	<color name="black">#FF000000</color>

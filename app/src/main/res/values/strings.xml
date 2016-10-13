@@ -7,4 +7,6 @@
 	<string name="clothes">پوشاک</string>
 	<string name="accessories">لوازم</string>
 	<string name="food">غذای نذری</string>
+	<string name="select_ur_gift_categorty">لطفا دسته‌بندی هدیه خود را انتخاب کنید.</string>
+	<string name="gift_category">دسته‌بندی هدیه</string>
 </resources>
