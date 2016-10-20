@@ -2,6 +2,88 @@
 <resources>
 
 	<!-- colors from divar -->
+
+	<color name="action_bar_splitter">#ffdddddd</color>
+	<color name="background_tab_pressed">#66d7d7d7</color>
+	<color name="cardview_dark_background">#ff424242</color>
+	<color name="cardview_light_background">#ffffffff</color>
+	<color name="cardview_shadow_end_color">#03000000</color>
+	<color name="cardview_shadow_start_color">#37000000</color>
+	<color name="category_item_focused">#fff0f0f0</color>
+	<color name="category_item_pressed">#ffededed</color>
+	<color name="city_you_are_here">#ff777777</color>
+
+	<color name="contact_item_bg">#ffffffff</color>
+	<color name="date_stamp_background">#ffe9e9e9</color>
+	<color name="date_stamp_text">@color/text_secondary</color>
+	<color name="default_circle_indicator_fill_color">#ffffffff</color>
+	<color name="default_circle_indicator_page_color">#00000000</color>
+	<color name="default_circle_indicator_stroke_color">#ffdddddd</color>
+	<color name="default_progress_bar_color">@color/red_high</color>
+	<color name="dialog_btn_separator">#ffdedede</color>
+	<color name="divar_button">#ffcfcfcf</color>
+	<color name="divar_button_disabled">#ffe8e8e8</color>
+	<color name="divar_button_focused">#ddcfcfcf</color>
+	<color name="divar_button_pressed">#aacfcfcf</color>
+	<color name="divar_search_button">#ffe1e1e1</color>
+	<color name="gray_header_text">#ff999999</color>
+	<color name="gray_header_text_shadow">#ffbbbbbb</color>
+	<color name="grayed_out">#ff999999</color>
+	<color name="highlight_color">#fffffc57</color>
+	<color name="horizontal_divider">#ff8f8f8f</color>
+	<color name="horizontal_vertical">#ff8f8f8f</color>
+	<color name="input_field_bg">#ffefefef</color>
+	<color name="input_image_delete_bg">#ddffffff</color>
+	<color name="input_image_delete_bg_selected">#ffffffff</color>
+	<color name="item_category_stroke">#ffe5e5e5</color>
+	<color name="light_grey">#ffeeeeee</color>
+	<color name="light_grey_bg">#fff6f6f6</color>
+	<color name="list_divider">#ffeeeeee</color>
+	<color name="list_item_focused">#55f1f1f1</color>
+	<color name="list_item_pressed">#55f1f1f1</color>
+	<color name="main_button">#ffa62626</color>
+	<color name="main_button_disabled">#77a62626</color>
+	<color name="main_button_focused">#dda62626</color>
+	<color name="main_button_pressed">#aaa62626</color>
+	<color name="new_post_view_bg">#ffefefef</color>
+	<color name="notification_name_color">@android:color/white</color>
+	<color name="post_item_separator">#ffdddddd</color>
+	<color name="post_list_bg">#ffe5e5e5</color>
+	<color name="post_page_bg">#ff555555</color>
+	<color name="quick_return_bar_bg">#eeff6161</color>
+	<color name="red_high">#ffa62626</color>
+	<color name="red_high_dark">#ff8d2626</color>
+	<color name="red_high_transparent">#44ff6161</color>
+	<color name="side_menu_gray">#ffd4d4d4</color>
+	<color name="smooth_text_color">#ff222222</color>
+	<color name="text_color_draft">#ffff0000</color>
+	<color name="text_grey_shadow">#ffeeeeee</color>
+	<color name="text_primary">#ff24292b</color>
+	<color name="text_primary_disabled">#ff868b8d</color>
+	<color name="text_primary_inverse">#ffe4e4e4</color>
+	<color name="text_secondary">#ff888888</color>
+	<color name="title_bar_black">#ff000000</color>
+	<color name="title_bar_gray">#ffeeeeee</color>
+	<color name="title_bar_redgray">#20a62626</color>
+	<color name="toast_bg">#ffdddddd</color>
+	<color name="transparent">#00000000</color>
+	<color name="transparent_white">#99ffffff</color>
+	<color name="ttlm_default_background_color">#ee131518</color>
+	<color name="ttlm_default_stroke_color">#ffe9ecef</color>
+	<color name="vpi__background_holo_dark">#ff000000</color>
+	<color name="vpi__background_holo_light">#fff3f3f3</color>
+	<color name="vpi__bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+	<color name="vpi__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+	<color name="vpi__bright_foreground_holo_dark">@color/vpi__background_holo_light</color>
+	<color name="vpi__bright_foreground_holo_light">@color/vpi__background_holo_dark</color>
+	<color name="vpi__bright_foreground_inverse_holo_dark">@color/vpi__bright_foreground_holo_light</color>
+	<color name="vpi__bright_foreground_inverse_holo_light">@color/vpi__bright_foreground_holo_dark</color>
+	<color name="warning_bar_background_fatal">#ffdd1812</color>
+	<color name="warning_bar_background_info">#ff009738</color>
+	<color name="warning_bar_background_warning">#ffffc107</color>
+
+
+	<!-- colors from divar -->
 	<color name="colorPrimary">#93161D</color>
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
 
@@ -23,7 +105,6 @@
 	<color name="dark_white">#737373</color>
 
 	<color name="divider">#dcdcdc</color>
-	<color name="transparent">#00737373</color>
 
 	<!-- progress view -->
 	<color name="blue_level">#5389bc</color>
