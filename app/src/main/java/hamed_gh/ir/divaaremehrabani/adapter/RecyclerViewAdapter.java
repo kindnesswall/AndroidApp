@@ -1,6 +1,7 @@
 package hamed_gh.ir.divaaremehrabani.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.activity.DetailActivity;
 import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.model.Gallery;
 
@@ -45,7 +47,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 //	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
 		ImageLoader.getInstance().displayImage(URIs.DOMAIN + galleries.get(i).getImageSrc(), myHolder.mImageView);
-
 	}
 
 	@Override
@@ -65,6 +66,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 			mGalleryIdTextView = (TextView) itemView.findViewById(R.id.row_title_textview);
 			mImageView = (ImageView) itemView.findViewById(R.id.row_imageview);
+
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mContext.startActivity(new Intent(mContext,DetailActivity.class));
+				}
+			});
 		}
 
 	}
