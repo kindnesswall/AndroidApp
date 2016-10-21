@@ -5,6 +5,17 @@
 		<item name="windowActionBar">false</item>
 	</style>
 
+	<style name="FabStyle">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_margin">@dimen/spacing_large</item>
+		<item name="android:src">@drawable/ic_profile</item>
+		<item name="borderWidth">0dp</item>
+		<item name="elevation">6dp</item>
+		<item name="pressedTranslationZ">12dp</item>
+		<item name="rippleColor">@android:color/white</item>
+	</style>
+
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="MyMaterialTheme">
 		<!-- Customize your theme here. -->

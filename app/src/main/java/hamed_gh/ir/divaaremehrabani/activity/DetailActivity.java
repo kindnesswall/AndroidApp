@@ -9,12 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
-import me.relex.circleindicator.CircleIndicator;
+import hamed_gh.ir.divaaremehrabani.customviews.customindicator.MyPageIndicator;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class DetailActivity extends AppCompatActivity {
 			R.drawable.rectangle_blue,
 			R.drawable.rectangle_red
 	};
+	private MyPageIndicator mIndicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,13 @@ public class DetailActivity extends AppCompatActivity {
 
 		ButterKnife.bind(this);
 
-		CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
 		setupViewPager(viewPager);
-		indicator.setViewPager(viewPager);
+
+		LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
+
+		mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
+		mIndicator.setPageCount(mResources.length);
+		mIndicator.show();
 	}
 
 	private void setupViewPager(ViewPager viewPager) {
