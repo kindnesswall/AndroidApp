@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#F1F1F1">
 
+	<RelativeLayout
+		android:id="@+id/search_textbox_lay"
+		android:layout_width="match_parent"
+		android:layout_height="42dp"
+
+		android:layout_marginLeft="4dp"
+		android:layout_marginRight="4dp"
+
+		android:layout_marginTop="2dp"
+
+		android:background="@color/white"
+		>
+
+		<hamed_gh.ir.divaaremehrabani.customviews.edit_text.EditTextIranSans
+			android:id="@+id/search_et"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_alignParentTop="true"
+			android:background="@android:color/transparent"
+			android:hint="@string/search_hint"
+			android:paddingLeft="8dp"
+
+			android:paddingRight="8dp"
+
+			android:textSize="15dp"/>
+
+		<ImageView
+			android:id="@+id/search_btn"
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+
+			android:layout_alignLeft="@id/search_et"
+
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="4dp"
+			android:background="@color/colorPrimary"
+			android:padding="4dp"
+			android:src="@mipmap/ic_search_white_24dp"
+			/>
+
+		<ImageView
+			android:id="@+id/search_backspace_btn"
+			android:layout_width="24dp"
+			android:layout_height="32dp"
+
+			android:layout_toRightOf="@id/search_btn"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="4dp"
+			android:paddingTop="6dp"
+			android:paddingBottom="6dp"
+
+
+			android:src="@mipmap/ic_backspace_black_24dp"
+
+			/>
+
+	</RelativeLayout>
 
 	<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 
-		android:layout_below="@id/fragment_progressBar"
+		android:layout_below="@id/search_textbox_lay"
 		android:layout_centerHorizontal="true"
 
 		android:padding="5dp"
