@@ -702,6 +702,8 @@ Fingerprint: %2$s"</string>
 	<string name="you_are_chatting_with_yourself">در حال چت با خودتان هستید!</string>
 	<string name="you_are_here">(شما اینجا هستید)</string>
 	<string name="you_have_signed_in">وارد شدید</string>
+	<string name="no_gift_found">هیچ هدیه ای در این موضوع وجود ندارد.</string>
+	<string name="searching">در حال جستجو</string>
 
 	<!-- from divar -->
 </resources>
