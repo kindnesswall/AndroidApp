@@ -32,6 +32,7 @@
 
 			android:text=""
 			android:textSize="26dp"
+			android:gravity="center"
 			android:textColor="@color/colorAccent"/>
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
