@@ -13,6 +13,9 @@
 	<dimen name="my_wall_mainlist_tv_padding_right">30dp</dimen>
 	<dimen name="my_wall_mainlist_tv_text_size">16dp</dimen>
 
+	<dimen name="statistic_text_size">16dp</dimen>
+	<dimen name="statistic_text_width">250dp</dimen>
+
 	<!-- Default screen margins, per the Android Design guidelines. -->
 	<dimen name="spacing_xsmall">2dp</dimen>
 	<dimen name="spacing_medium">8dp</dimen>
