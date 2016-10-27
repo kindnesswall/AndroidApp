@@ -2,7 +2,6 @@ package hamed_gh.ir.divaaremehrabani.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import hamed_gh.ir.divaaremehrabani.R;
@@ -12,20 +11,27 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class CategoryHolder extends RecyclerView.ViewHolder {
 
-	private ImageView mCategoryIc;
+//	private ImageView mCategoryIc;
 	private TextView mCategoryTv;
+
+	public TextView getmCategoryFontIcon() {
+		return mCategoryFontIcon;
+	}
+
+	private TextView mCategoryFontIcon;
 
 
 	public CategoryHolder(View itemView) {
 		super(itemView);
 
-		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
+//		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
 		mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
+		mCategoryFontIcon = (TextView) itemView.findViewById(R.id.cell_category_font_icon);
 	}
 
-	public ImageView getmCategoryIc() {
-		return mCategoryIc;
-	}
+//	public ImageView getmCategoryIc() {
+//		return mCategoryIc;
+//	}
 
 	public TextView getmCategoryTv() {
 		return mCategoryTv;

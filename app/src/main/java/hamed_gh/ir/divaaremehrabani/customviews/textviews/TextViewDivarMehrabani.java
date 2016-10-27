@@ -13,11 +13,11 @@ import java.util.Locale;
 
 import hamed_gh.ir.divaaremehrabani.helper.NumberTranslator;
 
-public class TextViewFontAwesome extends TextView {
+public class TextViewDivarMehrabani extends TextView {
 
 	Context ctx;
 
-	public TextViewFontAwesome(Context context) {
+	public TextViewDivarMehrabani(Context context) {
 		super(context);
 
 		ctx = context;
@@ -27,7 +27,7 @@ public class TextViewFontAwesome extends TextView {
 //		setColor();
 	}
 
-	public TextViewFontAwesome(Context context, AttributeSet attrs) {
+	public TextViewDivarMehrabani(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		if (!isInEditMode()) {
 			setFont();
@@ -35,7 +35,7 @@ public class TextViewFontAwesome extends TextView {
 //		setColor();
 	}
 
-	public TextViewFontAwesome(Context context, AttributeSet attrs, int defStyle) {
+	public TextViewDivarMehrabani(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		if (!isInEditMode()) {
 			setFont();
@@ -45,7 +45,7 @@ public class TextViewFontAwesome extends TextView {
 
 	private void setFont() {
 		Typeface iranSans = Typeface.createFromAsset(getContext().getAssets(),
-				"fonts/fontawesome-webfont.ttf");
+				"fonts/divar_mehrabani.ttf");
 		setTypeface(iranSans, Typeface.NORMAL);
 	}
 

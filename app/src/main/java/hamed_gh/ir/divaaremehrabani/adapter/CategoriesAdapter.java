@@ -15,48 +15,55 @@ import hamed_gh.ir.divaaremehrabani.holder.CategoryHolder;
  */
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
 
-	String schoolId, childID;
-	private int[] iconRes = {
-			R.mipmap.ic_books,
-			R.mipmap.ic_jumper,
-			R.mipmap.ic_dining_room,
-			R.mipmap.ic_sofa
-	};
+    String schoolId, childID;
+    private int[] iconRes = {
+            R.mipmap.ic_books,
+            R.mipmap.ic_jumper,
+            R.mipmap.ic_dining_room,
+            R.mipmap.ic_sofa
+    };
 
-	private int[] categoriesTitleRes = {
-			R.string.book,
-			R.string.clothes,
-			R.string.food,
-			R.string.accessories
-	};
+    private String[] fontIcons = {
+            "\uE801",
+            "\uE800",
+            "\uE832",
+            "\uE804"
+    };
 
-	private Context mContext;
-	private FragmentActivity activity;
+    private int[] categoriesTitleRes = {
+            R.string.book,
+            R.string.clothes,
+            R.string.food,
+            R.string.accessories
+    };
 
-	public CategoriesAdapter(Context context) {
-		this.mContext = context;
-	}
+    private Context mContext;
+    private FragmentActivity activity;
 
-	@Override
-	public CategoryHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_category, null);
-		CategoryHolder categoryHolder = new CategoryHolder(v);
+    public CategoriesAdapter(Context context) {
+        this.mContext = context;
+    }
 
-		return categoryHolder;
-	}
+    @Override
+    public CategoryHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_category, null);
+        CategoryHolder categoryHolder = new CategoryHolder(v);
 
-	@Override
-	public void onBindViewHolder(CategoryHolder categoryHolder, final int i) {
+        return categoryHolder;
+    }
 
-		categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
-		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
+    @Override
+    public void onBindViewHolder(CategoryHolder categoryHolder, final int i) {
 
-	}
+        categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
+//		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
+        categoryHolder.getmCategoryFontIcon().setText(fontIcons[i]);
+    }
 
-	@Override
-	public int getItemCount() {
+    @Override
+    public int getItemCount() {
 
-		return 4;
+        return 4;
 
-	}
+    }
 }

@@ -163,7 +163,7 @@
 		android:background="?attr/selectableItemBackground"
 		android:clickable="true">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewFontAwesome
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarMehrabani
 			android:id="@+id/statistic_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
 			android:layout_centerVertical="true"
 			android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
 
-			android:text="&#xf080;"
+			android:text=""
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
