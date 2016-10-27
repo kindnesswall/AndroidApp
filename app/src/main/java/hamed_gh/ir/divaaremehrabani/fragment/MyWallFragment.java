@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.activity.BottomBarActivity;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -21,6 +22,9 @@ public class MyWallFragment extends BaseFragment {
 
     @Bind(R.id.location_lay)
     RelativeLayout locationLayout;
+
+    @Bind(R.id.statistic_lay)
+    RelativeLayout statisticLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +41,17 @@ public class MyWallFragment extends BaseFragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
                 chooseCityDialogFragment.show(fm, "fragment_name");
+            }
+        });
+
+        statisticLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((BottomBarActivity)getActivity()).setFragment(
+                        new StatisticFragment(), StatisticFragment.class.getName()
+                );
+
             }
         });
 
