@@ -133,23 +133,27 @@
 					android:text="@string/gift_category"
 					android:textSize="18dp"/>
 
-				<hamed_gh.ir.divaaremehrabani.customviews.button.ButtonIranSans
+				<RelativeLayout
 					android:id="@+id/choose_category_btn"
-					android:layout_width="wrap_content"
-					android:layout_height="42dp"
+					android:layout_width="108dp"
+					android:layout_height="@dimen/button_height"
 
 					android:layout_below="@id/gift_category_txt"
 					android:layout_alignParentLeft="true"
 
-					android:paddingRight="30dp"
-					android:paddingLeft="30dp"
+					android:clickable="true"
+					android:background="@drawable/button_selector">
 
-					android:background="@color/colorPrimary"
-					android:text="انتخاب"
-					android:textColor="@color/white"
-					android:textSize="16dp"
+					<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
 
-					android:clickable="true"/>
+						android:layout_centerInParent="true"
+						android:textColor="@color/white"
+						android:textSize="16dp"
+						android:text="@string/field_label_select_category"/>
+
+				</RelativeLayout>
 
 			</RelativeLayout>
 
