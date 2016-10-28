@@ -26,6 +26,9 @@ public class MyWallFragment extends BaseFragment {
     @Bind(R.id.statistic_lay)
     RelativeLayout statisticLayout;
 
+    @Bind(R.id.my_gift_lay)
+    RelativeLayout myGiftLay;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +37,15 @@ public class MyWallFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         init();
+
+        myGiftLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BottomBarActivity)getActivity()).setFragment(
+                        new MyGiftListFragment(), MyGiftListFragment.class.getName()
+                );
+            }
+        });
 
         locationLayout.setOnClickListener(new View.OnClickListener() {
             @Override
