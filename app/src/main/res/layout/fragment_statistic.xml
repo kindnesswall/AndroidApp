@@ -8,8 +8,8 @@
 		android:layout_width="@dimen/statistic_text_width"
 		android:layout_height="wrap_content"
 
-		android:layout_alignParentTop="true"
 		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
 
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"
@@ -22,8 +22,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 
-		android:layout_toLeftOf="@id/number_of_user_txt"
 		android:layout_alignBottom="@id/number_of_user_txt"
+		android:layout_toLeftOf="@id/number_of_user_txt"
 
 		android:text="100000"
 		android:textSize="@dimen/statistic_text_size"/>
@@ -45,8 +45,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 
-		android:layout_toLeftOf="@id/number_of_all_gifts_txt"
 		android:layout_alignBottom="@id/number_of_all_gifts_txt"
+		android:layout_toLeftOf="@id/number_of_all_gifts_txt"
 
 		android:text="100000"
 		android:textSize="@dimen/statistic_text_size"/>
@@ -68,8 +68,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 
-		android:layout_toLeftOf="@id/value_of_all_gifts_txt"
 		android:layout_alignBottom="@id/value_of_all_gifts_txt"
+		android:layout_toLeftOf="@id/value_of_all_gifts_txt"
 
 		android:text="100000"
 		android:textSize="@dimen/statistic_text_size"/>
@@ -79,8 +79,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 
-		android:layout_toLeftOf="@id/value_of_all_gifts_tv"
 		android:layout_alignBottom="@id/value_of_all_gifts_tv"
+		android:layout_toLeftOf="@id/value_of_all_gifts_tv"
 
 		android:text="تومان"
 		android:textSize="@dimen/statistic_text_size"/>

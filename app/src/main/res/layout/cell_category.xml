@@ -12,14 +12,14 @@
 	                android:layout_marginRight="2dp"
 
 	                android:layout_marginTop="4dp"
-	                android:padding="8dp"
-	                android:background="@color/white">
+	                android:background="@color/white"
+	                android:padding="8dp">
 
 		<!--<ImageView-->
-			<!--android:id="@+id/cell_category_ic"-->
-			<!--android:layout_width="48dp"-->
-			<!--android:layout_height="48dp"-->
-			<!--android:layout_centerHorizontal="true"/>-->
+		<!--android:id="@+id/cell_category_ic"-->
+		<!--android:layout_width="48dp"-->
+		<!--android:layout_height="48dp"-->
+		<!--android:layout_centerHorizontal="true"/>-->
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarMehrabani
 			android:id="@+id/cell_category_font_icon"
@@ -34,10 +34,10 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/cell_category_font_icon"
-			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
-			android:textSize="16dp"
-			android:gravity="center"/>
+			android:layout_marginTop="8dp"
+			android:gravity="center"
+			android:textSize="16dp"/>
 
 	</RelativeLayout>
 

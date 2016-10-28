@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="#F1F1F1">
 
 	<RelativeLayout
@@ -10,28 +10,28 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@color/white"
-		android:padding="10dp"
-		android:elevation="4dp">
+		android:elevation="4dp"
+		android:padding="10dp">
 
 		<RelativeLayout
 			android:id="@+id/my_gift_login_btn"
 			android:layout_width="80dp"
 			android:layout_height="@dimen/button_height"
 
-			android:layout_margin="4dp"
-
-			android:clickable="true"
 			android:layout_centerVertical="true"
-			android:background="@drawable/button_selector">
+
+			android:layout_margin="4dp"
+			android:background="@drawable/button_selector"
+			android:clickable="true">
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 
 				android:layout_centerInParent="true"
+				android:text="@string/sign_in"
 				android:textColor="@color/white"
-				android:textSize="12dp"
-				android:text="@string/sign_in"/>
+				android:textSize="12dp"/>
 
 		</RelativeLayout>
 
@@ -39,9 +39,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 
-			android:layout_toRightOf="@id/my_gift_login_btn"
-
 			android:layout_margin="4dp"
+
+			android:layout_toRightOf="@id/my_gift_login_btn"
 			android:text="@string/login_bar_title"/>
 
 	</RelativeLayout>
@@ -62,8 +62,8 @@
 
 			app:pv_autostart="true"
 			app:pv_circular="true"
-			app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"
-			app:pv_progressMode="indeterminate"/>
+			app:pv_progressMode="indeterminate"
+			app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
 		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/message_textview"
@@ -71,8 +71,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 
-			android:layout_centerHorizontal="true"
 			android:layout_below="@id/search_progressBar"
+			android:layout_centerHorizontal="true"
 			android:padding="5dp"
 			android:text="@string/searching"
 			android:textColor="@color/dark_white"
