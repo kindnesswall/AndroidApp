@@ -41,7 +41,7 @@ public class MyWallFragment extends BaseFragment {
         myGiftLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BottomBarActivity)getActivity()).setFragment(
+                ((BottomBarActivity) getActivity()).setFragment(
                         new MyGiftListFragment(), MyGiftListFragment.class.getName()
                 );
             }
@@ -60,7 +60,7 @@ public class MyWallFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                ((BottomBarActivity)getActivity()).setFragment(
+                ((BottomBarActivity) getActivity()).setFragment(
                         new StatisticFragment(), StatisticFragment.class.getName()
                 );
 

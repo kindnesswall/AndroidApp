@@ -8,39 +8,39 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PhotoGalleryResponse {
 
-	@SerializedName("data")
-	@Expose
-	private Galleries data;
-	@SerializedName("meta")
-	@Expose
-	private Meta meta;
+    @SerializedName("data")
+    @Expose
+    private Galleries data;
+    @SerializedName("meta")
+    @Expose
+    private Meta meta;
 
-	/**
-	 * @return The data
-	 */
-	public Galleries getData() {
-		return data;
-	}
+    /**
+     * @return The data
+     */
+    public Galleries getData() {
+        return data;
+    }
 
-	/**
-	 * @param data The data
-	 */
-	public void setData(Galleries data) {
-		this.data = data;
-	}
+    /**
+     * @param data The data
+     */
+    public void setData(Galleries data) {
+        this.data = data;
+    }
 
-	/**
-	 * @return The meta
-	 */
-	public Meta getMeta() {
-		return meta;
-	}
+    /**
+     * @return The meta
+     */
+    public Meta getMeta() {
+        return meta;
+    }
 
-	/**
-	 * @param meta The meta
-	 */
-	public void setMeta(Meta meta) {
-		this.meta = meta;
-	}
+    /**
+     * @param meta The meta
+     */
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
 
 }

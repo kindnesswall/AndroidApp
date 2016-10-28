@@ -9,16 +9,16 @@ import android.util.TypedValue;
 
 public class MetricConverter {
 
-	public static int px2dp(Context ctx, int sizeInPx) {
-		return (int) TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_DIP,
-				sizeInPx,
-				ctx.getResources().getDisplayMetrics()
-		);
-	}
+    public static int px2dp(Context ctx, int sizeInPx) {
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                sizeInPx,
+                ctx.getResources().getDisplayMetrics()
+        );
+    }
 
-	public static float dp2px(Context ctx, int sizeInDp) {
-		float density = ctx.getResources().getDisplayMetrics().density;
-		return Math.round((float) sizeInDp * density);
-	}
+    public static float dp2px(Context ctx, int sizeInDp) {
+        float density = ctx.getResources().getDisplayMetrics().density;
+        return Math.round((float) sizeInDp * density);
+    }
 }

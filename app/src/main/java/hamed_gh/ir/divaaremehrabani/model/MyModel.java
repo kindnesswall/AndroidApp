@@ -5,22 +5,22 @@ package hamed_gh.ir.divaaremehrabani.model;
  */
 public class MyModel {
 
-	String imageUrl, title;
+    String imageUrl, title;
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getImageUrl() {
+    public String getImageUrl() {
 
-		return imageUrl;
-	}
+        return imageUrl;
+    }
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

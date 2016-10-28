@@ -41,14 +41,14 @@ import android.support.annotation.IdRes;
  */
 @Deprecated
 public interface OnMenuTabSelectedListener {
-	/**
-	 * The method being called when currently visible {@link BottomBarTab} changes.
-	 * This listener won't be fired until the user changes the selected item the
-	 * first time. So you won't get this event when you're just initialized the
-	 * BottomBar.
-	 *
-	 * @param menuItemId the new visible tab's id that
-	 *                   was assigned in the menu xml resource file.
-	 */
-	void onMenuItemSelected(@IdRes int menuItemId);
+    /**
+     * The method being called when currently visible {@link BottomBarTab} changes.
+     * This listener won't be fired until the user changes the selected item the
+     * first time. So you won't get this event when you're just initialized the
+     * BottomBar.
+     *
+     * @param menuItemId the new visible tab's id that
+     *                   was assigned in the menu xml resource file.
+     */
+    void onMenuItemSelected(@IdRes int menuItemId);
 }

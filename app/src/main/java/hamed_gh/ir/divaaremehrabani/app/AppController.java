@@ -18,76 +18,76 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
  */
 public class AppController extends Application {
 
-	public static final String TAG = AppController.class
-			.getSimpleName();
-	private static Context context;
-	private static AppController mInstance;
+    public static final String TAG = AppController.class
+            .getSimpleName();
+    private static Context context;
+    private static AppController mInstance;
 
-	private static SharedPreferences preferences;
-	private static SharedPreferences.Editor editor;
+    private static SharedPreferences preferences;
+    private static SharedPreferences.Editor editor;
 
-	public static SharedPreferences getPreferences() {
-		return preferences;
-	}
+    public static SharedPreferences getPreferences() {
+        return preferences;
+    }
 
-	public static String getStoredString(String key) {
-		return preferences.getString(key, null);
-	}
+    public static String getStoredString(String key) {
+        return preferences.getString(key, null);
+    }
 
-	public static int getStoredInt(String key) {
-		return preferences.getInt(key, 0);
-	}
+    public static int getStoredInt(String key) {
+        return preferences.getInt(key, 0);
+    }
 
-	public static boolean getStoredBoolean(String key, boolean value) {
-		return preferences.getBoolean(key, value);
-	}
+    public static boolean getStoredBoolean(String key, boolean value) {
+        return preferences.getBoolean(key, value);
+    }
 
-	public static void storeString(String key, String value) {
-		editor.putString(key, value);
-		editor.apply();
-	}
+    public static void storeString(String key, String value) {
+        editor.putString(key, value);
+        editor.apply();
+    }
 
-	public static void storeInt(String key, int value) {
-		editor.putInt(key, value);
-		editor.apply();
-	}
+    public static void storeInt(String key, int value) {
+        editor.putInt(key, value);
+        editor.apply();
+    }
 
-	public static void storeBoolean(String key, boolean value) {
-		editor.putBoolean(key, value);
-		editor.apply();
-	}
+    public static void storeBoolean(String key, boolean value) {
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
 
-	public static Context getAppContext() {
-		return AppController.context;
-	}
+    public static Context getAppContext() {
+        return AppController.context;
+    }
 
-	public static synchronized AppController getInstance() {
-		return mInstance;
-	}
+    public static synchronized AppController getInstance() {
+        return mInstance;
+    }
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 //		Fabric.with(this, new Crashlytics());
 
-		mInstance = this;
-		AppController.context = getApplicationContext();
+        mInstance = this;
+        AppController.context = getApplicationContext();
 
-		preferences = this.getSharedPreferences("Prefs", MODE_PRIVATE);
-		editor = preferences.edit();
+        preferences = this.getSharedPreferences("Prefs", MODE_PRIVATE);
+        editor = preferences.edit();
 
-		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-				.cacheInMemory(true)
-				.cacheOnDisk(true)
-				.displayer(new FadeInBitmapDisplayer(500, true, true, true))
-				.build();
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .displayer(new FadeInBitmapDisplayer(500, true, true, true))
+                .build();
 
-		// Create global configuration and initialize ImageLoader with this config
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-				.defaultDisplayImageOptions(defaultOptions)
-				.build();
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions)
+                .build();
 
-		ImageLoader.getInstance().init(config);
-	}
+        ImageLoader.getInstance().init(config);
+    }
 
 }

@@ -12,14 +12,14 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class BaseFragment extends Fragment {
 
-	protected Context context;
-	protected AppCompatActivity mainActivity;
-	private TextView mToolbarTitleTextView;
+    protected Context context;
+    protected AppCompatActivity mainActivity;
+    private TextView mToolbarTitleTextView;
 
-	protected void init() {
-		context = getActivity();
-		mainActivity = (AppCompatActivity) getActivity();
+    protected void init() {
+        context = getActivity();
+        mainActivity = (AppCompatActivity) getActivity();
 
-		mToolbarTitleTextView = (TextView) ((AppCompatActivity) context).findViewById(R.id.toolbar_title_textView);
-	}
+        mToolbarTitleTextView = (TextView) ((AppCompatActivity) context).findViewById(R.id.toolbar_title_textView);
+    }
 }

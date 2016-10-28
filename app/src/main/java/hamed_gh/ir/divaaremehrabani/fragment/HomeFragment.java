@@ -33,116 +33,116 @@ import retrofit2.Response;
  */
 public class HomeFragment extends BaseFragment {
 
-	@Bind(R.id.recycler_view)
-	RecyclerView mRecyclerView;
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
-	@Bind(R.id.message_textview)
-	TextView mMessageTextView;
+    @Bind(R.id.message_textview)
+    TextView mMessageTextView;
 
-	@Bind(R.id.fragment_progressBar)
-	ProgressView progressView;
+    @Bind(R.id.fragment_progressBar)
+    ProgressView progressView;
 
-	@Bind(R.id.swipeRefreshLayout)
-	SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-	private RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter adapter;
 
-	private ArrayList<Gallery> galleries = new ArrayList<>();
-	private int pageNumber = 0;
+    private ArrayList<Gallery> galleries = new ArrayList<>();
+    private int pageNumber = 0;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_information, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View rootView = inflater.inflate(R.layout.fragment_information, container, false);
 
-		ButterKnife.bind(this, rootView);
-		init();
+        ButterKnife.bind(this, rootView);
+        init();
 
-		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				// Refresh items
-				refreshItems();
-			}
-		});
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                refreshItems();
+            }
+        });
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
-		/* Initialize recyclerview */
-		adapter = new RecyclerViewAdapter(context, galleries);
-		mRecyclerView.setAdapter(adapter);
-		mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        /* Initialize recyclerview */
+        adapter = new RecyclerViewAdapter(context, galleries);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
-			@Override
-			public void onLoadMore(int page, int totalItemsCount) {
-				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				pageNumber++;
-			}
-		});
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+                pageNumber++;
+            }
+        });
 
-		sendRequest();
+        sendRequest();
 
-		return rootView;
-	}
+        return rootView;
+    }
 
-	void refreshItems() {
-		// Load items
-		// ...
+    void refreshItems() {
+        // Load items
+        // ...
 
-		pageNumber = 1;
-		galleries.clear();
+        pageNumber = 1;
+        galleries.clear();
 
-		sendRequest();
+        sendRequest();
 
-		// Load complete
-		onItemsLoadComplete();
-	}
+        // Load complete
+        onItemsLoadComplete();
+    }
 
-	void onItemsLoadComplete() {
-		// Update the adapter and notify data set changed
-		// ...
+    void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
 
-		// Stop refresh animation
-		mSwipeRefreshLayout.setRefreshing(false);
-	}
+        // Stop refresh animation
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
 
-	void sendRequest() {
-		Map<String, String> params = new HashMap<>();
-		params.put("pageSize", "10");
-		params.put("pageNo", "1");
+    void sendRequest() {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageSize", "10");
+        params.put("pageNo", "1");
 
-		Call<PhotoGalleryResponse> call = ((BottomBarActivity) context).service.getPhotoGallery(params);
+        Call<PhotoGalleryResponse> call = ((BottomBarActivity) context).service.getPhotoGallery(params);
 
-		call.enqueue(new Callback<PhotoGalleryResponse>() {
-			@Override
-			public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
-				progressView.setVisibility(View.INVISIBLE);
+        call.enqueue(new Callback<PhotoGalleryResponse>() {
+            @Override
+            public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
+                progressView.setVisibility(View.INVISIBLE);
 
-				try {
-					Meta meta = response.body().getMeta();
-					if (meta.getErrorCode() == 1000) {
-						galleries.addAll(response.body().getData().getGallery());
-						adapter.notifyDataSetChanged();
-						mRecyclerView.setVisibility(View.VISIBLE);
-						mMessageTextView.setVisibility(View.INVISIBLE);
-					} else {
-						mMessageTextView.setVisibility(View.VISIBLE);
-						mRecyclerView.setVisibility(View.INVISIBLE);
-					}
+                try {
+                    Meta meta = response.body().getMeta();
+                    if (meta.getErrorCode() == 1000) {
+                        galleries.addAll(response.body().getData().getGallery());
+                        adapter.notifyDataSetChanged();
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                        mMessageTextView.setVisibility(View.INVISIBLE);
+                    } else {
+                        mMessageTextView.setVisibility(View.VISIBLE);
+                        mRecyclerView.setVisibility(View.INVISIBLE);
+                    }
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-			}
+            }
 
-			@Override
-			public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
-				progressView.setVisibility(View.INVISIBLE);
-				mRecyclerView.setVisibility(View.INVISIBLE);
-				mMessageTextView.setText("خطا در دریافت اطلاعات");
-			}
-		});
-	}
+            @Override
+            public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
+                progressView.setVisibility(View.INVISIBLE);
+                mRecyclerView.setVisibility(View.INVISIBLE);
+                mMessageTextView.setText("خطا در دریافت اطلاعات");
+            }
+        });
+    }
 }

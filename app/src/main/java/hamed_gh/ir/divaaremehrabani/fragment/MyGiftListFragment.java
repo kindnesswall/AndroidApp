@@ -23,7 +23,7 @@ public class MyGiftListFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
         init();
 
-        ((BottomBarActivity)getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
+        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
         return rootView;
     }
 }

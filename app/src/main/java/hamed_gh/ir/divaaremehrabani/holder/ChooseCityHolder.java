@@ -11,21 +11,21 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class ChooseCityHolder extends RecyclerView.ViewHolder {
 
-	private TextView mCityNameTv;
-	private TextView mURHereTxt;
+    private TextView mCityNameTv;
+    private TextView mURHereTxt;
 
-	public ChooseCityHolder(View itemView) {
-		super(itemView);
+    public ChooseCityHolder(View itemView) {
+        super(itemView);
 
-		mCityNameTv = (TextView) itemView.findViewById(R.id.rw_choose_city_name_tv);
-		mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_city_ur_here_tv);
-	}
+        mCityNameTv = (TextView) itemView.findViewById(R.id.rw_choose_city_name_tv);
+        mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_city_ur_here_tv);
+    }
 
-	public TextView getCityNameTv() {
-		return mCityNameTv;
-	}
+    public TextView getCityNameTv() {
+        return mCityNameTv;
+    }
 
-	public TextView getURHereTxt() {
-		return mURHereTxt;
-	}
+    public TextView getURHereTxt() {
+        return mURHereTxt;
+    }
 }

@@ -24,56 +24,56 @@ import hamed_gh.ir.divaaremehrabani.model.Gallery;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
-	String schoolId, childID;
-	private ArrayList<Gallery> galleries;
-	private Context mContext;
-	private FragmentActivity activity;
+    String schoolId, childID;
+    private ArrayList<Gallery> galleries;
+    private Context mContext;
+    private FragmentActivity activity;
 
-	public RecyclerViewAdapter(Context context, ArrayList<Gallery> galleries) {
-		this.galleries = galleries;
-		this.mContext = context;
-	}
+    public RecyclerViewAdapter(Context context, ArrayList<Gallery> galleries) {
+        this.galleries = galleries;
+        this.mContext = context;
+    }
 
-	@Override
-	public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
-		MyHolder mh = new MyHolder(v);
+    @Override
+    public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
+        MyHolder mh = new MyHolder(v);
 
-		return mh;
-	}
+        return mh;
+    }
 
-	@Override
-	public void onBindViewHolder(MyHolder myHolder, final int i) {
+    @Override
+    public void onBindViewHolder(MyHolder myHolder, final int i) {
 
 //	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
-		ImageLoader.getInstance().displayImage(URIs.DOMAIN + galleries.get(i).getImageSrc(), myHolder.mImageView);
-	}
+        ImageLoader.getInstance().displayImage(URIs.DOMAIN + galleries.get(i).getImageSrc(), myHolder.mImageView);
+    }
 
-	@Override
-	public int getItemCount() {
+    @Override
+    public int getItemCount() {
 
-		return (null != galleries ? galleries.size() : 0);
+        return (null != galleries ? galleries.size() : 0);
 
-	}
+    }
 
-	public class MyHolder extends RecyclerView.ViewHolder {
+    public class MyHolder extends RecyclerView.ViewHolder {
 
-		protected TextView mGalleryIdTextView;
-		protected ImageView mImageView;
+        protected TextView mGalleryIdTextView;
+        protected ImageView mImageView;
 
-		public MyHolder(View itemView) {
-			super(itemView);
+        public MyHolder(View itemView) {
+            super(itemView);
 
-			mGalleryIdTextView = (TextView) itemView.findViewById(R.id.row_title_textview);
-			mImageView = (ImageView) itemView.findViewById(R.id.row_imageview);
+            mGalleryIdTextView = (TextView) itemView.findViewById(R.id.row_title_textview);
+            mImageView = (ImageView) itemView.findViewById(R.id.row_imageview);
 
-			itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mContext.startActivity(new Intent(mContext,DetailActivity.class));
-				}
-			});
-		}
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext, DetailActivity.class));
+                }
+            });
+        }
 
-	}
+    }
 }

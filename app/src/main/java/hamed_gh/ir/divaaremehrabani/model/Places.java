@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Places {
 
+    ArrayList<Place> places;
+
     public ArrayList<Place> getPlaces() {
         return places;
     }
@@ -16,9 +18,8 @@ public class Places {
         this.places = places;
     }
 
-    public void addPlace(Place place){
+    public void addPlace(Place place) {
         places.add(place);
     }
-    ArrayList<Place> places;
 
 }

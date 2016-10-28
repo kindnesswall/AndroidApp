@@ -11,29 +11,27 @@ import hamed_gh.ir.divaaremehrabani.R;
  */
 public class CategoryHolder extends RecyclerView.ViewHolder {
 
-//	private ImageView mCategoryIc;
-	private TextView mCategoryTv;
+    //	private ImageView mCategoryIc;
+    private TextView mCategoryTv;
+    private TextView mCategoryFontIcon;
 
-	public TextView getmCategoryFontIcon() {
-		return mCategoryFontIcon;
-	}
-
-	private TextView mCategoryFontIcon;
-
-
-	public CategoryHolder(View itemView) {
-		super(itemView);
+    public CategoryHolder(View itemView) {
+        super(itemView);
 
 //		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
-		mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
-		mCategoryFontIcon = (TextView) itemView.findViewById(R.id.cell_category_font_icon);
-	}
+        mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
+        mCategoryFontIcon = (TextView) itemView.findViewById(R.id.cell_category_font_icon);
+    }
+
+    public TextView getmCategoryFontIcon() {
+        return mCategoryFontIcon;
+    }
 
 //	public ImageView getmCategoryIc() {
 //		return mCategoryIc;
 //	}
 
-	public TextView getmCategoryTv() {
-		return mCategoryTv;
-	}
+    public TextView getmCategoryTv() {
+        return mCategoryTv;
+    }
 }

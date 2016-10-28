@@ -13,8 +13,8 @@ import retrofit2.http.POST;
  */
 public interface RestAPI {
 
-	@POST("Gallery/GetPhotoGallery")
-	@FormUrlEncoded
-	Call<PhotoGalleryResponse> getPhotoGallery(@FieldMap Map<String, String> params);
+    @POST("Gallery/GetPhotoGallery")
+    @FormUrlEncoded
+    Call<PhotoGalleryResponse> getPhotoGallery(@FieldMap Map<String, String> params);
 
 }

@@ -18,51 +18,51 @@ import hamed_gh.ir.divaaremehrabani.model.Place;
  */
 public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityHolder> {
 
-	String schoolId, childID;
-	private int[] iconRes = {
-			R.mipmap.ic_books,
-			R.mipmap.ic_jumper,
-			R.mipmap.ic_dining_room,
-			R.mipmap.ic_sofa
-	};
+    String schoolId, childID;
+    private int[] iconRes = {
+            R.mipmap.ic_books,
+            R.mipmap.ic_jumper,
+            R.mipmap.ic_dining_room,
+            R.mipmap.ic_sofa
+    };
 
-	private int[] categoriesTitleRes = {
-			R.string.book,
-			R.string.clothes,
-			R.string.food,
-			R.string.accessories
-	};
+    private int[] categoriesTitleRes = {
+            R.string.book,
+            R.string.clothes,
+            R.string.food,
+            R.string.accessories
+    };
 
-	private Context mContext;
-	private ArrayList<Place> places;
-	private FragmentActivity activity;
+    private Context mContext;
+    private ArrayList<Place> places;
+    private FragmentActivity activity;
 
-	public ChooseCityAdapter(Context context, ArrayList<Place> places) {
-		this.mContext = context;
-		this.places = places;
-	}
+    public ChooseCityAdapter(Context context, ArrayList<Place> places) {
+        this.mContext = context;
+        this.places = places;
+    }
 
-	@Override
-	public ChooseCityHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_choose_city, null);
-		ChooseCityHolder chooseCityHolder = new ChooseCityHolder(v);
+    @Override
+    public ChooseCityHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_choose_city, null);
+        ChooseCityHolder chooseCityHolder = new ChooseCityHolder(v);
 
-		return chooseCityHolder;
-	}
+        return chooseCityHolder;
+    }
 
-	@Override
-	public void onBindViewHolder(ChooseCityHolder chooseCityHolder, final int i) {
+    @Override
+    public void onBindViewHolder(ChooseCityHolder chooseCityHolder, final int i) {
 
-		chooseCityHolder.getCityNameTv().setText(places.get(i).name);
+        chooseCityHolder.getCityNameTv().setText(places.get(i).name);
 //		categoryHolder.getCityNameTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
 //		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
 
-	}
+    }
 
-	@Override
-	public int getItemCount() {
+    @Override
+    public int getItemCount() {
 
-		return places.size();
+        return places.size();
 
-	}
+    }
 }

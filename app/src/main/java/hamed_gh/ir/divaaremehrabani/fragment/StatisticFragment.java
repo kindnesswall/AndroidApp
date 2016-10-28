@@ -23,7 +23,7 @@ public class StatisticFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
         init();
 
-        ((BottomBarActivity)getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
+        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
 
         return rootView;
     }

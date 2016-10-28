@@ -19,72 +19,72 @@ import hamed_gh.ir.divaaremehrabani.customviews.customindicator.MyPageIndicator;
 
 public class DetailActivity extends AppCompatActivity {
 
-	@Bind(R.id.viewpager)
-	ViewPager viewPager;
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
 
-	int[] mResources = {
-			R.drawable.rectangle_blue,
-			R.drawable.rectangle_red
-	};
-	private MyPageIndicator mIndicator;
+    int[] mResources = {
+            R.drawable.rectangle_blue,
+            R.drawable.rectangle_red
+    };
+    private MyPageIndicator mIndicator;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_detail);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
-		ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
-		setupViewPager(viewPager);
+        setupViewPager(viewPager);
 
-		LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
+        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 
-		mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
-		mIndicator.setPageCount(mResources.length);
-		mIndicator.show();
-	}
+        mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
+        mIndicator.setPageCount(mResources.length);
+        mIndicator.show();
+    }
 
-	private void setupViewPager(ViewPager viewPager) {
-		CustomPagerAdapter adapter = new CustomPagerAdapter(this);
-		viewPager.setAdapter(adapter);
-	}
+    private void setupViewPager(ViewPager viewPager) {
+        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
+        viewPager.setAdapter(adapter);
+    }
 
 
-	class CustomPagerAdapter extends PagerAdapter {
+    class CustomPagerAdapter extends PagerAdapter {
 
-		Context mContext;
-		LayoutInflater mLayoutInflater;
+        Context mContext;
+        LayoutInflater mLayoutInflater;
 
-		public CustomPagerAdapter(Context context) {
-			mContext = context;
-			mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
+        public CustomPagerAdapter(Context context) {
+            mContext = context;
+            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
 
-		@Override
-		public int getCount() {
-			return mResources.length;
-		}
+        @Override
+        public int getCount() {
+            return mResources.length;
+        }
 
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view == ((RelativeLayout) object);
-		}
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == ((RelativeLayout) object);
+        }
 
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
 
-			ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
-			imageView.setImageResource(mResources[position]);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+            imageView.setImageResource(mResources[position]);
 
-			container.addView(itemView);
+            container.addView(itemView);
 
-			return itemView;
-		}
+            return itemView;
+        }
 
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			container.removeView((RelativeLayout) object);
-		}
-	}
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((RelativeLayout) object);
+        }
+    }
 }
