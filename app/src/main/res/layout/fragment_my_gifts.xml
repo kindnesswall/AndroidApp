@@ -9,94 +9,40 @@
 		android:id="@+id/search_top_lay"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="#F1F1F1"
+		android:background="@color/white"
+		android:padding="10dp"
 		android:elevation="4dp">
 
 		<RelativeLayout
-			android:id="@+id/search_textbox_lay"
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			android:layout_marginLeft="4dp"
-			android:layout_marginRight="4dp"
-			android:layout_marginTop="2dp"
-			android:background="@color/white">
+			android:id="@+id/my_gift_login_btn"
+			android:layout_width="80dp"
+			android:layout_height="40dp"
 
-			<hamed_gh.ir.divaaremehrabani.customviews.edit_text.EditTextIranSans
-				android:id="@+id/search_et"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_alignParentTop="true"
-				android:background="@android:color/transparent"
-				android:hint="@string/search_hint"
-				android:paddingLeft="8dp"
+			android:layout_margin="4dp"
 
-				android:paddingRight="8dp"
-
-				android:textSize="15dp"/>
-
-			<ImageView
-				android:id="@+id/search_btn"
-				android:layout_width="42dp"
-				android:layout_height="38dp"
-
-				android:layout_alignLeft="@id/search_et"
-
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="4dp"
-				android:background="@color/colorPrimary"
-				android:padding="4dp"
-				android:src="@mipmap/ic_search_white_24dp"
-				/>
-
-			<ImageView
-				android:id="@+id/search_backspace_btn"
-				android:layout_width="38dp"
-				android:layout_height="38dp"
-
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="8dp"
-				android:layout_toRightOf="@id/search_btn"
-				android:paddingBottom="8dp"
-				android:paddingLeft="0dp"
-				android:paddingRight="4dp"
-				android:paddingTop="8dp"
-				android:src="@mipmap/ic_backspace_black_24dp"
-				android:visibility="invisible"
-
-				/>
-
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:id="@+id/filter_lay"
-			android:layout_width="match_parent"
-			android:layout_height="52dp"
-			android:layout_below="@id/search_textbox_lay"
-			android:layout_marginTop="4dp">
-
-			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
-				android:id="@+id/filter_ic"
-				android:layout_width="24dp"
-				android:layout_height="24dp"
-
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
-				android:text=""
-				android:textSize="22dp"/>
+			android:clickable="true"
+			android:layout_centerVertical="true"
+			android:background="@drawable/button_selector">
 
 			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
-				android:id="@+id/filter_txt"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
 
-				android:layout_toLeftOf="@id/filter_ic"
-				android:paddingRight="8dp"
-				android:text="فیلتر کردن"
-				android:textSize="16dp"
-				/>
+				android:layout_centerInParent="true"
+				android:textColor="@color/white"
+				android:textSize="12dp"
+				android:text="@string/sign_in"/>
 
 		</RelativeLayout>
+
+		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:layout_toRightOf="@id/my_gift_login_btn"
+
+			android:layout_margin="4dp"
+			android:text="@string/login_bar_title"/>
 
 	</RelativeLayout>
 
@@ -104,7 +50,8 @@
 		android:id="@+id/search_bottom_lay"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@id/search_top_lay">
+		android:layout_below="@id/search_top_lay"
+		android:visibility="invisible">
 
 		<com.rey.material.widget.ProgressView
 			android:id="@+id/search_progressBar"
@@ -140,4 +87,5 @@
 			android:visibility="invisible"/>
 
 	</RelativeLayout>
+
 </RelativeLayout>

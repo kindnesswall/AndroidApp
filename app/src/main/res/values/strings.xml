@@ -373,7 +373,7 @@
 	<string name="location_not_available">در حال حاضر امکان پیدا کردن موقعیت شما وجود ندارد. لطفا بعدا تلاش کنید. از روشن بودن مکان یاب خود مطمئن شوید.</string>
 	<string name="loggined_to_divar_with_">شما با آدرس ایمیل %s در حساب کاربری خود وارد شده‌اید.</string>
 	<string name="login">ورود با ایمیل</string>
-	<string name="login_bar_title">برای مشاهده همهٔ آگهی‌های خود وارد حساب کاربری‌تان شوید.</string>
+	<string name="login_bar_title">برای مشاهده همهٔ هدیه‌های خود وارد حساب کاربری‌تان شوید.</string>
 	<string name="login_tip">با ورود به دیوار توسط آدرس ایمیل خود می‌توانید آگهی‌های خود را مدیریت کنید.</string>
 	<string name="logout">خروج از حساب</string>
 	<string name="manage_post">مدیریت آگهی</string>

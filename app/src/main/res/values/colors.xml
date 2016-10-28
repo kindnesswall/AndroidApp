@@ -85,6 +85,7 @@
 
 	<!-- colors from divar -->
 	<color name="colorPrimary">#ffa62626</color>
+	<color name="colorPrimaryAlphaDecrease">#aaa62626</color>
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
 
 	<color name="register_gift_warning_background">#FBC3C6</color>
