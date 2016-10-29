@@ -374,7 +374,7 @@
 	<string name="loggined_to_divar_with_">شما با آدرس ایمیل %s در حساب کاربری خود وارد شده‌اید.</string>
 	<string name="login">ورود با ایمیل</string>
 	<string name="login_bar_title">برای مشاهده همهٔ هدیه‌های خود وارد حساب کاربری‌تان شوید.</string>
-	<string name="login_tip">با ورود به دیوار توسط آدرس ایمیل خود می‌توانید آگهی‌های خود را مدیریت کنید.</string>
+	<string name="login_tip">با ورود به دیوار مهربانی توسط شماره تلفن خود می‌توانید آگهی‌های خود را مدیریت کنید.</string>
 	<string name="logout">خروج از حساب</string>
 	<string name="manage_post">مدیریت آگهی</string>
 	<string name="manage_your_posts_on_device">آگهی‌های خود را همین‌جا مدیریت کنید:</string>
