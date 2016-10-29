@@ -14,13 +14,14 @@ public class CategoryHolder extends RecyclerView.ViewHolder {
     //	private ImageView mCategoryIc;
     private TextView mCategoryTv;
     private TextView mCategoryFontIcon;
-
+    public View mItemView;
     public CategoryHolder(View itemView) {
         super(itemView);
 
 //		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
         mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
         mCategoryFontIcon = (TextView) itemView.findViewById(R.id.cell_category_font_icon);
+        mItemView = itemView;
     }
 
     public TextView getmCategoryFontIcon() {

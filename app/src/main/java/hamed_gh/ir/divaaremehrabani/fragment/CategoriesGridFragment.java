@@ -15,7 +15,7 @@ import hamed_gh.ir.divaaremehrabani.adapter.CategoriesAdapter;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class CategoriesFragment extends BaseFragment {
+public class CategoriesGridFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;

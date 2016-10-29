@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hamed_gh.ir.divaaremehrabani.R;
+import hamed_gh.ir.divaaremehrabani.activity.BottomBarActivity;
+import hamed_gh.ir.divaaremehrabani.fragment.CategoryFragment;
 import hamed_gh.ir.divaaremehrabani.holder.CategoryHolder;
 
 /**
@@ -58,12 +60,24 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
         categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
 //		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
         categoryHolder.getmCategoryFontIcon().setText(fontIcons[i]);
+
+        categoryHolder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((BottomBarActivity) mContext).setFragment(
+                        new CategoryFragment(),
+                        CategoryFragment.class.getName()
+                );
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
 
-        return 4;
+        return categoriesTitleRes.length;
 
     }
 }

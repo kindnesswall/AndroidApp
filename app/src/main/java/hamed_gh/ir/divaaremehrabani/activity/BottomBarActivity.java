@@ -22,7 +22,7 @@ import hamed_gh.ir.divaaremehrabani.app.RestAPI;
 import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
-import hamed_gh.ir.divaaremehrabani.fragment.CategoriesFragment;
+import hamed_gh.ir.divaaremehrabani.fragment.CategoriesGridFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.MyWallFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.SearchFragment;
@@ -102,7 +102,7 @@ public class BottomBarActivity extends AppCompatActivity {
                 } else if (menuItemId == R.id.bottomBarCategories) {
 
                     mToolbarTitleTextView.setText(R.string.categories);
-                    setFragment(new CategoriesFragment(), CategoriesFragment.class.getName());
+                    setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
 
                     // The user selected item number one.
                 } else if (menuItemId == R.id.bottomBarSearch) {
@@ -162,6 +162,8 @@ public class BottomBarActivity extends AppCompatActivity {
 
             }
         });
+
+        mBottomBar.selectTabAtPosition(3,false);
     }
 
     @Override
