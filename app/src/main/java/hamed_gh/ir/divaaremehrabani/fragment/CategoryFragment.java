@@ -1,12 +1,10 @@
 package hamed_gh.ir.divaaremehrabani.fragment;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -82,22 +80,15 @@ public class CategoryFragment extends BaseFragment {
             }
         });
 
-        Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
-        myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
-
-        mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
+        mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    filterIc.setAlpha(0.5f);
-                    filterTxt.setAlpha(0.5f);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    filterIc.setAlpha(1f);
-                    filterTxt.setAlpha(1f);
-                }
-                return true;
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
+                chooseCityDialogFragment.show(fm, "fragment_name");
             }
         });
+
         return rootView;
     }
 
