@@ -84,8 +84,8 @@ public class CategoryFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
-                chooseCityDialogFragment.show(fm, "fragment_name");
+                FilteringFragment filteringFragment = new FilteringFragment();
+                filteringFragment.show(fm, "fragment_name");
             }
         });
 
