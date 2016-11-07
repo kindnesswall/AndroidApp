@@ -77,17 +77,27 @@
 					android:layout_height="wrap_content">
 
 					<ImageView
-						android:id="@+id/search_ic"
-						android:layout_width="56dp"
+						android:id="@+id/share_ic"
+						android:layout_width="48dp"
 						android:layout_height="56dp"
 						android:layout_alignParentLeft="true"
 						android:layout_centerVertical="true"
 						android:scaleType="center"
-						android:src="@mipmap/ic_search_white_24dp"/>
+						android:src="@mipmap/ic_action_social_share"/>
+
+					<ImageView
+						android:id="@+id/bookmark_ic"
+						android:layout_width="48dp"
+						android:layout_height="56dp"
+						android:layout_toRightOf="@id/share_ic"
+
+						android:layout_centerVertical="true"
+						android:scaleType="center"
+						android:src="@mipmap/ic_action_action_bookmark_outline"/>
 
 					<ImageView
 						android:id="@+id/first_right_icon_ic"
-						android:layout_width="56dp"
+						android:layout_width="48dp"
 						android:layout_height="56dp"
 						android:layout_alignParentRight="true"
 						android:layout_centerVertical="true"
