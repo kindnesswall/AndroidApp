@@ -61,6 +61,52 @@
 				</LinearLayout>
 
 			</RelativeLayout>
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:minHeight="?attr/actionBarSize"
+				app:contentInsetLeft="0dp"
+				app:contentInsetStart="0dp"
+				app:layout_collapseMode="pin">
+
+				<RelativeLayout
+					android:id="@+id/toolbar_lay"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<ImageView
+						android:id="@+id/search_ic"
+						android:layout_width="56dp"
+						android:layout_height="56dp"
+						android:layout_alignParentLeft="true"
+						android:layout_centerVertical="true"
+						android:scaleType="center"
+						android:src="@mipmap/ic_search_white_24dp"/>
+
+					<ImageView
+						android:id="@+id/first_right_icon_ic"
+						android:layout_width="56dp"
+						android:layout_height="56dp"
+						android:layout_alignParentRight="true"
+						android:layout_centerVertical="true"
+						android:scaleType="center"
+						android:src="@mipmap/ic_back"/>
+
+					<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansBold
+						android:id="@+id/toolbar_title_tv"
+						android:layout_width="wrap_content"
+						android:layout_height="56dp"
+						android:layout_marginRight="4dp"
+						android:layout_toLeftOf="@id/first_right_icon_ic"
+						android:gravity="center"
+						android:text="عنوان"
+						android:textColor="@color/white"
+						android:textSize="14sp"/>
+
+				</RelativeLayout>
+			</android.support.v7.widget.Toolbar>
 			<!--<com.antonioleiva.materializeyourapp.widgets.SquareImageView-->
 			<!--android:id="@+id/image"-->
 			<!--android:layout_width="match_parent"-->
@@ -126,12 +172,6 @@
 		style="@style/FabStyle"
 		app:layout_anchor="@id/scroll"
 		app:layout_anchorGravity="bottom"/>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="56dp"
-		android:background="@color/deep_purple_400">
-	</RelativeLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
