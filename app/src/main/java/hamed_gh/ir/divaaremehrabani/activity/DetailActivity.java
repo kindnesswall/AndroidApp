@@ -1,6 +1,7 @@
 package hamed_gh.ir.divaaremehrabani.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,12 @@ import hamed_gh.ir.divaaremehrabani.customviews.customindicator.MyPageIndicator;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @Bind(R.id.bookmark_ic)
+    ImageView mBookmarkIc;
+
+    @Bind(R.id.share_ic)
+    ImageView mShareIc;
+
     @Bind(R.id.viewpager)
     ViewPager viewPager;
 
@@ -27,6 +34,8 @@ public class DetailActivity extends AppCompatActivity {
             R.drawable.rectangle_red
     };
     private MyPageIndicator mIndicator;
+    View.OnClickListener addToWishList;
+    View.OnClickListener removeFromWishList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,43 @@ public class DetailActivity extends AppCompatActivity {
         mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
         mIndicator.setPageCount(mResources.length);
         mIndicator.show();
+
+        addToWishList = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
+
+                mBookmarkIc.setOnClickListener(removeFromWishList);
+            }
+        };
+
+        removeFromWishList = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
+                mBookmarkIc.setOnClickListener(addToWishList);
+            }
+        };
+
+        mBookmarkIc.setOnClickListener(addToWishList);
+
+        mShareIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareIt();
+            }
+        });
+    }
+
+    private void shareIt() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "عنوان");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "تصویر");
+        startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با: "));
     }
 
     private void setupViewPager(ViewPager viewPager) {
