@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import java.util.ArrayList;
 
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.activity.DetailActivity;
-import hamed_gh.ir.divaaremehrabani.app.URIs;
-import hamed_gh.ir.divaaremehrabani.model.Gallery;
+import hamed_gh.ir.divaaremehrabani.model.Item;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -25,12 +22,12 @@ import hamed_gh.ir.divaaremehrabani.model.Gallery;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
     String schoolId, childID;
-    private ArrayList<Gallery> galleries;
+    private ArrayList<Item> items;
     private Context mContext;
     private FragmentActivity activity;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Gallery> galleries) {
-        this.galleries = galleries;
+    public RecyclerViewAdapter(Context context, ArrayList<Item> items) {
+        this.items = items;
         this.mContext = context;
     }
 
@@ -45,14 +42,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyHolder myHolder, final int i) {
 
-//	    myHolder.mGalleryIdTextView.setText(galleries.get(i).getGalleryId());
-        ImageLoader.getInstance().displayImage(URIs.DOMAIN + galleries.get(i).getImageSrc(), myHolder.mImageView);
+//	    myHolder.mGalleryIdTextView.setText(items.get(i).getGalleryId());
+
+        //TODO load image of item
+//        ImageLoader.getInstance().displayImage(
+//                URIs.BASE_URL + items.get(i).getImageSrc(), myHolder.mImageView)
+//        ;
     }
 
     @Override
     public int getItemCount() {
 
-        return (null != galleries ? galleries.size() : 0);
+        return (null != items ? items.size() : 0);
 
     }
 

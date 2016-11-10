@@ -154,7 +154,7 @@ public class SearchFragment extends BaseFragment {
         params.put("pageSize", "10");
         params.put("pageNo", "1");
 
-        Call<PhotoGalleryResponse> call = AppController.service.getPhotoGallery(params);
+        Call<PhotoGalleryResponse> call = AppController.service.getItems(params);
 
         call.enqueue(new Callback<PhotoGalleryResponse>() {
             @Override

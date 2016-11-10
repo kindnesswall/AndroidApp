@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,8 +20,8 @@ import hamed_gh.ir.divaaremehrabani.adapter.RecyclerViewAdapter;
 import hamed_gh.ir.divaaremehrabani.app.AppController;
 import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import hamed_gh.ir.divaaremehrabani.model.Gallery;
-import hamed_gh.ir.divaaremehrabani.model.Meta;
-import hamed_gh.ir.divaaremehrabani.model.PhotoGalleryResponse;
+import hamed_gh.ir.divaaremehrabani.model.Item;
+import hamed_gh.ir.divaaremehrabani.model.Items;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +45,7 @@ public class HomeFragment extends BaseFragment {
 
     private RecyclerViewAdapter adapter;
 
-    private ArrayList<Gallery> galleries = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
     private int pageNumber = 0;
 
     @Override
@@ -69,7 +67,7 @@ public class HomeFragment extends BaseFragment {
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new RecyclerViewAdapter(context, galleries);
+        adapter = new RecyclerViewAdapter(context, items);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -91,7 +89,7 @@ public class HomeFragment extends BaseFragment {
         // ...
 
         pageNumber = 1;
-        galleries.clear();
+        items.clear();
 
         sendRequest();
 
@@ -108,37 +106,34 @@ public class HomeFragment extends BaseFragment {
     }
 
     void sendRequest() {
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize", "10");
-        params.put("pageNo", "1");
 
-        Call<PhotoGalleryResponse> call = AppController.service.getPhotoGallery(params);
+        Call<Items> call = AppController.service.getItems("0","10");
 
-        call.enqueue(new Callback<PhotoGalleryResponse>() {
+        call.enqueue(new Callback<Items>() {
             @Override
-            public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
+            public void onResponse(Call<Items> call, Response<Items> response) {
                 progressView.setVisibility(View.INVISIBLE);
 
-                try {
-                    Meta meta = response.body().getMeta();
-                    if (meta.getErrorCode() == 1000) {
-                        galleries.addAll(response.body().getData().getGallery());
+//                try {
+//                    Meta meta = response.body().getMeta();
+//                    if (meta.getErrorCode() == 1000) {
+                        items.addAll(response.body().getItems());
                         adapter.notifyDataSetChanged();
                         mRecyclerView.setVisibility(View.VISIBLE);
                         mMessageTextView.setVisibility(View.INVISIBLE);
-                    } else {
-                        mMessageTextView.setVisibility(View.VISIBLE);
-                        mRecyclerView.setVisibility(View.INVISIBLE);
-                    }
+//                    } else {
+//                        mMessageTextView.setVisibility(View.VISIBLE);
+//                        mRecyclerView.setVisibility(View.INVISIBLE);
+//                    }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
             @Override
-            public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
+            public void onFailure(Call<Items> call, Throwable t) {
                 progressView.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 mMessageTextView.setText("خطا در دریافت اطلاعات");

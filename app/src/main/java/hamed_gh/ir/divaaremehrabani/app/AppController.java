@@ -110,14 +110,17 @@ public class AppController extends Application {
                             @Override
                             public Response intercept(Interceptor.Chain chain) throws IOException {
                                 Request request = chain.request().newBuilder()
-                                        .addHeader("token", "s:s").build();
+                                        .addHeader("X-Parse-Application-Id", "MY_APP_ID")
+                                        .addHeader("X-Parse-REST-API-Key","MY_REST_API_KEY")
+                                        .addHeader("X-Parse-Master-Key","MY_MASTER_KEY")
+                                        .build();
                                 return chain.proceed(request);
                             }
                         }).build();
 
         //Creating Rest Services
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URIs.API)
+                .baseUrl(URIs.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient).build();
 

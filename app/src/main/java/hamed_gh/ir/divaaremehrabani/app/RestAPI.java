@@ -1,20 +1,17 @@
 package hamed_gh.ir.divaaremehrabani.app;
 
-import java.util.Map;
-
-import hamed_gh.ir.divaaremehrabani.model.PhotoGalleryResponse;
+import hamed_gh.ir.divaaremehrabani.model.Items;
 import retrofit2.Call;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by Hamed on 5/6/16.
  */
 public interface RestAPI {
 
-    @POST("Gallery/GetPhotoGallery")
-    @FormUrlEncoded
-    Call<PhotoGalleryResponse> getPhotoGallery(@FieldMap Map<String, String> params);
+    @GET("classes/Item")
+    Call<Items> getItems(@Query("skip") String skip,
+                         @Query("limit") String limit);
 
 }
