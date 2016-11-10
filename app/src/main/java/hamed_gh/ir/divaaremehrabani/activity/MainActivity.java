@@ -15,22 +15,13 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
-import hamed_gh.ir.divaaremehrabani.app.RestAPI;
-import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesGridFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     //	@Bind(R.id.tabs)
 //	TabLayout tabLayout;
-    public RestAPI service;
     private Context context;
     private Toolbar mToolbar;
     private TextView mToolbarTitleTextView;
@@ -47,37 +37,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //	    OkHttpClient httpClient = new OkHttpClient();
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(
-                        new Interceptor() {
-                            @Override
-                            public Response intercept(Interceptor.Chain chain) throws IOException {
-                                Request request = chain.request().newBuilder()
-                                        .addHeader("token", "s:s").build();
-                                return chain.proceed(request);
-                            }
-                        }).build();
-
-//	    httpClient.networkInterceptors().add(new Interceptor() {
-//		    @Override
-//		    public Response intercept(Chain chain) throws IOException {
-//			    Request request = chain.request().newBuilder().addHeader("token", "s:s").build();
-//			    return chain.proceed(request);
-//		    }
-//	    });
-
-//	    Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(url).client(httpClient).build();
-
-        //Creating Rest Services
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URIs.API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient).build();
-
-        service = retrofit.create(RestAPI.class);
-
 
         context = this;
 

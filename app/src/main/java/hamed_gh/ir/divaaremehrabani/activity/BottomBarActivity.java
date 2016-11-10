@@ -13,13 +13,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hamed_gh.ir.divaaremehrabani.R;
-import hamed_gh.ir.divaaremehrabani.app.RestAPI;
-import hamed_gh.ir.divaaremehrabani.app.URIs;
 import hamed_gh.ir.divaaremehrabani.bottombar.BottomBar;
 import hamed_gh.ir.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import hamed_gh.ir.divaaremehrabani.fragment.CategoriesGridFragment;
@@ -27,16 +23,9 @@ import hamed_gh.ir.divaaremehrabani.fragment.HomeFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.MyWallFragment;
 import hamed_gh.ir.divaaremehrabani.fragment.SearchFragment;
 import hamed_gh.ir.divaaremehrabani.helper.Toasti;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BottomBarActivity extends AppCompatActivity {
 
-    public RestAPI service;
     @Bind(R.id.toolbar_title_textView)
     public TextView mToolbarTitleTextView;
     @Bind(R.id.main_toolbar)
@@ -46,27 +35,6 @@ public class BottomBarActivity extends AppCompatActivity {
 
     private Context context;
     private BottomBar mBottomBar;
-
-    private void retrofitInitialization() {
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(
-                        new Interceptor() {
-                            @Override
-                            public Response intercept(Interceptor.Chain chain) throws IOException {
-                                Request request = chain.request().newBuilder()
-                                        .addHeader("token", "s:s").build();
-                                return chain.proceed(request);
-                            }
-                        }).build();
-
-        //Creating Rest Services
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URIs.API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient).build();
-
-        service = retrofit.create(RestAPI.class);
-    }
 
     private void settingToolbar() {
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -147,7 +115,6 @@ public class BottomBarActivity extends AppCompatActivity {
 
         context = this;
 
-        retrofitInitialization();
         settingToolbar();
 
         setFragment(new HomeFragment(), "Home");
