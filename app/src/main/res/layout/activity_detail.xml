@@ -104,7 +104,7 @@
 						android:scaleType="center"
 						android:src="@mipmap/ic_back"/>
 
-					<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansBold
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
 						android:id="@+id/toolbar_title_tv"
 						android:layout_width="wrap_content"
 						android:layout_height="56dp"

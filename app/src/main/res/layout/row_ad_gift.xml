@@ -20,7 +20,7 @@
 			android:layout_alignParentLeft="true"
 			android:src="@drawable/book_default"/>
 
-		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/row_title_textview"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 			android:layout_marginTop="8dp"
 			android:src="@mipmap/ic_location_on_black_18dp"/>
 
-		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/row_ad_gift_location_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
 			android:textSize="11sp"/>
 
 
-		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/row_ad_gift_time_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

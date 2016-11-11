@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ir.hamed_gh.divaaremehrabani.activity.MainActivity">
+    tools:context="ir.hamed_gh.divaremehrabani.activity.MainActivity">
 
     <item android:id="@+id/action_menu"
           android:title="@string/action_menu"

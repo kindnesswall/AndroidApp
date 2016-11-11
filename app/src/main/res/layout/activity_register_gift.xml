@@ -37,7 +37,7 @@
 			android:padding="8dp"
 			android:src="@mipmap/ic_back"/>
 
-		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_title_textView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -54,7 +54,7 @@
 			android:textSize="16sp"
 			android:visibility="visible"/>
 
-		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_send_btn_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
@@ -111,7 +111,7 @@
 				android:background="@color/register_gift_warning_background"
 				android:padding="8dp">
 
-				<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansBold
+				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
 					android:id="@+id/choose_category_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
 					android:text="@string/select_ur_gift_categorty"
 					android:textColor="@color/register_gift_warning_text"/>
 
-				<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 					android:id="@+id/gift_category_txt"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
 					android:background="@drawable/button_selector"
 					android:clickable="true">
 
-					<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 
