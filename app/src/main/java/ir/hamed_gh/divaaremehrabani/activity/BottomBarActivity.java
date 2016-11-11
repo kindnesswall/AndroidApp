@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.crashlytics.android.Crashlytics;
 import hamed_gh.ir.divaaremehrabani.R;
+import io.fabric.sdk.android.Fabric;
 import ir.hamed_gh.divaaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaaremehrabani.bottombar.OnMenuTabClickListener;
 import ir.hamed_gh.divaaremehrabani.fragment.CategoriesGridFragment;
@@ -110,6 +112,7 @@ public class BottomBarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_bottombar);
         ButterKnife.bind(this);
 
