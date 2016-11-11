@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import hamed_gh.ir.divaaremehrabani.R;
 import hamed_gh.ir.divaaremehrabani.activity.DetailActivity;
-import hamed_gh.ir.divaaremehrabani.model.Item;
+import hamed_gh.ir.divaaremehrabani.model.api.Item;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -52,9 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-
         return (null != items ? items.size() : 0);
-
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

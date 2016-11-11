@@ -1,6 +1,6 @@
 package hamed_gh.ir.divaaremehrabani.app;
 
-import hamed_gh.ir.divaaremehrabani.model.Items;
+import hamed_gh.ir.divaaremehrabani.model.api.Items;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
