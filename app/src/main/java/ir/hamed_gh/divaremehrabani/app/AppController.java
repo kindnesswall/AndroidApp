@@ -112,7 +112,7 @@ public class AppController extends Application {
                                 Request request = chain.request().newBuilder()
                                         .addHeader("X-Parse-Application-Id", "MY_APP_ID")
                                         .addHeader("X-Parse-REST-API-Key","MY_REST_API_KEY")
-                                        .addHeader("X-Parse-Master-Key","MY_MASTER_KEY")
+//                                        .addHeader("X-Parse-Master-Key","MY_MASTER_KEY")
                                         .build();
                                 return chain.proceed(request);
                             }

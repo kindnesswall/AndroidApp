@@ -108,8 +108,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="4dp"
+				android:padding="8dp"
 				android:background="@color/register_gift_warning_background"
-				android:padding="8dp">
+			>
 
 				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
 					android:id="@+id/choose_category_tv"
@@ -154,6 +155,55 @@
 						android:textSize="16dp"/>
 
 				</RelativeLayout>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:id="@+id/upload_image_lay"
+				android:layout_below="@id/choose_category_lay"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="4dp"
+				android:padding="8dp"
+				android:background="@color/white">
+
+				<RelativeLayout
+					android:id="@+id/choose_image_btn"
+					android:layout_width="108dp"
+					android:layout_height="@dimen/button_height"
+
+					android:layout_alignParentLeft="true"
+
+					android:background="@drawable/button_selector_gray"
+					android:clickable="true">
+
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_centerInParent="true"
+						android:text="@string/activity_post_button_add_photo"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+				</RelativeLayout>
+
+				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+
+					android:layout_alignParentRight="true"
+
+					android:layout_centerInParent="true"
+					android:text="@string/field_label_picture"
+					android:textColor="@color/text_secondary"
+					android:textSize="16dp"/>
+
+				<ImageView
+					android:id="@+id/gift_imageview"
+					android:layout_below="@id/choose_image_btn"
+					android:layout_width="100dp"
+					android:layout_height="100dp"/>
 
 			</RelativeLayout>
 
