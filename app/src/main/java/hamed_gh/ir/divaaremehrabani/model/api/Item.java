@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Item {
     @SerializedName("objectId")
-    String objectId;
+    public String objectId;
 
     @SerializedName("title")
-    String title;
+    public String title;
 
     @SerializedName("description")
     String description;

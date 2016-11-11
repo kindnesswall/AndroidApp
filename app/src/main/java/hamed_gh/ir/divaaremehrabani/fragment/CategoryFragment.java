@@ -24,9 +24,8 @@ import hamed_gh.ir.divaaremehrabani.app.AppController;
 import hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons;
 import hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import hamed_gh.ir.divaaremehrabani.helper.EndlessRecyclerViewScrollListener;
-import hamed_gh.ir.divaaremehrabani.model.Gallery;
-import hamed_gh.ir.divaaremehrabani.model.Meta;
-import hamed_gh.ir.divaaremehrabani.model.PhotoGalleryResponse;
+import hamed_gh.ir.divaaremehrabani.model.api.Item;
+import hamed_gh.ir.divaaremehrabani.model.api.Items;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +55,7 @@ public class CategoryFragment extends BaseFragment {
 
     private RecyclerViewAdapter adapter;
 
-    private ArrayList<Gallery> galleries = new ArrayList<>();
+    private ArrayList<Item> galleries = new ArrayList<>();
     private int pageNumber = 0;
 
     @Override
@@ -97,33 +96,33 @@ public class CategoryFragment extends BaseFragment {
         params.put("pageSize", "10");
         params.put("pageNo", "1");
 
-        Call<PhotoGalleryResponse> call = AppController.service.getItems(params);
+        Call<Items> call = AppController.service.getItems("0","10");
 
-        call.enqueue(new Callback<PhotoGalleryResponse>() {
+        call.enqueue(new Callback<Items>() {
             @Override
-            public void onResponse(Call<PhotoGalleryResponse> call, Response<PhotoGalleryResponse> response) {
+            public void onResponse(Call<Items> call, Response<Items> response) {
                 progressView.setVisibility(View.INVISIBLE);
 
-                try {
-                    Meta meta = response.body().getMeta();
-                    if (meta.getErrorCode() == 1000) {
-                        galleries.addAll(response.body().getData().getGallery());
+//                try {
+//                    Meta meta = response.body().getMeta();
+//                    if (meta.getErrorCode() == 1000) {
+                        galleries.addAll(response.body().getItems());
                         adapter.notifyDataSetChanged();
                         mRecyclerView.setVisibility(View.VISIBLE);
                         mMessageTextView.setVisibility(View.INVISIBLE);
-                    } else {
-                        mMessageTextView.setVisibility(View.VISIBLE);
-                        mRecyclerView.setVisibility(View.INVISIBLE);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                    } else {
+//                        mMessageTextView.setVisibility(View.VISIBLE);
+//                        mRecyclerView.setVisibility(View.INVISIBLE);
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
             @Override
-            public void onFailure(Call<PhotoGalleryResponse> call, Throwable t) {
+            public void onFailure(Call<Items> call, Throwable t) {
                 progressView.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 mMessageTextView.setText("خطا در دریافت اطلاعات");
