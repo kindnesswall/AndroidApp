@@ -23,7 +23,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;

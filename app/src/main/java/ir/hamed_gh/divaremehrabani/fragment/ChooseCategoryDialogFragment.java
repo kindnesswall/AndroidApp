@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.ChooseCityAdapter;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;

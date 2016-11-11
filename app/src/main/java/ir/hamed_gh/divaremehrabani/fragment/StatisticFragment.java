@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 
 /**

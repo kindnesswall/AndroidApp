@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.bottombar.scrollsweetness.BottomNavigationBehavior;
 
 /*

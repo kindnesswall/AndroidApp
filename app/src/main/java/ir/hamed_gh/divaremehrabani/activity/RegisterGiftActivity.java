@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.fragment.ChooseCategoryDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 

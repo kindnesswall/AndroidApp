@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
+
 
 /**
  * Created by aseman on 3/28/16.

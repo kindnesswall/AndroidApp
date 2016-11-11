@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.activity.LoginActivity;
 

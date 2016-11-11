@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.fragment.CategoriesGridFragment;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
 

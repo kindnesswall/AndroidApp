@@ -13,11 +13,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.crashlytics.android.Crashlytics;
-import hamed_gh.ir.divaaremehrabani.R;
 import io.fabric.sdk.android.Fabric;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
 import ir.hamed_gh.divaremehrabani.fragment.CategoriesGridFragment;

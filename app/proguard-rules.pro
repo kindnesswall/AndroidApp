@@ -22,3 +22,26 @@
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
 }
+
+# ---------------------
+-keep class com.rey.material.** { *; }
+-dontwarn com.rey.material.**
+
+# ---------------------
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+# Okio
+-keep class sun.misc.Unsafe { *; }
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn okio.**

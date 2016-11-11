@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import hamed_gh.ir.divaaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.fragment.CategoryFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryHolder;
