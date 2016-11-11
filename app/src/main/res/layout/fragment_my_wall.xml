@@ -10,7 +10,7 @@
 		android:background="?attr/selectableItemBackground"
 		android:clickable="true">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/my_gift_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/my_gift_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
 		android:clickable="true"
 		>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/bookmark_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/bookmark_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
 		android:clickable="true"
 		>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/location_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/location_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
 
 			android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/location_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
 		android:background="?attr/selectableItemBackground"
 		android:clickable="true">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarMehrabani
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarMehrabani
 			android:id="@+id/statistic_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/statistic_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
 		android:clickable="true"
 		>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/rules_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/rules_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -255,7 +255,7 @@
 
 		android:clickable="true">
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/rw_mywall_txt_icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
 			android:textColor="@color/icon_black"
 			android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/about_txt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".activity.MainActivity">
+              tools:context="ir.hamed_gh.divaaremehrabani.activity.MainActivity">
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
@@ -39,7 +39,7 @@
 				android:padding="8dp"
 				android:src="@drawable/ic_pink_heart"/>
 
-			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 				android:id="@+id/toolbar_title_textView"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
@@ -62,7 +62,7 @@
 				android:background="?attr/selectableItemBackground"
 				android:clickable="true">
 
-				<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+				<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 					android:id="@+id/toolbar_new_gift_btn_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

@@ -24,7 +24,7 @@
 			android:background="@drawable/button_selector"
 			android:clickable="true">
 
-			<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+			<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 
@@ -35,7 +35,7 @@
 
 		</RelativeLayout>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 
@@ -65,7 +65,7 @@
 			app:pv_progressMode="indeterminate"
 			app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
-		<hamed_gh.ir.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.hamed_gh.divaaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/message_textview"
 
 			android:layout_width="wrap_content"
