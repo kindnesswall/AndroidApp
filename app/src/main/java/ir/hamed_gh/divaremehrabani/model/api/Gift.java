@@ -6,18 +6,24 @@ import com.google.gson.annotations.SerializedName;
  * Created by Hamed on 11/11/16.
  */
 
-public class Item {
-    @SerializedName("objectId")
-    public String objectId;
+public class Gift {
+    @SerializedName("Id")
+    public String giftId;
 
-    @SerializedName("title")
+    @SerializedName("Title")
     public String title;
 
-    @SerializedName("description")
+    @SerializedName("Description")
     String description;
 
-    @SerializedName("address")
+    @SerializedName("Price")
+    String price;
+
+    @SerializedName("Address")
     String address;
+
+    @SerializedName("UserId")
+    String userId;
 
     @SerializedName("tel")
     String tel;

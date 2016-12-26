@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.holder.ItemHolder;
-import ir.hamed_gh.divaremehrabani.model.api.Item;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -19,12 +19,12 @@ import ir.hamed_gh.divaremehrabani.model.api.Item;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
 
     String schoolId, childID;
-    private ArrayList<Item> items;
+    private ArrayList<Gift> gifts;
     private Context mContext;
     private FragmentActivity activity;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Item> items) {
-        this.items = items;
+    public RecyclerViewAdapter(Context context, ArrayList<Gift> gifts) {
+        this.gifts = gifts;
         this.mContext = context;
     }
 
@@ -39,19 +39,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
     @Override
     public void onBindViewHolder(ItemHolder myHolder, final int i) {
 
-//	    myHolder.mItemTitleTv.setText(items.get(i).getGalleryId());
+//	    myHolder.mItemTitleTv.setText(gifts.get(i).getGalleryId());
 
         //TODO load image of item
 //        ImageLoader.getInstance().displayImage(
-//                URIs.BASE_URL + items.get(i).getImageSrc(), myHolder.mItemIv)
+//                URIs.BASE_URL + gifts.get(i).getImageSrc(), myHolder.mItemIv)
 //        ;
 
-        myHolder.getmItemTitleTv().setText(items.get(i).title);
+        myHolder.getmItemTitleTv().setText(gifts.get(i).title);
 
     }
 
     @Override
     public int getItemCount() {
-        return (null != items ? items.size() : 0);
+        return (null != gifts ? gifts.size() : 0);
     }
 }

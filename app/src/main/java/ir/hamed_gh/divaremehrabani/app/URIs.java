@@ -5,6 +5,6 @@ package ir.hamed_gh.divaremehrabani.app;
  */
 public class URIs {
 
-    public static final String BASE_URL = "http://31.3.253.207:1337/parse/";
+    public static final String BASE_URL = "http://awsm.ir/api/v01/";
 
 }

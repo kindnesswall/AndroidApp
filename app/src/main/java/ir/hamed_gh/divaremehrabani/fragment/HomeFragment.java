@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,8 +20,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
-import ir.hamed_gh.divaremehrabani.model.api.Item;
-import ir.hamed_gh.divaremehrabani.model.api.Items;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +44,7 @@ public class HomeFragment extends BaseFragment {
 
     private RecyclerViewAdapter adapter;
 
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
 
     @Override
@@ -59,14 +59,14 @@ public class HomeFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Refresh items
+                // Refresh gifts
                 refreshItems();
             }
         });
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new RecyclerViewAdapter(context, items);
+        adapter = new RecyclerViewAdapter(context, gifts);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -84,11 +84,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     void refreshItems() {
-        // Load items
+        // Load gifts
         // ...
 
         pageNumber = 1;
-        items.clear();
+        gifts.clear();
 
         sendRequest();
 
@@ -106,17 +106,17 @@ public class HomeFragment extends BaseFragment {
 
     void sendRequest() {
 
-        Call<Items> call = AppController.service.getItems("0","10");
+        Call<List<Gift>> call = AppController.service.getGifts();
 
-        call.enqueue(new Callback<Items>() {
+        call.enqueue(new Callback<List<Gift>>() {
             @Override
-            public void onResponse(Call<Items> call, Response<Items> response) {
+            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
                 progressView.setVisibility(View.INVISIBLE);
 
 //                try {
 //                    Meta meta = response.body().getMeta();
 //                    if (meta.getErrorCode() == 1000) {
-                        items.addAll(response.body().getItems());
+                        gifts.addAll(response.body());
                         adapter.notifyDataSetChanged();
                         mRecyclerView.setVisibility(View.VISIBLE);
                         mMessageTextView.setVisibility(View.INVISIBLE);
@@ -132,7 +132,7 @@ public class HomeFragment extends BaseFragment {
             }
 
             @Override
-            public void onFailure(Call<Items> call, Throwable t) {
+            public void onFailure(Call<List<Gift>> call, Throwable t) {
                 progressView.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 mMessageTextView.setText("خطا در دریافت اطلاعات");

@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * Created by Hamed on 11/11/16.
  */
 
-public class Items {
+public class Gifts {
 
     @SerializedName("results")
-    ArrayList<Item> items;
+    ArrayList<Gift> gifts;
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Gift> getGifts() {
+        return gifts;
     }
 }

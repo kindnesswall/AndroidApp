@@ -13,22 +13,15 @@ import android.widget.TextView;
 import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
-import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
-import ir.hamed_gh.divaremehrabani.model.api.Item;
-import ir.hamed_gh.divaremehrabani.model.api.Items;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -55,7 +48,7 @@ public class CategoryFragment extends BaseFragment {
 
     private RecyclerViewAdapter adapter;
 
-    private ArrayList<Item> galleries = new ArrayList<>();
+    private ArrayList<Gift> galleries = new ArrayList<>();
     private int pageNumber = 0;
 
     @Override
@@ -92,41 +85,41 @@ public class CategoryFragment extends BaseFragment {
     }
 
     void sendRequest() {
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize", "10");
-        params.put("pageNo", "1");
+//        Map<String, String> params = new HashMap<>();
+//        params.put("pageSize", "10");
+//        params.put("pageNo", "1");
 
-        Call<Items> call = AppController.service.getItems("0","10");
-
-        call.enqueue(new Callback<Items>() {
-            @Override
-            public void onResponse(Call<Items> call, Response<Items> response) {
-                progressView.setVisibility(View.INVISIBLE);
-
-//                try {
-//                    Meta meta = response.body().getMeta();
-//                    if (meta.getErrorCode() == 1000) {
-                        galleries.addAll(response.body().getItems());
-                        adapter.notifyDataSetChanged();
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        mMessageTextView.setVisibility(View.INVISIBLE);
-//                    } else {
-//                        mMessageTextView.setVisibility(View.VISIBLE);
-//                        mRecyclerView.setVisibility(View.INVISIBLE);
-//                    }
+//        Call<ArrayList<Gift>> call = AppController.service.getGifts();
 //
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Items> call, Throwable t) {
-                progressView.setVisibility(View.INVISIBLE);
-                mRecyclerView.setVisibility(View.INVISIBLE);
-                mMessageTextView.setText("خطا در دریافت اطلاعات");
-            }
-        });
+//        call.enqueue(new Callback<ArrayList<Gift>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<Gift>> call, Response<ArrayList<Gift>> response) {
+//                progressView.setVisibility(View.INVISIBLE);
+//
+////                try {
+////                    Meta meta = response.body().getMeta();
+////                    if (meta.getErrorCode() == 1000) {
+//                        galleries.addAll(response.body());
+//                        adapter.notifyDataSetChanged();
+//                        mRecyclerView.setVisibility(View.VISIBLE);
+//                        mMessageTextView.setVisibility(View.INVISIBLE);
+////                    } else {
+////                        mMessageTextView.setVisibility(View.VISIBLE);
+////                        mRecyclerView.setVisibility(View.INVISIBLE);
+////                    }
+////
+////                } catch (Exception e) {
+////                    e.printStackTrace();
+////                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+//                progressView.setVisibility(View.INVISIBLE);
+//                mRecyclerView.setVisibility(View.INVISIBLE);
+//                mMessageTextView.setText("خطا در دریافت اطلاعات");
+//            }
+//        });
     }
 }
