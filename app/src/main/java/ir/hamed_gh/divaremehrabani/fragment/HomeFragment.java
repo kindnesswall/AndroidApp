@@ -106,7 +106,7 @@ public class HomeFragment extends BaseFragment {
 
     void sendRequest() {
 
-        Call<List<Gift>> call = AppController.service.getGifts();
+        Call<List<Gift>> call = AppController.service.getGifts("1","1","10");
 
         call.enqueue(new Callback<List<Gift>>() {
             @Override

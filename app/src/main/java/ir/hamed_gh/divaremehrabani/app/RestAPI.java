@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 /**
@@ -16,8 +17,10 @@ import retrofit2.http.Url;
  */
 public interface RestAPI {
 
-    @GET("Gift")
-    Call<List<Gift>> getGifts();
+    @GET("Gift/{locationId}/{startIndex}/{lastIndex}")
+    Call<List<Gift>> getGifts(@Path("locationId") String locationId,
+                              @Path("startIndex") String startIndex,
+                              @Path("lastIndex") String lastIndex);
 
     @POST
     Call<ResponseBody> uploadFile(@Body RequestBody photo, @Url String url);
