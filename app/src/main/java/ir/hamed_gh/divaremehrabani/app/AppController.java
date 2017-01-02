@@ -35,6 +35,7 @@ public class AppController extends Application {
 
     private static SharedPreferences preferences;
     private static SharedPreferences.Editor editor;
+    public static Retrofit retrofit;
 
     public static SharedPreferences getPreferences() {
         return preferences;
@@ -110,8 +111,6 @@ public class AppController extends Application {
                             @Override
                             public Response intercept(Interceptor.Chain chain) throws IOException {
                                 Request request = chain.request().newBuilder()
-                                        .addHeader("X-Parse-Application-Id", "MY_APP_ID")
-                                        .addHeader("X-Parse-REST-API-Key","MY_REST_API_KEY")
 //                                        .addHeader("X-Parse-Master-Key","MY_MASTER_KEY")
                                         .build();
                                 return chain.proceed(request);
@@ -119,7 +118,7 @@ public class AppController extends Application {
                         }).build();
 
         //Creating Rest Services
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(URIs.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient).build();
