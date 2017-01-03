@@ -28,7 +28,7 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment{
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -78,7 +78,8 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        sendRequest();
+        apiRequest.getGifts();
+
 
         return rootView;
     }
@@ -90,7 +91,7 @@ public class HomeFragment extends BaseFragment {
         pageNumber = 1;
         gifts.clear();
 
-        sendRequest();
+        apiRequest.getGifts();
 
         // Load complete
         onItemsLoadComplete();
@@ -106,20 +107,37 @@ public class HomeFragment extends BaseFragment {
 
     void sendRequest() {
 
-        Call<List<Gift>> call = AppController.service.getGifts("1","1","10");
+        Call<List<Gift>> call = AppController.service.getGifts("1","0","10");
 
         call.enqueue(new Callback<List<Gift>>() {
             @Override
             public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
-                progressView.setVisibility(View.INVISIBLE);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Gift>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onResponse(Call call, Response response) {
+        progressView.setVisibility(View.INVISIBLE);
 
 //                try {
 //                    Meta meta = response.body().getMeta();
 //                    if (meta.getErrorCode() == 1000) {
-                        gifts.addAll(response.body());
-                        adapter.notifyDataSetChanged();
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        mMessageTextView.setVisibility(View.INVISIBLE);
+
+        List<Gift> responseGifts = (List<Gift>) response.body();
+        gifts.addAll(responseGifts);
+
+        adapter.notifyDataSetChanged();
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mMessageTextView.setVisibility(View.INVISIBLE);
+
 //                    } else {
 //                        mMessageTextView.setVisibility(View.VISIBLE);
 //                        mRecyclerView.setVisibility(View.INVISIBLE);
@@ -129,14 +147,12 @@ public class HomeFragment extends BaseFragment {
 //                    e.printStackTrace();
 //                }
 
-            }
+    }
 
-            @Override
-            public void onFailure(Call<List<Gift>> call, Throwable t) {
-                progressView.setVisibility(View.INVISIBLE);
-                mRecyclerView.setVisibility(View.INVISIBLE);
-                mMessageTextView.setText("خطا در دریافت اطلاعات");
-            }
-        });
+    @Override
+    public void onFailure(Call call, Throwable t) {
+        progressView.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mMessageTextView.setText("خطا در دریافت اطلاعات");
     }
 }

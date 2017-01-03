@@ -2,6 +2,10 @@ package ir.hamed_gh.divaremehrabani.helper;
 
 import android.content.Context;
 
+import java.util.List;
+
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -109,6 +113,19 @@ public class ApiRequest {
             adapterListener.onResponse(handlingResponse.call, handlingResponse.response,
                     handlingResponse.position);
         }
+    }
+
+    public void getGifts(){
+
+        Call<List<Gift>> call = AppController.service.getGifts("1","1","10");
+
+        call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
+            @Override
+            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call,response,this));
+            }
+        });
+
     }
 
 }
