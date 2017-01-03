@@ -22,6 +22,15 @@ public interface RestAPI {
                               @Path("startIndex") String startIndex,
                               @Path("lastIndex") String lastIndex);
 
+    @POST("Register/{telephone}")
+    Call register(@Path("telephone") String telephone);
+
+    @POST("Logout")
+    Call logout();
+
+    @POST("token")
+    Call token();
+
     @POST
     Call<ResponseBody> uploadFile(@Body RequestBody photo, @Url String url);
 }

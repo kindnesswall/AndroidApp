@@ -321,6 +321,7 @@
 	<string name="hide_my_email">آدرس ایمیلم را به دیگران نمایش نده</string>
 	<string name="hide_my_phone">شماره تلفنم را به دیگران نمایش نده</string>
 	<string name="hint_email_field">آدرس ایمیل شما</string>
+	<string name="hint_telephone_field">شماره تلفن شما</string>
 	<string name="hint_enter_text">پیامتان را بنویسید…</string>
 	<string name="hint_feedback">نظرات و انتقادات شما</string>
 	<string name="hint_open_kbd_to_compose">Open keyboard to compose message</string>
@@ -685,7 +686,7 @@ Fingerprint: %2$s"</string>
 	<string name="urgent">فوری</string>
 	<string name="user_account">حساب کاربری</string>
 	<string name="user_acount_captcha_fail">حساب کاربری فعال نگردید! لطفا دوباره تلاش‌ کنید</string>
-	<string name="verification_not_received">ایمیل تایید به دستم نرسیده</string>
+	<string name="verification_not_received">کد تایید به دستم نرسیده</string>
 	<string name="video_error">خطا در پخش ویدیو</string>
 	<string name="video_error_proccessing">لطفا کمی صبر کنید</string>
 	<string name="view_contact">View contact</string>

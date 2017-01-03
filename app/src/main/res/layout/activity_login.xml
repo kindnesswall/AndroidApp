@@ -4,7 +4,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/register_gift_bg">
+                android:background="@color/white">
 
 	<RelativeLayout
 		android:id="@+id/toolbar_layout"
@@ -61,6 +61,9 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/toolbar_layout"
 
+		android:background="@color/white"
+		android:scrollbarStyle="insideOverlay"
+		android:scrollbars="none"
 		android:paddingLeft="30dp"
 		android:paddingRight="30dp">
 
@@ -86,7 +89,7 @@
 				android:textSize="16dp"/>
 
 			<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
-				android:id="@+id/choose_city_et"
+				android:id="@+id/phone_confirimation_code_et"
 				android:layout_width="match_parent"
 				android:layout_height="42dp"
 
@@ -95,9 +98,10 @@
 				android:background="@android:color/transparent"
 
 				android:gravity="center_vertical"
-				android:hint="@string/field_hint_verification_code"
-
+				android:hint="@string/hint_telephone_field"
+				android:text="09353703108"
 				android:textSize="14dp"/>
+			<!--android:hint="@string/field_hint_verification_code"-->
 
 			<RelativeLayout
 				android:id="@+id/login_get_verification_btn"
@@ -110,11 +114,12 @@
 				android:clickable="true">
 
 				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+					android:id="@+id/login_get_verification_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 
 					android:layout_centerInParent="true"
-					android:text="@string/sign_in"
+					android:text="@string/sign_up"
 					android:textColor="@color/white"
 					android:textSize="16dp"/>
 
@@ -127,7 +132,8 @@
 
 				android:layout_marginTop="4dp"
 
-				android:background="@drawable/button_selector"
+				android:background="@drawable/button_selector_gray"
+				android:visibility="invisible"
 				android:clickable="true">
 
 				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
@@ -135,8 +141,8 @@
 					android:layout_height="wrap_content"
 
 					android:layout_centerInParent="true"
-					android:text="@string/sign_in"
-					android:textColor="@color/white"
+					android:text="@string/verification_not_received"
+					android:textColor="@color/black"
 					android:textSize="16dp"/>
 
 			</RelativeLayout>
