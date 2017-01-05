@@ -14,9 +14,12 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
+import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ApiRequest.Listener {
 
     @Bind(R.id.main_toolbar)
     Toolbar mToolbar;
@@ -43,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
     View.OnClickListener enterPhoneNumber;
     View.OnClickListener enterVerificationCodeListener;
+    private ApiRequest apiRequest;
 
     private void settingToolbar() {
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -62,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         context = this;
+        apiRequest = new ApiRequest(context,this);
 
         settingToolbar();
 
@@ -82,6 +87,9 @@ public class LoginActivity extends AppCompatActivity {
         enterPhoneNumber = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apiRequest.register(phoneConfirimationCodeEt.getText().toString());
+
                 phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
                 phoneConfirimationCodeEt.setText("111111");
 
@@ -108,13 +116,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onResponse(Call call, Response response) {
+        Toasti.showS("onResponse");
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onFailure(Call call, Throwable t) {
+        Toasti.showS("onFailure");
     }
-
 }

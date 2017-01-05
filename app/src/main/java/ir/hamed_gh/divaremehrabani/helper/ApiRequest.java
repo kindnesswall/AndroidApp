@@ -6,6 +6,7 @@ import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -128,4 +129,29 @@ public class ApiRequest {
 
     }
 
+    public void getToken(){
+
+        Call<List<Gift>> call = AppController.accountService.token();
+
+        call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
+            @Override
+            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call,response,this));
+            }
+        });
+
+    }
+
+    public void register(String telephone){
+
+        Call<ResponseBody> call = AppController.accountService.register(telephone);
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call,mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call,response,this));
+            }
+        });
+
+    }
 }

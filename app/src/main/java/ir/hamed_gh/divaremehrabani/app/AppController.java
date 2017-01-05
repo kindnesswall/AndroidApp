@@ -29,13 +29,19 @@ public class AppController extends Application {
 
     public static final String TAG = AppController.class
             .getSimpleName();
+
     public static RestAPI service;
+    public static AccountRestAPI accountService;
     private static Context context;
     private static AppController mInstance;
 
     private static SharedPreferences preferences;
     private static SharedPreferences.Editor editor;
-    public static Retrofit retrofit;
+    private Retrofit retrofit;
+    private Retrofit accountRetrofit;
+
+    private OkHttpClient httpClient;
+    private Retrofit.Builder retrofitBuilder;
 
     public static SharedPreferences getPreferences() {
         return preferences;
@@ -105,7 +111,7 @@ public class AppController extends Application {
     }
 
     private void retrofitInitialization() {
-        OkHttpClient httpClient = new OkHttpClient.Builder()
+        httpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
                             @Override
@@ -118,12 +124,15 @@ public class AppController extends Application {
                         }).build();
 
         //Creating Rest Services
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URIs.BASE_URL)
+        retrofitBuilder = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient).build();
+                .client(httpClient);
+
+        retrofit = retrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
+        accountRetrofit = retrofitBuilder.baseUrl(URIs.BASE_URL).build();
 
         service = retrofit.create(RestAPI.class);
+        accountService = accountRetrofit.create(AccountRestAPI.class);
     }
 
 }
