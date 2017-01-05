@@ -7,5 +7,6 @@ public class Constants {
 
     public static final String TOKEN = "token";
     public static final String LOCATION_ID = "LOCATION_ID";
+    public static final String TELEPHONE = "TELEPHONE";
 
 }

@@ -5,7 +5,9 @@ import android.content.Context;
 import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -129,13 +131,17 @@ public class ApiRequest {
 
     }
 
-    public void getToken(){
+    public void getToken(String verificationCode){
 
-        Call<List<Gift>> call = AppController.accountService.token();
+        Call<TokenOutput> call = AppController.accountService.token(
+                AppController.getStoredString(Constants.TELEPHONE),
+                verificationCode,
+                "password"
+        );
 
-        call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<TokenOutput>(call,mContext) {
             @Override
-            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
+            public void onResponse(Call<TokenOutput> call, Response<TokenOutput> response) {
                 handlingOnResponse(new HandlingResponse(call,response,this));
             }
         });
@@ -144,6 +150,7 @@ public class ApiRequest {
 
     public void register(String telephone){
 
+        AppController.storeString(Constants.TELEPHONE, telephone);
         Call<ResponseBody> call = AppController.accountService.register(telephone);
 
         call.enqueue(new CallbackWithRetry<ResponseBody>(call,mContext) {

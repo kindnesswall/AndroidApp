@@ -12,6 +12,8 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
@@ -81,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             @Override
             public void onClick(View v) {
                 Toasti.showS("send verification code");
+                apiRequest.getToken(phoneConfirimationCodeEt.getText().toString());
             }
         };
 
@@ -89,30 +92,45 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             public void onClick(View v) {
 
                 apiRequest.register(phoneConfirimationCodeEt.getText().toString());
+                enterVerificationCode();
 
-                phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
-                phoneConfirimationCodeEt.setText("111111");
-
-                login_get_verification_tv.setText(getString(R.string.sign_in));
-
-                not_recieved_code_btn.setVisibility(View.VISIBLE);
-                loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
             }
         };
-
-        loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
 
         not_recieved_code_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
-                phoneConfirimationCodeEt.setText("09353703108");
-
-                login_get_verification_tv.setText(getString(R.string.sign_up));
-                not_recieved_code_btn.setVisibility(View.INVISIBLE);
-
+                enterTelephoneNumber();
             }
         });
+
+        if (AppController.getStoredString(Constants.TELEPHONE)==null){
+            enterTelephoneNumber();
+            loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
+        }else {
+            enterVerificationCode();
+            loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
+        }
+    }
+
+
+    public void enterTelephoneNumber(){
+        AppController.storeString(Constants.TELEPHONE, null);
+        phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
+        phoneConfirimationCodeEt.setText("09353703108");
+
+        login_get_verification_tv.setText(getString(R.string.sign_up));
+        not_recieved_code_btn.setVisibility(View.INVISIBLE);
+    }
+
+    public void enterVerificationCode(){
+        phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
+        phoneConfirimationCodeEt.setText("111111");
+
+        login_get_verification_tv.setText(getString(R.string.sign_in));
+
+        not_recieved_code_btn.setVisibility(View.VISIBLE);
+        loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
     }
 
     @Override
