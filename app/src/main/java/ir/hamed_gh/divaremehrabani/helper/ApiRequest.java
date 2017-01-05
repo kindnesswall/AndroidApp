@@ -161,4 +161,22 @@ public class ApiRequest {
         });
 
     }
+
+//    public void uploadGiftImage(RequestBody requestBody) {
+//        Call<ResponseBody> result = AppController.service.uploadGiftImage(
+//                AppController.getStoredString(Constants.TOKEN),
+//                "me.jpg",
+//                requestBody
+//        );
+//
+//        result.enqueue(new CallbackWithRetry<ResponseBody>(result, mContext) {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                handlingOnResponse(new HandlingResponse(call, response, this));
+//            }
+//
+//        });
+//
+//    }
+
 }

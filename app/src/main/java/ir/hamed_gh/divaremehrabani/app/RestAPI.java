@@ -8,9 +8,9 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Url;
 
 /**
  * Created by Hamed on 5/6/16.
@@ -22,6 +22,15 @@ public interface RestAPI {
                               @Path("startIndex") String startIndex,
                               @Path("lastIndex") String lastIndex);
 
-    @POST
-    Call<ResponseBody> uploadFile(@Body RequestBody photo, @Url String url);
+    @POST("Upload")
+    Call<ResponseBody> uploadFile(
+            @Header("Authorization") String authorization,
+            @Header("fileName") String fileName,
+            @Body RequestBody photo
+    );
+
+//    @POST("Upload")
+//    Call<ResponseBody> uploadGiftImage(@Header("token") String token,
+//                                    @Header("fileName") String fileName,
+//                                    @Body RequestBody photo);
 }

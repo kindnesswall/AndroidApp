@@ -18,6 +18,7 @@ import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -136,6 +137,12 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
     @Override
     public void onResponse(Call call, Response response) {
         Toasti.showS("onResponse");
+        if (response.body() instanceof TokenOutput){
+            TokenOutput tokenOutput = (TokenOutput) response.body();
+            AppController.storeString(
+                    Constants.TOKEN,
+                    Constants.BEARER + " " + tokenOutput.access_token);
+        }
     }
 
     @Override

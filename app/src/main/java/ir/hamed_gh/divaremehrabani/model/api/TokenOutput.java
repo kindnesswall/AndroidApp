@@ -9,20 +9,20 @@ import com.google.gson.annotations.SerializedName;
 public class TokenOutput {
 
     @SerializedName("access_token")
-    String access_token;
+    public String access_token;
 
     @SerializedName("token_type")
-    String token_type;
+    public String token_type;
 
     @SerializedName("expires_in")
-    String expires_in;
+    public String expires_in;
 
     @SerializedName("userName")
-    String userName;
+    public String userName;
 
     @SerializedName(".issued")
-    String issued;
+    public String issued;
 
     @SerializedName(".expires")
-    String expires;
+    public String expires;
 }

@@ -31,6 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.ChooseCategoryDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
@@ -193,6 +194,21 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 
 	private void uploadFile(String filePath) {
 
+
+//		File file = new File(filePath);
+//		RequestBody requestBody = new ProgressRequestBody(
+//				MediaType.parse("application/octet-stream"),
+//				file,
+//				this);
+
+//		(new ApiRequest(context,this)).uploadFile(requestBody);
+
+//		Call<ResponseBody> result = AppController.service.uploadGiftImage(
+//				AppController.getStoredString(Constants.TOKEN),
+//				"me.jpg",
+//				requestBody
+//		);
+
 		File file = new File(filePath);
 		RequestBody requestBody = new ProgressRequestBody(
 				MediaType.parse("application/octet-stream"),
@@ -200,7 +216,10 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 				this);
 
 		Call<ResponseBody> call = AppController.service.uploadFile(
-				requestBody, "files/me.png");
+				AppController.getStoredString(Constants.TOKEN),
+				"me.jpg",
+				requestBody
+		);
 
 		call.enqueue(new Callback<ResponseBody>() {
 			@Override
