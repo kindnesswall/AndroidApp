@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
@@ -42,9 +44,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
 //	    myHolder.mItemTitleTv.setText(gifts.get(i).getGalleryId());
 
         //TODO load image of item
-//        ImageLoader.getInstance().displayImage(
-//                URIs.BASE_URL + gifts.get(i).getImageSrc(), myHolder.mItemIv)
-//        ;
+        String image_url;
+        if (gifts.get(i).giftImages != null && gifts.get(i).giftImages.size() > 0) {
+            image_url = gifts.get(i).giftImages.get(0);
+        }else {
+            image_url = "";
+        }
+
+        Glide
+                .with(mContext)
+                .load(image_url)
+                .centerCrop()
+                .placeholder(R.color.background)
+                .crossFade()
+                .into(myHolder.mItemIv);
+        
 
         myHolder.getmItemTitleTv().setText(gifts.get(i).title);
 

@@ -3,6 +3,7 @@ package ir.hamed_gh.divaremehrabani.app;
 import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.Location;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,4 +34,13 @@ public interface RestAPI {
 //    Call<ResponseBody> uploadGiftImage(@Header("token") String token,
 //                                    @Header("fileName") String fileName,
 //                                    @Body RequestBody photo);
+
+    @GET("Location")
+    Call<List<Location>> getLocations();
+
+    @GET("Location/{Id}")
+    Call<Location> getLocation(@Path("Id") String locationId);
+
+
+
 }

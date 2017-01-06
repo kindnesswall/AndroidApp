@@ -7,6 +7,7 @@ import java.util.List;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.Location;
 import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -120,7 +121,7 @@ public class ApiRequest {
 
     public void getGifts(){
 
-        Call<List<Gift>> call = AppController.service.getGifts("1","1","10");
+        Call<List<Gift>> call = AppController.service.getGifts("1","0","10");
 
         call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
             @Override
@@ -178,5 +179,18 @@ public class ApiRequest {
 //        });
 //
 //    }
+
+    public void getLocations(){
+
+        Call<List<Location>> call = AppController.service.getLocations();
+
+        call.enqueue(new CallbackWithRetry<List<Location>>(call,mContext) {
+            @Override
+            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
+                handlingOnResponse(new HandlingResponse(call,response,this));
+            }
+        });
+
+    }
 
 }

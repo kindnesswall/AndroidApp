@@ -7,12 +7,18 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Location {
-    @SerializedName("__type")
-    String __type;
+    @SerializedName("ParentId")
+    String ParentId;
 
-    @SerializedName("className")
-    String className;
+    @SerializedName("Title")
+    String Title;
 
-    @SerializedName("objectId")
-    String objectId;
+    @SerializedName("Latitude")
+    String Latitude;
+
+    @SerializedName("Longitude")
+    String Longitude;
+
+    @SerializedName("Id")
+    String Id;
 }

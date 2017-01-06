@@ -2,6 +2,8 @@ package ir.hamed_gh.divaremehrabani.model.api;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hamed on 11/11/16.
  */
@@ -14,32 +16,35 @@ public class Gift {
     public String title;
 
     @SerializedName("Description")
-    String description;
+    public String description;
 
     @SerializedName("Price")
-    String price;
+    public String price;
 
     @SerializedName("Address")
-    String address;
+    public String address;
 
     @SerializedName("UserId")
-    String userId;
+    public String userId;
 
     @SerializedName("tel")
-    String tel;
+    public String tel;
+
+    @SerializedName("GiftImages")
+    public ArrayList<String> giftImages;
 
     @SerializedName("createdAt")
-    String createdAt;
+    public String createdAt;
 
     @SerializedName("updatedAt")
-    String updatedAt;
+    public String updatedAt;
 
     @SerializedName("category")
-    Category category;
+    public Category category;
 
     @SerializedName("location")
-    Location location;
+    public Location location;
 
     @SerializedName("position")
-    Position position;
+    public Position position;
 }

@@ -16,7 +16,7 @@ import ir.hamed_gh.divaremehrabani.activity.DetailActivity;
 public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     protected TextView mItemTitleTv;
-    protected ImageView mItemIv;
+    public ImageView mItemIv;
     View itemView;
 
     public TextView getmItemTitleTv() {
