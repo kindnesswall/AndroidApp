@@ -57,10 +57,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
                 .centerCrop()
                 .placeholder(R.color.background)
                 .crossFade()
-                .into(myHolder.mItemIv);
-        
+                .into(myHolder.getmItemIv());
 
-        myHolder.getmItemTitleTv().setText(gifts.get(i).title);
+        myHolder.getGiftTitleTv().setText(gifts.get(i).title);
+        myHolder.getGiftLocationTv().setText(gifts.get(i).address);
+        myHolder.getGiftCreatedTimeTv().setText(gifts.get(i).createDateTime);
 
     }
 

@@ -15,12 +15,20 @@ import ir.hamed_gh.divaremehrabani.activity.DetailActivity;
 
 public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    protected TextView mItemTitleTv;
-    public ImageView mItemIv;
+    protected TextView mItemTitleTv,mGiftLocationTv,mGiftCreatedTimeTv;
+    protected ImageView mItemIv;
     View itemView;
 
-    public TextView getmItemTitleTv() {
+    public TextView getGiftTitleTv() {
         return mItemTitleTv;
+    }
+
+    public TextView getGiftLocationTv() {
+        return mGiftLocationTv;
+    }
+
+    public TextView getGiftCreatedTimeTv() {
+        return mGiftCreatedTimeTv;
     }
 
     public ImageView getmItemIv() {
@@ -33,6 +41,9 @@ public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickL
         this.itemView = itemView;
 
         mItemTitleTv = (TextView) itemView.findViewById(R.id.row_title_textview);
+        mGiftLocationTv = (TextView) itemView.findViewById(R.id.row_ad_gift_location_tv);
+        mGiftCreatedTimeTv = (TextView) itemView.findViewById(R.id.row_ad_gift_time_tv);
+
         mItemIv = (ImageView) itemView.findViewById(R.id.row_imageview);
 
         itemView.setOnClickListener(this);

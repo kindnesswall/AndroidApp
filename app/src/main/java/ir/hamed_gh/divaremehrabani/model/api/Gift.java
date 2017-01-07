@@ -9,42 +9,49 @@ import java.util.ArrayList;
  */
 
 public class Gift {
-    @SerializedName("Id")
-    public String giftId;
 
     @SerializedName("Title")
-    public String title;
-
-    @SerializedName("Description")
-    public String description;
-
-    @SerializedName("Price")
-    public String price;
+    public String title="";
 
     @SerializedName("Address")
-    public String address;
+    public String address="";
+
+    @SerializedName("Description")
+    public String description="";
+
+    @SerializedName("Price")
+    public String price="";
+
+    @SerializedName("Status")
+    String status;
 
     @SerializedName("UserId")
-    public String userId;
+    public String userId="";
 
-    @SerializedName("tel")
-    public String tel;
+    @SerializedName("CategoryId")
+    String categoryId;
+
+    @SerializedName("Category")
+    public Category category;
+
+    @SerializedName("LocationId")
+    public Location locationId;
+
+    @SerializedName("Location")
+    public Location location;
 
     @SerializedName("GiftImages")
     public ArrayList<String> giftImages;
 
-    @SerializedName("createdAt")
-    public String createdAt;
+    @SerializedName("Id")
+    public String giftId="";
 
-    @SerializedName("updatedAt")
-    public String updatedAt;
+    @SerializedName("CreateDateTime")
+    public String createDateTime="";
 
-    @SerializedName("category")
-    public Category category;
+    @SerializedName("CreateDate")
+    public String createDate="";
 
-    @SerializedName("location")
-    public Location location;
-
-    @SerializedName("position")
-    public Position position;
+    @SerializedName("CreateTime")
+    public String createTime="";
 }
