@@ -17,8 +17,7 @@
 			android:id="@+id/row_imageview"
 			android:layout_width="118dp"
 			android:layout_height="118dp"
-			android:layout_alignParentLeft="true"
-			android:src="@drawable/book_default"/>
+			android:layout_alignParentLeft="true"/>
 
 		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/row_title_textview"
