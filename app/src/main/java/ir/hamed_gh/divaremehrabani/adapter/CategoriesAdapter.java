@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.fragment.CategoryFragment;
+import ir.hamed_gh.divaremehrabani.fragment.GiftCategoryFilterFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryHolder;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -40,10 +43,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
     };
 
     private Context mContext;
+    private ArrayList<Category> categories;
     private FragmentActivity activity;
 
-    public CategoriesAdapter(Context context) {
+    public CategoriesAdapter(Context context, ArrayList<Category> categories) {
         this.mContext = context;
+        this.categories = categories;
     }
 
     @Override
@@ -57,7 +62,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
     @Override
     public void onBindViewHolder(CategoryHolder categoryHolder, final int i) {
 
-        categoryHolder.getmCategoryTv().setText(mContext.getResources().getText(categoriesTitleRes[i]));
+        categoryHolder.getmCategoryTv().setText(categories.get(i).title);
 //		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
         categoryHolder.getmCategoryFontIcon().setText(fontIcons[i]);
 
@@ -66,8 +71,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
             public void onClick(View v) {
 
                 ((BottomBarActivity) mContext).setFragment(
-                        new CategoryFragment(),
-                        CategoryFragment.class.getName()
+                        new GiftCategoryFilterFragment(),
+                        GiftCategoryFilterFragment.class.getName()
                 );
 
             }
@@ -77,7 +82,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
     @Override
     public int getItemCount() {
 
-        return categoriesTitleRes.length;
+        return categories !=null? categories.size(): 0;
 
     }
 }

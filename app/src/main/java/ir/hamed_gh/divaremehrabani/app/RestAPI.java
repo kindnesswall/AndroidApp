@@ -1,7 +1,9 @@
 package ir.hamed_gh.divaremehrabani.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
 import okhttp3.RequestBody;
@@ -41,6 +43,7 @@ public interface RestAPI {
     @GET("Location/{Id}")
     Call<Location> getLocation(@Path("Id") String locationId);
 
-
+	@GET("Category")
+	Call<ArrayList<Category>> getCategories();
 
 }

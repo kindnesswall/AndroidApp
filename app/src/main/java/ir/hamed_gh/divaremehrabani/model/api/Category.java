@@ -7,12 +7,21 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Category {
-    @SerializedName("__type")
-    String __type;
+    @SerializedName("Title")
+    public String title;
 
-    @SerializedName("className")
-    String className;
+    @SerializedName("ImageUrl")
+    public String imageUrl;
 
-    @SerializedName("objectId")
-    String objectId;
+    @SerializedName("Id")
+    public String categoryId;
+
+    @SerializedName("CreateDateTime")
+    public String createDateTime;
+
+    @SerializedName("CreateDate")
+    public String createDate;
+
+    @SerializedName("CreateTime")
+    public String createTime;
 }

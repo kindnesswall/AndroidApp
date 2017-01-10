@@ -26,7 +26,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class CategoryFragment extends BaseFragment {
+public class GiftCategoryFilterFragment extends BaseFragment {
 
     @Bind(R.id.message_textview)
     TextView mMessageTextView;
@@ -80,7 +80,6 @@ public class CategoryFragment extends BaseFragment {
                 filteringFragment.show(fm, "fragment_name");
             }
         });
-
         return rootView;
     }
 

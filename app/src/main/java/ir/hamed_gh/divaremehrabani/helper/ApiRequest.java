@@ -2,10 +2,12 @@ package ir.hamed_gh.divaremehrabani.helper;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
 import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
@@ -192,5 +194,21 @@ public class ApiRequest {
         });
 
     }
+
+	public void getCategories(){
+
+		Call<ArrayList<Category>> call = AppController.service.getCategories();
+
+		call.enqueue(new CallbackWithRetry<ArrayList<Category>>(call,mContext) {
+			@Override
+			public void onResponse(Call<ArrayList<Category>> call,
+			                       Response<ArrayList<Category>> response) {
+
+				handlingOnResponse(new HandlingResponse(call,response,this));
+
+			}
+		});
+
+	}
 
 }
