@@ -23,22 +23,22 @@ public class Gift {
     public String price="";
 
     @SerializedName("Status")
-    String status;
+    public String status;
 
     @SerializedName("UserId")
     public String userId="";
 
     @SerializedName("CategoryId")
-    String categoryId;
+    public String categoryId;
 
     @SerializedName("Category")
-    public Category category;
+    public String category;
 
     @SerializedName("LocationId")
-    public Location locationId;
+    public String locationId;
 
     @SerializedName("Location")
-    public Location location;
+    public String location;
 
     @SerializedName("GiftImages")
     public ArrayList<String> giftImages;
