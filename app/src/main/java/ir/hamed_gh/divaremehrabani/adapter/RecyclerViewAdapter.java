@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.activity.DetailActivity;
 import ir.hamed_gh.divaremehrabani.holder.ItemHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
@@ -62,7 +63,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
         myHolder.getGiftTitleTv().setText(gifts.get(i).title);
         myHolder.getGiftLocationTv().setText(gifts.get(i).address);
         myHolder.getGiftCreatedTimeTv().setText(gifts.get(i).createDateTime);
-
+        myHolder.itemView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mContext.startActivity(
+                                DetailActivity.createIntent(gifts.get(i))
+                        );
+                    }
+                }
+        );
     }
 
     @Override

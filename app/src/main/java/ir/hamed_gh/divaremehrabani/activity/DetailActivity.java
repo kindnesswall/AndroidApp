@@ -12,125 +12,164 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 public class DetailActivity extends AppCompatActivity {
 
-    @Bind(R.id.bookmark_ic)
-    ImageView mBookmarkIc;
+	@Bind(R.id.bookmark_ic)
+	ImageView mBookmarkIc;
 
-    @Bind(R.id.share_ic)
-    ImageView mShareIc;
+	@Bind(R.id.share_ic)
+	ImageView mShareIc;
 
-    @Bind(R.id.viewpager)
-    ViewPager viewPager;
+	@Bind(R.id.viewpager)
+	ViewPager viewPager;
 
-    int[] mResources = {
-            R.drawable.rectangle_blue,
-            R.drawable.rectangle_red
-    };
-    private MyPageIndicator mIndicator;
-    View.OnClickListener addToWishList;
-    View.OnClickListener removeFromWishList;
+	@Bind(R.id.toolbar_title_tv)
+	TextView mToolbarTitleTv;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+//	int[] mResources = {
+//			R.drawable.rectangle_blue,
+//			R.drawable.rectangle_red
+//	};
+	View.OnClickListener addToWishList;
+	View.OnClickListener removeFromWishList;
+	private Gift gift;
+	private MyPageIndicator mIndicator;
 
-        ButterKnife.bind(this);
+	public static Intent createIntent(Gift gift) {
+		Intent intent = new Intent(AppController.getAppContext(), DetailActivity.class);
+		intent.putExtra(Constants.GIFT, gift);
+		return intent;
+	}
 
-        setupViewPager(viewPager);
+	private void extractDataFromBundle() {
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			gift = (Gift) bundle.get(Constants.GIFT);
+			mToolbarTitleTv.setText(gift.title);
+		}
+	}
 
-        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
+	private void setListeners(){
+		addToWishList = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-        mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
-        mIndicator.setPageCount(mResources.length);
-        mIndicator.show();
+				mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
 
-        addToWishList = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+				mBookmarkIc.setOnClickListener(removeFromWishList);
+			}
+		};
 
-                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
+		removeFromWishList = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-                mBookmarkIc.setOnClickListener(removeFromWishList);
-            }
-        };
+				mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
+				mBookmarkIc.setOnClickListener(addToWishList);
+			}
+		};
 
-        removeFromWishList = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+		mBookmarkIc.setOnClickListener(addToWishList);
 
-                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
-                mBookmarkIc.setOnClickListener(addToWishList);
-            }
-        };
+		mShareIc.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				shareIt();
+			}
+		});
+	}
 
-        mBookmarkIc.setOnClickListener(addToWishList);
+	private void init(){
+		setupViewPager(viewPager);
 
-        mShareIc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareIt();
-            }
-        });
-    }
+		LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 
-    private void shareIt() {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "عنوان");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "تصویر");
-        startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با: "));
-    }
+		mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
+		mIndicator.setPageCount(gift.giftImages.size());
+		mIndicator.show();
+	}
 
-    private void setupViewPager(ViewPager viewPager) {
-        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
-        viewPager.setAdapter(adapter);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_detail);
+
+		ButterKnife.bind(this);
+		extractDataFromBundle();
+		init();
+		setListeners();
+	}
+
+	private void shareIt() {
+		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+		sharingIntent.setType("text/plain");
+		sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "عنوان");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "تصویر");
+		startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با: "));
+	}
+
+	private void setupViewPager(ViewPager viewPager) {
+		CustomPagerAdapter adapter = new CustomPagerAdapter(this);
+		viewPager.setAdapter(adapter);
+	}
 
 
-    class CustomPagerAdapter extends PagerAdapter {
+	class CustomPagerAdapter extends PagerAdapter {
 
-        Context mContext;
-        LayoutInflater mLayoutInflater;
+		Context mContext;
+		LayoutInflater mLayoutInflater;
 
-        public CustomPagerAdapter(Context context) {
-            mContext = context;
-            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+		public CustomPagerAdapter(Context context) {
+			mContext = context;
+			mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
 
-        @Override
-        public int getCount() {
-            return mResources.length;
-        }
+		@Override
+		public int getCount() {
+			return gift.giftImages.size();
+		}
 
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == ((RelativeLayout) object);
-        }
+		@Override
+		public boolean isViewFromObject(View view, Object object) {
+			return view == ((RelativeLayout) object);
+		}
 
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
 
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
-            imageView.setImageResource(mResources[position]);
+			ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+//			imageView.setImageResource(mResources[position]);
 
-            container.addView(itemView);
+			Glide
+					.with(mContext)
+					.load(gift.giftImages.get(position))
+					.centerCrop()
+					.placeholder(R.color.background)
+					.crossFade()
+					.into(imageView);
 
-            return itemView;
-        }
+			container.addView(itemView);
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((RelativeLayout) object);
-        }
-    }
+			return itemView;
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((RelativeLayout) object);
+		}
+	}
 }

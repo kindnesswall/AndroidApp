@@ -17,7 +17,7 @@ public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     protected TextView mItemTitleTv,mGiftLocationTv,mGiftCreatedTimeTv;
     protected ImageView mItemIv;
-    View itemView;
+    public View itemView;
 
     public TextView getGiftTitleTv() {
         return mItemTitleTv;
@@ -45,12 +45,10 @@ public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickL
         mGiftCreatedTimeTv = (TextView) itemView.findViewById(R.id.row_ad_gift_time_tv);
 
         mItemIv = (ImageView) itemView.findViewById(R.id.row_imageview);
-
-        itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        itemView.getContext().startActivity(new Intent(itemView.getContext(), DetailActivity.class));
+
     }
 }
