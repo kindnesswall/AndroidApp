@@ -20,28 +20,28 @@ import retrofit2.http.Path;
  */
 public interface RestAPI {
 
-    @GET("Gift/{locationId}/{startIndex}/{lastIndex}")
-    Call<List<Gift>> getGifts(@Path("locationId") String locationId,
-                              @Path("startIndex") String startIndex,
-                              @Path("lastIndex") String lastIndex);
+	@GET("Gift/{" + Constants.LOCATION_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<List<Gift>> getGifts(@Path(Constants.LOCATION_ID) String locationId,
+	                          @Path(Constants.StartIndex) String startIndex,
+	                          @Path(Constants.LastIndex) String lastIndex);
 
-    @POST("Upload")
-    Call<ResponseBody> uploadFile(
-            @Header("Authorization") String authorization,
-            @Header("fileName") String fileName,
-            @Body RequestBody photo
-    );
+	@POST("Upload")
+	Call<ResponseBody> uploadFile(
+			@Header(Constants.Authorization) String authorization,
+			@Header("fileName") String fileName,
+			@Body RequestBody photo
+	);
 
 //    @POST("Upload")
 //    Call<ResponseBody> uploadGiftImage(@Header("token") String token,
 //                                    @Header("fileName") String fileName,
 //                                    @Body RequestBody photo);
 
-    @GET("Location")
-    Call<List<Location>> getLocations();
+	@GET("Location")
+	Call<List<Location>> getLocations();
 
-    @GET("Location/{Id}")
-    Call<Location> getLocation(@Path("Id") String locationId);
+	@GET("Location/{" + Constants.ID + "}")
+	Call<Location> getLocation(@Path(Constants.ID) String locationId);
 
 	@GET("Category")
 	Call<ArrayList<Category>> getCategories();

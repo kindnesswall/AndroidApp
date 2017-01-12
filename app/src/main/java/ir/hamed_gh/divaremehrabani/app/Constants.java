@@ -11,4 +11,10 @@ public class Constants {
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";
 
+    public static final String Authorization = "Authorization";
+    public static final String StartIndex = "startIndex";
+    public static final String LastIndex = "lastIndex";
+    public static final String LocationId = "locationId";
+    public static final String ID = "Id";
+
 }
