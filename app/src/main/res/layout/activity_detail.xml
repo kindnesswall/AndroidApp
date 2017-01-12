@@ -44,6 +44,12 @@
 					android:layout_width="match_parent"
 					android:layout_height="300dp"/>
 
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="56dp"
+					android:layout_alignTop="@id/viewpager"
+					android:background="@drawable/forground_color_black_top" />
+
 				<LinearLayout
 					android:id="@+id/pagesContainer"
 					android:layout_width="match_parent"
@@ -70,7 +76,6 @@
 				app:contentInsetLeft="0dp"
 				app:contentInsetStart="0dp"
 				app:layout_collapseMode="pin">
-
 				<RelativeLayout
 					android:id="@+id/toolbar_lay"
 					android:layout_width="match_parent"
@@ -153,16 +158,17 @@
 					android:orientation="vertical">
 
 					<TextView
-						android:id="@+id/title"
+						android:id="@+id/detail_title_tv"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="@dimen/spacing_large"
 						android:layout_marginRight="@dimen/spacing_large"
 						android:layout_marginTop="@dimen/spacing_large"
+						android:textColor="@color/red_high"
 						android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
 					<TextView
-						android:id="@+id/description"
+						android:id="@+id/detail_description_tv"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_margin="@dimen/spacing_large"

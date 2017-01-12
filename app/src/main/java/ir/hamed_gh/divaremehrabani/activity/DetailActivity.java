@@ -38,6 +38,11 @@ public class DetailActivity extends AppCompatActivity {
 	@Bind(R.id.toolbar_title_tv)
 	TextView mToolbarTitleTv;
 
+	@Bind(R.id.detail_title_tv)
+	TextView mDetailTitleTv;
+
+	@Bind(R.id.detail_description_tv)
+	TextView mDetailDescriptionTv;
 //	int[] mResources = {
 //			R.drawable.rectangle_blue,
 //			R.drawable.rectangle_red
@@ -58,6 +63,8 @@ public class DetailActivity extends AppCompatActivity {
 		if (bundle != null) {
 			gift = (Gift) bundle.get(Constants.GIFT);
 			mToolbarTitleTv.setText(gift.title);
+			mDetailDescriptionTv.setText(gift.description);
+			mDetailTitleTv.setText(gift.title);
 		}
 	}
 
