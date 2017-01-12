@@ -6,7 +6,7 @@
                 android:background="#F1F1F1">
 
 	<RelativeLayout
-		android:id="@+id/search_top_lay"
+		android:id="@+id/my_gift_top_lay"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@color/white"
@@ -47,14 +47,14 @@
 	</RelativeLayout>
 
 	<RelativeLayout
-		android:id="@+id/search_bottom_lay"
+		android:id="@+id/my_gift_bottom_lay"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_below="@id/search_top_lay"
 		android:visibility="invisible">
 
 		<com.rey.material.widget.ProgressView
-			android:id="@+id/search_progressBar"
+			android:id="@+id/my_gift_progressBar"
 
 			android:layout_width="36dp"
 			android:layout_height="36dp"
@@ -66,18 +66,18 @@
 			app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
 		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/message_textview"
+			android:id="@+id/my_gift_message_tv"
 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 
-			android:layout_below="@id/search_progressBar"
-			android:layout_centerHorizontal="true"
+			android:layout_centerInParent="true"
 			android:padding="5dp"
 			android:text="@string/searching"
 			android:textColor="@color/dark_white"
 
-			android:textSize="14sp"/>
+			android:textSize="14sp"
+			android:visibility="invisible"/>
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/recycler_view"

@@ -62,17 +62,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 //        mToolbarTitleTextView.setText("دیوار مهربانی");
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-
-        context = this;
-        apiRequest = new ApiRequest(context,this);
-
-        settingToolbar();
-
+    private void setListeners(){
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +102,24 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             enterVerificationCode();
             loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
         }
+    }
+
+    private void init(){
+        context = this;
+        apiRequest = new ApiRequest(context,this);
+
+        settingToolbar();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+
+        init();
+
+        setListeners();
     }
 
 
