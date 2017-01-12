@@ -9,7 +9,7 @@
 		android:id="@+id/search_top_lay"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="#F1F1F1"
+		android:background="@color/background_gray"
 		android:elevation="4dp">
 
 		<RelativeLayout

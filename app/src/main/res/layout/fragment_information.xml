@@ -4,10 +4,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+	<RelativeLayout
+		android:id="@+id/filter_lay"
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		android:layout_marginTop="4dp"
+		android:layout_alignParentTop="true"
+		android:background="@color/background_gray">
+
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/filter_ic"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:text=""
+			android:textSize="22dp"/>
+
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/filter_txt"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+
+			android:layout_toLeftOf="@id/filter_ic"
+			android:paddingRight="8dp"
+			android:text="فیلتر کردن"
+			android:textSize="16dp"
+		/>
+
+	</RelativeLayout>
+
 	<android.support.v4.widget.SwipeRefreshLayout
 		android:id="@+id/swipeRefreshLayout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:layout_below="@id/filter_lay">
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/recycler_view"

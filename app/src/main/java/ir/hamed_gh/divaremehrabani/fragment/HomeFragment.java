@@ -5,8 +5,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rey.material.widget.ProgressView;
@@ -19,6 +21,8 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
+import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
@@ -42,6 +46,15 @@ public class HomeFragment extends BaseFragment{
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @Bind(R.id.filter_lay)
+    RelativeLayout mFilterLayBtn;
+
+    @Bind(R.id.filter_ic)
+    TextViewDivarIcons filterIc;
+
+    @Bind(R.id.filter_txt)
+    TextViewIranSansRegular filterTxt;
+
     private RecyclerViewAdapter adapter;
 
     private ArrayList<Gift> gifts = new ArrayList<>();
@@ -55,6 +68,20 @@ public class HomeFragment extends BaseFragment{
 
         ButterKnife.bind(this, rootView);
         init();
+
+        mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filterIc.setAlpha(0.5f);
+                    filterTxt.setAlpha(0.5f);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    filterIc.setAlpha(1f);
+                    filterTxt.setAlpha(1f);
+                }
+                return true;
+            }
+        });
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
