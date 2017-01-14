@@ -15,6 +15,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -111,6 +112,11 @@ public class AppController extends Application {
     }
 
     private void retrofitInitialization() {
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        // set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         httpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
@@ -121,7 +127,9 @@ public class AppController extends Application {
                                         .build();
                                 return chain.proceed(request);
                             }
-                        }).build();
+                        })
+                .addInterceptor(logging)
+                .build();
 
         //Creating Rest Services
         retrofitBuilder = new Retrofit.Builder()

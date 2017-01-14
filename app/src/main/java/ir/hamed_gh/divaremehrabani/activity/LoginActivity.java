@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
         if (response.body() instanceof TokenOutput){
             TokenOutput tokenOutput = (TokenOutput) response.body();
             AppController.storeString(
-                    Constants.TOKEN,
+                    Constants.Authorization,
                     Constants.BEARER + " " + tokenOutput.access_token);
             finish();
         }

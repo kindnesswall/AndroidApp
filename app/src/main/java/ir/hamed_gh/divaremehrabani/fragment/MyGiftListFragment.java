@@ -44,7 +44,7 @@ public class MyGiftListFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if (AppController.getStoredString(Constants.TOKEN)!=null){
+        if (AppController.getStoredString(Constants.Authorization)!=null){
             myGiftTopLay.setVisibility(View.GONE);
         }else {
             myGiftTopLay.setVisibility(View.VISIBLE);

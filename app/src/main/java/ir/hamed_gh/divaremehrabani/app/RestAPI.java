@@ -46,4 +46,11 @@ public interface RestAPI {
 	@GET("Category")
 	Call<ArrayList<Category>> getCategories();
 
+	@POST("Gift")
+	Call<Gift> registerGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body Gift gift
+	);
+
 }

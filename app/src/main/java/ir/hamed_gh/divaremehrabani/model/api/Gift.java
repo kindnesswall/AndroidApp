@@ -113,4 +113,21 @@ public class Gift implements Parcelable {
             return new Gift[size];
         }
     };
+
+    public Gift(String description,
+                String address,
+                String title,
+                String price,
+                String categoryId,
+                String locationId,
+                ArrayList<String> giftImages) {
+
+        this.description = description;
+        this.address = address;
+        this.title = title;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.locationId = locationId;
+        this.giftImages = giftImages;
+    }
 }

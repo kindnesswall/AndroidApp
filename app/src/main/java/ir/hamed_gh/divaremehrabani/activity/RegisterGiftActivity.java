@@ -33,9 +33,11 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.ChooseCategoryDialogFragment;
+import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.UploadFileOutput;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -44,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterGiftActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks {
+public class RegisterGiftActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks,ApiRequest.Listener {
 
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;
@@ -69,6 +71,9 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 
 	@Bind(R.id.gift_imageview)
 	ImageView giftImageview;
+
+	@Bind(R.id.register_gift_btn)
+	RelativeLayout mRegisterGiftBtn;
 
 	private Context context;
 	private Uri imageUri;
@@ -119,6 +124,27 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 			@Override
 			public void onClick(View v) {
 				startActivityForResult(getPickImageChooserIntent(), 200);
+			}
+		});
+
+		mRegisterGiftBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                ArrayList<String> giftImages = new ArrayList<String>();
+                giftImages.add("http://awsm.ir/Upload/1822aaed-6a7c-4b77-9d63-6940e78633c3.jpg");
+                giftImages.add("http://awsm.ir/Upload/6ce02f2a-46b9-48eb-b87e-2ede15497a3b.jpg");
+
+				(new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
+						new Gift(
+								"چقده عالی",
+                                "نواب",
+                                "نقاشی های رویایی",
+                                "20000000",
+                                "1",
+                                "1",
+                                giftImages
+						)
+				);
 			}
 		});
 	}
@@ -216,7 +242,7 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 				this);
 
 		Call<ResponseBody> call = AppController.service.uploadFile(
-				AppController.getStoredString(Constants.TOKEN),
+				AppController.getStoredString(Constants.Authorization),
 				"me.jpg",
 				requestBody
 		);
@@ -316,7 +342,7 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 
 	@Override
 	public void onProgressUpdate(int percentage) {
-		Log.d("Upload", "onProgressUpdate: " + percentage);
+//		Log.d("Upload", "onProgressUpdate: " + percentage);
 	}
 
 	@Override
@@ -326,6 +352,19 @@ public class RegisterGiftActivity extends AppCompatActivity implements ProgressR
 
 	@Override
 	public void onFinish() {
+
+	}
+
+	@Override
+	public void onResponse(Call call, Response response) {
+        if (response.body() instanceof Gift){
+            Gift gift = (Gift) response.body();
+            Toasti.showS(gift.title);
+        }
+	}
+
+	@Override
+	public void onFailure(Call call, Throwable t) {
 
 	}
 }

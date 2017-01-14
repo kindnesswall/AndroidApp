@@ -207,6 +207,38 @@
 
 			</RelativeLayout>
 
+			<RelativeLayout
+				android:id="@+id/register_gift_lay"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/upload_image_lay"
+				android:layout_marginTop="4dp"
+				android:padding="8dp"
+				android:background="@color/white">
+
+			<RelativeLayout
+					android:id="@+id/register_gift_btn"
+					android:layout_width="108dp"
+					android:layout_height="@dimen/button_height"
+
+					android:layout_centerInParent="true"
+
+					android:background="@drawable/button_selector_gray"
+					android:clickable="true">
+
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_centerInParent="true"
+						android:text="ثبت هدیه"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+				</RelativeLayout>
+
+			</RelativeLayout>
+
 		</RelativeLayout>
 
 

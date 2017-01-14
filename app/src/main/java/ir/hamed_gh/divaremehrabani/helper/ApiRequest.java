@@ -211,4 +211,20 @@ public class ApiRequest {
 
 	}
 
+    public void registerGift(Gift gift){
+        Call<Gift> call = AppController.service.registerGift(
+                "application/json",
+                AppController.getStoredString(Constants.Authorization),
+                gift
+        );
+
+        call.enqueue(new CallbackWithRetry<Gift>(call,mContext) {
+            @Override
+            public void onResponse(Call<Gift> call,
+                                   Response<Gift> response) {
+                handlingOnResponse(new HandlingResponse(call,response,this));
+            }
+        });
+    }
+
 }
