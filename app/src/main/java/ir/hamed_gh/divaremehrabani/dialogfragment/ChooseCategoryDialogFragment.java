@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.dialogfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

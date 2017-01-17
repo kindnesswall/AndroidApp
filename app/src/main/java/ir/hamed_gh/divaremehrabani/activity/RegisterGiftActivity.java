@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
-import ir.hamed_gh.divaremehrabani.fragment.ChooseCategoryDialogFragment;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCategoryDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;

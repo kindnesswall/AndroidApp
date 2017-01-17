@@ -11,6 +11,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
 
 /**
  * Created by 5 on 02/21/2016.
