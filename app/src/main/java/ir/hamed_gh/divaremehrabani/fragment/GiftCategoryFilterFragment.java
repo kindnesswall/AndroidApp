@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
@@ -32,95 +34,104 @@ import retrofit2.Response;
  */
 public class GiftCategoryFilterFragment extends BaseFragment {
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTextView;
+	@Bind(R.id.message_textview)
+	TextView mMessageTextView;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.search_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.search_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.filter_lay)
-    RelativeLayout mFilterLayBtn;
+	@Bind(R.id.filter_lay)
+	RelativeLayout mFilterLayBtn;
 
-    @Bind(R.id.filter_ic)
-    TextViewDivarIcons filterIc;
+	@Bind(R.id.filter_ic)
+	TextViewDivarIcons filterIc;
 
-    @Bind(R.id.filter_txt)
-    TextViewIranSansRegular filterTxt;
+	@Bind(R.id.filter_txt)
+	TextViewIranSansRegular filterTxt;
+	Category category;
+	private GiftListAdapter adapter;
+	private ArrayList<Gift> galleries = new ArrayList<>();
+	private int pageNumber = 0;
 
-    private GiftListAdapter adapter;
+	public static GiftCategoryFilterFragment newInstance(Category category) {
+		GiftCategoryFilterFragment fragment = new GiftCategoryFilterFragment();
+		Bundle args = new Bundle();
+		args.putParcelable(Constants.CATEGORY, category);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    private ArrayList<Gift> galleries = new ArrayList<>();
-    private int pageNumber = 0;
+	private void extractDataFromBundle() {
+		Bundle bundle = this.getArguments();
+		if (bundle != null) {
+			category = bundle.getParcelable(Constants.CATEGORY);
+		}
+	}
 
-    Category category;
+	@Override
+	protected void init() {
+		super.init();
+		extractDataFromBundle();
 
-    public static GiftCategoryFilterFragment newInstance(Category category) {
-        GiftCategoryFilterFragment fragment = new GiftCategoryFilterFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(Constants.CATEGORY, category);
-        fragment.setArguments(args);
-        return fragment;
-    }
+		adapter = new GiftListAdapter(context, galleries);
+		mRecyclerView.setAdapter(adapter);
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-    private void extractDataFromBundle(){
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            category = bundle.getParcelable(Constants.CATEGORY);
-        }
-    }
+		apiRequest.getGifts(new GetGiftPathQuery(
+				"1",
+				"0",
+				"10",
+				category.categoryId,
+				null
+		));
+	}
 
-    @Override
-    protected void init() {
-        super.init();
-        extractDataFromBundle();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_category, container, false);
 
-        adapter = new GiftListAdapter(context, galleries);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+		ButterKnife.bind(this, rootView);
+		init();
+		setListeners();
+		return rootView;
+	}
 
+	private void setListeners() {
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				pageNumber++;
+			}
+		});
 
-    }
+		mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				FilteringFragment filteringFragment = new FilteringFragment();
+				filteringFragment.show(fm, "fragment_name");
+			}
+		});
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_category, container, false);
+	@Override
+	public void onResponse(Call call, Response response) {
 
-        ButterKnife.bind(this, rootView);
-        init();
-        setListeners();
-        return rootView;
-    }
+		galleries.clear();
+		galleries.addAll((List<Gift>)response.body());
+		adapter.notifyDataSetChanged();
+		mRecyclerView.setVisibility(View.VISIBLE);
+		mMessageTextView.setVisibility(View.INVISIBLE);
 
-    private void setListeners() {
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-                pageNumber++;
-            }
-        });
+	}
 
-        mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FilteringFragment filteringFragment = new FilteringFragment();
-                filteringFragment.show(fm, "fragment_name");
-            }
-        });
-    }
-
-    @Override
-    public void onResponse(Call call, Response response) {
-
-    }
-
-    void sendRequest() {
+	void sendRequest() {
 //        Map<String, String> params = new HashMap<>();
 //        params.put("pageSize", "10");
 //        params.put("pageNo", "1");
@@ -157,5 +168,5 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 //                mMessageTextView.setText("خطا در دریافت اطلاعات");
 //            }
 //        });
-    }
+	}
 }
