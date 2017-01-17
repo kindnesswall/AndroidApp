@@ -18,10 +18,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -51,6 +55,35 @@ public class GiftCategoryFilterFragment extends BaseFragment {
     private ArrayList<Gift> galleries = new ArrayList<>();
     private int pageNumber = 0;
 
+    Category category;
+
+    public static GiftCategoryFilterFragment newInstance(Category category) {
+        GiftCategoryFilterFragment fragment = new GiftCategoryFilterFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Constants.CATEGORY, category);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    private void extractDataFromBundle(){
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            category = bundle.getParcelable(Constants.CATEGORY);
+        }
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        extractDataFromBundle();
+
+        adapter = new GiftListAdapter(context, galleries);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,11 +92,11 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         init();
+        setListeners();
+        return rootView;
+    }
 
-        adapter = new GiftListAdapter(context, galleries);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
+    private void setListeners() {
         mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
@@ -80,7 +113,11 @@ public class GiftCategoryFilterFragment extends BaseFragment {
                 filteringFragment.show(fm, "fragment_name");
             }
         });
-        return rootView;
+    }
+
+    @Override
+    public void onResponse(Call call, Response response) {
+
     }
 
     void sendRequest() {

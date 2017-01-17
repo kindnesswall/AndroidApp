@@ -54,6 +54,7 @@ public class CategoriesGridFragment extends BaseFragment {
         super.onResponse(call, response);
 	    Log.d(TAG, "onResponse");
 	    ArrayList<Category> categories = (ArrayList<Category>) response.body();
+        this.categories.clear();
         this.categories.addAll(categories);
         adapter.notifyDataSetChanged();
     }

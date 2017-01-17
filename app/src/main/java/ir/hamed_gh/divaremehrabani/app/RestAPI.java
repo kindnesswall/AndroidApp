@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Hamed on 5/6/16.
@@ -23,7 +24,9 @@ public interface RestAPI {
 	@GET("Gift/{" + Constants.LOCATION_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
 	Call<List<Gift>> getGifts(@Path(Constants.LOCATION_ID) String locationId,
 	                          @Path(Constants.StartIndex) String startIndex,
-	                          @Path(Constants.LastIndex) String lastIndex);
+	                          @Path(Constants.LastIndex) String lastIndex,
+	                          @Query(Constants.CATEGORY_ID) String categoryId,
+	                          @Query(Constants.SEARCH_TEXT) String searchText);
 
 	@POST("Upload")
 	Call<ResponseBody> uploadFile(

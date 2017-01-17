@@ -20,13 +20,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
-import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -105,7 +104,15 @@ public class HomeFragment extends BaseFragment{
             }
         });
 
-        apiRequest.getGifts();
+        apiRequest.getGifts(
+                new GetGiftPathQuery(
+                        "1",
+                        "0",
+                        "10",
+                        null,
+                        null
+                )
+        );
 
 
         return rootView;
@@ -118,7 +125,15 @@ public class HomeFragment extends BaseFragment{
         pageNumber = 1;
         gifts.clear();
 
-        apiRequest.getGifts();
+        apiRequest.getGifts(
+                new GetGiftPathQuery(
+                        "1",
+                        "0",
+                        "10",
+                        null,
+                        null
+                )
+        );
 
         // Load complete
         onItemsLoadComplete();
@@ -130,24 +145,6 @@ public class HomeFragment extends BaseFragment{
 
         // Stop refresh animation
         mSwipeRefreshLayout.setRefreshing(false);
-    }
-
-    void sendRequest() {
-
-        Call<List<Gift>> call = AppController.service.getGifts("1","0","10");
-
-        call.enqueue(new Callback<List<Gift>>() {
-            @Override
-            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Gift>> call, Throwable t) {
-
-            }
-        });
     }
 
     @Override

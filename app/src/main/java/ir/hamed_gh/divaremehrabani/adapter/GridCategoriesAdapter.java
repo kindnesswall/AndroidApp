@@ -70,8 +70,9 @@ public class GridCategoriesAdapter extends RecyclerView.Adapter<CategoryGridHold
             @Override
             public void onClick(View v) {
 
+
                 ((BottomBarActivity) mContext).setFragment(
-                        new GiftCategoryFilterFragment(),
+                        GiftCategoryFilterFragment.newInstance(categories.get(i)),
                         GiftCategoryFilterFragment.class.getName()
                 );
 

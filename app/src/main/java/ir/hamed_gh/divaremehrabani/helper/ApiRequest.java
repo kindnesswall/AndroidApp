@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
@@ -121,9 +122,14 @@ public class ApiRequest {
         }
     }
 
-    public void getGifts(){
+    public void getGifts(GetGiftPathQuery getGiftPathQuery){
 
-        Call<List<Gift>> call = AppController.service.getGifts("1","0","10");
+        Call<List<Gift>> call = AppController.service.getGifts(
+                getGiftPathQuery.locationId,
+                getGiftPathQuery.startIndex,
+                getGiftPathQuery.lastIndex,
+                getGiftPathQuery.categoryId,
+                getGiftPathQuery.searchText);
 
         call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
             @Override
