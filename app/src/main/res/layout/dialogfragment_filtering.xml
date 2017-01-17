@@ -1,60 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="150dp">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/choose_city_text"
+		android:id="@+id/filtering_basedon_tv"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
 		android:gravity="right"
+
 		android:paddingBottom="14dp"
 		android:paddingRight="12dp"
 		android:paddingTop="14dp"
-		android:text="انتخاب شهر"
-		android:textColor="@color/colorPrimary"
+
+		android:text="فیلتر بر اساس:"
+
+		android:textColor="@color/white"
+		android:background="@color/colorPrimary"
 		android:textSize="16sp"/>
 
-	<ImageView
-		android:id="@+id/search_icon"
-		android:layout_width="32dp"
-		android:layout_height="32dp"
-		android:layout_alignParentRight="true"
-		android:layout_below="@id/choose_city_text"
-		android:layout_marginRight="26dp"
-		android:layout_marginTop="16dp"
-
-		android:src="@mipmap/ic_action_action_search_light"/>
-
-	<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
-		android:id="@+id/choose_city_et"
+	<RelativeLayout
+		android:id="@+id/filter_lay"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignBottom="@id/search_icon"
-		android:layout_marginBottom="4dp"
-		android:layout_marginLeft="12dp"
-		android:layout_toLeftOf="@id/search_icon"
+		android:layout_height="52dp"
+		android:layout_marginTop="4dp"
+		android:layout_below="@id/filtering_basedon_tv"
+		android:background="@color/background_gray">
 
-		android:background="@android:color/transparent"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/filter_ic"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 
-		android:gravity="right"
-		android:hint="جستجوی شهر..."
-		android:padding="5dp"
-		android:textSize="14sp"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:text=""
+			android:textSize="22dp"/>
+
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/filter_txt"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+
+			android:layout_toLeftOf="@id/filter_ic"
+			android:paddingRight="8dp"
+			android:text="فیلتر کردن"
+			android:textSize="16dp"
 		/>
 
-	<ImageView
-		android:id="@+id/choose_city_iv"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-
-		android:layout_below="@id/choose_city_et"
-		android:src="@mipmap/textfield_activated_holo_light"/>
-
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/choose_city_recyclerview"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@id/choose_city_iv"/>
+	</RelativeLayout>
 
 </RelativeLayout>

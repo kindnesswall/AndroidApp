@@ -1,6 +1,7 @@
 package ir.hamed_gh.divaremehrabani.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
+import ir.hamed_gh.divaremehrabani.dialogfragment.FilterDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
@@ -59,66 +61,86 @@ public class HomeFragment extends BaseFragment{
     private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
 
-    @Override
+	@Override
+	protected void init() {
+		super.init();
+
+		//		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
+        /* Initialize recyclerview */
+		adapter = new GiftListAdapter(context, gifts);
+		mRecyclerView.setAdapter(adapter);
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+		apiRequest.getGifts(
+				new GetGiftPathQuery(
+						"1",
+						"0",
+						"10",
+						null,
+						null
+				)
+		);
+	}
+
+
+
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_information, container, false);
-
         ButterKnife.bind(this, rootView);
+
         init();
-
-        mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    filterIc.setAlpha(0.5f);
-                    filterTxt.setAlpha(0.5f);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    filterIc.setAlpha(1f);
-                    filterTxt.setAlpha(1f);
-                }
-                return true;
-            }
-        });
-
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Refresh gifts
-                refreshItems();
-            }
-        });
-
-//		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
-        /* Initialize recyclerview */
-        adapter = new GiftListAdapter(context, gifts);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-                pageNumber++;
-            }
-        });
-
-        apiRequest.getGifts(
-                new GetGiftPathQuery(
-                        "1",
-                        "0",
-                        "10",
-                        null,
-                        null
-                )
-        );
-
+		setListeners();
 
         return rootView;
     }
 
-    void refreshItems() {
+	private void setListeners() {
+
+		mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					filterIc.setAlpha(0.5f);
+					filterTxt.setAlpha(0.5f);
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					filterIc.setAlpha(1f);
+					filterTxt.setAlpha(1f);
+				}
+				return false;
+			}
+		});
+
+		mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				FilterDialogFragment fragment = new FilterDialogFragment();
+				fragment.show(fm, "fragment_name");
+			}
+		});
+
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// Refresh gifts
+				refreshItems();
+			}
+		});
+
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				pageNumber++;
+			}
+		});
+
+	}
+
+	void refreshItems() {
         // Load gifts
         // ...
 
