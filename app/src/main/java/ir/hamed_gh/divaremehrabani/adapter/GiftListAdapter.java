@@ -19,14 +19,14 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
 /**
  * Created by 5 on 3/8/2016.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<ItemHolder> {
+public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
 
     String schoolId, childID;
     private ArrayList<Gift> gifts;
     private Context mContext;
     private FragmentActivity activity;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Gift> gifts) {
+    public GiftListAdapter(Context context, ArrayList<Gift> gifts) {
         this.gifts = gifts;
         this.mContext = context;
     }

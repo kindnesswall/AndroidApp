@@ -19,7 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
+import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment{
     @Bind(R.id.filter_txt)
     TextViewIranSansRegular filterTxt;
 
-    private RecyclerViewAdapter adapter;
+    private GiftListAdapter adapter;
 
     private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment{
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new RecyclerViewAdapter(context, gifts);
+        adapter = new GiftListAdapter(context, gifts);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 

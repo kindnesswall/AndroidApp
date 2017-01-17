@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.CategoriesAdapter;
+import ir.hamed_gh.divaremehrabani.adapter.GridCategoriesAdapter;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -26,7 +26,7 @@ public class CategoriesGridFragment extends BaseFragment {
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private CategoriesAdapter adapter;
+    private GridCategoriesAdapter adapter;
     ArrayList<Category> categories = new ArrayList<>();
 	String TAG = CategoriesGridFragment.class.getName();
     @Override
@@ -40,7 +40,7 @@ public class CategoriesGridFragment extends BaseFragment {
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new CategoriesAdapter(context,categories);
+        adapter = new GridCategoriesAdapter(context,categories);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 

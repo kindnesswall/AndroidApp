@@ -10,13 +10,13 @@ import ir.hamed_gh.divaremehrabani.R;
 /**
  * Created by Hamed on 6/10/16.
  */
-public class CategoryHolder extends RecyclerView.ViewHolder {
+public class CategoryGridHolder extends RecyclerView.ViewHolder {
 
     //	private ImageView mCategoryIc;
     private TextView mCategoryTv;
     private TextView mCategoryFontIcon;
     public View mItemView;
-    public CategoryHolder(View itemView) {
+    public CategoryGridHolder(View itemView) {
         super(itemView);
 
 //		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);

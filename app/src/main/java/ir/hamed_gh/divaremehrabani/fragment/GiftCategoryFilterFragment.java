@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.RecyclerViewAdapter;
+import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
@@ -46,7 +46,7 @@ public class GiftCategoryFilterFragment extends BaseFragment {
     @Bind(R.id.filter_txt)
     TextViewIranSansRegular filterTxt;
 
-    private RecyclerViewAdapter adapter;
+    private GiftListAdapter adapter;
 
     private ArrayList<Gift> galleries = new ArrayList<>();
     private int pageNumber = 0;
@@ -60,7 +60,7 @@ public class GiftCategoryFilterFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
         init();
 
-        adapter = new RecyclerViewAdapter(context, galleries);
+        adapter = new GiftListAdapter(context, galleries);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 

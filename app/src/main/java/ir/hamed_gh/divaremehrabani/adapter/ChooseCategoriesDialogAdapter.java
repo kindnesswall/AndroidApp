@@ -12,59 +12,36 @@ import java.util.ArrayList;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.fragment.GiftCategoryFilterFragment;
-import ir.hamed_gh.divaremehrabani.holder.CategoryHolder;
+import ir.hamed_gh.divaremehrabani.holder.CategoryDialogHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
  * Created by 5 on 3/8/2016.
  */
-public class CategoriesAdapter extends RecyclerView.Adapter<CategoryHolder> {
-
-    String schoolId, childID;
-    private int[] iconRes = {
-            R.mipmap.ic_books,
-            R.mipmap.ic_jumper,
-            R.mipmap.ic_dining_room,
-            R.mipmap.ic_sofa
-    };
-
-    private String[] fontIcons = {
-            "\uE801",
-            "\uE800",
-            "\uE832",
-            "\uE804"
-    };
-
-    private int[] categoriesTitleRes = {
-            R.string.book,
-            R.string.clothes,
-            R.string.food,
-            R.string.accessories
-    };
+public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<CategoryDialogHolder> {
 
     private Context mContext;
     private ArrayList<Category> categories;
     private FragmentActivity activity;
 
-    public CategoriesAdapter(Context context, ArrayList<Category> categories) {
+    public ChooseCategoriesDialogAdapter(Context context, ArrayList<Category> categories) {
         this.mContext = context;
         this.categories = categories;
     }
 
     @Override
-    public CategoryHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_category, null);
-        CategoryHolder categoryHolder = new CategoryHolder(v);
+    public CategoryDialogHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_choose_category, null);
+        CategoryDialogHolder categoryHolder = new CategoryDialogHolder(v);
 
         return categoryHolder;
     }
 
     @Override
-    public void onBindViewHolder(CategoryHolder categoryHolder, final int i) {
+    public void onBindViewHolder(CategoryDialogHolder categoryHolder, final int i) {
 
         categoryHolder.getmCategoryTv().setText(categories.get(i).title);
 //		categoryHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
-        categoryHolder.getmCategoryFontIcon().setText(fontIcons[i]);
 
         categoryHolder.mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
