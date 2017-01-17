@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.fragment.GiftCategoryFilterFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryDialogHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
@@ -46,11 +44,6 @@ public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<Category
         categoryHolder.mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ((BottomBarActivity) mContext).setFragment(
-                        new GiftCategoryFilterFragment(),
-                        GiftCategoryFilterFragment.class.getName()
-                );
 
             }
         });
