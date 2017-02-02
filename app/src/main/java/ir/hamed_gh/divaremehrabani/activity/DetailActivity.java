@@ -104,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
 		LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
 
 		mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
-		mIndicator.setPageCount(gift.giftImages.size());
+		mIndicator.setPageCount(gift.giftImages != null? gift.giftImages.size():0);
 		mIndicator.show();
 	}
 
@@ -146,7 +146,7 @@ public class DetailActivity extends AppCompatActivity {
 
 		@Override
 		public int getCount() {
-			return gift.giftImages.size();
+			return (gift.giftImages != null? gift.giftImages.size() : 0);
 		}
 
 		@Override
