@@ -18,7 +18,7 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class MyGiftListFragment extends BaseFragment {
+public class MyRequestsFragment extends BaseFragment {
 
     @Bind(R.id.my_gift_login_btn)
     RelativeLayout myGiftLoginBtn;

@@ -30,6 +30,11 @@ public class MyWallFragment extends BaseFragment {
     @Bind(R.id.my_gift_lay)
     RelativeLayout myGiftLay;
 
+    @Bind(R.id.my_request_lay)
+    RelativeLayout myRequestsLay;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,11 +44,26 @@ public class MyWallFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
         init();
 
+        setListeners();
+
+        return rootView;
+    }
+
+    private void setListeners() {
         myGiftLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((BottomBarActivity) getActivity()).setFragment(
-                        new MyGiftListFragment(), MyGiftListFragment.class.getName()
+                        new MyGiftsFragment(), MyGiftsFragment.class.getName()
+                );
+            }
+        });
+
+        myRequestsLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BottomBarActivity) getActivity()).setFragment(
+                        new MyRequestsFragment(), MyRequestsFragment.class.getName()
                 );
             }
         });
@@ -67,7 +87,5 @@ public class MyWallFragment extends BaseFragment {
 
             }
         });
-
-        return rootView;
     }
 }
