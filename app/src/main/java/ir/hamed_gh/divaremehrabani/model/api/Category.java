@@ -10,22 +10,22 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Category implements Parcelable {
-    @SerializedName("Title")
+    @SerializedName("title")
     public String title;
 
-    @SerializedName("ImageUrl")
+    @SerializedName("imageUrl")
     public String imageUrl;
 
-    @SerializedName("Id")
+    @SerializedName("id")
     public String categoryId;
 
-    @SerializedName("CreateDateTime")
+    @SerializedName("createDateTime")
     public String createDateTime;
 
-    @SerializedName("CreateDate")
+    @SerializedName("createDate")
     public String createDate;
 
-    @SerializedName("CreateTime")
+    @SerializedName("createTime")
     public String createTime;
 
     @Override

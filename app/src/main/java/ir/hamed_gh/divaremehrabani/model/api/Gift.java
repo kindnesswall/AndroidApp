@@ -13,49 +13,49 @@ import java.util.ArrayList;
 
 public class Gift implements Parcelable {
 
-    @SerializedName("Title")
+    @SerializedName("title")
     public String title="";
 
-    @SerializedName("Address")
+    @SerializedName("address")
     public String address="";
 
-    @SerializedName("Description")
+    @SerializedName("description")
     public String description="";
 
-    @SerializedName("Price")
+    @SerializedName("price")
     public String price="";
 
-    @SerializedName("Status")
+    @SerializedName("status")
     public String status;
 
-    @SerializedName("UserId")
+    @SerializedName("userId")
     public String userId="";
 
-    @SerializedName("CategoryId")
+    @SerializedName("categoryId")
     public String categoryId;
 
-    @SerializedName("Category")
+    @SerializedName("category")
     public String category;
 
-    @SerializedName("LocationId")
+    @SerializedName("locationId")
     public String locationId;
 
-    @SerializedName("Location")
+    @SerializedName("location")
     public String location;
 
-    @SerializedName("GiftImages")
+    @SerializedName("giftImages")
     public ArrayList<String> giftImages;
 
-    @SerializedName("Id")
+    @SerializedName("id")
     public String giftId="";
 
-    @SerializedName("CreateDateTime")
+    @SerializedName("createDateTime")
     public String createDateTime="";
 
-    @SerializedName("CreateDate")
+    @SerializedName("createDate")
     public String createDate="";
 
-    @SerializedName("CreateTime")
+    @SerializedName("createTime")
     public String createTime="";
 
     // No-arg Ctor
