@@ -12,6 +12,8 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mygifts.MyGiftsFragment;
+import ir.hamed_gh.divaremehrabani.fragment.requests.MyRequestsFragment;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -47,6 +49,14 @@ public class MyWallFragment extends BaseFragment {
         setListeners();
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("دیوار من");
+
     }
 
     private void setListeners() {
