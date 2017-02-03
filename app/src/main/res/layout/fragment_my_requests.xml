@@ -50,7 +50,7 @@
 		android:id="@+id/my_gift_bottom_lay"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:visibility="visible">
+		android:visibility="invisible">
 
 		<ir.hamed_gh.divaremehrabani.customviews.CustomTabLayout
 			android:id="@+id/main_tabs"

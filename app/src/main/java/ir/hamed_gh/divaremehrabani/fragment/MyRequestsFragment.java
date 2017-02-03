@@ -29,6 +29,9 @@ public class MyRequestsFragment extends BaseFragment {
     @Bind(R.id.my_gift_top_lay)
     RelativeLayout myGiftTopLay;
 
+    @Bind(R.id.my_gift_bottom_lay)
+    RelativeLayout myGiftBottomLay;
+
     @Bind(R.id.main_tabs)
     CustomTabLayout mainTabs;
 
@@ -44,22 +47,22 @@ public class MyRequestsFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
         init();
 
-        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
+        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
 
         setupViewPager(mainVp);
         mainTabs.setupWithViewPager(mainVp);
-
+        mainVp.setCurrentItem(1,false);
         return rootView;
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
 
-        RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
-        RegisteredGiftsFragment registeredGiftsFragment2 = new RegisteredGiftsFragment();
+        SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
+        ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
 
-        adapter.addFrag(registeredGiftsFragment, "درخواستی");
-        adapter.addFrag(registeredGiftsFragment2, "ارسالی");
+        adapter.addFrag(receivedRequestsFragment , "دریافتی");
+        adapter.addFrag(sentRequestsFragment , "ارسالی");
 
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -71,8 +74,11 @@ public class MyRequestsFragment extends BaseFragment {
 
         if (AppController.getStoredString(Constants.Authorization)!=null){
             myGiftTopLay.setVisibility(View.GONE);
+            myGiftBottomLay.setVisibility(View.VISIBLE);
+            mainVp.setCurrentItem(1,false);
         }else {
             myGiftTopLay.setVisibility(View.VISIBLE);
+            myGiftBottomLay.setVisibility(View.INVISIBLE);
 
             myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
