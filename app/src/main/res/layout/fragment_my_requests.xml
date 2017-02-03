@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F1F1F1">
+
+	<RelativeLayout
+		android:id="@+id/my_gift_top_lay"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/white"
+		android:elevation="4dp"
+		android:padding="10dp">
+
+		<RelativeLayout
+			android:id="@+id/my_gift_login_btn"
+			android:layout_width="80dp"
+			android:layout_height="@dimen/button_height"
+
+			android:layout_centerVertical="true"
+
+			android:layout_margin="4dp"
+			android:background="@drawable/button_selector"
+			android:clickable="true">
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerInParent="true"
+				android:text="@string/sign_in"
+				android:textColor="@color/white"
+				android:textSize="12dp"/>
+
+		</RelativeLayout>
+
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:layout_margin="4dp"
+
+			android:layout_toRightOf="@id/my_gift_login_btn"
+			android:text="@string/login_bar_title"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/my_gift_bottom_lay"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="visible">
+
+		<ir.hamed_gh.divaremehrabani.customviews.CustomTabLayout
+			android:id="@+id/main_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:contentInsetLeft="0dp"
+			android:contentInsetStart="0dp"
+			app:tabGravity="fill"
+			app:tabIndicatorColor="@color/white"
+			app:tabMaxWidth="0dp"
+			app:tabSelectedTextColor="@color/white"
+			android:background="@color/colorAccent"
+			app:tabTextColor="@color/white"/>
+
+		<android.support.v4.view.ViewPager
+			android:id="@+id/main_vp"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@id/main_tabs"
+			android:background="@color/white" />
+
+	</RelativeLayout>
+
+</RelativeLayout>
