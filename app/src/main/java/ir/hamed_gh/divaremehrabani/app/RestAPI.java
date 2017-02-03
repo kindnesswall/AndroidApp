@@ -56,4 +56,9 @@ public interface RestAPI {
 			@Body Gift gift
 	);
 
+
+	@GET("SentRequestList/")
+	Call<List<Gift>> getSentRequestList(
+	                          @Path(Constants.StartIndex) String startIndex,
+	                          @Path(Constants.LastIndex) String lastIndex);
 }

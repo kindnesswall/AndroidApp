@@ -53,10 +53,12 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 
 	@Bind(R.id.filter_txt)
 	TextViewIranSansRegular filterTxt;
-	Category category;
+
+	private Category category;
 	private GiftListAdapter adapter;
 	private ArrayList<Gift> galleries = new ArrayList<>();
 	private int pageNumber = 0;
+	private LinearLayoutManager linearLayoutManager;
 
 	public static GiftCategoryFilterFragment newInstance(Category category) {
 		GiftCategoryFilterFragment fragment = new GiftCategoryFilterFragment();
@@ -80,7 +82,8 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 
 		adapter = new GiftListAdapter(context, galleries);
 		mRecyclerView.setAdapter(adapter);
-		mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
 		apiRequest.getGifts(new GetGiftPathQuery(
 				"1",
@@ -104,7 +107,7 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 	}
 
 	private void setListeners() {
-		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);

@@ -48,7 +48,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterGiftActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks,ApiRequest.Listener {
+public class RegisterGiftActivity extends AppCompatActivity
+		implements ProgressRequestBody.UploadCallbacks,ApiRequest.Listener {
 
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;

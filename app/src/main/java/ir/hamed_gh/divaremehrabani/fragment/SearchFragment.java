@@ -67,6 +67,7 @@ public class SearchFragment extends BaseFragment {
 
     private ArrayList<Gift> galleries = new ArrayList<>();
     private int pageNumber = 0;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,9 +80,10 @@ public class SearchFragment extends BaseFragment {
 
         adapter = new GiftListAdapter(context, galleries);
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        linearLayoutManager = new LinearLayoutManager(context);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);

@@ -21,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.dialogfragment.FilterDialogFragment;
@@ -61,6 +62,9 @@ public class HomeFragment extends BaseFragment{
     private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
 
+	private int startIndex = 0;
+	private LinearLayoutManager linearLayoutManager;
+
 	@Override
 	protected void init() {
 		super.init();
@@ -69,19 +73,11 @@ public class HomeFragment extends BaseFragment{
         /* Initialize recyclerview */
 		adapter = new GiftListAdapter(context, gifts);
 		mRecyclerView.setAdapter(adapter);
-		mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-		apiRequest.getGifts(
-				new GetGiftPathQuery(
-						"1",
-						"0",
-						"10",
-						null,
-						null
-				)
-		);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
+
+		getGifts();
 	}
-
-
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,11 +126,12 @@ public class HomeFragment extends BaseFragment{
 			}
 		});
 
-		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(new LinearLayoutManager(context)) {
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
 				pageNumber++;
+				getGifts();
 			}
 		});
 
@@ -147,19 +144,27 @@ public class HomeFragment extends BaseFragment{
         pageNumber = 1;
         gifts.clear();
 
-        apiRequest.getGifts(
-                new GetGiftPathQuery(
-                        "1",
-                        "0",
-                        "10",
-                        null,
-                        null
-                )
-        );
+		startIndex = 0;
+
+        getGifts();
 
         // Load complete
         onItemsLoadComplete();
     }
+
+	private void getGifts(){
+		apiRequest.getGifts(
+				new GetGiftPathQuery(
+						"1",
+						startIndex + "",
+						startIndex + Constants.LIMIT + "",
+						null,
+						null
+				)
+		);
+
+		startIndex += Constants.LIMIT;
+	}
 
     void onItemsLoadComplete() {
         // Update the adapter and notify data set changed
@@ -173,26 +178,12 @@ public class HomeFragment extends BaseFragment{
     public void onResponse(Call call, Response response) {
         progressView.setVisibility(View.INVISIBLE);
 
-//                try {
-//                    Meta meta = response.body().getMeta();
-//                    if (meta.getErrorCode() == 1000) {
-
         List<Gift> responseGifts = (List<Gift>) response.body();
         gifts.addAll(responseGifts);
 
         adapter.notifyDataSetChanged();
         mRecyclerView.setVisibility(View.VISIBLE);
         mMessageTextView.setVisibility(View.INVISIBLE);
-
-//                    } else {
-//                        mMessageTextView.setVisibility(View.VISIBLE);
-//                        mRecyclerView.setVisibility(View.INVISIBLE);
-//                    }
-
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-
     }
 
     @Override

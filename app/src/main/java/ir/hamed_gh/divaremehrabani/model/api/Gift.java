@@ -31,6 +31,9 @@ public class Gift implements Parcelable {
     @SerializedName("userId")
     public String userId="";
 
+    @SerializedName("user")
+    public String user="";
+
     @SerializedName("categoryId")
     public String categoryId;
 
@@ -69,6 +72,7 @@ public class Gift implements Parcelable {
         this.price = in.readString();
         this.status = in.readString();
         this.userId = in.readString();
+        this.user = in.readString();
         this.categoryId = in.readString();
         this.category = in.readString();
         this.locationId = in.readString();
@@ -93,6 +97,7 @@ public class Gift implements Parcelable {
         dest.writeString(price);
         dest.writeString(status);
         dest.writeString(userId);
+        dest.writeString(user);
         dest.writeString(categoryId);
         dest.writeString(category);
         dest.writeString(locationId);

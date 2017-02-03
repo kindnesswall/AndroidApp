@@ -6,7 +6,7 @@
                 android:background="#F1F1F1">
 
 	<com.rey.material.widget.ProgressView
-		android:id="@+id/my_gift_progressBar"
+		android:id="@+id/fragment_progressBar"
 
 		android:layout_width="36dp"
 		android:layout_height="36dp"

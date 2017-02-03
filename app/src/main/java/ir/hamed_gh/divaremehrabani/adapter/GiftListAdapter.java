@@ -60,7 +60,7 @@ public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
                 .crossFade()
                 .into(myHolder.getmItemIv());
 
-        myHolder.getGiftTitleTv().setText(gifts.get(i).title);
+        myHolder.getGiftTitleTv().setText(gifts.get(i).title + gifts.get(i).user);
         myHolder.getGiftLocationTv().setText(gifts.get(i).address);
         myHolder.getGiftCreatedTimeTv().setText(gifts.get(i).createDateTime);
         myHolder.itemView.setOnClickListener(
