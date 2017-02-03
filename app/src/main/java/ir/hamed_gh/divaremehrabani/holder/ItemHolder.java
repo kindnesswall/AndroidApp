@@ -1,13 +1,11 @@
 package ir.hamed_gh.divaremehrabani.holder;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.DetailActivity;
 
 /**
  * Created by Hamed on 11/11/16.

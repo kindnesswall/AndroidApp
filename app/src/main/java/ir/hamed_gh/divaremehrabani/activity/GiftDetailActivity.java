@@ -24,7 +24,7 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
-public class DetailActivity extends AppCompatActivity {
+public class GiftDetailActivity extends AppCompatActivity {
 
 	@Bind(R.id.bookmark_ic)
 	ImageView mBookmarkIc;
@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
 	private MyPageIndicator mIndicator;
 
 	public static Intent createIntent(Gift gift) {
-		Intent intent = new Intent(AppController.getAppContext(), DetailActivity.class);
+		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
 		intent.putExtra(Constants.GIFT, gift);
 		return intent;
 	}

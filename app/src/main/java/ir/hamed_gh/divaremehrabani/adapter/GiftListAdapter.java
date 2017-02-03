@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.DetailActivity;
+import ir.hamed_gh.divaremehrabani.activity.GiftDetailActivity;
 import ir.hamed_gh.divaremehrabani.holder.ItemHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
@@ -68,7 +68,7 @@ public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
                     @Override
                     public void onClick(View v) {
                         mContext.startActivity(
-                                DetailActivity.createIntent(gifts.get(i))
+                                GiftDetailActivity.createIntent(gifts.get(i))
                         );
                     }
                 }

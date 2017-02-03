@@ -23,7 +23,7 @@
 		<activity android:name="ir.hamed_gh.divaremehrabani.activity.RegisterGiftActivity"
 			android:screenOrientation="portrait"/>
 
-		<activity android:name="ir.hamed_gh.divaremehrabani.activity.DetailActivity"
+		<activity android:name="ir.hamed_gh.divaremehrabani.activity.GiftDetailActivity"
 		          android:screenOrientation="portrait"/>
 
 		<activity android:name="ir.hamed_gh.divaremehrabani.activity.LoginActivity"

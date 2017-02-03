@@ -59,6 +59,7 @@ public interface RestAPI {
 
 	@GET("SentRequestList/")
 	Call<List<Gift>> getSentRequestList(
-	                          @Path(Constants.StartIndex) String startIndex,
-	                          @Path(Constants.LastIndex) String lastIndex);
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex);
 }
