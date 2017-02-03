@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.fragment.category;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +22,8 @@ import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
+import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
+import ir.hamed_gh.divaremehrabani.fragment.FilteringFragment;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;

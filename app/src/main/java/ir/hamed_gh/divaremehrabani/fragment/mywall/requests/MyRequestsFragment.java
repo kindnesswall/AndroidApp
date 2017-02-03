@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment.mygifts;
+package ir.hamed_gh.divaremehrabani.fragment.mywall.requests;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class MyGiftsFragment extends BaseFragment {
+public class MyRequestsFragment extends BaseFragment {
 
     @Bind(R.id.my_gift_login_btn)
     RelativeLayout myGiftLoginBtn;
@@ -43,17 +43,18 @@ public class MyGiftsFragment extends BaseFragment {
     protected void init() {
         super.init();
 
-        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
+        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
+
         setupViewPager(mainVp);
         mainTabs.setupWithViewPager(mainVp);
-        mainVp.setCurrentItem(2,false);
+        mainVp.setCurrentItem(1,false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_my_gifts, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_my_requests, container, false);
 
         ButterKnife.bind(this, rootView);
         init();
@@ -64,13 +65,11 @@ public class MyGiftsFragment extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
 
-        RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
-        DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
-        ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
+        SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
+        ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
 
-        adapter.addFrag(registeredGiftsFragment , "ثبت شده");
-        adapter.addFrag(donatedGiftsFragment , "اهدایی");
-        adapter.addFrag(receivedGiftsFragment , "دریافتی");
+        adapter.addFrag(receivedRequestsFragment , "دریافتی");
+        adapter.addFrag(sentRequestsFragment , "ارسالی");
 
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -83,7 +82,7 @@ public class MyGiftsFragment extends BaseFragment {
         if (AppController.getStoredString(Constants.Authorization)!=null){
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(2,false);
+            mainVp.setCurrentItem(1,false);
         }else {
             myGiftTopLay.setVisibility(View.VISIBLE);
             myGiftBottomLay.setVisibility(View.INVISIBLE);

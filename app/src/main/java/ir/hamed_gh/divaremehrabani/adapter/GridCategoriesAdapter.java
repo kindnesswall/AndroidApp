@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.fragment.GiftCategoryFilterFragment;
+import ir.hamed_gh.divaremehrabani.fragment.category.GiftCategoryFilterFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryGridHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 

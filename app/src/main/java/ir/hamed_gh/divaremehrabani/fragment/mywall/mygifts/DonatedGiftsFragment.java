@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment.requests;
+package ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class ReceivedRequestsFragment extends BaseFragment {
+public class DonatedGiftsFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

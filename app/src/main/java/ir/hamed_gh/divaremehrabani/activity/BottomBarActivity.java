@@ -21,9 +21,9 @@ import io.fabric.sdk.android.Fabric;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
-import ir.hamed_gh.divaremehrabani.fragment.CategoriesGridFragment;
+import ir.hamed_gh.divaremehrabani.fragment.category.CategoriesGridFragment;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
-import ir.hamed_gh.divaremehrabani.fragment.MyWallFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
 import ir.hamed_gh.divaremehrabani.fragment.SearchFragment;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 

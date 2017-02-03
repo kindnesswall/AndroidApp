@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment.mygifts;
+package ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

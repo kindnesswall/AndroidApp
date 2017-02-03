@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.fragment.mywall;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +12,9 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
-import ir.hamed_gh.divaremehrabani.fragment.mygifts.MyGiftsFragment;
-import ir.hamed_gh.divaremehrabani.fragment.requests.MyRequestsFragment;
+import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 
 /**
  * Created by 5 on 02/21/2016.

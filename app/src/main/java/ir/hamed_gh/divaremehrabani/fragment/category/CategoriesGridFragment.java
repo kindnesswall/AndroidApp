@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.fragment.category;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GridCategoriesAdapter;
+import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import retrofit2.Call;
 import retrofit2.Response;

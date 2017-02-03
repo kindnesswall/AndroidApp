@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.fragment.mywall;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
+import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 
 /**
  * Created by 5 on 02/21/2016.
