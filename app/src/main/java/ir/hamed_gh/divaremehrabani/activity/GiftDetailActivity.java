@@ -43,10 +43,12 @@ public class GiftDetailActivity extends AppCompatActivity {
 
 	@Bind(R.id.detail_description_tv)
 	TextView mDetailDescriptionTv;
+
 //	int[] mResources = {
 //			R.drawable.rectangle_blue,
 //			R.drawable.rectangle_red
 //	};
+
 	View.OnClickListener addToWishList;
 	View.OnClickListener removeFromWishList;
 	private Gift gift;

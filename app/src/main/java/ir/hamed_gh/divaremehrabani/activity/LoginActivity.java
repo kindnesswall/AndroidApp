@@ -150,6 +150,11 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             AppController.storeString(
                     Constants.Authorization,
                     Constants.BEARER + " " + tokenOutput.access_token);
+
+            AppController.storeString(
+                    Constants.USERNAME,
+                    tokenOutput.userName);
+
             finish();
         }
     }
