@@ -68,7 +68,6 @@ public class SearchFragment extends BaseFragment {
     TextViewIranSansRegular filterTxt;
 
     private GiftListAdapter adapter;
-
     private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
 
@@ -176,7 +175,7 @@ public class SearchFragment extends BaseFragment {
                         startIndex + "",
                         startIndex + Constants.LIMIT + "",
                         null,
-                        null
+                        searchTxt
                 )
         );
 
@@ -203,6 +202,11 @@ public class SearchFragment extends BaseFragment {
     }
 
     void sendRequest() {
+        startIndex = 0;
+        gifts.clear();
+        searchTxt = mSearchET.getText().toString();
+        getGifts();
+
 //        Map<String, String> params = new HashMap<>();
 //        params.put("pageSize", "10");
 //        params.put("pageNo", "1");
