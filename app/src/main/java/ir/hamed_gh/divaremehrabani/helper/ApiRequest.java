@@ -302,4 +302,71 @@ public class ApiRequest {
         });
     }
 
+
+    public void getRegisteredGifts(StartLastIndex startLastIndex) {
+        Call<ArrayList<Gift>> call = AppController.service.getMyRegisteredGifts(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                startLastIndex.startIndex,
+                startLastIndex.lastIndex
+        );
+
+        call.enqueue(new CallbackWithRetry<ArrayList<Gift>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<Gift>> call,
+                                   Response<ArrayList<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getDonatedGifts(StartLastIndex startLastIndex) {
+        Call<ArrayList<Gift>> call = AppController.service.getMyDonatedGifts(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                startLastIndex.startIndex,
+                startLastIndex.lastIndex
+        );
+
+        call.enqueue(new CallbackWithRetry<ArrayList<Gift>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<Gift>> call,
+                                   Response<ArrayList<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getReceivedGifts(StartLastIndex startLastIndex) {
+        Call<ArrayList<Gift>> call = AppController.service.getMyReceivedGifts(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                startLastIndex.startIndex,
+                startLastIndex.lastIndex
+        );
+
+        call.enqueue(new CallbackWithRetry<ArrayList<Gift>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<Gift>> call,
+                                   Response<ArrayList<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
 }

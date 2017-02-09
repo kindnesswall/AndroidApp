@@ -80,4 +80,28 @@ public interface RestAPI {
 			@Path(Constants.StartIndex) String startIndex,
 			@Path(Constants.LastIndex) String lastIndex
 	);
+
+    @GET("RegisteredGifts/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+    Call<ArrayList<Gift>> getMyRegisteredGifts(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.StartIndex) String startIndex,
+            @Path(Constants.LastIndex) String lastIndex
+    );
+
+    @GET("DonatedGifts/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+    Call<ArrayList<Gift>> getMyDonatedGifts(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.StartIndex) String startIndex,
+            @Path(Constants.LastIndex) String lastIndex
+    );
+
+    @GET("ReceivedGifts/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+    Call<ArrayList<Gift>> getMyReceivedGifts(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.StartIndex) String startIndex,
+            @Path(Constants.LastIndex) String lastIndex
+    );
 }
