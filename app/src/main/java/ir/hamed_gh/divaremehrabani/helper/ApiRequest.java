@@ -11,6 +11,8 @@ import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
+import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -251,6 +253,28 @@ public class ApiRequest {
 
             @Override
             public void onFailure(Call<RequestGiftOutput> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getSentRequestList(StartLastIndex startLastIndex) {
+        Call<ArrayList<RequestModel>> call = AppController.service.getSentRequestList(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                startLastIndex.startIndex,
+                startLastIndex.lastIndex
+        );
+
+        call.enqueue(new CallbackWithRetry<ArrayList<RequestModel>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<RequestModel>> call,
+                                   Response<ArrayList<RequestModel>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<RequestModel>> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

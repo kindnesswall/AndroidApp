@@ -6,6 +6,7 @@ import java.util.List;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
+import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.RequestBody;
@@ -58,12 +59,13 @@ public interface RestAPI {
 			@Body Gift gift
 	);
 
-
-	@GET("SentRequestList/")
-	Call<List<Gift>> getSentRequestList(
+	@GET("SentRequestList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<RequestModel>> getSentRequestList(
+			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.StartIndex) String startIndex,
-			@Path(Constants.LastIndex) String lastIndex);
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
 	@POST("RequestGift/")
 	Call<RequestGiftOutput> sendRequestGift(
