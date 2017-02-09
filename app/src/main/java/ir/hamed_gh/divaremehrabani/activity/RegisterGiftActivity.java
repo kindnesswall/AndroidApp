@@ -39,7 +39,7 @@ import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
-import ir.hamed_gh.divaremehrabani.model.api.UploadFileOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

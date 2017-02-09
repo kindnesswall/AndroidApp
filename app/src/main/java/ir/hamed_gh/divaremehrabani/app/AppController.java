@@ -123,7 +123,7 @@ public class AppController extends Application {
                             @Override
                             public Response intercept(Interceptor.Chain chain) throws IOException {
                                 Request request = chain.request().newBuilder()
-//                                        .addHeader("X-Parse-Master-Key","MY_MASTER_KEY")
+//                                        .addHeader(Constants.ContentType,Constants.JSON_TYPE)
                                         .build();
                                 return chain.proceed(request);
                             }

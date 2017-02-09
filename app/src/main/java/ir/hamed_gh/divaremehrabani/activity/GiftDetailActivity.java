@@ -22,9 +22,15 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
+import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class GiftDetailActivity extends AppCompatActivity {
+public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.Listener{
 
 	@Bind(R.id.bookmark_ic)
 	ImageView mBookmarkIc;
@@ -44,17 +50,19 @@ public class GiftDetailActivity extends AppCompatActivity {
 	@Bind(R.id.detail_description_tv)
 	TextView mDetailDescriptionTv;
 
-//	int[] mResources = {
-//			R.drawable.rectangle_blue,
-//			R.drawable.rectangle_red
-//	};
+	@Bind(R.id.pagesContainer)
+	LinearLayout pagesContainer;
+
+	@Bind(R.id.bottomBarLayBtn)
+	RelativeLayout bottomBarLayBtn;
 
 	View.OnClickListener addToWishList;
 	View.OnClickListener removeFromWishList;
 	private Gift gift;
 	private MyPageIndicator mIndicator;
+    private ApiRequest apiRequest;
 
-	public static Intent createIntent(Gift gift) {
+    public static Intent createIntent(Gift gift) {
 		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
 		intent.putExtra(Constants.GIFT, gift);
 		return intent;
@@ -98,16 +106,36 @@ public class GiftDetailActivity extends AppCompatActivity {
 				shareIt();
 			}
 		});
+
+		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                if (AppController.getStoredString(Constants.Authorization)!=null){
+                    apiRequest.sendRequestGift(
+                            new RequestGiftInput(
+                                    gift.giftId
+                            )
+                    );
+                }else {
+                    Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
+                }
+
+			}
+		});
 	}
 
 	private void init(){
+		ButterKnife.bind(this);
+		extractDataFromBundle();
 		setupViewPager(viewPager);
 
-		LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.pagesContainer);
+        apiRequest = new ApiRequest(this, this);
 
-		mIndicator = new MyPageIndicator(this, mLinearLayout, viewPager, R.drawable.indicator_circle);
+		mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
 		mIndicator.setPageCount(gift.giftImages != null? gift.giftImages.size():0);
 		mIndicator.show();
+
+		setListeners();
 	}
 
 	@Override
@@ -115,10 +143,7 @@ public class GiftDetailActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
-		ButterKnife.bind(this);
-		extractDataFromBundle();
 		init();
-		setListeners();
 	}
 
 	private void shareIt() {
@@ -135,8 +160,19 @@ public class GiftDetailActivity extends AppCompatActivity {
 		viewPager.setAdapter(adapter);
 	}
 
+    @Override
+    public void onResponse(Call call, Response response) {
+        if (response.body() instanceof RequestGiftOutput){
+            Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
+        }
+    }
 
-	class CustomPagerAdapter extends PagerAdapter {
+    @Override
+    public void onFailure(Call call, Throwable t) {
+
+    }
+
+    class CustomPagerAdapter extends PagerAdapter {
 
 		Context mContext;
 		LayoutInflater mLayoutInflater;

@@ -11,7 +11,9 @@ import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.Location;
-import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
+import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -122,7 +124,7 @@ public class ApiRequest {
         }
     }
 
-    public void getGifts(GetGiftPathQuery getGiftPathQuery){
+    public void getGifts(GetGiftPathQuery getGiftPathQuery) {
 
         Call<List<Gift>> call = AppController.service.getGifts(
                 getGiftPathQuery.locationId,
@@ -131,16 +133,16 @@ public class ApiRequest {
                 getGiftPathQuery.categoryId,
                 getGiftPathQuery.searchText);
 
-        call.enqueue(new CallbackWithRetry<List<Gift>>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<List<Gift>>(call, mContext) {
             @Override
             public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
-                handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
             }
         });
 
     }
 
-    public void getToken(String verificationCode){
+    public void getToken(String verificationCode) {
 
         Call<TokenOutput> call = AppController.accountService.token(
                 AppController.getStoredString(Constants.TELEPHONE),
@@ -148,24 +150,24 @@ public class ApiRequest {
                 "password"
         );
 
-        call.enqueue(new CallbackWithRetry<TokenOutput>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<TokenOutput>(call, mContext) {
             @Override
             public void onResponse(Call<TokenOutput> call, Response<TokenOutput> response) {
-                handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
             }
         });
 
     }
 
-    public void register(String telephone){
+    public void register(String telephone) {
 
         AppController.storeString(Constants.TELEPHONE, telephone);
         Call<ResponseBody> call = AppController.accountService.register(telephone);
 
-        call.enqueue(new CallbackWithRetry<ResponseBody>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
             }
         });
 
@@ -188,47 +190,68 @@ public class ApiRequest {
 //
 //    }
 
-    public void getLocations(){
+    public void getLocations() {
 
         Call<List<Location>> call = AppController.service.getLocations();
 
-        call.enqueue(new CallbackWithRetry<List<Location>>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<List<Location>>(call, mContext) {
             @Override
             public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
-                handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
             }
         });
 
     }
 
-	public void getCategories(){
+    public void getCategories() {
 
-		Call<ArrayList<Category>> call = AppController.service.getCategories();
+        Call<ArrayList<Category>> call = AppController.service.getCategories();
 
-		call.enqueue(new CallbackWithRetry<ArrayList<Category>>(call,mContext) {
-			@Override
-			public void onResponse(Call<ArrayList<Category>> call,
-			                       Response<ArrayList<Category>> response) {
+        call.enqueue(new CallbackWithRetry<ArrayList<Category>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<Category>> call,
+                                   Response<ArrayList<Category>> response) {
 
-				handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
 
-			}
-		});
+            }
+        });
 
-	}
+    }
 
-    public void registerGift(Gift gift){
+    public void registerGift(Gift gift) {
         Call<Gift> call = AppController.service.registerGift(
                 "application/json",
                 AppController.getStoredString(Constants.Authorization),
                 gift
         );
 
-        call.enqueue(new CallbackWithRetry<Gift>(call,mContext) {
+        call.enqueue(new CallbackWithRetry<Gift>(call, mContext) {
             @Override
             public void onResponse(Call<Gift> call,
                                    Response<Gift> response) {
-                handlingOnResponse(new HandlingResponse(call,response,this));
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+        });
+    }
+
+    public void sendRequestGift(RequestGiftInput requestGiftInput) {
+        Call<RequestGiftOutput> call = AppController.service.sendRequestGift(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                requestGiftInput
+        );
+
+        call.enqueue(new CallbackWithRetry<RequestGiftOutput>(call, mContext) {
+            @Override
+            public void onResponse(Call<RequestGiftOutput> call,
+                                   Response<RequestGiftOutput> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<RequestGiftOutput> call, Throwable t) {
+                super.onFailure(call, t);
             }
         });
     }

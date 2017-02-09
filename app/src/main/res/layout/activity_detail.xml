@@ -20,7 +20,7 @@
 	android:layout_width="match_parent" android:layout_height="match_parent">
 
 	<RelativeLayout
-		android:id="@+id/bottomBarLay"
+		android:id="@+id/bottomBarLayBtn"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:layout_alignParentBottom="true"
@@ -40,7 +40,7 @@
 	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@id/bottomBarLay">
+		android:layout_above="@id/bottomBarLayBtn">
 
 		<android.support.design.widget.AppBarLayout
 			android:id="@+id/app_bar_layout"

@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.model.api;
+package ir.hamed_gh.divaremehrabani.model.api.output;
 
 import com.google.gson.annotations.SerializedName;
 

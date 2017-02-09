@@ -1,6 +1,6 @@
 package ir.hamed_gh.divaremehrabani.app;
 
-import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;

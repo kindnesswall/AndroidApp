@@ -18,7 +18,7 @@ import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
-import ir.hamed_gh.divaremehrabani.model.api.TokenOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 

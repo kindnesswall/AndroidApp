@@ -15,7 +15,10 @@ public class Constants {
 
     public static final String Authorization = "Authorization";
     public static final String USERNAME = "USERNAME";
+
     public static final String ContentType = "Content-Type";
+    public static final String JSON_TYPE = "application/json";
+
     public static final String StartIndex = "startIndex";
     public static final String LastIndex = "lastIndex";
     public static final String CATEGORY_ID = "categoryId";
