@@ -369,4 +369,24 @@ public class ApiRequest {
         });
     }
 
+    public void logout() {
+        Call<ResponseBody> call = AppController.accountService.logout(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization)
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call,
+                                   Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
 }

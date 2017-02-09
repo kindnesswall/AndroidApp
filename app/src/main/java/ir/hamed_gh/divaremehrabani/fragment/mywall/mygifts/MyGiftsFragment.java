@@ -44,9 +44,7 @@ public class MyGiftsFragment extends BaseFragment {
         super.init();
 
         ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
-        setupViewPager(mainVp);
-        mainTabs.setupWithViewPager(mainVp);
-        mainVp.setCurrentItem(2,false);
+
     }
 
     @Override
@@ -81,6 +79,10 @@ public class MyGiftsFragment extends BaseFragment {
         super.onResume();
 
         if (AppController.getStoredString(Constants.Authorization)!=null){
+            setupViewPager(mainVp);
+            mainTabs.setupWithViewPager(mainVp);
+            mainVp.setCurrentItem(2,false);
+
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);
             mainVp.setCurrentItem(2,false);

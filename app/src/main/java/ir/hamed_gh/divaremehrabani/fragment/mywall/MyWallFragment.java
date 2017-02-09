@@ -11,10 +11,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
+import ir.hamed_gh.divaremehrabani.helper.Snackbari;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -36,7 +41,8 @@ public class MyWallFragment extends BaseFragment {
     @Bind(R.id.my_request_lay)
     RelativeLayout myRequestsLay;
 
-
+    @Bind(R.id.logout_lay)
+    RelativeLayout mLogoutLay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +59,17 @@ public class MyWallFragment extends BaseFragment {
     }
 
     @Override
+    protected void init() {
+        super.init();
+
+        if (AppController.getStoredString(Constants.Authorization)!= null){
+            mLogoutLay.setVisibility(View.VISIBLE);
+        }else {
+            mLogoutLay.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -60,7 +77,21 @@ public class MyWallFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onResponse(Call call, Response response) {
+        Snackbari.showS(mLogoutLay, "شما با موفقیت از حساب خارج شدید");
+    }
+
     private void setListeners() {
+        mLogoutLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                apiRequest.logout();
+                mLogoutLay.setVisibility(View.INVISIBLE);
+                AppController.storeString(Constants.Authorization,null);
+            }
+        });
+
         myGiftLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

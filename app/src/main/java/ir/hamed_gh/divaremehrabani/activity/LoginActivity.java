@@ -144,7 +144,6 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
     @Override
     public void onResponse(Call call, Response response) {
-        Toasti.showS("onResponse");
         if (response.body() instanceof TokenOutput){
             TokenOutput tokenOutput = (TokenOutput) response.body();
             AppController.storeString(

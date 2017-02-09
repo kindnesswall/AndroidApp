@@ -44,10 +44,6 @@ public class MyRequestsFragment extends BaseFragment {
         super.init();
 
         ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
-
-        setupViewPager(mainVp);
-        mainTabs.setupWithViewPager(mainVp);
-        mainVp.setCurrentItem(1,false);
     }
 
     @Override
@@ -80,6 +76,10 @@ public class MyRequestsFragment extends BaseFragment {
         super.onResume();
 
         if (AppController.getStoredString(Constants.Authorization)!=null){
+            setupViewPager(mainVp);
+            mainTabs.setupWithViewPager(mainVp);
+            mainVp.setCurrentItem(1,false);
+
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);
             mainVp.setCurrentItem(1,false);
