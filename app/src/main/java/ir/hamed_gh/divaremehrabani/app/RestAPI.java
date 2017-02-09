@@ -72,4 +72,12 @@ public interface RestAPI {
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Body RequestGiftInput requestGiftInput);
+
+	@GET("RequestedGifts/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<Gift>> getRequestedToMyGifts(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 }
