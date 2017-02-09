@@ -18,7 +18,7 @@ public class ReceivedGiftsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_registered_gifts, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();
