@@ -21,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
@@ -34,7 +35,7 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -62,24 +63,24 @@ public class HomeFragment extends BaseFragment{
     private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
 
-	private int startIndex = 0;
-	private LinearLayoutManager linearLayoutManager;
+    private int startIndex = 0;
+    private LinearLayoutManager linearLayoutManager;
 
-	@Override
-	protected void init() {
-		super.init();
+    @Override
+    protected void init() {
+        super.init();
 
-		//		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
+        //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-		adapter = new GiftListAdapter(context, gifts);
-		mRecyclerView.setAdapter(adapter);
-		linearLayoutManager = new LinearLayoutManager(context);
-		mRecyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new GiftListAdapter(context, gifts);
+        mRecyclerView.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(context);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
 
-		getGifts();
-	}
+        getGifts();
+    }
 
-	@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,64 +88,64 @@ public class HomeFragment extends BaseFragment{
         ButterKnife.bind(this, rootView);
 
         init();
-		setListeners();
+        setListeners();
 
         return rootView;
     }
 
-	private void setListeners() {
+    private void setListeners() {
 
-		mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					filterIc.setAlpha(0.5f);
-					filterTxt.setAlpha(0.5f);
-				}
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					filterIc.setAlpha(1f);
-					filterTxt.setAlpha(1f);
-				}
-				return false;
-			}
-		});
+        mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    filterIc.setAlpha(0.5f);
+                    filterTxt.setAlpha(0.5f);
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    filterIc.setAlpha(1f);
+                    filterTxt.setAlpha(1f);
+                }
+                return false;
+            }
+        });
 
-		mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm = getActivity().getSupportFragmentManager();
-				FilterDialogFragment fragment = new FilterDialogFragment();
-				fragment.show(fm, "fragment_name");
-			}
-		});
+        mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FilterDialogFragment fragment = new FilterDialogFragment();
+                fragment.show(fm, "fragment_name");
+            }
+        });
 
-		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				// Refresh gifts
-				refreshItems();
-			}
-		});
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh gifts
+                refreshItems();
+            }
+        });
 
-		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-			@Override
-			public void onLoadMore(int page, int totalItemsCount) {
-				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				pageNumber++;
-				getGifts();
-			}
-		});
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+                pageNumber++;
+                getGifts();
+            }
+        });
 
-	}
+    }
 
-	void refreshItems() {
+    void refreshItems() {
         // Load gifts
         // ...
 
         pageNumber = 1;
         gifts.clear();
 
-		startIndex = 0;
+        startIndex = 0;
 
         getGifts();
 
@@ -152,19 +153,19 @@ public class HomeFragment extends BaseFragment{
         onItemsLoadComplete();
     }
 
-	private void getGifts(){
-		apiRequest.getGifts(
-				new GetGiftPathQuery(
-						"1",
-						startIndex + "",
-						startIndex + Constants.LIMIT + "",
-						null,
-						null
-				)
-		);
+    private void getGifts() {
+        apiRequest.getGifts(
+                new GetGiftPathQuery(
+                        AppController.getStoredString(Constants.LOCATION_ID),
+                        startIndex + "",
+                        startIndex + Constants.LIMIT + "",
+                        null,
+                        null
+                )
+        );
 
-		startIndex += Constants.LIMIT;
-	}
+        startIndex += Constants.LIMIT;
+    }
 
     void onItemsLoadComplete() {
         // Update the adapter and notify data set changed

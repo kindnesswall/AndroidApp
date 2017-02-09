@@ -8,6 +8,7 @@ public class Constants {
     public static final int LIMIT = 10;
 
     public static final String BEARER = "bearer";
+
     public static final String LOCATION_ID = "LOCATION_ID";
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";

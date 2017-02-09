@@ -18,18 +18,22 @@ import android.widget.TextView;
 import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by 5 on 02/21/2016.
@@ -65,9 +69,30 @@ public class SearchFragment extends BaseFragment {
 
     private GiftListAdapter adapter;
 
-    private ArrayList<Gift> galleries = new ArrayList<>();
+    private ArrayList<Gift> gifts = new ArrayList<>();
     private int pageNumber = 0;
+
+    private String searchTxt = "";
+
     private LinearLayoutManager linearLayoutManager;
+
+    private int startIndex = 0;
+
+    @Override
+    protected void init() {
+        super.init();
+
+        adapter = new GiftListAdapter(context, gifts);
+        mRecyclerView.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(context);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
+        myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
+        mSearchBackspaceBtn.setImageDrawable(myIcon);
+
+        getGifts();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,23 +102,23 @@ public class SearchFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         init();
+        setListeners();
 
-        adapter = new GiftListAdapter(context, galleries);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        return rootView;
+    }
+
+    private void setListeners(){
 
         mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+
+                getGifts();
+
                 pageNumber++;
             }
         });
-
-        Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
-        myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
-        mSearchBackspaceBtn.setImageDrawable(myIcon);
 
         mSearchBackspaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,13 +167,45 @@ public class SearchFragment extends BaseFragment {
                 return true;
             }
         });
-        return rootView;
+    }
+
+    private void getGifts() {
+        apiRequest.getGifts(
+                new GetGiftPathQuery(
+                        AppController.getStoredString(Constants.LOCATION_ID),
+                        startIndex + "",
+                        startIndex + Constants.LIMIT + "",
+                        null,
+                        null
+                )
+        );
+
+        startIndex += Constants.LIMIT;
+    }
+
+    @Override
+    public void onResponse(Call call, Response response) {
+        progressView.setVisibility(View.INVISIBLE);
+
+        List<Gift> responseGifts = (List<Gift>) response.body();
+        gifts.addAll(responseGifts);
+
+        adapter.notifyDataSetChanged();
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mMessageTextView.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onFailure(Call call, Throwable t) {
+        progressView.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mMessageTextView.setText("خطا در دریافت اطلاعات");
     }
 
     void sendRequest() {
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize", "10");
-        params.put("pageNo", "1");
+//        Map<String, String> params = new HashMap<>();
+//        params.put("pageSize", "10");
+//        params.put("pageNo", "1");
 
 //        Call<ArrayList<Gift>> call = AppController.service.getGifts();
 //
