@@ -43,7 +43,7 @@
 			android:layout_height="match_parent"
 
 			android:layout_toLeftOf="@id/toolbar_back_iv"
-			android:layout_toRightOf="@+id/toolbar_new_gift_btn"
+			android:layout_toRightOf="@+id/toolbar_new_gift_btn_tv"
 
 			android:ellipsize="end"
 			android:gravity="center_vertical|right"
