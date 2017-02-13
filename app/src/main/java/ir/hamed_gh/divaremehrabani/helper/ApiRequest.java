@@ -140,6 +140,11 @@ public class ApiRequest {
             public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
+
+            @Override
+            public void onFailure(Call<List<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
         });
 
     }

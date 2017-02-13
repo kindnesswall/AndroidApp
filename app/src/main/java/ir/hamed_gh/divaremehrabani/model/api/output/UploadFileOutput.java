@@ -8,9 +8,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class UploadFileOutput {
 
-	@SerializedName("url")
-	public String url;
+//	@SerializedName("url")
+//	public String url;
+//
+//	@SerializedName("name")
+//	public String name;
 
-	@SerializedName("name")
-	public String name;
+	@SerializedName("imageSrc")
+	public String imageSrc;
 }

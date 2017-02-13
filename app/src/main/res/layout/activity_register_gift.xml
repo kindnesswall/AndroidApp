@@ -203,7 +203,8 @@
 					android:id="@+id/gift_imageview"
 					android:layout_below="@id/choose_image_btn"
 					android:layout_width="100dp"
-					android:layout_height="100dp"/>
+					android:layout_height="100dp"
+					android:src="@color/amber_400"/>
 
 			</RelativeLayout>
 

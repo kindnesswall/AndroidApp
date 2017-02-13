@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
@@ -40,7 +39,6 @@ import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
-
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -267,9 +265,18 @@ public class RegisterGiftActivity extends AppCompatActivity
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				if (uploadFileOutput.url!=null) {
-					Log.d("Upload", "onResponse: " + uploadFileOutput.url);
-					ImageLoader.getInstance().displayImage(uploadFileOutput.url, giftImageview);
+				if (uploadFileOutput.imageSrc!=null) {
+					Log.d("Upload", "onResponse: " + uploadFileOutput.imageSrc);
+
+					Glide
+							.with(context)
+							.load(uploadFileOutput.imageSrc)
+							.centerCrop()
+							.placeholder(R.color.background)
+							.crossFade()
+							.into(giftImageview);
+
+//					ImageLoader.getInstance().displayImage(uploadFileOutput.imageSrc, giftImageview);
 				}
 
 //                switch (uploadAvatarOutput.status) {
@@ -345,16 +352,18 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 	@Override
 	public void onProgressUpdate(int percentage) {
-//		Log.d("Upload", "onProgressUpdate: " + percentage);
+		Log.d("Upload", "onProgressUpdate: " + percentage);
 	}
 
 	@Override
 	public void onError() {
+		Log.d("onError", "onProgressUpdate: ");
 
 	}
 
 	@Override
 	public void onFinish() {
+		Log.d("onFinish", "onProgressUpdate: ");
 
 	}
 
