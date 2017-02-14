@@ -339,12 +339,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_register_gift);
-		ButterKnife.bind(this);
-
+	private void init(){
 		context = this;
 
 		giftGalleryAdapter = new GiftGalleryAdapter(context,myGift.giftImages);
@@ -352,6 +347,15 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
 		settingToolbar();
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_register_gift);
+		ButterKnife.bind(this);
+
+		init();
 		setListeners();
 	}
 
