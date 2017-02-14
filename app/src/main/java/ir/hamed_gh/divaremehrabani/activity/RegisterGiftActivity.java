@@ -12,6 +12,8 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.adapter.GiftGalleryAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCategoryDialogFragment;
@@ -76,8 +79,13 @@ public class RegisterGiftActivity extends AppCompatActivity
 	@Bind(R.id.register_gift_btn)
 	RelativeLayout mRegisterGiftBtn;
 
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
+
 	private Context context;
 	private Uri imageUri;
+	private Gift myGift = new Gift();
+	private GiftGalleryAdapter giftGalleryAdapter;
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -276,6 +284,9 @@ public class RegisterGiftActivity extends AppCompatActivity
 							.crossFade()
 							.into(giftImageview);
 
+					myGift.giftImages.add(uploadFileOutput.imageSrc);
+					giftGalleryAdapter.notifyDataSetChanged();
+
 //					ImageLoader.getInstance().displayImage(uploadFileOutput.imageSrc, giftImageview);
 				}
 
@@ -335,6 +346,10 @@ public class RegisterGiftActivity extends AppCompatActivity
 		ButterKnife.bind(this);
 
 		context = this;
+
+		giftGalleryAdapter = new GiftGalleryAdapter(context,myGift.giftImages);
+		mRecyclerView.setAdapter(giftGalleryAdapter);
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
 		settingToolbar();
 		setListeners();

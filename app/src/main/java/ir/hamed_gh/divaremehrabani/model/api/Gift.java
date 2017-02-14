@@ -53,7 +53,7 @@ public class Gift implements Parcelable {
     public String location;
 
     @SerializedName("giftImages")
-    public ArrayList<String> giftImages;
+    public ArrayList<String> giftImages = new ArrayList<>();
 
     @SerializedName("id")
     public String giftId="";

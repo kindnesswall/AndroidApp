@@ -188,23 +188,38 @@
 
 				</RelativeLayout>
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+				<!--<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content"-->
 
-					android:layout_alignParentRight="true"
+					<!--android:layout_alignParentRight="true"-->
 
-					android:layout_centerInParent="true"
-					android:text="@string/field_label_picture"
-					android:textColor="@color/text_secondary"
-					android:textSize="16dp"/>
+					<!--android:layout_centerInParent="true"-->
+					<!--android:text="@string/field_label_picture"-->
+					<!--android:textColor="@color/text_secondary"-->
+					<!--android:textSize="16dp"/>-->
+
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/recycler_view"
+
+					android:layout_width="match_parent"
+					android:layout_height="145dp"
+					android:layout_marginTop="8dp"
+					android:layout_below="@id/choose_image_btn"
+
+					android:background="@color/grey_200"
+
+					android:clipToPadding="false"
+					android:paddingBottom="8dp"
+					android:scrollbars="horizontal"/>
 
 				<ImageView
 					android:id="@+id/gift_imageview"
 					android:layout_below="@id/choose_image_btn"
 					android:layout_width="100dp"
 					android:layout_height="100dp"
-					android:src="@color/amber_400"/>
+					android:src="@color/amber_400"
+					android:visibility="gone"/>
 
 			</RelativeLayout>
 
