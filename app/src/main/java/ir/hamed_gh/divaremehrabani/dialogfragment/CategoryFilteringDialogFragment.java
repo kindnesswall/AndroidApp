@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.fragment;
+package ir.hamed_gh.divaremehrabani.dialogfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -24,7 +24,7 @@ import ir.hamed_gh.divaremehrabani.model.Places;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class FilteringFragment extends DialogFragment {
+public class CategoryFilteringDialogFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +33,6 @@ public class FilteringFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.dialogfragment_choose_city, container, false);
 
         ButterKnife.bind(this, rootView);
-
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_city_recyclerview);
         EditTextIranSans editTextIranSans = (EditTextIranSans) rootView.findViewById(R.id.choose_city_et);
 //		int color = AppController.getAppContext().getResources().getColor(R.color.colorAccent);
@@ -62,7 +61,8 @@ public class FilteringFragment extends DialogFragment {
             }
         }
 
-        ChooseCityAdapter chooseCityAdapter = new ChooseCityAdapter(getContext(), level2.getPlaces());
+        ChooseCityAdapter chooseCityAdapter =
+                new ChooseCityAdapter(this, getContext(),null, level2.getPlaces());
         recyclerView.setAdapter(chooseCityAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

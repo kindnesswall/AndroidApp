@@ -70,6 +70,9 @@ public class RegisterGiftActivity extends AppCompatActivity
 	@Bind(R.id.toolbar_cancel_iv)
 	ImageView mCancelBtn;
 
+	@Bind(R.id.toolbar_save_iv)
+	ImageView mSaveBtn;
+
 	@Bind(R.id.choose_image_btn)
 	RelativeLayout mChooseImageBtn;
 
@@ -116,7 +119,15 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mCancelBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				AppController.storeBoolean(Constants.MY_GIFT_SAVED,false);
 				finish();
+			}
+		});
+
+		mSaveBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				saveMyGift();
 			}
 		});
 
@@ -339,8 +350,55 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 	}
 
+	private void saveMyGift(){
+
+		AppController.storeBoolean(Constants.MY_GIFT_SAVED, true);
+
+		AppController.storeString(Constants.MY_GIFT_TITLE, myGift.title);
+		AppController.storeString(Constants.MY_GIFT_PRICE, myGift.price);
+		AppController.storeString(Constants.MY_GIFT_ADDRESS, myGift.address);
+		AppController.storeString(Constants.MY_GIFT_DESCRIPTION, myGift.description);
+		AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, myGift.categoryId);
+		AppController.storeString(Constants.MY_GIFT_LOCATION_ID, myGift.locationId);
+
+		for (int i = 0; i < myGift.giftImages.size(); i++) {
+			AppController.storeString(Constants.MY_GIFT_IMAGE+"_"+i, myGift.giftImages.get(i));
+		}
+		AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER,myGift.giftImages.size());
+
+	}
+
+	private void loadMyGift(){
+		myGift.title = AppController.getStoredString(Constants.MY_GIFT_TITLE)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_TITLE):"";
+
+		myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_PRICE):"";
+		
+		myGift.address = AppController.getStoredString(Constants.MY_GIFT_ADDRESS)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_ADDRESS):"";
+		
+		myGift.description = AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION):"";
+		
+		myGift.categoryId = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID):"";
+		
+		myGift.locationId = AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID)!=null?
+				AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID):"";
+
+		int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
+		for (int i = 0; i < numberOfMyImages; i++) {
+			myGift.giftImages.add(AppController.getStoredString(Constants.MY_GIFT_IMAGE+"_"+i));
+		}
+	}
+
 	private void init(){
 		context = this;
+
+		if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED,false)){
+			loadMyGift();
+		}
 
 		giftGalleryAdapter = new GiftGalleryAdapter(context,myGift.giftImages);
 		mRecyclerView.setAdapter(giftGalleryAdapter);

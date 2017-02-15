@@ -9,7 +9,28 @@ public class Constants {
 
     public static final String BEARER = "bearer";
 
+    public static final String FROM_ACTIVITY = "FROM_ACTIVITY";
+
+    public static final String MY_GIFT_SAVED = "MY_GIFT_SAVED";
+    public static final String MY_GIFT_TITLE = "MY_GIFT_TITLE";
+    public static final String MY_GIFT_PRICE = "MY_GIFT_PRICE";
+    public static final String MY_GIFT_ADDRESS = "MY_GIFT_ADDRESS";
+    public static final String MY_GIFT_DESCRIPTION = "MY_GIFT_DESCRIPTION";
+    public static final String MY_GIFT_CATEGORY_ID = "MY_GIFT_CATEGORY_ID";
+    public static final String MY_GIFT_LOCATION_ID = "MY_GIFT_LOCATION_ID";
+    public static final String MY_GIFT_IMAGE = "MY_GIFT_IMAGE";
+    public static final String MY_GIFT_IMAGE_NUMBER = "MY_GIFT_IMAGE_NUMBER";
+//    public static final String MY_GIFT_IMAGE_1 = "MY_GIFT_IMAGE_1";
+//    public static final String MY_GIFT_IMAGE_2 = "MY_GIFT_IMAGE_2";
+//    public static final String MY_GIFT_IMAGE_3 = "MY_GIFT_IMAGE_3";
+//    public static final String MY_GIFT_IMAGE_4 = "MY_GIFT_IMAGE_4";
+
+    public static final String MY_LOCATION_ID = "MY_LOCATION_ID";
+    public static final String MY_LOCATION_NAME = "MY_LOCATION_NAME";
+
     public static final String LOCATION_ID = "LOCATION_ID";
+    public static final String LOCATION_NAME = "LOCATION_NAME";
+
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";
     public static final String CATEGORY = "category";

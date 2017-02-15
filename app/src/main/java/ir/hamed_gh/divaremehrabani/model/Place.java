@@ -13,6 +13,8 @@ public class Place {
     public String name;
     public String level;
     public Integer container_id;
+    public String id;
+
     String ordering;
     @SerializedName("long")
     String longitude;
@@ -26,7 +28,5 @@ public class Place {
     @SerializedName("new")
     Boolean isNew;
     Integer radius;
-
-    String id;
 
 }

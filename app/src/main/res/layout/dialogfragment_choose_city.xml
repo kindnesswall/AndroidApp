@@ -12,7 +12,8 @@
 		android:paddingRight="12dp"
 		android:paddingTop="14dp"
 		android:text="انتخاب شهر"
-		android:textColor="@color/colorPrimary"
+		android:background="@color/colorPrimary"
+		android:textColor="@color/white"
 		android:textSize="16sp"/>
 
 	<ImageView
@@ -41,20 +42,28 @@
 		android:hint="جستجوی شهر..."
 		android:padding="5dp"
 		android:textSize="14sp"
-		/>
+	/>
 
 	<ImageView
-		android:id="@+id/choose_city_iv"
+		android:id="@+id/divider_iv"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="1dp"
 
 		android:layout_below="@id/choose_city_et"
-		android:src="@mipmap/textfield_activated_holo_light"/>
+		android:background="@color/divider"/>
+
+	<!--<ImageView-->
+	<!--android:id="@+id/choose_city_iv"-->
+	<!--android:layout_width="match_parent"-->
+	<!--android:layout_height="wrap_content"-->
+
+	<!--android:layout_below="@id/choose_city_et"-->
+	<!--android:src="@mipmap/textfield_activated_holo_light"/>-->
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/choose_city_recyclerview"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@id/choose_city_iv"/>
+		android:layout_below="@id/divider_iv"/>
 
 </RelativeLayout>

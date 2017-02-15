@@ -14,10 +14,12 @@ public class ChooseCityHolder extends RecyclerView.ViewHolder {
 
     private TextView mCityNameTv;
     private TextView mURHereTxt;
+    public View itemView;
 
     public ChooseCityHolder(View itemView) {
         super(itemView);
 
+        this.itemView = itemView;
         mCityNameTv = (TextView) itemView.findViewById(R.id.rw_choose_city_name_tv);
         mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_city_ur_here_tv);
     }

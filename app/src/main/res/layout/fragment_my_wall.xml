@@ -181,7 +181,7 @@
                 android:layout_toLeftOf="@id/location_txt"
                 android:gravity="center"
                 android:paddingRight="2dp"
-                android:text="تهران"
+                android:text=""
 
                 android:textColor="@color/icon_black"
 

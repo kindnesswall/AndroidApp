@@ -189,9 +189,14 @@ public class SearchFragment extends BaseFragment {
         List<Gift> responseGifts = (List<Gift>) response.body();
         gifts.addAll(responseGifts);
 
-        adapter.notifyDataSetChanged();
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mMessageTextView.setVisibility(View.INVISIBLE);
+        if (gifts.size()==0){
+            mMessageTextView.setText(getString(R.string.no_gift_found));
+
+        }else {
+            adapter.notifyDataSetChanged();
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mMessageTextView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

@@ -25,7 +25,7 @@ import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
-import ir.hamed_gh.divaremehrabani.dialogfragment.FilterDialogFragment;
+import ir.hamed_gh.divaremehrabani.dialogfragment.HomeFilteringDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
@@ -114,7 +114,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                FilterDialogFragment fragment = new FilterDialogFragment();
+                HomeFilteringDialogFragment fragment = new HomeFilteringDialogFragment();
                 fragment.show(fm, "fragment_name");
             }
         });
@@ -182,9 +182,15 @@ public class HomeFragment extends BaseFragment {
         List<Gift> responseGifts = (List<Gift>) response.body();
         gifts.addAll(responseGifts);
 
-        adapter.notifyDataSetChanged();
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mMessageTextView.setVisibility(View.INVISIBLE);
+	    if (gifts.size()==0){
+		    mMessageTextView.setText(getString(R.string.no_gift_found));
+
+	    }else {
+		    adapter.notifyDataSetChanged();
+		    mRecyclerView.setVisibility(View.VISIBLE);
+		    mMessageTextView.setVisibility(View.INVISIBLE);
+	    }
+
     }
 
     @Override

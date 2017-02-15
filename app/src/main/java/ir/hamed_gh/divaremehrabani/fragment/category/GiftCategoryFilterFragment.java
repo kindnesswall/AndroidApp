@@ -23,7 +23,7 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
-import ir.hamed_gh.divaremehrabani.fragment.FilteringFragment;
+import ir.hamed_gh.divaremehrabani.dialogfragment.CategoryFilteringDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
@@ -119,8 +119,8 @@ public class GiftCategoryFilterFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				FragmentManager fm = getActivity().getSupportFragmentManager();
-				FilteringFragment filteringFragment = new FilteringFragment();
-				filteringFragment.show(fm, "fragment_name");
+				CategoryFilteringDialogFragment categoryFilteringDialogFragment = new CategoryFilteringDialogFragment();
+				categoryFilteringDialogFragment.show(fm, "fragment_name");
 			}
 		});
 	}

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,8 +27,8 @@ import retrofit2.Response;
  */
 public class MyWallFragment extends BaseFragment {
 
-//    @Bind(R.id.my_gift_txt)
-//    TextView mMessageTextView;
+    @Bind(R.id.location_tv)
+    TextView mLocationTv;
 
     @Bind(R.id.location_lay)
     RelativeLayout locationLayout;
@@ -67,6 +68,8 @@ public class MyWallFragment extends BaseFragment {
         }else {
             mLogoutLay.setVisibility(View.INVISIBLE);
         }
+
+        mLocationTv.setText(AppController.getStoredString(Constants.MY_LOCATION_NAME));
     }
 
     @Override

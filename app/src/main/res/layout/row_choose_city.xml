@@ -11,7 +11,7 @@
 		android:layout_centerVertical="true"
 
 		android:layout_marginLeft="8dp"
-
+		android:visibility="invisible"
 		android:text="(شما اینجا هستید)"/>
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular

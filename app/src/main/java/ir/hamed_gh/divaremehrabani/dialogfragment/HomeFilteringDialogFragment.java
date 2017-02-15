@@ -1,21 +1,25 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
+import ir.hamed_gh.divaremehrabani.app.AppController;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class FilterDialogFragment extends DialogFragment {
+public class HomeFilteringDialogFragment extends DialogFragment implements DialogInterface{
 
     @Bind(R.id.category_filter_lay)
     RelativeLayout categoryFilterLay;
@@ -24,10 +28,16 @@ public class FilterDialogFragment extends DialogFragment {
     RelativeLayout locationFilterLay;
 
     @Bind(R.id.apply_filter_tv)
-    TextViewIranSansRegular applyFilterTv;
+    TextView applyFilterTv;
 
     @Bind(R.id.cancel_filter_tv)
-    TextViewIranSansRegular cancelFilterTv;
+    TextView cancelFilterTv;
+
+    @Bind(R.id.categoryـfilter_tv)
+    TextView mCategoryFilterTv;
+
+    @Bind(R.id.location_filter_tv)
+    TextView mLocationFilterTv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +56,15 @@ public class FilterDialogFragment extends DialogFragment {
         return rootView;
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        mLocationFilterTv.setText(
+                getText(R.string.place_equal) + " " + AppController.getStoredString(Constants.LOCATION_NAME));
+    }
+
     private void setListeners() {
+
         categoryFilterLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +75,15 @@ public class FilterDialogFragment extends DialogFragment {
         locationFilterLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
 
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
+                chooseCityDialogFragment.setArguments(bundle);
+
+                chooseCityDialogFragment.show(fm, ChooseCityDialogFragment.class.getName());
+                chooseCityDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
             }
         });
 
@@ -95,5 +121,11 @@ public class FilterDialogFragment extends DialogFragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+    }
+
+    @Override
+    public void cancel() {
+        int i = 0;
+        i = 10;
     }
 }

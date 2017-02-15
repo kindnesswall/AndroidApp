@@ -75,11 +75,26 @@
 			android:textSize="13dp"/>
 
 		<ImageView
-			android:id="@+id/toolbar_cancel_iv"
+			android:id="@+id/toolbar_save_iv"
 			android:layout_width="48dp"
 			android:layout_height="match_parent"
 
 			android:layout_toRightOf="@id/toolbar_send_btn_tv"
+
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+
+			android:paddingLeft="8dp"
+			android:paddingRight="8dp"
+
+			android:src="@mipmap/ic_action_content_save"/>
+
+		<ImageView
+			android:id="@+id/toolbar_cancel_iv"
+			android:layout_width="48dp"
+			android:layout_height="match_parent"
+
+			android:layout_toRightOf="@id/toolbar_save_iv"
 
 			android:background="?attr/selectableItemBackground"
 			android:clickable="true"
