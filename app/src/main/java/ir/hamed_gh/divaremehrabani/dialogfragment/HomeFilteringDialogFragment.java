@@ -1,6 +1,5 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -15,11 +14,14 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class HomeFilteringDialogFragment extends DialogFragment implements DialogInterface{
+public class HomeFilteringDialogFragment
+        extends DialogFragment
+        implements ChooseCityCallback {
 
     @Bind(R.id.category_filter_lay)
     RelativeLayout categoryFilterLay;
@@ -40,6 +42,11 @@ public class HomeFilteringDialogFragment extends DialogFragment implements Dialo
     TextView mLocationFilterTv;
 
     @Override
+    public void onCitySelected() {
+        mLocationFilterTv.setText(
+                getText(R.string.place_equal) + " " + AppController.getStoredString(Constants.LOCATION_NAME));
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +61,6 @@ public class HomeFilteringDialogFragment extends DialogFragment implements Dialo
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        mLocationFilterTv.setText(
-                getText(R.string.place_equal) + " " + AppController.getStoredString(Constants.LOCATION_NAME));
     }
 
     private void setListeners() {
@@ -83,7 +83,8 @@ public class HomeFilteringDialogFragment extends DialogFragment implements Dialo
                 chooseCityDialogFragment.setArguments(bundle);
 
                 chooseCityDialogFragment.show(fm, ChooseCityDialogFragment.class.getName());
-                chooseCityDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
+                chooseCityDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this,0);
+//                chooseCityDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
             }
         });
 
@@ -121,11 +122,5 @@ public class HomeFilteringDialogFragment extends DialogFragment implements Dialo
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-    }
-
-    @Override
-    public void cancel() {
-        int i = 0;
-        i = 10;
     }
 }

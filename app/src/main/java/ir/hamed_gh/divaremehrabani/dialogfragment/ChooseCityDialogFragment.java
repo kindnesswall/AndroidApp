@@ -1,5 +1,6 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,18 +19,18 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.SplashScreenActivity;
 import ir.hamed_gh.divaremehrabani.adapter.ChooseCityAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
+import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class ChooseCityDialogFragment extends DialogFragment {
+public class ChooseCityDialogFragment extends DialogFragment{
 
     private String fromActivity;
 
@@ -41,6 +42,7 @@ public class ChooseCityDialogFragment extends DialogFragment {
 	private Places level2;
 	private Places level2Original;
 	private ChooseCityAdapter chooseCityAdapter;
+	private ChooseCityCallback mHost;
 
 	private void readFromJson(){
 		String json = ReadJsonFile.loadJSONFromAsset(getContext());
@@ -124,12 +126,26 @@ public class ChooseCityDialogFragment extends DialogFragment {
         return rootView;
     }
 
-    @Override
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+		if (getTargetFragment()==null){
+			mHost = (ChooseCityCallback) context;
+		}else {
+			mHost =
+					(ChooseCityCallback) getTargetFragment();
+		}
+	}
+
+	@Override
     public void onDestroy() {
 
-        if (fromActivity!=null && fromActivity.equals(SplashScreenActivity.class.getName())) {
-            getActivity().finish();
-        }
+//        if (fromActivity!=null && fromActivity.equals(SplashScreenActivity.class.getName())) {
+//            getActivity().finish();
+//        }else {
+	        mHost.onCitySelected();
+//        }
 
         super.onDestroy();
     }

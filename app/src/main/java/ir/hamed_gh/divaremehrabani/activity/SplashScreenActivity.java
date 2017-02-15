@@ -10,12 +10,13 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
+import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
 
 /**
  * Created by Hamed on 2/14/17.
  */
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity implements ChooseCityCallback {
 
 	/** Duration of wait **/
 	private final int SPLASH_DISPLAY_LENGTH = 1000;
@@ -52,4 +53,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 		}
 	}
 
+	@Override
+	public void onCitySelected() {
+		finish();
+	}
 }
