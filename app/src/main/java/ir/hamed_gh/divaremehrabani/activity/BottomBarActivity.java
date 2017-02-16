@@ -69,7 +69,7 @@ public class BottomBarActivity extends AppCompatActivity {
 			public void onMenuTabSelected(@IdRes int menuItemId) {
 				if (menuItemId == R.id.bottomBarHome) {
 
-					mToolbarTitleTextView.setText("همه هدیه‌های تهران");
+					mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
 					setFragment(new HomeFragment(), HomeFragment.class.getName());
 					// The user reselected item number one, scroll your content to top.
 				} else if (menuItemId == R.id.bottomBarCategories) {
