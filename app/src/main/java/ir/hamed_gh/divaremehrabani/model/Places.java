@@ -1,5 +1,7 @@
 package ir.hamed_gh.divaremehrabani.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 
 public class Places {
 
+    @SerializedName("places")
     ArrayList<Place> places;
 
     public ArrayList<Place> getPlaces() {
