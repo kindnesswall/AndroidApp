@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
@@ -219,6 +220,23 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 		progressView.setVisibility(View.VISIBLE);
 		mRecyclerView.setVisibility(View.INVISIBLE);
 		mMessageTextView.setVisibility(View.INVISIBLE);
+		if (place!=null || category != null){
+			filterIc.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+			filterTxt.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+		}
+		String filterText = "";
+		if (place != null){
+			((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("همه هدیه‌های " + place.name);
+			filterText += "فیلتر شده بر اساس محل";
+		}
+		if (category!=null){
+			if (filterText.equals("")){
+				filterText = "فیلتر شده بر اساس دسته‌بندی";
+			}else {
+				filterText += " / دسته‌بندی";
+			}
+		}
+		filterTxt.setText(filterText);
 
 		gifts.clear();
 		startIndex = 0;

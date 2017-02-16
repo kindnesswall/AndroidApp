@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rey.material.widget.ProgressView;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -29,6 +31,9 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
     @Bind(R.id.choose_place_recyclerview)
     RecyclerView recyclerView;
 
+    @Bind(R.id.choose_place_progressBar)
+    ProgressView mProgressView;
+
     ArrayList<Category> categories = new ArrayList<>();
     ApiRequest apiRequest;
     private ChooseCategoriesDialogAdapter chooseCategoriesDialogAdapter;
@@ -39,6 +44,7 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.dialogfragment_choose_category, container, false);
+
 
         ButterKnife.bind(this, rootView);
 
@@ -95,10 +101,14 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
         ArrayList<Category> categories = (ArrayList<Category>) response.body();
         this.categories.addAll(categories);
         chooseCategoriesDialogAdapter.notifyDataSetChanged();
+
+        mProgressView.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onFailure(Call call, Throwable t) {
-
+        mProgressView.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
     }
 }
