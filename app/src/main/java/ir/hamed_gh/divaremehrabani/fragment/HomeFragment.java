@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -121,10 +120,15 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
             @Override
             public void onClick(View v) {
 
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                HomeFilteringDialogFragment fragment = new HomeFilteringDialogFragment();
+	            HomeFilteringDialogFragment fragment = HomeFilteringDialogFragment.ShowME(
+			            getActivity().getSupportFragmentManager(),
+			            category,
+			            place
+	            );
+
 	            fragment.setTargetFragment(HomeFragment.this, 0);
-	            fragment.show(fm, HomeFragment.class.getName());
+	            fragment.show(getActivity().getSupportFragmentManager(),
+			            HomeFragment.class.getName());
 
             }
         });
@@ -236,6 +240,19 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 				filterText += " / دسته‌بندی";
 			}
 		}
+
+		if (place == null && category == null){
+			filterIc.setTextColor(getContext().getResources().getColor(R.color.text_secondary));
+			filterTxt.setTextColor(getContext().getResources().getColor(R.color.text_secondary));
+
+			filterText = "فیلتر کردن";
+
+			((BottomBarActivity) getActivity()).
+					mToolbarTitleTextView.setText("همه هدیه‌های " +
+					AppController.getStoredString(Constants.MY_LOCATION_NAME));
+
+		}
+
 		filterTxt.setText(filterText);
 
 		gifts.clear();

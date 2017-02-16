@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,11 +19,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.activity.SplashScreenActivity;
 import ir.hamed_gh.divaremehrabani.adapter.ChoosePlaceAdapter;
-import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
@@ -91,19 +86,6 @@ public class ChoosePlaceDialogFragment extends DialogFragment{
 
 	public void onPlaceSelected(Place place){
 
-//		AppController.storeString(Constants.LOCATION_ID, place.id);
-//		AppController.storeString(Constants.LOCATION_NAME, place.name);
-
-		//todo should check instance of context if it is SplashScreen
-		if (getContext() instanceof SplashScreenActivity) {
-
-			AppController.storeString(Constants.MY_LOCATION_ID, place.id);
-			AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
-
-			Intent mainIntent = new Intent(getContext(), BottomBarActivity.class);
-			getActivity().startActivity(mainIntent);
-
-		}
 		mHost.onPlaceSelected(place);
 		dismiss();
 

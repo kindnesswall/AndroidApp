@@ -19,13 +19,15 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
+import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
+import ir.hamed_gh.divaremehrabani.model.Place;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class MyWallFragment extends BaseFragment {
+public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback{
 
     @Bind(R.id.location_tv)
     TextView mLocationTv;
@@ -118,6 +120,7 @@ public class MyWallFragment extends BaseFragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+                choosePlaceDialogFragment.setTargetFragment(MyWallFragment.this, 0);
                 choosePlaceDialogFragment.show(fm, "fragment_name");
             }
         });
@@ -132,5 +135,15 @@ public class MyWallFragment extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onPlaceSelected(Place place) {
+
+        AppController.storeString(Constants.MY_LOCATION_ID, place.id);
+        AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
+
+        mLocationTv.setText(place.name);
+
     }
 }

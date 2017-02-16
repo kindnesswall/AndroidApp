@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.HomeFilteringCallback;
@@ -46,8 +47,36 @@ public class HomeFilteringDialogFragment
 	Category choosenCategory;
 	Place choosenPlace;
 
+	public static HomeFilteringDialogFragment ShowME(
+			FragmentManager fm,
+			Category category,
+			Place place) {
+
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(Constants.CATEGORY_PARCELABLE, category);
+		bundle.putParcelable(Constants.PLACE_PARCELABLE, place);
+
+		HomeFilteringDialogFragment fragment = new HomeFilteringDialogFragment();
+		fragment.setArguments(bundle);
+
+		return fragment;
+	}
+
+	private void extractDataFromBundle(){
+		Bundle bundle = this.getArguments();
+		if (bundle!=null){
+			choosenCategory = bundle.getParcelable(Constants.CATEGORY_PARCELABLE);
+			onCategorySelected(choosenCategory);
+
+			choosenPlace = bundle.getParcelable(Constants.PLACE_PARCELABLE);
+			onPlaceSelected(choosenPlace);
+		}
+	}
+
 	@Override
 	public void onPlaceSelected(Place place) {
+		if (place==null)return;
+
 		mLocationFilterTv.setText(
 				getText(R.string.place_equal) + " " + place.name);
 		choosenPlace = place;
@@ -55,6 +84,8 @@ public class HomeFilteringDialogFragment
 
 	@Override
 	public void onCategorySelected(Category category) {
+		if (category==null)return;
+
 		mCategoryFilterTv.setText(
 				getText(R.string.category_equal) +
 						" " +
@@ -71,11 +102,9 @@ public class HomeFilteringDialogFragment
 
 		ButterKnife.bind(this, rootView);
 
-		setListeners();
+		extractDataFromBundle();
 
-//        ChoosePlaceAdapter chooseCityAdapter = new ChoosePlaceAdapter(getContext(), level2.getPlaces());
-//        recyclerView.setAdapter(chooseCityAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		setListeners();
 
 		return rootView;
 	}
@@ -114,8 +143,8 @@ public class HomeFilteringDialogFragment
 			@Override
 			public void onClick(View v) {
 
-				((HomeFilteringCallback)getTargetFragment())
-						.onApplyFiltering(choosenPlace,choosenCategory);
+				((HomeFilteringCallback) getTargetFragment())
+						.onApplyFiltering(choosenPlace, choosenCategory);
 				dismiss();
 
 			}
@@ -124,7 +153,9 @@ public class HomeFilteringDialogFragment
 		cancelFilterTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				((HomeFilteringCallback) getTargetFragment())
+						.onApplyFiltering(null, null);
+				dismiss();
 			}
 		});
 	}

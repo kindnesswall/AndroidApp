@@ -56,6 +56,12 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 	@Override
 	public void onPlaceSelected(Place place) {
+		AppController.storeString(Constants.MY_LOCATION_ID, place.id);
+		AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
+
+		Intent mainIntent = new Intent(this, BottomBarActivity.class);
+		startActivity(mainIntent);
+
 		finish();
 	}
 }

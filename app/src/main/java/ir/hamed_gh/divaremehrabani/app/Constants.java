@@ -50,4 +50,7 @@ public class Constants {
     public static final String LocationId = "locationId";
     public static final String ID = "Id";
 
+    public static final String PLACE_PARCELABLE = "PLACE_PARCELABLE";
+    public static final String CATEGORY_PARCELABLE = "CATEGORY_PARCELABLE";
+
 }

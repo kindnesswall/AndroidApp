@@ -112,7 +112,7 @@
 			android:gravity="center"
 			android:textSize="14dp"
 			android:text="@string/remove_filter"
-			android:textColor="@color/divar_button_disabled"/>
+			android:textColor="@color/colorPrimary"/>
 
 	</RelativeLayout>
 
