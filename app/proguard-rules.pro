@@ -40,8 +40,19 @@
     @butterknife.* <methods>;
 }
 
-# Okio
+#--------------- Okio
 -keep class sun.misc.Unsafe { *; }
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
+
+# ---------------------
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+#-----------
+-dontwarn okhttp3.*
+-dontwarn com.squareup.okhttp.**

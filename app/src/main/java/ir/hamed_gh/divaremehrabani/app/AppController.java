@@ -4,11 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -94,18 +89,18 @@ public class AppController extends Application {
         preferences = this.getSharedPreferences("Prefs", MODE_PRIVATE);
         editor = preferences.edit();
 
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .displayer(new FadeInBitmapDisplayer(500, true, true, true))
-                .build();
-
-        // Create global configuration and initialize ImageLoader with this config
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                .defaultDisplayImageOptions(defaultOptions)
-                .build();
-
-        ImageLoader.getInstance().init(config);
+//        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+//                .cacheInMemory(true)
+//                .cacheOnDisk(true)
+//                .displayer(new FadeInBitmapDisplayer(500, true, true, true))
+//                .build();
+//
+//        // Create global configuration and initialize ImageLoader with this config
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+//                .defaultDisplayImageOptions(defaultOptions)
+//                .build();
+//
+//        ImageLoader.getInstance().init(config);
 
         retrofitInitialization();
 

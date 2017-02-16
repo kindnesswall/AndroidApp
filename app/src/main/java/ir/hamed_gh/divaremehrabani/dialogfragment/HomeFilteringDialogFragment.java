@@ -12,7 +12,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.HomeFilteringCallback;
@@ -98,12 +97,12 @@ public class HomeFilteringDialogFragment
 		locationFilterLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
+//				Bundle bundle = new Bundle();
+//				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
 
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
-				choosePlaceDialogFragment.setArguments(bundle);
+//				choosePlaceDialogFragment.setArguments(bundle);
 
 				choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
 				choosePlaceDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);

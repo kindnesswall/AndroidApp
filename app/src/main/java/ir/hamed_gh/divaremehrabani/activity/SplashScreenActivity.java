@@ -43,12 +43,12 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 		}else {
 
-			Bundle bundle = new Bundle();
-			bundle.putString(Constants.FROM_ACTIVITY, SplashScreenActivity.class.getName());
+//			Bundle bundle = new Bundle();
+//			bundle.putString(Constants.FROM_ACTIVITY, SplashScreenActivity.class.getName());
 
 			FragmentManager fm = getSupportFragmentManager();
 			ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
-			choosePlaceDialogFragment.setArguments(bundle);
+//			choosePlaceDialogFragment.setArguments(bundle);
 
 			choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
 		}
