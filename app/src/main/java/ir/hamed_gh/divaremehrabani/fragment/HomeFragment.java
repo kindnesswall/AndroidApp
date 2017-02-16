@@ -27,7 +27,10 @@ import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.dialogfragment.HomeFilteringDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
+import ir.hamed_gh.divaremehrabani.interfaces.HomeFilteringCallback;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
+import ir.hamed_gh.divaremehrabani.model.Place;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -35,7 +38,7 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -65,6 +68,9 @@ public class HomeFragment extends BaseFragment {
 
     private int startIndex = 0;
     private LinearLayoutManager linearLayoutManager;
+
+	Place place;
+	Category category;
 
     @Override
     protected void init() {
@@ -113,9 +119,12 @@ public class HomeFragment extends BaseFragment {
         mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 HomeFilteringDialogFragment fragment = new HomeFilteringDialogFragment();
-                fragment.show(fm, "fragment_name");
+	            fragment.setTargetFragment(HomeFragment.this, 0);
+	            fragment.show(fm, HomeFragment.class.getName());
+
             }
         });
 
@@ -156,10 +165,10 @@ public class HomeFragment extends BaseFragment {
     private void getGifts() {
         apiRequest.getGifts(
                 new GetGiftPathQuery(
-                        AppController.getStoredString(Constants.MY_LOCATION_ID),
+		                (place==null? AppController.getStoredString(Constants.MY_LOCATION_ID): place.id),
                         startIndex + "",
                         startIndex + Constants.LIMIT + "",
-                        null,
+		                (category==null? null: category.categoryId),
                         null
                 )
         );
@@ -183,6 +192,8 @@ public class HomeFragment extends BaseFragment {
         gifts.addAll(responseGifts);
 
 	    if (gifts.size()==0){
+		    mRecyclerView.setVisibility(View.INVISIBLE);
+		    mMessageTextView.setVisibility(View.VISIBLE);
 		    mMessageTextView.setText(getString(R.string.no_gift_found));
 
 	    }else {
@@ -199,4 +210,18 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mMessageTextView.setText("خطا در دریافت اطلاعات");
     }
+
+	@Override
+	public void onApplyFiltering(Place place, Category category) {
+		this.place = place;
+		this.category = category;
+
+		progressView.setVisibility(View.VISIBLE);
+		mRecyclerView.setVisibility(View.INVISIBLE);
+		mMessageTextView.setVisibility(View.INVISIBLE);
+
+		gifts.clear();
+		startIndex = 0;
+		getGifts();
+	}
 }

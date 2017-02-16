@@ -15,6 +15,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
+import ir.hamed_gh.divaremehrabani.interfaces.HomeFilteringCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
@@ -43,10 +44,14 @@ public class HomeFilteringDialogFragment
 	@Bind(R.id.location_filter_tv)
 	TextView mLocationFilterTv;
 
+	Category choosenCategory;
+	Place choosenPlace;
+
 	@Override
 	public void onPlaceSelected(Place place) {
 		mLocationFilterTv.setText(
 				getText(R.string.place_equal) + " " + place.name);
+		choosenPlace = place;
 	}
 
 	@Override
@@ -56,6 +61,7 @@ public class HomeFilteringDialogFragment
 						" " +
 						category.title
 		);
+		choosenCategory = category;
 	}
 
 	@Override
@@ -108,6 +114,10 @@ public class HomeFilteringDialogFragment
 		applyFilterTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
+				((HomeFilteringCallback)getTargetFragment())
+						.onApplyFiltering(choosenPlace,choosenCategory);
+				dismiss();
 
 			}
 		});
