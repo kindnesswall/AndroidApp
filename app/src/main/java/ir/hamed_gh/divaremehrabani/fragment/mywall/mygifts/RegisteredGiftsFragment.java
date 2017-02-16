@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rey.material.widget.ProgressView;
 
@@ -32,6 +33,9 @@ public class RegisteredGiftsFragment extends BaseFragment {
 
 	@Bind(R.id.recycler_view)
 	RecyclerView mRecyclerView;
+
+	@Bind(R.id.message_textview)
+	TextView mMessageTv;
 
 	private ArrayList<Gift> gifts = new ArrayList<>();
 	private GiftListAdapter adapter;
@@ -78,6 +82,17 @@ public class RegisteredGiftsFragment extends BaseFragment {
 		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
 		this.gifts.addAll(gifts);
 		adapter.notifyDataSetChanged();
+
+		if (gifts.size()>0){
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTv.setVisibility(View.INVISIBLE);
+		}else {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTv.setVisibility(View.VISIBLE);
+			mMessageTv.setText(
+					"شما هیچ هدیه‌ی ثبت نکرده اید."
+			);
+		}
 
 	}
 
