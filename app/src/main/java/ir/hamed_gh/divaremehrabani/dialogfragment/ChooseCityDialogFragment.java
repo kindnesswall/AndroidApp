@@ -82,6 +82,10 @@ public class ChooseCityDialogFragment extends DialogFragment{
 		recyclerView.setAdapter(chooseCityAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+		setListeners();
+	}
+
+	private void setListeners() {
 		editTextIranSans.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -108,7 +112,7 @@ public class ChooseCityDialogFragment extends DialogFragment{
 		});
 	}
 
-    @Override
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -28,8 +28,11 @@ public class Constants {
     public static final String MY_LOCATION_ID = "MY_LOCATION_ID";
     public static final String MY_LOCATION_NAME = "MY_LOCATION_NAME";
 
+    public static final String CATEGORY_ID = "categoryId";
+    public static final String CATEGORY_NAME = "CATEGORY_NAME";
+
     public static final String LOCATION_ID = "LOCATION_ID";
-    public static final String LOCATION_NAME = "LOCATION_NAME";
+    public static final String LOCATION_NAME = "LCATOION_NAME";
 
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";
@@ -43,7 +46,6 @@ public class Constants {
 
     public static final String StartIndex = "startIndex";
     public static final String LastIndex = "lastIndex";
-    public static final String CATEGORY_ID = "categoryId";
     public static final String SEARCH_TEXT = "searchText";
     public static final String LocationId = "locationId";
     public static final String ID = "Id";

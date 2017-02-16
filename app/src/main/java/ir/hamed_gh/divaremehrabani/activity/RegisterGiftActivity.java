@@ -40,6 +40,7 @@ import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
 import okhttp3.MediaType;
@@ -50,7 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterGiftActivity extends AppCompatActivity
-		implements ProgressRequestBody.UploadCallbacks,ApiRequest.Listener {
+		implements ProgressRequestBody.UploadCallbacks,ApiRequest.Listener,ChooseCategoryCallback {
 
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;
@@ -454,6 +455,11 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 	@Override
 	public void onFailure(Call call, Throwable t) {
+
+	}
+
+	@Override
+	public void onCategorySelected() {
 
 	}
 }

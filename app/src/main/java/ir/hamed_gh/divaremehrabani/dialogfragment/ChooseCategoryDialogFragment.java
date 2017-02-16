@@ -1,5 +1,6 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.ChooseCategoriesDialogAdapter;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -30,6 +32,7 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
     ArrayList<Category> categories = new ArrayList<>();
     ApiRequest apiRequest;
     private ChooseCategoriesDialogAdapter chooseCategoriesDialogAdapter;
+    private ChooseCategoryCallback mHost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,11 +46,31 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
         apiRequest.getCategories();
 
         chooseCategoriesDialogAdapter =
-                new ChooseCategoriesDialogAdapter(getActivity(), categories);
+                new ChooseCategoriesDialogAdapter(getActivity(), this,categories);
         recyclerView.setAdapter(chooseCategoriesDialogAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+
+        mHost.onCategorySelected();
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getTargetFragment()==null){
+            mHost = (ChooseCategoryCallback) context;
+        }else {
+            mHost =
+                    (ChooseCategoryCallback) getTargetFragment();
+        }
     }
 
     @Override
