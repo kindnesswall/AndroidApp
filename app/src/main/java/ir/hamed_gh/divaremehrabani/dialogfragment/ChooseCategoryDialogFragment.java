@@ -26,7 +26,7 @@ import retrofit2.Response;
  */
 public class ChooseCategoryDialogFragment extends DialogFragment implements ApiRequest.Listener {
 
-    @Bind(R.id.choose_city_recyclerview)
+    @Bind(R.id.choose_place_recyclerview)
     RecyclerView recyclerView;
 
     ArrayList<Category> categories = new ArrayList<>();
@@ -53,12 +53,9 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
         return rootView;
     }
 
-    @Override
-    public void onDestroy() {
-
-        mHost.onCategorySelected();
-
-        super.onDestroy();
+    public void onCategorySelected(Category category){
+        mHost.onCategorySelected(category);
+        dismiss();
     }
 
     @Override

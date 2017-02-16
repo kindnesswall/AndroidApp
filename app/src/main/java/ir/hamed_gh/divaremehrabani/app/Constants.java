@@ -29,10 +29,10 @@ public class Constants {
     public static final String MY_LOCATION_NAME = "MY_LOCATION_NAME";
 
     public static final String CATEGORY_ID = "categoryId";
-    public static final String CATEGORY_NAME = "CATEGORY_NAME";
+//    public static final String CATEGORY_NAME = "CATEGORY_NAME";
 
     public static final String LOCATION_ID = "LOCATION_ID";
-    public static final String LOCATION_NAME = "LCATOION_NAME";
+//    public static final String LOCATION_NAME = "LCATOION_NAME";
 
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";

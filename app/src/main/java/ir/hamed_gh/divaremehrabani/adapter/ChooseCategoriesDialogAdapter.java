@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.adapter;
 
 import android.content.Context;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +10,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCategoryDialogFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryDialogHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
@@ -24,11 +22,11 @@ public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<Category
     private Context mContext;
     private ArrayList<Category> categories;
     private FragmentActivity activity;
-    private DialogFragment dialogFragment;
+    private ChooseCategoryDialogFragment dialogFragment;
 
     public ChooseCategoriesDialogAdapter(
             Context context,
-            DialogFragment dialogFragment,
+            ChooseCategoryDialogFragment dialogFragment,
             ArrayList<Category> categories) {
 
         this.mContext = context;
@@ -53,10 +51,10 @@ public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<Category
         categoryHolder.mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppController.storeString(Constants.CATEGORY_ID, categories.get(i).categoryId);
-                AppController.storeString(Constants.CATEGORY_NAME, categories.get(i).title);
+//                AppController.storeString(Constants.CATEGORY_ID, categories.get(i).categoryId);
+//                AppController.storeString(Constants.CATEGORY_NAME, categories.get(i).title);
 
-                dialogFragment.dismiss();
+                dialogFragment.onCategorySelected(categories.get(i));
 
             }
         });

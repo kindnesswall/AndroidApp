@@ -41,6 +41,7 @@ import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
 import okhttp3.MediaType;
@@ -459,7 +460,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 	}
 
 	@Override
-	public void onCategorySelected() {
+	public void onCategorySelected(Category category) {
 
 	}
 }

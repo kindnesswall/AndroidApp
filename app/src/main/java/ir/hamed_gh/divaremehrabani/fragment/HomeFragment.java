@@ -156,7 +156,7 @@ public class HomeFragment extends BaseFragment {
     private void getGifts() {
         apiRequest.getGifts(
                 new GetGiftPathQuery(
-                        AppController.getStoredString(Constants.LOCATION_ID),
+                        AppController.getStoredString(Constants.MY_LOCATION_ID),
                         startIndex + "",
                         startIndex + Constants.LIMIT + "",
                         null,

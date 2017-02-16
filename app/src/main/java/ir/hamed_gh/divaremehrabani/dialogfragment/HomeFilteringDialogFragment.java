@@ -12,17 +12,18 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
-import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
+import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
+import ir.hamed_gh.divaremehrabani.model.Place;
+import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
  * Created by 5 on 02/21/2016.
  */
 public class HomeFilteringDialogFragment
 		extends DialogFragment
-		implements ChooseCityCallback, ChooseCategoryCallback {
+		implements ChoosePlaceCallback, ChooseCategoryCallback {
 
 	@Bind(R.id.category_filter_lay)
 	RelativeLayout categoryFilterLay;
@@ -43,17 +44,17 @@ public class HomeFilteringDialogFragment
 	TextView mLocationFilterTv;
 
 	@Override
-	public void onCitySelected() {
+	public void onPlaceSelected(Place place) {
 		mLocationFilterTv.setText(
-				getText(R.string.place_equal) + " " + AppController.getStoredString(Constants.LOCATION_NAME));
+				getText(R.string.place_equal) + " " + place.name);
 	}
 
 	@Override
-	public void onCategorySelected() {
+	public void onCategorySelected(Category category) {
 		mCategoryFilterTv.setText(
 				getText(R.string.category_equal) +
 						" " +
-						AppController.getStoredString(Constants.CATEGORY_NAME)
+						category.title
 		);
 	}
 
@@ -67,7 +68,7 @@ public class HomeFilteringDialogFragment
 
 		setListeners();
 
-//        ChooseCityAdapter chooseCityAdapter = new ChooseCityAdapter(getContext(), level2.getPlaces());
+//        ChoosePlaceAdapter chooseCityAdapter = new ChoosePlaceAdapter(getContext(), level2.getPlaces());
 //        recyclerView.setAdapter(chooseCityAdapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -95,12 +96,12 @@ public class HomeFilteringDialogFragment
 				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
 
 				FragmentManager fm = getActivity().getSupportFragmentManager();
-				ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
-				chooseCityDialogFragment.setArguments(bundle);
+				ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+				choosePlaceDialogFragment.setArguments(bundle);
 
-				chooseCityDialogFragment.show(fm, ChooseCityDialogFragment.class.getName());
-				chooseCityDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);
-//                chooseCityDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
+				choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+				choosePlaceDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);
+//                choosePlaceDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
 			}
 		});
 

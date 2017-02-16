@@ -2,7 +2,6 @@ package ir.hamed_gh.divaremehrabani.dialogfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.ChooseCityAdapter;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.model.Place;
@@ -30,11 +28,11 @@ public class CategoryFilteringDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.dialogfragment_choose_city, container, false);
+        View rootView = inflater.inflate(R.layout.dialogfragment_choose_place, container, false);
 
         ButterKnife.bind(this, rootView);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_city_recyclerview);
-        EditTextIranSans editTextIranSans = (EditTextIranSans) rootView.findViewById(R.id.choose_city_et);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_place_recyclerview);
+        EditTextIranSans editTextIranSans = (EditTextIranSans) rootView.findViewById(R.id.choose_place_et);
 //		int color = AppController.getAppContext().getResources().getColor(R.color.colorAccent);
 //		editTextIranSans.getCompoundDrawables()[2].setColorFilter( color, PorterDuff.Mode.SRC_ATOP);
         String json = ReadJsonFile.loadJSONFromAsset(getContext());
@@ -61,10 +59,10 @@ public class CategoryFilteringDialogFragment extends DialogFragment {
             }
         }
 
-        ChooseCityAdapter chooseCityAdapter =
-                new ChooseCityAdapter(this, getContext(),null, level2.getPlaces());
-        recyclerView.setAdapter(chooseCityAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ChoosePlaceAdapter chooseCityAdapter =
+//                new ChoosePlaceAdapter(this, getContext(), level2.getPlaces());
+//        recyclerView.setAdapter(chooseCityAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
     }

@@ -4,7 +4,7 @@
                 android:layout_height="150dp">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/choose_city_text"
+		android:id="@+id/choose_place_text"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="right"
@@ -56,9 +56,9 @@
 		<!--android:src="@mipmap/textfield_activated_holo_light"/>-->
 
 	<android.support.v7.widget.RecyclerView
-		android:id="@+id/choose_city_recyclerview"
+		android:id="@+id/choose_place_recyclerview"
 		android:layout_width="match_parent"
 		android:layout_height="300dp"
-		android:layout_below="@id/choose_city_text"/>
+		android:layout_below="@id/choose_place_text"/>
 
 </RelativeLayout>

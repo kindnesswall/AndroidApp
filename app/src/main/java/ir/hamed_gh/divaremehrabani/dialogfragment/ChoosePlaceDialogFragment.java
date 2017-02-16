@@ -1,6 +1,7 @@
 package ir.hamed_gh.divaremehrabani.dialogfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,30 +20,33 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.ChooseCityAdapter;
+import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
+import ir.hamed_gh.divaremehrabani.activity.SplashScreenActivity;
+import ir.hamed_gh.divaremehrabani.adapter.ChoosePlaceAdapter;
+import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
-import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
+import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class ChooseCityDialogFragment extends DialogFragment{
+public class ChoosePlaceDialogFragment extends DialogFragment{
 
-    private String fromActivity;
+//    private String fromActivity;
 
-	@Bind(R.id.choose_city_recyclerview)
+	@Bind(R.id.choose_place_recyclerview)
 	RecyclerView recyclerView;
 
-	@Bind(R.id.choose_city_et)
+	@Bind(R.id.choose_place_et)
 	EditTextIranSans editTextIranSans;
 	private Places level2;
 	private Places level2Original;
-	private ChooseCityAdapter chooseCityAdapter;
-	private ChooseCityCallback mHost;
+	private ChoosePlaceAdapter choosePlaceAdapter;
+	private ChoosePlaceCallback mHost;
 
 	private void readFromJson(){
 		String json = ReadJsonFile.loadJSONFromAsset(getContext());
@@ -74,15 +78,35 @@ public class ChooseCityDialogFragment extends DialogFragment{
 	}
 
 	private void init(){
-		fromActivity = getArguments().getString(Constants.FROM_ACTIVITY);
+//		fromActivity = getArguments().getString(Constants.FROM_ACTIVITY);
 
 		readFromJson();
 
-		chooseCityAdapter = new ChooseCityAdapter(this, getContext(), fromActivity, level2.getPlaces());
-		recyclerView.setAdapter(chooseCityAdapter);
+		choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level2.getPlaces());
+		recyclerView.setAdapter(choosePlaceAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		setListeners();
+	}
+
+	public void onPlaceSelected(Place place){
+
+//		AppController.storeString(Constants.LOCATION_ID, place.id);
+//		AppController.storeString(Constants.LOCATION_NAME, place.name);
+
+		//todo should check instance of context if it is SplashScreen
+		if (getContext() instanceof SplashScreenActivity) {
+
+			AppController.storeString(Constants.MY_LOCATION_ID, place.id);
+			AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
+
+			Intent mainIntent = new Intent(getContext(), BottomBarActivity.class);
+			getActivity().startActivity(mainIntent);
+
+		}
+		mHost.onPlaceSelected(place);
+		dismiss();
+
 	}
 
 	private void setListeners() {
@@ -101,7 +125,7 @@ public class ChooseCityDialogFragment extends DialogFragment{
 						level2.addPlace(p);
 					}
 				}
-				chooseCityAdapter.notifyDataSetChanged();
+				choosePlaceAdapter.notifyDataSetChanged();
 
 			}
 
@@ -116,7 +140,7 @@ public class ChooseCityDialogFragment extends DialogFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.dialogfragment_choose_city, container, false);
+        View rootView = inflater.inflate(R.layout.dialogfragment_choose_place, container, false);
 
         ButterKnife.bind(this, rootView);
 
@@ -135,24 +159,12 @@ public class ChooseCityDialogFragment extends DialogFragment{
 		super.onAttach(context);
 
 		if (getTargetFragment()==null){
-			mHost = (ChooseCityCallback) context;
+			mHost = (ChoosePlaceCallback) context;
 		}else {
 			mHost =
-					(ChooseCityCallback) getTargetFragment();
+					(ChoosePlaceCallback) getTargetFragment();
 		}
 	}
-
-	@Override
-    public void onDestroy() {
-
-//        if (fromActivity!=null && fromActivity.equals(SplashScreenActivity.class.getName())) {
-//            getActivity().finish();
-//        }else {
-	        mHost.onCitySelected();
-//        }
-
-        super.onDestroy();
-    }
 
     @Override
     public void onStart() {

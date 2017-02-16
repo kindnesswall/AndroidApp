@@ -4,7 +4,7 @@
                 android:layout_height="match_parent">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/rw_choose_city_ur_here_tv"
+		android:id="@+id/rw_choose_place_ur_here_tv"
 		android:layout_width="108dp"
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
@@ -15,14 +15,14 @@
 		android:text="(شما اینجا هستید)"/>
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/rw_choose_city_name_tv"
+		android:id="@+id/rw_choose_place_name_tv"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 
 		android:layout_marginLeft="6dp"
 
 		android:layout_marginRight="10dp"
-		android:layout_toRightOf="@id/rw_choose_city_ur_here_tv"
+		android:layout_toRightOf="@id/rw_choose_place_ur_here_tv"
 
 		android:paddingBottom="8dp"
 		android:paddingTop="12dp"

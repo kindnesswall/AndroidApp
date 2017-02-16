@@ -9,14 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
-import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
-import ir.hamed_gh.divaremehrabani.interfaces.ChooseCityCallback;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
+import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
+import ir.hamed_gh.divaremehrabani.model.Place;
 
 /**
  * Created by Hamed on 2/14/17.
  */
 
-public class SplashScreenActivity extends AppCompatActivity implements ChooseCityCallback {
+public class SplashScreenActivity extends AppCompatActivity implements ChoosePlaceCallback {
 
 	/** Duration of wait **/
 	private final int SPLASH_DISPLAY_LENGTH = 1000;
@@ -46,15 +47,15 @@ public class SplashScreenActivity extends AppCompatActivity implements ChooseCit
 			bundle.putString(Constants.FROM_ACTIVITY, SplashScreenActivity.class.getName());
 
 			FragmentManager fm = getSupportFragmentManager();
-			ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
-			chooseCityDialogFragment.setArguments(bundle);
+			ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+			choosePlaceDialogFragment.setArguments(bundle);
 
-			chooseCityDialogFragment.show(fm, ChooseCityDialogFragment.class.getName());
+			choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
 		}
 	}
 
 	@Override
-	public void onCitySelected() {
+	public void onPlaceSelected(Place place) {
 		finish();
 	}
 }

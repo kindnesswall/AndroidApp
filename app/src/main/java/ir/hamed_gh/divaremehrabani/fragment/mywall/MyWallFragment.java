@@ -14,7 +14,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
-import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCityDialogFragment;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
@@ -117,8 +117,8 @@ public class MyWallFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ChooseCityDialogFragment chooseCityDialogFragment = new ChooseCityDialogFragment();
-                chooseCityDialogFragment.show(fm, "fragment_name");
+                ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+                choosePlaceDialogFragment.show(fm, "fragment_name");
             }
         });
 

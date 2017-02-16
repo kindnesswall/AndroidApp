@@ -10,22 +10,22 @@ import ir.hamed_gh.divaremehrabani.R;
 /**
  * Created by Hamed on 6/10/16.
  */
-public class ChooseCityHolder extends RecyclerView.ViewHolder {
+public class ChoosePlaceHolder extends RecyclerView.ViewHolder {
 
-    private TextView mCityNameTv;
+    private TextView mPlaceNameTv;
     private TextView mURHereTxt;
     public View itemView;
 
-    public ChooseCityHolder(View itemView) {
+    public ChoosePlaceHolder(View itemView) {
         super(itemView);
 
         this.itemView = itemView;
-        mCityNameTv = (TextView) itemView.findViewById(R.id.rw_choose_city_name_tv);
-        mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_city_ur_here_tv);
+        mPlaceNameTv = (TextView) itemView.findViewById(R.id.rw_choose_place_name_tv);
+        mURHereTxt = (TextView) itemView.findViewById(R.id.rw_choose_place_ur_here_tv);
     }
 
-    public TextView getCityNameTv() {
-        return mCityNameTv;
+    public TextView getPlaceNameTv() {
+        return mPlaceNameTv;
     }
 
     public TextView getURHereTxt() {
