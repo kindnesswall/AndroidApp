@@ -10,12 +10,11 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
-import ir.hamed_gh.divaremehrabani.model.api.Location;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -197,18 +196,18 @@ public class ApiRequest {
 //
 //    }
 
-    public void getLocations() {
-
-        Call<List<Location>> call = AppController.service.getLocations();
-
-        call.enqueue(new CallbackWithRetry<List<Location>>(call, mContext) {
-            @Override
-            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
-                handlingOnResponse(new HandlingResponse(call, response, this));
-            }
-        });
-
-    }
+//    public void getLocations() {
+//
+//        Call<List<Location>> call = AppController.service.getLocations();
+//
+//        call.enqueue(new CallbackWithRetry<List<Location>>(call, mContext) {
+//            @Override
+//            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
+//                handlingOnResponse(new HandlingResponse(call, response, this));
+//            }
+//        });
+//
+//    }
 
     public void getCategories() {
 

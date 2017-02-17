@@ -5,7 +5,6 @@ import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
-import ir.hamed_gh.divaremehrabani.model.api.Location;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -43,11 +42,11 @@ public interface RestAPI {
 //                                    @Header("fileName") String fileName,
 //                                    @Body RequestBody photo);
 
-	@GET("Location")
-	Call<List<Location>> getLocations();
+//	@GET("Location")
+//	Call<List<Location>> getLocations();
 
-	@GET("Location/{" + Constants.ID + "}")
-	Call<Location> getLocation(@Path(Constants.ID) String locationId);
+//	@GET("Location/{" + Constants.ID + "}")
+//	Call<Location> getLocation(@Path(Constants.ID) String locationId);
 
 	@GET("Category")
 	Call<ArrayList<Category>> getCategories();

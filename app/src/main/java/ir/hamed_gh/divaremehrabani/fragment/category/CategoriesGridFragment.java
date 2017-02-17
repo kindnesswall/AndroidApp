@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rey.material.widget.ProgressView;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -27,6 +29,9 @@ public class CategoriesGridFragment extends BaseFragment {
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @Bind(R.id.fragment_progressBar)
+    ProgressView mProgressView;
+
     private GridCategoriesAdapter adapter;
     ArrayList<Category> categories = new ArrayList<>();
 	String TAG = CategoriesGridFragment.class.getName();
@@ -34,7 +39,7 @@ public class CategoriesGridFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.recyclerview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
         ButterKnife.bind(this, rootView);
         init();
@@ -54,6 +59,10 @@ public class CategoriesGridFragment extends BaseFragment {
     public void onResponse(Call call, Response response) {
         super.onResponse(call, response);
 	    Log.d(TAG, "onResponse");
+
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mProgressView.setVisibility(View.INVISIBLE);
+
 	    ArrayList<Category> categories = (ArrayList<Category>) response.body();
         this.categories.clear();
         this.categories.addAll(categories);

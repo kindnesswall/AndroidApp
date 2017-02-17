@@ -72,10 +72,29 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 	Place place;
 	Category category;
 
+	public static HomeFragment newInstance(Category category) {
+		HomeFragment fragment = new HomeFragment();
+		Bundle args = new Bundle();
+		args.putParcelable(Constants.CATEGORY, category);
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	private void extractDataFromBundle() {
+		Bundle bundle = this.getArguments();
+		if (bundle != null) {
+			category = bundle.getParcelable(Constants.CATEGORY);
+			filterTxt.setText("فیلتر شده بر اساس دسته‌بندی");
+			setFilteringBtnColor(R.color.colorPrimary);
+
+		}
+	}
+
     @Override
     protected void init() {
         super.init();
 
+	    extractDataFromBundle();
         //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
         adapter = new GiftListAdapter(context, gifts);
@@ -216,6 +235,11 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
         mMessageTextView.setText("خطا در دریافت اطلاعات");
     }
 
+	private void setFilteringBtnColor(int colorId){
+		filterIc.setTextColor(getContext().getResources().getColor(colorId));
+		filterTxt.setTextColor(getContext().getResources().getColor(colorId));
+	}
+
 	@Override
 	public void onApplyFiltering(Place place, Category category) {
 		this.place = place;
@@ -225,8 +249,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 		mRecyclerView.setVisibility(View.INVISIBLE);
 		mMessageTextView.setVisibility(View.INVISIBLE);
 		if (place!=null || category != null){
-			filterIc.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
-			filterTxt.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+			setFilteringBtnColor(R.color.colorPrimary);
 		}
 		String filterText = "";
 		if (place != null){
@@ -242,8 +265,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 		}
 
 		if (place == null && category == null){
-			filterIc.setTextColor(getContext().getResources().getColor(R.color.text_secondary));
-			filterTxt.setTextColor(getContext().getResources().getColor(R.color.text_secondary));
+			setFilteringBtnColor(R.color.text_secondary);
+
 
 			filterText = "فیلتر کردن";
 
