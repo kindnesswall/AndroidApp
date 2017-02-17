@@ -24,7 +24,6 @@ import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
-import ir.hamed_gh.divaremehrabani.fragment.SearchFragment;
 import ir.hamed_gh.divaremehrabani.fragment.category.CategoriesGridFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
@@ -70,7 +69,9 @@ public class BottomBarActivity extends AppCompatActivity {
 				if (menuItemId == R.id.bottomBarHome) {
 
 					mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-					setFragment(new HomeFragment(), HomeFragment.class.getName());
+					setFragment(
+							HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
+							HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
 					// The user reselected item number one, scroll your content to top.
 				} else if (menuItemId == R.id.bottomBarCategories) {
 
@@ -81,7 +82,10 @@ public class BottomBarActivity extends AppCompatActivity {
 				} else if (menuItemId == R.id.bottomBarSearch) {
 
 					mToolbarTitleTextView.setText(R.string.search);
-					setFragment(new SearchFragment(), SearchFragment.class.getName());
+					setFragment(
+							HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
+							HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+					);
 
 					// The user selected item number one.
 				} else if (menuItemId == R.id.bottomBarMyWall) {
@@ -123,7 +127,10 @@ public class BottomBarActivity extends AppCompatActivity {
 
 		settingToolbar();
 
-		setFragment(new HomeFragment(), "Home");
+		setFragment(
+				HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
+				HomeFragment.class.getName() + Constants.HOME_PAGETYPE
+		);
 
 		settingBottomBar(savedInstanceState);
 

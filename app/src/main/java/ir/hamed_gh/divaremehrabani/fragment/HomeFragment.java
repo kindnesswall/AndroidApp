@@ -1,13 +1,18 @@
 package ir.hamed_gh.divaremehrabani.fragment;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +28,7 @@ import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.dialogfragment.HomeFilteringDialogFragment;
@@ -38,44 +44,55 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
+public class HomeFragment extends BaseFragment implements HomeFilteringCallback {
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTextView;
+	@Bind(R.id.message_textview)
+	TextView mMessageTextView;
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+	@Bind(R.id.swipeRefreshLayout)
+	SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Bind(R.id.filter_lay)
-    RelativeLayout mFilterLayBtn;
+	@Bind(R.id.filter_lay)
+	RelativeLayout mFilterLayBtn;
 
-    @Bind(R.id.filter_ic)
-    TextViewDivarIcons filterIc;
+	@Bind(R.id.filter_ic)
+	TextViewDivarIcons filterIc;
 
-    @Bind(R.id.filter_txt)
-    TextViewIranSansRegular filterTxt;
+	@Bind(R.id.filter_txt)
+	TextViewIranSansRegular filterTxt;
 
-    private GiftListAdapter adapter;
+	@Bind(R.id.search_btn)
+	ImageView mSearchBtn;
 
-    private ArrayList<Gift> gifts = new ArrayList<>();
-    private int pageNumber = 0;
+	@Bind(R.id.search_backspace_btn)
+	ImageView mSearchBackspaceBtn;
 
-    private int startIndex = 0;
-    private LinearLayoutManager linearLayoutManager;
+	@Bind(R.id.search_et)
+	EditTextIranSans mSearchET;
 
+	@Bind(R.id.search_textbox_lay)
+	RelativeLayout mSearchTextboxLay;
 	Place place;
 	Category category;
+	private String pageType;
+	private String searchTxt = "";
+	private GiftListAdapter adapter;
+	private ArrayList<Gift> gifts = new ArrayList<>();
+	private int pageNumber = 0;
+	private int startIndex = 0;
+	private LinearLayoutManager linearLayoutManager;
 
-	public static HomeFragment newInstance(Category category) {
+	public static HomeFragment newInstance(String pageType, Category category) {
 		HomeFragment fragment = new HomeFragment();
 		Bundle args = new Bundle();
-		args.putParcelable(Constants.CATEGORY, category);
+		args.putString(Constants.PAGETYPE, pageType);
+		args.putParcelable(Constants.CATEGORY_PARCELABLE, category);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -83,159 +100,215 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 	private void extractDataFromBundle() {
 		Bundle bundle = this.getArguments();
 		if (bundle != null) {
-			category = bundle.getParcelable(Constants.CATEGORY);
-			filterTxt.setText("فیلتر شده بر اساس دسته‌بندی");
-			setFilteringBtnColor(R.color.colorPrimary);
+			pageType = bundle.getString(Constants.PAGETYPE);
+			switch (pageType) {
+				case Constants.HOME_PAGETYPE:
 
+					break;
+				case Constants.CATEGORY_PAGETYPE:
+					category = bundle.getParcelable(Constants.CATEGORY_PARCELABLE);
+					if (category != null) {
+						filterTxt.setText("فیلتر شده بر اساس دسته‌بندی");
+						setFilteringBtnColor(R.color.colorPrimary);
+					}
+					break;
+				case Constants.SEARCH_PAGETYPE:
+					mSearchTextboxLay.setVisibility(View.VISIBLE);
+					break;
+			}
 		}
 	}
 
-    @Override
-    protected void init() {
-        super.init();
+	@Override
+	protected void init() {
+		super.init();
 
-	    extractDataFromBundle();
-        //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
-        /* Initialize recyclerview */
-        adapter = new GiftListAdapter(context, gifts);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+		extractDataFromBundle();
+		//		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
+	    /* Initialize recyclerview */
+		adapter = new GiftListAdapter(context, gifts);
+		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        getGifts();
-    }
+		Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
+		myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
+		mSearchBackspaceBtn.setImageDrawable(myIcon);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_information, container, false);
-        ButterKnife.bind(this, rootView);
+		getGifts();
+	}
 
-        init();
-        setListeners();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_information, container, false);
+		ButterKnife.bind(this, rootView);
 
-        return rootView;
-    }
+		init();
+		setListeners();
 
-    private void setListeners() {
+		return rootView;
+	}
 
-        mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    filterIc.setAlpha(0.5f);
-                    filterTxt.setAlpha(0.5f);
-                }
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    filterIc.setAlpha(1f);
-                    filterTxt.setAlpha(1f);
-                }
-                return false;
-            }
-        });
+	private void setListeners() {
 
-        mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+		mFilterLayBtn.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					filterIc.setAlpha(0.5f);
+					filterTxt.setAlpha(0.5f);
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					filterIc.setAlpha(1f);
+					filterTxt.setAlpha(1f);
+				}
+				return false;
+			}
+		});
 
-	            HomeFilteringDialogFragment fragment = HomeFilteringDialogFragment.ShowME(
-			            getActivity().getSupportFragmentManager(),
-			            category,
-			            place
-	            );
+		mFilterLayBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-	            fragment.setTargetFragment(HomeFragment.this, 0);
-	            fragment.show(getActivity().getSupportFragmentManager(),
-			            HomeFragment.class.getName());
+				HomeFilteringDialogFragment fragment = HomeFilteringDialogFragment.ShowME(
+						getActivity().getSupportFragmentManager(),
+						category,
+						place
+				);
 
-            }
-        });
+				fragment.setTargetFragment(HomeFragment.this, 0);
+				fragment.show(getActivity().getSupportFragmentManager(),
+						HomeFragment.class.getName());
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Refresh gifts
-                refreshItems();
-            }
-        });
+			}
+		});
 
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                // Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-                pageNumber++;
-                getGifts();
-            }
-        });
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// Refresh gifts
+				refreshItems();
+			}
+		});
 
-    }
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				pageNumber++;
+				getGifts();
+			}
+		});
 
-    void refreshItems() {
-        // Load gifts
-        // ...
+		mSearchBackspaceBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mSearchET.setText("");
+				mSearchBackspaceBtn.setVisibility(View.INVISIBLE);
+			}
+		});
 
-        pageNumber = 1;
-        gifts.clear();
+		mSearchET.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        startIndex = 0;
+			}
 
-        getGifts();
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        // Load complete
-        onItemsLoadComplete();
-    }
+			}
 
-    private void getGifts() {
-        apiRequest.getGifts(
-                new GetGiftPathQuery(
-		                (place==null? AppController.getStoredString(Constants.MY_LOCATION_ID): place.id),
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + "",
-		                (category==null? null: category.categoryId),
-                        null
-                )
-        );
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (s.length() > 0) {
+					mSearchBackspaceBtn.setVisibility(View.VISIBLE);
+				}
+			}
+		});
 
-        startIndex += Constants.LIMIT;
-    }
+		mSearchBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchText();
+			}
+		});
+	}
 
-    void onItemsLoadComplete() {
-        // Update the adapter and notify data set changed
-        // ...
+	void searchText() {
+		startIndex = 0;
+		gifts.clear();
+		searchTxt = mSearchET.getText().toString();
+		getGifts();
+	}
 
-        // Stop refresh animation
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
+	void refreshItems() {
+		// Load gifts
+		// ...
 
-    @Override
-    public void onResponse(Call call, Response response) {
-        progressView.setVisibility(View.INVISIBLE);
+		pageNumber = 1;
+		gifts.clear();
 
-        List<Gift> responseGifts = (List<Gift>) response.body();
-        gifts.addAll(responseGifts);
+		startIndex = 0;
 
-	    if (gifts.size()==0){
-		    mRecyclerView.setVisibility(View.INVISIBLE);
-		    mMessageTextView.setVisibility(View.VISIBLE);
-		    mMessageTextView.setText(getString(R.string.no_gift_found));
+		getGifts();
 
-	    }else {
-		    adapter.notifyDataSetChanged();
-		    mRecyclerView.setVisibility(View.VISIBLE);
-		    mMessageTextView.setVisibility(View.INVISIBLE);
-	    }
+		// Load complete
+		onItemsLoadComplete();
+	}
 
-    }
+	private void getGifts() {
+		apiRequest.getGifts(
+				new GetGiftPathQuery(
+						(place == null ? AppController.getStoredString(Constants.MY_LOCATION_ID) : place.id),
+						startIndex + "",
+						startIndex + Constants.LIMIT + "",
+						(category == null ? null : category.categoryId),
+						searchTxt
+				)
+		);
 
-    @Override
-    public void onFailure(Call call, Throwable t) {
-        progressView.setVisibility(View.INVISIBLE);
-        mRecyclerView.setVisibility(View.INVISIBLE);
-        mMessageTextView.setText("خطا در دریافت اطلاعات");
-    }
+		startIndex += Constants.LIMIT;
+	}
 
-	private void setFilteringBtnColor(int colorId){
+	void onItemsLoadComplete() {
+		// Update the adapter and notify data set changed
+		// ...
+
+		// Stop refresh animation
+		mSwipeRefreshLayout.setRefreshing(false);
+	}
+
+	@Override
+	public void onResponse(Call call, Response response) {
+		progressView.setVisibility(View.INVISIBLE);
+
+		List<Gift> responseGifts = (List<Gift>) response.body();
+		gifts.addAll(responseGifts);
+
+		if (gifts.size() == 0) {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTextView.setVisibility(View.VISIBLE);
+			mMessageTextView.setText(getString(R.string.no_gift_found));
+
+		} else {
+			adapter.notifyDataSetChanged();
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTextView.setVisibility(View.INVISIBLE);
+		}
+
+	}
+
+	@Override
+	public void onFailure(Call call, Throwable t) {
+		progressView.setVisibility(View.INVISIBLE);
+		mRecyclerView.setVisibility(View.INVISIBLE);
+		mMessageTextView.setText("خطا در دریافت اطلاعات");
+	}
+
+	private void setFilteringBtnColor(int colorId) {
 		filterIc.setTextColor(getContext().getResources().getColor(colorId));
 		filterTxt.setTextColor(getContext().getResources().getColor(colorId));
 	}
@@ -248,28 +321,28 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback{
 		progressView.setVisibility(View.VISIBLE);
 		mRecyclerView.setVisibility(View.INVISIBLE);
 		mMessageTextView.setVisibility(View.INVISIBLE);
-		if (place!=null || category != null){
+		if (place != null || category != null) {
 			setFilteringBtnColor(R.color.colorPrimary);
 		}
 		String filterText = "";
-		if (place != null){
-			((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("همه هدیه‌های " + place.name);
+		if (place != null) {
+			if (pageType.equals(Constants.HOME_PAGETYPE)) {
+				((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("همه هدیه‌های " + place.name);
+			}
 			filterText += "فیلتر شده بر اساس محل";
 		}
-		if (category!=null){
-			if (filterText.equals("")){
+		if (category != null) {
+			if (filterText.equals("")) {
 				filterText = "فیلتر شده بر اساس دسته‌بندی";
-			}else {
+			} else {
 				filterText += " / دسته‌بندی";
 			}
 		}
 
-		if (place == null && category == null){
+		if (place == null && category == null) {
 			setFilteringBtnColor(R.color.text_secondary);
 
-
 			filterText = "فیلتر کردن";
-
 			((BottomBarActivity) getActivity()).
 					mToolbarTitleTextView.setText("همه هدیه‌های " +
 					AppController.getStoredString(Constants.MY_LOCATION_NAME));
