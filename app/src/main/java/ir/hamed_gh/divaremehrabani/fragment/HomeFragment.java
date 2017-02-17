@@ -131,11 +131,15 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
 
+		setBackspaceSearchtxtIcon();
+
+		getGifts();
+	}
+
+	private void setBackspaceSearchtxtIcon(){
 		Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
 		myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
 		mSearchBackspaceBtn.setImageDrawable(myIcon);
-
-		getGifts();
 	}
 
 	@Override
@@ -225,6 +229,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 			public void afterTextChanged(Editable s) {
 				if (s.length() > 0) {
 					mSearchBackspaceBtn.setVisibility(View.VISIBLE);
+				}else {
+					mSearchBackspaceBtn.setVisibility(View.INVISIBLE);
 				}
 			}
 		});
