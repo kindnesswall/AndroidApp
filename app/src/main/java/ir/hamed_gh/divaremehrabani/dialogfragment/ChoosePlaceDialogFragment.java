@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.google.gson.Gson;
 
@@ -123,7 +124,7 @@ public class ChoosePlaceDialogFragment extends DialogFragment{
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.dialogfragment_choose_place, container, false);
-
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         ButterKnife.bind(this, rootView);
 
 //         = (RecyclerView) rootView.findViewById(R.id.choose_city_recyclerview);

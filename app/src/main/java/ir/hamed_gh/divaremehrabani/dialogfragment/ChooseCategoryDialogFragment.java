@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.rey.material.widget.ProgressView;
 
@@ -44,7 +45,7 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.dialogfragment_choose_category, container, false);
-
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         ButterKnife.bind(this, rootView);
 

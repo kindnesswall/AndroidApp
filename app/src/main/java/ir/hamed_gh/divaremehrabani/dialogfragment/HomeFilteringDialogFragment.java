@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -99,6 +100,7 @@ public class HomeFilteringDialogFragment
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View rootView = inflater.inflate(R.layout.dialogfragment_filtering, container, false);
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
 		ButterKnife.bind(this, rootView);
 
