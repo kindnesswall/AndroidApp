@@ -18,7 +18,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RequestToMyGiftsAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
-import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -37,7 +37,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
     @Bind(R.id.message_textview)
     TextView mMessageTv;
 
-    private ArrayList<RequestModel> requestModels = new ArrayList<>();
+    private ArrayList<Gift> gifts = new ArrayList<>();
     private RequestToMyGiftsAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
@@ -47,7 +47,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
     protected void init() {
         super.init();
 
-        adapter = new RequestToMyGiftsAdapter(context, requestModels);
+        adapter = new RequestToMyGiftsAdapter(context, gifts);
         mRecyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -78,11 +78,11 @@ public class ReceivedRequestsFragment extends BaseFragment {
 
         progressView.setVisibility(View.INVISIBLE);
 
-        ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
-        this.requestModels.addAll(requestModels);
+        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+        this.gifts.addAll(gifts);
         adapter.notifyDataSetChanged();
 
-        if (requestModels.size()>0){
+        if (gifts.size()>0){
             mRecyclerView.setVisibility(View.VISIBLE);
             mMessageTv.setVisibility(View.INVISIBLE);
         }else {

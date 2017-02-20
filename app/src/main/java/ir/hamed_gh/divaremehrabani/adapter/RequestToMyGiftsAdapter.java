@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
-import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
  * Created by 5 on 3/8/2016.
@@ -19,12 +19,12 @@ import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
 
     String schoolId, childID;
-    private ArrayList<RequestModel> requestModels;
+    private ArrayList<Gift> gifts;
     private Context mContext;
     private FragmentActivity activity;
 
-    public RequestToMyGiftsAdapter(Context context, ArrayList<RequestModel> requestModels) {
-        this.requestModels = requestModels;
+    public RequestToMyGiftsAdapter(Context context, ArrayList<Gift> gifts) {
+        this.gifts = gifts;
         this.mContext = context;
     }
 
@@ -39,12 +39,12 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-	    myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
+	    myHolder.mItemTitleTv.setText(gifts.get(i).title);
 
     }
 
     @Override
     public int getItemCount() {
-        return (null != requestModels ? requestModels.size() : 0);
+        return (null != gifts ? gifts.size() : 0);
     }
 }
