@@ -167,6 +167,15 @@ public class BottomBarActivity extends AppCompatActivity {
 		super.onResume();
 	}
 
+	@Override
+	protected void onPostResume() {
+		try {
+			super.onPostResume();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void setFragment(Fragment fragment, String title) {
 		try {
 
