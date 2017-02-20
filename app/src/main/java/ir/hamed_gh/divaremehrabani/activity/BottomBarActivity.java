@@ -165,6 +165,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+
 	}
 
 	public void setFragment(Fragment fragment, String title) {
