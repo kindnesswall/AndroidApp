@@ -56,6 +56,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.bottomBarLayBtn)
 	RelativeLayout bottomBarLayBtn;
 
+	@Bind(R.id.first_right_icon_ic)
+	ImageView mFirstRightIcon;
+
 	View.OnClickListener addToWishList;
 	View.OnClickListener removeFromWishList;
 	private Gift gift;
@@ -79,6 +82,13 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	}
 
 	private void setListeners(){
+		mFirstRightIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onBackPressed();
+			}
+		});
+
 		addToWishList = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
