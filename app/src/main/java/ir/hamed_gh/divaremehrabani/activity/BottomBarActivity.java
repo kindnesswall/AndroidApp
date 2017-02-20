@@ -26,7 +26,6 @@ import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
 import ir.hamed_gh.divaremehrabani.fragment.category.CategoriesGridFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
-import ir.hamed_gh.divaremehrabani.helper.Toasti;
 
 public class BottomBarActivity extends AppCompatActivity {
 
@@ -51,6 +50,38 @@ public class BottomBarActivity extends AppCompatActivity {
 		mToolbarTitleTextView.setText("دیوار مهربانی");
 	}
 
+	private void TabSelected(int menuItemId){
+		if (menuItemId == R.id.bottomBarHome) {
+
+			mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+			setFragment(
+					HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
+					HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+			// The user reselected item number one, scroll your content to top.
+		} else if (menuItemId == R.id.bottomBarCategories) {
+
+			mToolbarTitleTextView.setText(R.string.categories);
+			setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
+
+			// The user selected item number one.
+		} else if (menuItemId == R.id.bottomBarSearch) {
+
+			mToolbarTitleTextView.setText(R.string.search);
+			setFragment(
+					HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
+					HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+			);
+
+			// The user selected item number one.
+		} else if (menuItemId == R.id.bottomBarMyWall) {
+
+			mToolbarTitleTextView.setText(R.string.my_wall);
+			setFragment(new MyWallFragment(), MyWallFragment.class.getName());
+
+			// The user selected item number one.
+		}
+	}
+
 	private void settingBottomBar(Bundle savedInstanceState) {
 		mBottomBar = BottomBar.attach(this, savedInstanceState);
 		mBottomBar.noTopOffset();
@@ -66,52 +97,25 @@ public class BottomBarActivity extends AppCompatActivity {
 		mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
 			@Override
 			public void onMenuTabSelected(@IdRes int menuItemId) {
-				if (menuItemId == R.id.bottomBarHome) {
-
-					mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-					setFragment(
-							HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
-							HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-					// The user reselected item number one, scroll your content to top.
-				} else if (menuItemId == R.id.bottomBarCategories) {
-
-					mToolbarTitleTextView.setText(R.string.categories);
-					setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
-
-					// The user selected item number one.
-				} else if (menuItemId == R.id.bottomBarSearch) {
-
-					mToolbarTitleTextView.setText(R.string.search);
-					setFragment(
-							HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
-							HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
-					);
-
-					// The user selected item number one.
-				} else if (menuItemId == R.id.bottomBarMyWall) {
-
-					mToolbarTitleTextView.setText(R.string.my_wall);
-					setFragment(new MyWallFragment(), MyWallFragment.class.getName());
-
-					// The user selected item number one.
-				}
+				TabSelected(menuItemId);
 			}
 
 			@Override
 			public void onMenuTabReSelected(@IdRes int menuItemId) {
-				if (menuItemId == R.id.bottomBarHome) {
-					Toasti.showS("Home reselected");
-					// The user reselected item number one, scroll your content to top.
-				} else if (menuItemId == R.id.bottomBarCategories) {
-					Toasti.showS("Catagories reselected");
-					// The user selected item number one.
-				} else if (menuItemId == R.id.bottomBarSearch) {
-					Toasti.showS("Search reselected");
-					// The user selected item number one.
-				} else if (menuItemId == R.id.bottomBarMyWall) {
-					Toasti.showS("MyWall reselected");
-					// The user selected item number one.
-				}
+				TabSelected(menuItemId);
+//				if (menuItemId == R.id.bottomBarHome) {
+//					Toasti.showS("Home reselected");
+//					// The user reselected item number one, scroll your content to top.
+//				} else if (menuItemId == R.id.bottomBarCategories) {
+//					Toasti.showS("Catagories reselected");
+//					// The user selected item number one.
+//				} else if (menuItemId == R.id.bottomBarSearch) {
+//					Toasti.showS("Search reselected");
+//					// The user selected item number one.
+//				} else if (menuItemId == R.id.bottomBarMyWall) {
+//					Toasti.showS("MyWall reselected");
+//					// The user selected item number one.
+//				}
 			}
 		});
 	}
