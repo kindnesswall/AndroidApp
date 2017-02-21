@@ -38,7 +38,7 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     }
 
     @Override
-    public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
+    public void onBindViewHolder(final SentRequestItemHolder myHolder, final int i) {
 
         myHolder.mItemTitleTv.setText(gifts.get(i).title);
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {

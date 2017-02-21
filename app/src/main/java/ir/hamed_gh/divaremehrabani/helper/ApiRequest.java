@@ -12,6 +12,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
+import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -257,6 +258,27 @@ public class ApiRequest {
 
             @Override
             public void onFailure(Call<RequestGiftOutput> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getUser(String userID) {
+        Call<User> call = AppController.service.getUser(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                userID
+        );
+
+        call.enqueue(new CallbackWithRetry<User>(call, mContext) {
+            @Override
+            public void onResponse(Call<User> call,
+                                   Response<User> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

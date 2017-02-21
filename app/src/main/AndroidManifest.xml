@@ -25,6 +25,9 @@
 		<activity android:name="ir.hamed_gh.divaremehrabani.activity.BottomBarActivity"
 			android:screenOrientation="portrait"/>
 
+		<activity android:name="ir.hamed_gh.divaremehrabani.activity.UserProfileActivity"
+			android:screenOrientation="portrait"/>
+
 		<activity android:name="ir.hamed_gh.divaremehrabani.activity.RegisterGiftActivity"
 			android:screenOrientation="portrait"/>
 

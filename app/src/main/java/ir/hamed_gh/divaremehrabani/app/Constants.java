@@ -38,6 +38,7 @@ public class Constants {
 
     public static final String TELEPHONE = "TELEPHONE";
     public static final String GIFT = "gift";
+    public static final String USER_ID = "USER_ID";
     public static final String CATEGORY = "category";
 
     public static final String Authorization = "Authorization";

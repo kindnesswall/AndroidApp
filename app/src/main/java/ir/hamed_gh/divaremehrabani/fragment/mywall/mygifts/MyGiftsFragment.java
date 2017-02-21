@@ -81,7 +81,6 @@ public class MyGiftsFragment extends BaseFragment {
         if (AppController.getStoredString(Constants.Authorization) != null) {
             setupViewPager(mainVp);
             mainTabs.setupWithViewPager(mainVp);
-            mainVp.setCurrentItem(2, false);
 
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);

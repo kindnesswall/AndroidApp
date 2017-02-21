@@ -6,6 +6,7 @@ import java.util.List;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.RequestBody;
@@ -78,6 +79,13 @@ public interface RestAPI {
             @Header(Constants.Authorization) String authorization,
             @Path(Constants.StartIndex) String startIndex,
             @Path(Constants.LastIndex) String lastIndex
+    );
+
+    @GET("User/{" + Constants.USER_ID + "}")
+    Call<User> getUser(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.USER_ID) String userID
     );
 
     @GET("RecievedRequestList/{" + Constants.GIFT_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")

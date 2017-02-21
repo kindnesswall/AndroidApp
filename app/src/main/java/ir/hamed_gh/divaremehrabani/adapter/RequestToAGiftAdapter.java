@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
+import ir.hamed_gh.divaremehrabani.activity.UserProfileActivity;
 import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 
@@ -42,9 +41,12 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemH
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BottomBarActivity) mContext).setFragment(
-                        new RequestsToAGiftFragment(), RequestsToAGiftFragment.class.getName()
-                );
+//                ((BottomBarActivity) mContext).setFragment(
+//                        new RequestsToAGiftFragment(), RequestsToAGiftFragment.class.getName()
+//                );
+
+                mContext.startActivity(UserProfileActivity.createIntent(requestModels.get(i).fromUserId));
+
             }
         });
 
