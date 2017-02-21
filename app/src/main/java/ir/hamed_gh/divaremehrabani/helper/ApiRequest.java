@@ -12,6 +12,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
+import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
@@ -284,8 +285,8 @@ public class ApiRequest {
         });
     }
 
-    public void getRequestedToMyGifts(StartLastIndex startLastIndex) {
-        Call<ArrayList<Gift>> call = AppController.service.getRequestedToMyGifts(
+    public void getRequestsToMyGifts(StartLastIndex startLastIndex) {
+        Call<ArrayList<Gift>> call = AppController.service.getRequestsMyGifts(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
                 startLastIndex.startIndex,
@@ -301,6 +302,29 @@ public class ApiRequest {
 
             @Override
             public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getRecievedRequestList(RecievedRequestListInput recievedRequestListInput) {
+        Call<ArrayList<RequestModel>> call = AppController.service.getRecievedRequestList(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                recievedRequestListInput.giftId,
+                recievedRequestListInput.startIndex,
+                recievedRequestListInput.lastIndex
+        );
+
+        call.enqueue(new CallbackWithRetry<ArrayList<RequestModel>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<RequestModel>> call,
+                                   Response<ArrayList<RequestModel>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<RequestModel>> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

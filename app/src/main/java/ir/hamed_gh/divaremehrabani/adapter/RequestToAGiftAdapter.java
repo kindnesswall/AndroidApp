@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,23 +11,22 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
-import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 
 /**
  * Created by 5 on 3/8/2016.
  */
-public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
+public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
 
     String schoolId, childID;
-    private ArrayList<Gift> gifts;
+    private ArrayList<RequestModel> requestModels;
     private Context mContext;
     private FragmentActivity activity;
 
-    public RequestToMyGiftsAdapter(Context context, ArrayList<Gift> gifts) {
-        this.gifts = gifts;
+    public RequestToAGiftAdapter(Context context, ArrayList<RequestModel> requestModels) {
+        this.requestModels = requestModels;
         this.mContext = context;
     }
 
@@ -43,17 +41,12 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-	    myHolder.mItemTitleTv.setText(gifts.get(i).title);
+	    myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestsToAGiftFragment requestsToAGiftFragment = new RequestsToAGiftFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
-                requestsToAGiftFragment.setArguments(bundle);
-
                 ((BottomBarActivity) mContext).setFragment(
-                        requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
+                        new RequestsToAGiftFragment(), RequestsToAGiftFragment.class.getName()
                 );
             }
         });
@@ -62,6 +55,6 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
 
     @Override
     public int getItemCount() {
-        return (null != gifts ? gifts.size() : 0);
+        return (null != requestModels ? requestModels.size() : 0);
     }
 }

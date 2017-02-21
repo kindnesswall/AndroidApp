@@ -81,16 +81,17 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
         enterPhoneNumber = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 apiRequest.register(phoneConfirimationCodeEt.getText().toString());
-                enterVerificationCode();
-
             }
         };
 
         not_recieved_code_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AppController.storeString(
+                        Constants.TELEPHONE, null
+                );
+
                 enterTelephoneNumber();
             }
         });
@@ -155,6 +156,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
                     tokenOutput.userName);
 
             finish();
+        }else {
+            enterVerificationCode();
         }
     }
 

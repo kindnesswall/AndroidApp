@@ -91,9 +91,12 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback{
         mLogoutLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 apiRequest.logout();
                 mLogoutLay.setVisibility(View.INVISIBLE);
                 AppController.storeString(Constants.Authorization,null);
+                AppController.storeString(Constants.TELEPHONE, null);
+
             }
         });
 

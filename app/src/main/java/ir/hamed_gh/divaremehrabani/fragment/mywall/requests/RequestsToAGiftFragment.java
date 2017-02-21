@@ -15,18 +15,18 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.adapter.RequestToMyGiftsAdapter;
+import ir.hamed_gh.divaremehrabani.adapter.RequestToAGiftAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
-import ir.hamed_gh.divaremehrabani.model.api.Gift;
-import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
+import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * Created by 5 on 02/21/2016.
  */
-public class ReceivedRequestsFragment extends BaseFragment {
+public class RequestsToAGiftFragment extends BaseFragment {
 
     @Bind(R.id.fragment_progressBar)
     ProgressView progressView;
@@ -37,23 +37,30 @@ public class ReceivedRequestsFragment extends BaseFragment {
     @Bind(R.id.message_textview)
     TextView mMessageTv;
 
-    private ArrayList<Gift> gifts = new ArrayList<>();
-    private RequestToMyGiftsAdapter adapter;
+    private ArrayList<RequestModel> requestModels = new ArrayList<>();
+    private RequestToAGiftAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
     private int startIndex = 0;
+    private String giftId;
 
     @Override
     protected void init() {
         super.init();
 
-        adapter = new RequestToMyGiftsAdapter(context, gifts);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            giftId = bundle.getString(Constants.GIFT_ID);
+        }
+
+        adapter = new RequestToAGiftAdapter(context, requestModels);
         mRecyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        apiRequest.getRequestsToMyGifts(
-                new StartLastIndex(
+        apiRequest.getRecievedRequestList(
+                new RecievedRequestListInput(
+                        giftId,
                         startIndex + "",
                         startIndex + Constants.LIMIT + ""
                 )
@@ -78,11 +85,11 @@ public class ReceivedRequestsFragment extends BaseFragment {
 
         progressView.setVisibility(View.INVISIBLE);
 
-        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-        this.gifts.addAll(gifts);
+        ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
+        this.requestModels.addAll(requestModels);
         adapter.notifyDataSetChanged();
 
-        if (gifts.size()>0){
+        if (requestModels.size()>0){
             mRecyclerView.setVisibility(View.VISIBLE);
             mMessageTv.setVisibility(View.INVISIBLE);
         }else {
