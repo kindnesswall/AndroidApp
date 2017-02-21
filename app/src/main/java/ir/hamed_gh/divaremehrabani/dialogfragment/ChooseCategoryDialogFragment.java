@@ -49,18 +49,18 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
 
         ButterKnife.bind(this, rootView);
 
-        apiRequest = new ApiRequest(getActivity(),this);
+        apiRequest = new ApiRequest(getActivity(), this);
         apiRequest.getCategories();
 
         chooseCategoriesDialogAdapter =
-                new ChooseCategoriesDialogAdapter(getActivity(), this,categories);
+                new ChooseCategoriesDialogAdapter(getActivity(), this, categories);
         recyclerView.setAdapter(chooseCategoriesDialogAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return rootView;
     }
 
-    public void onCategorySelected(Category category){
+    public void onCategorySelected(Category category) {
         mHost.onCategorySelected(category);
         dismiss();
     }
@@ -69,9 +69,9 @@ public class ChooseCategoryDialogFragment extends DialogFragment implements ApiR
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (getTargetFragment()==null){
+        if (getTargetFragment() == null) {
             mHost = (ChooseCategoryCallback) context;
-        }else {
+        } else {
             mHost =
                     (ChooseCategoryCallback) getTargetFragment();
         }

@@ -19,49 +19,53 @@ import ir.hamed_gh.divaremehrabani.model.Place;
 
 public class SplashScreenActivity extends AppCompatActivity implements ChoosePlaceCallback {
 
-	/** Duration of wait **/
-	private final int SPLASH_DISPLAY_LENGTH = 1000;
+    /**
+     * Duration of wait
+     **/
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
-		setContentView(R.layout.activity_splash);
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setContentView(R.layout.activity_splash);
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
-		if (AppController.getStoredString(Constants.MY_LOCATION_ID)!=null) {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
+        if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-					Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
-					SplashScreenActivity.this.startActivity(mainIntent);
-					SplashScreenActivity.this.finish();
-				}
-			}, SPLASH_DISPLAY_LENGTH);
+                    Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
+                    SplashScreenActivity.this.startActivity(mainIntent);
+                    SplashScreenActivity.this.finish();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
 
-		}else {
+        } else {
 
 //			Bundle bundle = new Bundle();
 //			bundle.putString(Constants.FROM_ACTIVITY, SplashScreenActivity.class.getName());
 
-			FragmentManager fm = getSupportFragmentManager();
-			ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
 //			choosePlaceDialogFragment.setArguments(bundle);
 
-			choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
-		}
-	}
+            choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+        }
+    }
 
-	@Override
-	public void onPlaceSelected(Place place) {
-		AppController.storeString(Constants.MY_LOCATION_ID, place.id);
-		AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
+    @Override
+    public void onPlaceSelected(Place place) {
+        AppController.storeString(Constants.MY_LOCATION_ID, place.id);
+        AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
 
-		Intent mainIntent = new Intent(this, BottomBarActivity.class);
-		startActivity(mainIntent);
+        Intent mainIntent = new Intent(this, BottomBarActivity.class);
+        startActivity(mainIntent);
 
-		finish();
-	}
+        finish();
+    }
 }

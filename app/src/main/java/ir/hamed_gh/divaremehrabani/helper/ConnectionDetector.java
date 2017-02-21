@@ -12,22 +12,22 @@ import ir.hamed_gh.divaremehrabani.app.AppController;
  */
 public class ConnectionDetector {
 
-	public static boolean isConnectedToInternet() {
-		ConnectivityManager connectivity = (ConnectivityManager) AppController.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (connectivity != null) {
-			NetworkInfo[] info = connectivity.getAllNetworkInfo();
-			if (info != null)
-				for (int i = 0; i < info.length; i++)
-					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						return true;
-					}
-		}
-		return false;
-	}
+    public static boolean isConnectedToInternet() {
+        ConnectivityManager connectivity = (ConnectivityManager) AppController.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+        }
+        return false;
+    }
 
-	public static void ShowNetwrokConnectionProblemDialog(Context activity, final CallbackWithRetry callbackWithRetry) {
+    public static void ShowNetwrokConnectionProblemDialog(Context activity, final CallbackWithRetry callbackWithRetry) {
 
-		Toasti.showS("ShowNetwrokConnectionProblemDialog");
+        Toasti.showS("ShowNetwrokConnectionProblemDialog");
 //		MaterialDialog.Builder builder = MaterialDialogBuilder.create(activity);
 //		final MaterialDialog dialog = builder
 //				.customView(R.layout.activity_no_internet_connection, false).show();
@@ -51,7 +51,7 @@ public class ConnectionDetector {
 //				});
 //			}
 //		});
-		/*TextViewIranSansBold btnTryButton =
+        /*TextViewIranSansBold btnTryButton =
 				(TextViewIranSansBold) dialog.findViewById(R.id.btn_try_connect_to_internet);
 		btnTryButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -69,11 +69,11 @@ public class ConnectionDetector {
 //		dialog.setCancelable(false);
 
 
-	}
+    }
 
-	public static void ShowServerProblemDialog(Context activity, final CallbackWithRetry callbackWithRetry) {
+    public static void ShowServerProblemDialog(Context activity, final CallbackWithRetry callbackWithRetry) {
 
-		Toasti.showS("ShowServerProblemDialog");
+        Toasti.showS("ShowServerProblemDialog");
 
 //		MaterialDialog.Builder builder = MaterialDialogBuilder.create(activity);
 //		final MaterialDialog dialog = builder
@@ -116,6 +116,6 @@ public class ConnectionDetector {
 //		dialog.setCancelable(true);
 
 
-	}
+    }
 
 }

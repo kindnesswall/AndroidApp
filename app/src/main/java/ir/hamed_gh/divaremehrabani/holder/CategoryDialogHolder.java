@@ -15,6 +15,7 @@ public class CategoryDialogHolder extends RecyclerView.ViewHolder {
     //	private ImageView mCategoryIc;
     private TextView mCategoryTv;
     public View mItemView;
+
     public CategoryDialogHolder(View itemView) {
         super(itemView);
 

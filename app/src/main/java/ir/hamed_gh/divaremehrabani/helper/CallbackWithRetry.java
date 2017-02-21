@@ -12,42 +12,42 @@ import retrofit2.Response;
  * Created by lms-3 on 02/07/2016.
  */
 public abstract class CallbackWithRetry<T> implements Callback<T> {
-	private static final String TAG = CallbackWithRetry.class.getSimpleName();
-	private final Call<T> call;
-	private Context context;//Should Be Activity Context!
+    private static final String TAG = CallbackWithRetry.class.getSimpleName();
+    private final Call<T> call;
+    private Context context;//Should Be Activity Context!
 
-	public CallbackWithRetry(Call<T> call, Context context) {
-		this.call = call;
-		this.context = context;
-	}
+    public CallbackWithRetry(Call<T> call, Context context) {
+        this.call = call;
+        this.context = context;
+    }
 
-	@Override
-	public void onResponse(Call<T> call, Response<T> response) {
-		if (!call.isCanceled()) {
-			if (!response.isSuccessful()) {
-				onResponseDoExtraTaskWhenNotSuccessfull();
-				ConnectionDetector.ShowServerProblemDialog(context, this);
-				return;
-			}
-		}
-	}
+    @Override
+    public void onResponse(Call<T> call, Response<T> response) {
+        if (!call.isCanceled()) {
+            if (!response.isSuccessful()) {
+                onResponseDoExtraTaskWhenNotSuccessfull();
+                ConnectionDetector.ShowServerProblemDialog(context, this);
+                return;
+            }
+        }
+    }
 
-	public void onResponseDoExtraTaskWhenNotSuccessfull() {
-		//Help : for doing st like progressview.setvisibility(View.GONE);
-	}
+    public void onResponseDoExtraTaskWhenNotSuccessfull() {
+        //Help : for doing st like progressview.setvisibility(View.GONE);
+    }
 
-	@Override
-	public void onFailure(Call<T> call, Throwable t) {
-		if (call.isCanceled()) {
-			//nothing to do when reason is by our wish to cancle it
-		} else {
-			if (t instanceof IOException) {//network problem
-				ConnectionDetector.ShowNetwrokConnectionProblemDialog(context, this);
-			}
-		}
-	}
+    @Override
+    public void onFailure(Call<T> call, Throwable t) {
+        if (call.isCanceled()) {
+            //nothing to do when reason is by our wish to cancle it
+        } else {
+            if (t instanceof IOException) {//network problem
+                ConnectionDetector.ShowNetwrokConnectionProblemDialog(context, this);
+            }
+        }
+    }
 
-	public void retry() {
-		call.clone().enqueue(this);
-	}
+    public void retry() {
+        call.clone().enqueue(this);
+    }
 }

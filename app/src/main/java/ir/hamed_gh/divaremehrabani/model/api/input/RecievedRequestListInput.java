@@ -8,7 +8,7 @@ import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
  * Created by Hamed on 2/9/17.
  */
 
-public class RecievedRequestListInput extends StartLastIndex{
+public class RecievedRequestListInput extends StartLastIndex {
 
     @SerializedName("giftId")
     public String giftId;

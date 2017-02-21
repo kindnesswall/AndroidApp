@@ -9,6 +9,6 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 public interface HomeFilteringCallback {
 
-	public void onApplyFiltering(Place place, Category category);
+    public void onApplyFiltering(Place place, Category category);
 
 }

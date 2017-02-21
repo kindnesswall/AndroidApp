@@ -14,31 +14,31 @@ import java.util.ArrayList;
 public class Gift implements Parcelable {
 
     @SerializedName("title")
-    public String title="";
+    public String title = "";
 
     @SerializedName("address")
-    public String address="";
+    public String address = "";
 
     @SerializedName("description")
-    public String description="";
+    public String description = "";
 
     @SerializedName("price")
-    public String price="";
+    public String price = "";
 
     @SerializedName("status")
     public String status;
 
     @SerializedName("userId")
-    public String userId="";
+    public String userId = "";
 
     @SerializedName("user")
-    public String user="";
+    public String user = "";
 
     @SerializedName("receivedUserId")
-    public String receivedUserId="";
+    public String receivedUserId = "";
 
     @SerializedName("receivedUser")
-    public String receivedUser="";
+    public String receivedUser = "";
 
     @SerializedName("categoryId")
     public String categoryId;
@@ -56,22 +56,23 @@ public class Gift implements Parcelable {
     public ArrayList<String> giftImages = new ArrayList<>();
 
     @SerializedName("id")
-    public String giftId="";
+    public String giftId = "";
 
     @SerializedName("createDateTime")
-    public String createDateTime="";
+    public String createDateTime = "";
 
     @SerializedName("createDate")
-    public String createDate="";
+    public String createDate = "";
 
     @SerializedName("createTime")
-    public String createTime="";
+    public String createTime = "";
 
     // No-arg Ctor
-    public Gift(){}
+    public Gift() {
+    }
 
     // Parcelling part
-    public Gift(Parcel in){
+    public Gift(Parcel in) {
         this.title = in.readString();
         this.address = in.readString();
         this.description = in.readString();
@@ -119,11 +120,14 @@ public class Gift implements Parcelable {
         dest.writeString(createTime);
     }
 
-    /** Static field used to regenerate object, individually or as arrays */
+    /**
+     * Static field used to regenerate object, individually or as arrays
+     */
     public static final Parcelable.Creator<Gift> CREATOR = new Parcelable.Creator<Gift>() {
         public Gift createFromParcel(Parcel pc) {
             return new Gift(pc);
         }
+
         public Gift[] newArray(int size) {
             return new Gift[size];
         }

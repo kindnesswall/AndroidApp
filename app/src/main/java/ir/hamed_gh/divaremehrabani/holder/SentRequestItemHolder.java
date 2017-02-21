@@ -10,7 +10,7 @@ import ir.hamed_gh.divaremehrabani.R;
  * Created by Hamed on 11/11/16.
  */
 
-public class SentRequestItemHolder extends RecyclerView.ViewHolder{
+public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 
     public TextView mItemTitleTv;
 

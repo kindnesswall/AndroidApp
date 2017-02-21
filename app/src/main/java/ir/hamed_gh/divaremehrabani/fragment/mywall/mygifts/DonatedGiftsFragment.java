@@ -28,71 +28,71 @@ import retrofit2.Response;
  */
 public class DonatedGiftsFragment extends BaseFragment {
 
-	@Bind(R.id.fragment_progressBar)
-	ProgressView progressView;
+    @Bind(R.id.fragment_progressBar)
+    ProgressView progressView;
 
-	@Bind(R.id.recycler_view)
-	RecyclerView mRecyclerView;
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
-	@Bind(R.id.message_textview)
-	TextView mMessageTv;
+    @Bind(R.id.message_textview)
+    TextView mMessageTv;
 
-	private ArrayList<Gift> gifts = new ArrayList<>();
-	private GiftListAdapter adapter;
-	private LinearLayoutManager linearLayoutManager;
+    private ArrayList<Gift> gifts = new ArrayList<>();
+    private GiftListAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
 
-	private int startIndex = 0;
+    private int startIndex = 0;
 
-	@Override
-	protected void init() {
-		super.init();
+    @Override
+    protected void init() {
+        super.init();
 
-		adapter = new GiftListAdapter(context, gifts);
-		mRecyclerView.setAdapter(adapter);
-		linearLayoutManager = new LinearLayoutManager(context);
-		mRecyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new GiftListAdapter(context, gifts);
+        mRecyclerView.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(context);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
 
-		apiRequest.getDonatedGifts(
-				new StartLastIndex(
-						startIndex + "",
-						startIndex + Constants.LIMIT + ""
-				)
-		);
-	}
+        apiRequest.getDonatedGifts(
+                new StartLastIndex(
+                        startIndex + "",
+                        startIndex + Constants.LIMIT + ""
+                )
+        );
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        super.onCreate(savedInstanceState);
+        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-		ButterKnife.bind(this, rootView);
-		init();
+        ButterKnife.bind(this, rootView);
+        init();
 
-		return rootView;
-	}
+        return rootView;
+    }
 
-	@Override
-	public void onResponse(Call call, Response response) {
+    @Override
+    public void onResponse(Call call, Response response) {
 
-		progressView.setVisibility(View.INVISIBLE);
+        progressView.setVisibility(View.INVISIBLE);
 
-		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-		this.gifts.addAll(gifts);
-		adapter.notifyDataSetChanged();
+        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+        this.gifts.addAll(gifts);
+        adapter.notifyDataSetChanged();
 
-		if (gifts.size()>0){
-			mRecyclerView.setVisibility(View.VISIBLE);
-			mMessageTv.setVisibility(View.INVISIBLE);
-		}else {
-			mRecyclerView.setVisibility(View.INVISIBLE);
-			mMessageTv.setVisibility(View.VISIBLE);
-			mMessageTv.setText(
-					"شما هیچ هدیه‌ی اهدا نکرده اید."
-			);
-		}
+        if (gifts.size() > 0) {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mMessageTv.setVisibility(View.INVISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.INVISIBLE);
+            mMessageTv.setVisibility(View.VISIBLE);
+            mMessageTv.setText(
+                    "شما هیچ هدیه‌ی اهدا نکرده اید."
+            );
+        }
 
-	}
+    }
 
 }

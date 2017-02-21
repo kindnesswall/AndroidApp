@@ -16,6 +16,7 @@ public class CategoryGridHolder extends RecyclerView.ViewHolder {
     private TextView mCategoryTv;
     private TextView mCategoryFontIcon;
     public View mItemView;
+
     public CategoryGridHolder(View itemView) {
         super(itemView);
 

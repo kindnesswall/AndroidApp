@@ -21,54 +21,54 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
  */
 public class GridCategoriesAdapter extends RecyclerView.Adapter<CategoryGridHolder> {
 
-	private String[] fontIcons = {
-			"\uE801",
-			"\uE800",
-			"\uE832",
-			"\uE804"
-	};
+    private String[] fontIcons = {
+            "\uE801",
+            "\uE800",
+            "\uE832",
+            "\uE804"
+    };
 
-	private Context mContext;
-	private ArrayList<Category> categories;
+    private Context mContext;
+    private ArrayList<Category> categories;
 
-	public GridCategoriesAdapter(Context context, ArrayList<Category> categories) {
-		this.mContext = context;
-		this.categories = categories;
-	}
+    public GridCategoriesAdapter(Context context, ArrayList<Category> categories) {
+        this.mContext = context;
+        this.categories = categories;
+    }
 
-	@Override
-	public CategoryGridHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_category, null);
-		CategoryGridHolder categoryGridHolder = new CategoryGridHolder(v);
+    @Override
+    public CategoryGridHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_category, null);
+        CategoryGridHolder categoryGridHolder = new CategoryGridHolder(v);
 
-		return categoryGridHolder;
-	}
+        return categoryGridHolder;
+    }
 
-	@Override
-	public void onBindViewHolder(CategoryGridHolder categoryGridHolder, final int i) {
+    @Override
+    public void onBindViewHolder(CategoryGridHolder categoryGridHolder, final int i) {
 
-		categoryGridHolder.getmCategoryTv().setText(categories.get(i).title);
+        categoryGridHolder.getmCategoryTv().setText(categories.get(i).title);
 //		categoryGridHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
-		categoryGridHolder.getmCategoryFontIcon().setText(fontIcons[i]);
+        categoryGridHolder.getmCategoryFontIcon().setText(fontIcons[i]);
 
-		categoryGridHolder.mItemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+        categoryGridHolder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-				((BottomBarActivity) mContext).setFragment(
-						HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE,categories.get(i)),
-						HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
-				);
+                ((BottomBarActivity) mContext).setFragment(
+                        HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, categories.get(i)),
+                        HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
+                );
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	@Override
-	public int getItemCount() {
+    @Override
+    public int getItemCount() {
 
-		return categories != null ? categories.size() : 0;
+        return categories != null ? categories.size() : 0;
 
-	}
+    }
 }

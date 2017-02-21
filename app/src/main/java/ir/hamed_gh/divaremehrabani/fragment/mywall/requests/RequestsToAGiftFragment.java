@@ -89,10 +89,10 @@ public class RequestsToAGiftFragment extends BaseFragment {
         this.requestModels.addAll(requestModels);
         adapter.notifyDataSetChanged();
 
-        if (requestModels.size()>0){
+        if (requestModels.size() > 0) {
             mRecyclerView.setVisibility(View.VISIBLE);
             mMessageTv.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             mRecyclerView.setVisibility(View.INVISIBLE);
             mMessageTv.setVisibility(View.VISIBLE);
             mMessageTv.setText(

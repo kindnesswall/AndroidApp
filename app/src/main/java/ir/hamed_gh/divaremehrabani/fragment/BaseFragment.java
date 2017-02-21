@@ -14,12 +14,13 @@ import retrofit2.Response;
 /**
  * Created by aseman on 3/28/16.
  */
-public class BaseFragment extends Fragment implements ApiRequest.Listener{
+public class BaseFragment extends Fragment implements ApiRequest.Listener {
 
     protected Context context;
     protected AppCompatActivity mainActivity;
     private TextView mToolbarTitleTextView;
     protected ApiRequest apiRequest;
+
     protected void init() {
         context = getActivity();
         mainActivity = (AppCompatActivity) getActivity();

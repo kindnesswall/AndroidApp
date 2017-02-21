@@ -27,7 +27,7 @@ import retrofit2.Response;
 /**
  * Created by 5 on 02/21/2016.
  */
-public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback{
+public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback {
 
     @Bind(R.id.location_tv)
     TextView mLocationTv;
@@ -65,9 +65,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback{
     protected void init() {
         super.init();
 
-        if (AppController.getStoredString(Constants.Authorization)!= null){
+        if (AppController.getStoredString(Constants.Authorization) != null) {
             mLogoutLay.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mLogoutLay.setVisibility(View.INVISIBLE);
         }
 
@@ -94,7 +94,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback{
 
                 apiRequest.logout();
                 mLogoutLay.setVisibility(View.INVISIBLE);
-                AppController.storeString(Constants.Authorization,null);
+                AppController.storeString(Constants.Authorization, null);
                 AppController.storeString(Constants.TELEPHONE, null);
 
             }

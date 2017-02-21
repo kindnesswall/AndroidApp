@@ -63,7 +63,7 @@ public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<Category
     @Override
     public int getItemCount() {
 
-        return categories !=null? categories.size(): 0;
+        return categories != null ? categories.size() : 0;
 
     }
 }

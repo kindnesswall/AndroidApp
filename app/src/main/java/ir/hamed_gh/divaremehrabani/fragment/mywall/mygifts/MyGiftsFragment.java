@@ -66,9 +66,9 @@ public class MyGiftsFragment extends BaseFragment {
         DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
         ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
 
-        adapter.addFrag(registeredGiftsFragment , "ثبت شده");
-        adapter.addFrag(donatedGiftsFragment , "اهدایی");
-        adapter.addFrag(receivedGiftsFragment , "دریافتی");
+        adapter.addFrag(registeredGiftsFragment, "ثبت شده");
+        adapter.addFrag(donatedGiftsFragment, "اهدایی");
+        adapter.addFrag(receivedGiftsFragment, "دریافتی");
 
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -78,15 +78,15 @@ public class MyGiftsFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if (AppController.getStoredString(Constants.Authorization)!=null){
+        if (AppController.getStoredString(Constants.Authorization) != null) {
             setupViewPager(mainVp);
             mainTabs.setupWithViewPager(mainVp);
-            mainVp.setCurrentItem(2,false);
+            mainVp.setCurrentItem(2, false);
 
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(2,false);
-        }else {
+            mainVp.setCurrentItem(2, false);
+        } else {
             myGiftTopLay.setVisibility(View.VISIBLE);
             myGiftBottomLay.setVisibility(View.INVISIBLE);
 

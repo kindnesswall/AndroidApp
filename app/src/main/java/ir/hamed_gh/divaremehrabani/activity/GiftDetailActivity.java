@@ -30,149 +30,149 @@ import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.Listener{
+public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.Listener {
 
-	@Bind(R.id.bookmark_ic)
-	ImageView mBookmarkIc;
+    @Bind(R.id.bookmark_ic)
+    ImageView mBookmarkIc;
 
-	@Bind(R.id.share_ic)
-	ImageView mShareIc;
+    @Bind(R.id.share_ic)
+    ImageView mShareIc;
 
-	@Bind(R.id.viewpager)
-	ViewPager viewPager;
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
 
-	@Bind(R.id.toolbar_title_tv)
-	TextView mToolbarTitleTv;
+    @Bind(R.id.toolbar_title_tv)
+    TextView mToolbarTitleTv;
 
-	@Bind(R.id.detail_title_tv)
-	TextView mDetailTitleTv;
+    @Bind(R.id.detail_title_tv)
+    TextView mDetailTitleTv;
 
-	@Bind(R.id.detail_description_tv)
-	TextView mDetailDescriptionTv;
+    @Bind(R.id.detail_description_tv)
+    TextView mDetailDescriptionTv;
 
-	@Bind(R.id.pagesContainer)
-	LinearLayout pagesContainer;
+    @Bind(R.id.pagesContainer)
+    LinearLayout pagesContainer;
 
-	@Bind(R.id.bottomBarLayBtn)
-	RelativeLayout bottomBarLayBtn;
+    @Bind(R.id.bottomBarLayBtn)
+    RelativeLayout bottomBarLayBtn;
 
-	@Bind(R.id.first_right_icon_ic)
-	ImageView mFirstRightIcon;
+    @Bind(R.id.first_right_icon_ic)
+    ImageView mFirstRightIcon;
 
-	View.OnClickListener addToWishList;
-	View.OnClickListener removeFromWishList;
-	private Gift gift;
-	private MyPageIndicator mIndicator;
+    View.OnClickListener addToWishList;
+    View.OnClickListener removeFromWishList;
+    private Gift gift;
+    private MyPageIndicator mIndicator;
     private ApiRequest apiRequest;
 
     public static Intent createIntent(Gift gift) {
-		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
-		intent.putExtra(Constants.GIFT, gift);
-		return intent;
-	}
+        Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+        intent.putExtra(Constants.GIFT, gift);
+        return intent;
+    }
 
-	private void extractDataFromBundle() {
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			gift = (Gift) bundle.get(Constants.GIFT);
-			mToolbarTitleTv.setText(gift.title);
-			mDetailDescriptionTv.setText(gift.description);
-			mDetailTitleTv.setText(gift.title);
-		}
-	}
+    private void extractDataFromBundle() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            gift = (Gift) bundle.get(Constants.GIFT);
+            mToolbarTitleTv.setText(gift.title);
+            mDetailDescriptionTv.setText(gift.description);
+            mDetailTitleTv.setText(gift.title);
+        }
+    }
 
-	private void setListeners(){
-		mFirstRightIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				onBackPressed();
-			}
-		});
+    private void setListeners() {
+        mFirstRightIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
-		addToWishList = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+        addToWishList = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-				mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
 
-				mBookmarkIc.setOnClickListener(removeFromWishList);
-			}
-		};
+                mBookmarkIc.setOnClickListener(removeFromWishList);
+            }
+        };
 
-		removeFromWishList = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+        removeFromWishList = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-				mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
-				mBookmarkIc.setOnClickListener(addToWishList);
-			}
-		};
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
+                mBookmarkIc.setOnClickListener(addToWishList);
+            }
+        };
 
-		mBookmarkIc.setOnClickListener(addToWishList);
+        mBookmarkIc.setOnClickListener(addToWishList);
 
-		mShareIc.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				shareIt();
-			}
-		});
+        mShareIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareIt();
+            }
+        });
 
-		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-                if (AppController.getStoredString(Constants.Authorization)!=null){
+        bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (AppController.getStoredString(Constants.Authorization) != null) {
                     apiRequest.sendRequestGift(
                             new RequestGiftInput(
                                     gift.giftId
                             )
                     );
-                }else {
+                } else {
                     Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
                 }
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void init(){
-		ButterKnife.bind(this);
-		extractDataFromBundle();
-		setupViewPager(viewPager);
+    private void init() {
+        ButterKnife.bind(this);
+        extractDataFromBundle();
+        setupViewPager(viewPager);
 
         apiRequest = new ApiRequest(this, this);
 
-		mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
-		mIndicator.setPageCount(gift.giftImages != null? gift.giftImages.size():0);
-		mIndicator.show();
+        mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
+        mIndicator.setPageCount(gift.giftImages != null ? gift.giftImages.size() : 0);
+        mIndicator.show();
 
-		setListeners();
-	}
+        setListeners();
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_detail);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
-		init();
-	}
+        init();
+    }
 
-	private void shareIt() {
-		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-		sharingIntent.setType("text/plain");
-		sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "عنوان");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "تصویر");
-		startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با: "));
-	}
+    private void shareIt() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "عنوان");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "تصویر");
+        startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با: "));
+    }
 
-	private void setupViewPager(ViewPager viewPager) {
-		CustomPagerAdapter adapter = new CustomPagerAdapter(this);
-		viewPager.setAdapter(adapter);
-	}
+    private void setupViewPager(ViewPager viewPager) {
+        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
+        viewPager.setAdapter(adapter);
+    }
 
     @Override
     public void onResponse(Call call, Response response) {
-        if (response.body() instanceof RequestGiftOutput){
+        if (response.body() instanceof RequestGiftOutput) {
             Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
         }
     }
@@ -184,47 +184,47 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     class CustomPagerAdapter extends PagerAdapter {
 
-		Context mContext;
-		LayoutInflater mLayoutInflater;
+        Context mContext;
+        LayoutInflater mLayoutInflater;
 
-		public CustomPagerAdapter(Context context) {
-			mContext = context;
-			mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
+        public CustomPagerAdapter(Context context) {
+            mContext = context;
+            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
 
-		@Override
-		public int getCount() {
-			return (gift.giftImages != null? gift.giftImages.size() : 0);
-		}
+        @Override
+        public int getCount() {
+            return (gift.giftImages != null ? gift.giftImages.size() : 0);
+        }
 
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view == ((RelativeLayout) object);
-		}
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == ((RelativeLayout) object);
+        }
 
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
 
-			ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
 //			imageView.setImageResource(mResources[position]);
 
-			Glide
-					.with(mContext)
-					.load(gift.giftImages.get(position))
-					.centerCrop()
-					.placeholder(R.color.background)
-					.crossFade()
-					.into(imageView);
+            Glide
+                    .with(mContext)
+                    .load(gift.giftImages.get(position))
+                    .centerCrop()
+                    .placeholder(R.color.background)
+                    .crossFade()
+                    .into(imageView);
 
-			container.addView(itemView);
+            container.addView(itemView);
 
-			return itemView;
-		}
+            return itemView;
+        }
 
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			container.removeView((RelativeLayout) object);
-		}
-	}
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((RelativeLayout) object);
+        }
+    }
 }

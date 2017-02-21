@@ -21,7 +21,7 @@ public class ChoosePlaceAdapter extends RecyclerView.Adapter<ChoosePlaceHolder> 
 
     private ChoosePlaceDialogFragment dialogFragment;
     private Context mContext;
-//    private String fromActivity;
+    //    private String fromActivity;
     private ArrayList<Place> places;
     private FragmentActivity activity;
 
@@ -52,7 +52,7 @@ public class ChoosePlaceAdapter extends RecyclerView.Adapter<ChoosePlaceHolder> 
 
 //                else{
 
-                    dialogFragment.onPlaceSelected(places.get(i));
+                dialogFragment.onPlaceSelected(places.get(i));
 
 //                }
 

@@ -48,7 +48,7 @@ public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
         String image_url;
         if (gifts.get(i).giftImages != null && gifts.get(i).giftImages.size() > 0) {
             image_url = gifts.get(i).giftImages.get(0);
-        }else {
+        } else {
             image_url = "";
         }
 

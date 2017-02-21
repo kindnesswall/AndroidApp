@@ -34,7 +34,8 @@ public class CategoriesGridFragment extends BaseFragment {
 
     private GridCategoriesAdapter adapter;
     ArrayList<Category> categories = new ArrayList<>();
-	String TAG = CategoriesGridFragment.class.getName();
+    String TAG = CategoriesGridFragment.class.getName();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class CategoriesGridFragment extends BaseFragment {
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new GridCategoriesAdapter(context,categories);
+        adapter = new GridCategoriesAdapter(context, categories);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
@@ -58,12 +59,12 @@ public class CategoriesGridFragment extends BaseFragment {
     @Override
     public void onResponse(Call call, Response response) {
         super.onResponse(call, response);
-	    Log.d(TAG, "onResponse");
+        Log.d(TAG, "onResponse");
 
         mRecyclerView.setVisibility(View.VISIBLE);
         mProgressView.setVisibility(View.INVISIBLE);
 
-	    ArrayList<Category> categories = (ArrayList<Category>) response.body();
+        ArrayList<Category> categories = (ArrayList<Category>) response.body();
         this.categories.clear();
         this.categories.addAll(categories);
         adapter.notifyDataSetChanged();

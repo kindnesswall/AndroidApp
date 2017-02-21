@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +19,8 @@ import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
  */
 public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
 
-    String schoolId, childID;
     private ArrayList<RequestModel> requestModels;
     private Context mContext;
-    private FragmentActivity activity;
 
     public RequestToAGiftAdapter(Context context, ArrayList<RequestModel> requestModels) {
         this.requestModels = requestModels;
@@ -41,7 +38,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemH
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-	    myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
+        myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

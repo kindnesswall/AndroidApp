@@ -39,7 +39,7 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-	    myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
+        myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
 
     }
 

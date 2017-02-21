@@ -11,9 +11,9 @@ import ir.hamed_gh.divaremehrabani.R;
  * Created by Hamed on 11/11/16.
  */
 
-public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    protected TextView mItemTitleTv,mGiftLocationTv,mGiftCreatedTimeTv;
+    protected TextView mItemTitleTv, mGiftLocationTv, mGiftCreatedTimeTv;
     protected ImageView mItemIv;
     public View itemView;
 

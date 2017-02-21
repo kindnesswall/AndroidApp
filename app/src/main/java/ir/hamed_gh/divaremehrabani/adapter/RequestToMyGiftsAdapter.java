@@ -2,7 +2,6 @@ package ir.hamed_gh.divaremehrabani.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +21,8 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
  */
 public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
 
-    String schoolId, childID;
     private ArrayList<Gift> gifts;
     private Context mContext;
-    private FragmentActivity activity;
 
     public RequestToMyGiftsAdapter(Context context, ArrayList<Gift> gifts) {
         this.gifts = gifts;
@@ -43,7 +40,7 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-	    myHolder.mItemTitleTv.setText(gifts.get(i).title);
+        myHolder.mItemTitleTv.setText(gifts.get(i).title);
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

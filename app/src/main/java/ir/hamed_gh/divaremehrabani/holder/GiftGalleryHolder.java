@@ -14,6 +14,7 @@ public class GiftGalleryHolder extends RecyclerView.ViewHolder {
 
     public ImageView mImageView, mCloseBtn;
     public View mItemView;
+
     public GiftGalleryHolder(View itemView) {
         super(itemView);
 

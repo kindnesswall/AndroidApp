@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 //        mToolbarTitleTextView.setText("دیوار مهربانی");
     }
 
-    private void setListeners(){
+    private void setListeners() {
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,18 +96,18 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             }
         });
 
-        if (AppController.getStoredString(Constants.TELEPHONE)==null){
+        if (AppController.getStoredString(Constants.TELEPHONE) == null) {
             enterTelephoneNumber();
             loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
-        }else {
+        } else {
             enterVerificationCode();
             loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
         }
     }
 
-    private void init(){
+    private void init() {
         context = this;
-        apiRequest = new ApiRequest(context,this);
+        apiRequest = new ApiRequest(context, this);
 
         settingToolbar();
     }
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
     }
 
 
-    public void enterTelephoneNumber(){
+    public void enterTelephoneNumber() {
         AppController.storeString(Constants.TELEPHONE, null);
         phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
         phoneConfirimationCodeEt.setText("09011090098");
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
         not_recieved_code_btn.setVisibility(View.INVISIBLE);
     }
 
-    public void enterVerificationCode(){
+    public void enterVerificationCode() {
         phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
         phoneConfirimationCodeEt.setText("111111");
 
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
     @Override
     public void onResponse(Call call, Response response) {
-        if (response.body() instanceof TokenOutput){
+        if (response.body() instanceof TokenOutput) {
             TokenOutput tokenOutput = (TokenOutput) response.body();
             AppController.storeString(
                     Constants.Authorization,
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
                     tokenOutput.userName);
 
             finish();
-        }else {
+        } else {
             enterVerificationCode();
         }
     }

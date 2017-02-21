@@ -64,8 +64,8 @@ public class MyRequestsFragment extends BaseFragment {
         SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
         ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
 
-        adapter.addFrag(receivedRequestsFragment , "دریافتی");
-        adapter.addFrag(sentRequestsFragment , "ارسالی");
+        adapter.addFrag(receivedRequestsFragment, "دریافتی");
+        adapter.addFrag(sentRequestsFragment, "ارسالی");
 
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -75,15 +75,15 @@ public class MyRequestsFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if (AppController.getStoredString(Constants.Authorization)!=null){
+        if (AppController.getStoredString(Constants.Authorization) != null) {
             setupViewPager(mainVp);
             mainTabs.setupWithViewPager(mainVp);
-            mainVp.setCurrentItem(1,false);
+            mainVp.setCurrentItem(1, false);
 
             myGiftTopLay.setVisibility(View.GONE);
             myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(1,false);
-        }else {
+            mainVp.setCurrentItem(1, false);
+        } else {
             myGiftTopLay.setVisibility(View.VISIBLE);
             myGiftBottomLay.setVisibility(View.INVISIBLE);
 

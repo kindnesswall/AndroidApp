@@ -78,7 +78,7 @@ public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> 
     @Override
     public int getItemCount() {
 
-        return giftImageUrls !=null? giftImageUrls.size(): 0;
+        return giftImageUrls != null ? giftImageUrls.size() : 0;
 
     }
 }

@@ -29,80 +29,80 @@ import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
 
 public class BottomBarActivity extends AppCompatActivity {
 
-	@Bind(R.id.toolbar_title_textView)
-	public TextView mToolbarTitleTextView;
-	@Bind(R.id.main_toolbar)
-	Toolbar mToolbar;
-	@Bind(R.id.toolbar_new_gift_btn_tv)
-	TextView mToolbarNewGiftBtnTv;
+    @Bind(R.id.toolbar_title_textView)
+    public TextView mToolbarTitleTextView;
+    @Bind(R.id.main_toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.toolbar_new_gift_btn_tv)
+    TextView mToolbarNewGiftBtnTv;
 
-	private Context context;
-	private BottomBar mBottomBar;
+    private Context context;
+    private BottomBar mBottomBar;
 
-	private void settingToolbar() {
-		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-		setSupportActionBar(mToolbar);
-		try {
-			getSupportActionBar().setDisplayShowTitleEnabled(false);
-		} catch (Exception e) {
+    private void settingToolbar() {
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(mToolbar);
+        try {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        } catch (Exception e) {
 
-		}
-		mToolbarTitleTextView.setText("دیوار مهربانی");
-	}
+        }
+        mToolbarTitleTextView.setText("دیوار مهربانی");
+    }
 
-	private void TabSelected(int menuItemId){
-		if (menuItemId == R.id.bottomBarHome) {
+    private void TabSelected(int menuItemId) {
+        if (menuItemId == R.id.bottomBarHome) {
 
-			mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-			setFragment(
-					HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
-					HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-			// The user reselected item number one, scroll your content to top.
-		} else if (menuItemId == R.id.bottomBarCategories) {
+            mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+            setFragment(
+                    HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
+                    HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+            // The user reselected item number one, scroll your content to top.
+        } else if (menuItemId == R.id.bottomBarCategories) {
 
-			mToolbarTitleTextView.setText(R.string.categories);
-			setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
+            mToolbarTitleTextView.setText(R.string.categories);
+            setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
 
-			// The user selected item number one.
-		} else if (menuItemId == R.id.bottomBarSearch) {
+            // The user selected item number one.
+        } else if (menuItemId == R.id.bottomBarSearch) {
 
-			mToolbarTitleTextView.setText(R.string.search);
-			setFragment(
-					HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
-					HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
-			);
+            mToolbarTitleTextView.setText(R.string.search);
+            setFragment(
+                    HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
+                    HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+            );
 
-			// The user selected item number one.
-		} else if (menuItemId == R.id.bottomBarMyWall) {
+            // The user selected item number one.
+        } else if (menuItemId == R.id.bottomBarMyWall) {
 
-			mToolbarTitleTextView.setText(R.string.my_wall);
-			setFragment(new MyWallFragment(), MyWallFragment.class.getName());
+            mToolbarTitleTextView.setText(R.string.my_wall);
+            setFragment(new MyWallFragment(), MyWallFragment.class.getName());
 
-			// The user selected item number one.
-		}
-	}
+            // The user selected item number one.
+        }
+    }
 
-	private void settingBottomBar(Bundle savedInstanceState) {
-		mBottomBar = BottomBar.attach(this, savedInstanceState);
-		mBottomBar.noTopOffset();
-		mBottomBar.useFixedMode();
-		mBottomBar.setTypeFace("fonts/IRANSansMobile_Light-4.1.ttf");
-		mBottomBar.setItems(R.menu.menu_bottombar);
-		mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-		int color = getResources().getColor(R.color.white);
+    private void settingBottomBar(Bundle savedInstanceState) {
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.noTopOffset();
+        mBottomBar.useFixedMode();
+        mBottomBar.setTypeFace("fonts/IRANSansMobile_Light-4.1.ttf");
+        mBottomBar.setItems(R.menu.menu_bottombar);
+        mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        int color = getResources().getColor(R.color.white);
 
-		((ImageView) mBottomBar.findViewById(R.id.bb_bottom_bar_icon)).setColorFilter(color);
+        ((ImageView) mBottomBar.findViewById(R.id.bb_bottom_bar_icon)).setColorFilter(color);
 
 
-		mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-			@Override
-			public void onMenuTabSelected(@IdRes int menuItemId) {
-				TabSelected(menuItemId);
-			}
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                TabSelected(menuItemId);
+            }
 
-			@Override
-			public void onMenuTabReSelected(@IdRes int menuItemId) {
-				TabSelected(menuItemId);
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+                TabSelected(menuItemId);
 //				if (menuItemId == R.id.bottomBarHome) {
 //					Toasti.showS("Home reselected");
 //					// The user reselected item number one, scroll your content to top.
@@ -116,85 +116,85 @@ public class BottomBarActivity extends AppCompatActivity {
 //					Toasti.showS("MyWall reselected");
 //					// The user selected item number one.
 //				}
-			}
-		});
-	}
+            }
+        });
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Fabric.with(this, new Crashlytics());
-		setContentView(R.layout.activity_bottombar);
-		ButterKnife.bind(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+        setContentView(R.layout.activity_bottombar);
+        ButterKnife.bind(this);
 
-		context = this;
+        context = this;
 
-		settingToolbar();
+        settingToolbar();
 
-		setFragment(
-				HomeFragment.newInstance(Constants.HOME_PAGETYPE,null),
-				HomeFragment.class.getName() + Constants.HOME_PAGETYPE
-		);
+        setFragment(
+                HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
+                HomeFragment.class.getName() + Constants.HOME_PAGETYPE
+        );
 
-		settingBottomBar(savedInstanceState);
+        settingBottomBar(savedInstanceState);
 
-		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+        mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-				if (AppController.getStoredString(Constants.Authorization) != null) {
-					startActivity(new Intent(context, RegisterGiftActivity.class));
+                if (AppController.getStoredString(Constants.Authorization) != null) {
+                    startActivity(new Intent(context, RegisterGiftActivity.class));
 
-				} else {
+                } else {
 
-					startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class));
 
-				}
+                }
 
-			}
-		});
+            }
+        });
 
-		mBottomBar.selectTabAtPosition(3, false);
-	}
+        mBottomBar.selectTabAtPosition(3, false);
+    }
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-		// Necessary to restore the BottomBar's state, otherwise we would
-		// lose the current tab on orientation change.
-		mBottomBar.onSaveInstanceState(outState);
-	}
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-	}
+    }
 
-	@Override
-	protected void onPostResume() {
-		try {
-			super.onPostResume();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @Override
+    protected void onPostResume() {
+        try {
+            super.onPostResume();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void setFragment(Fragment fragment, String title) {
-		try {
+    public void setFragment(Fragment fragment, String title) {
+        try {
 
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-			fragmentTransaction.replace(R.id.container_body, fragment, title);
-			fragmentTransaction.addToBackStack(title);
-			fragmentTransaction.commit();
+            fragmentTransaction.replace(R.id.container_body, fragment, title);
+            fragmentTransaction.addToBackStack(title);
+            fragmentTransaction.commit();
 
-		} catch (Exception e) {
-			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
-			// java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
-		}
-	}
+        } catch (Exception e) {
+            //Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+            // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+        }
+    }
 
 }
