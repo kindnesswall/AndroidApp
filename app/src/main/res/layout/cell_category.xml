@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	                android:layout_width="match_parent"
-	                android:layout_height="match_parent"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-	                android:layout_marginLeft="2dp"
-	                android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
 
-	                android:layout_marginTop="4dp"
-	                android:background="@color/white"
-	                android:padding="8dp">
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:padding="8dp">
 
-		<!--<ImageView-->
-		<!--android:id="@+id/cell_category_ic"-->
-		<!--android:layout_width="48dp"-->
-		<!--android:layout_height="48dp"-->
-		<!--android:layout_centerHorizontal="true"/>-->
+        <!--<ImageView-->
+        <!--android:id="@+id/cell_category_ic"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarMehrabani
-			android:id="@+id/cell_category_font_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_centerHorizontal="true"
-			android:textColor="@color/icon_black"
-			android:textSize="32dp"/>
+        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarMehrabani
+            android:id="@+id/cell_category_font_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/icon_black"
+            android:textSize="32dp" />
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/cell_category_tv"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/cell_category_font_icon"
-			android:layout_marginBottom="8dp"
-			android:layout_marginTop="8dp"
-			android:gravity="center"
-			android:textSize="16dp"/>
+        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+            android:id="@+id/cell_category_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cell_category_font_icon"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="16dp" />
 
-	</RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
