@@ -9,7 +9,7 @@ import android.widget.TextView;
 import ir.hamed_gh.divaremehrabani.R;
 
 /**
- * Created by Hamed on 8/17/16.
+ * Created by HamedGh on 3/8/2016.
  */
 
 public class Snackbari {

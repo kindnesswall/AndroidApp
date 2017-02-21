@@ -3,7 +3,7 @@ package ir.hamed_gh.divaremehrabani.model.api.output;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Hamed on 1/5/17.
+ * Created by HamedGh on 3/8/2016.
  */
 
 public class TokenOutput {

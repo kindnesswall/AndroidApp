@@ -42,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * Created by 5 on 02/21/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class HomeFragment extends BaseFragment implements HomeFilteringCallback {
 

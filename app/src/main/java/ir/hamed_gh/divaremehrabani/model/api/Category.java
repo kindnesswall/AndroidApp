@@ -6,9 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Hamed on 11/11/16.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class Category implements Parcelable {
     @SerializedName("title")
     public String title;

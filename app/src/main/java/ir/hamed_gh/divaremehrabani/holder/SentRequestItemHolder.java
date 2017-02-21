@@ -7,9 +7,8 @@ import android.widget.TextView;
 import ir.hamed_gh.divaremehrabani.R;
 
 /**
- * Created by Hamed on 11/11/16.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 
     public TextView mItemTitleTv;

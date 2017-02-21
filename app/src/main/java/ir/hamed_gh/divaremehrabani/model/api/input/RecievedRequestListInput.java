@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 
 /**
- * Created by Hamed on 2/9/17.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class RecievedRequestListInput extends StartLastIndex {
 
     @SerializedName("giftId")

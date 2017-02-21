@@ -5,7 +5,7 @@ import android.widget.Toast;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 
 /**
- * Created by aseman on 3/5/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class Toasti {
 

@@ -11,7 +11,7 @@ import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 
 /**
- * Created by 5 on 02/21/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class StatisticFragment extends BaseFragment {
 

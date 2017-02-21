@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //import io.fabric.sdk.android.Fabric;
 
 /**
- * Created by Hamed on 4/3/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class AppController extends Application {
 

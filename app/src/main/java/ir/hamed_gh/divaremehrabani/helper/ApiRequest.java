@@ -21,9 +21,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * Created by Hamed on 11/12/16.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class ApiRequest {
 
     private Listener listener;

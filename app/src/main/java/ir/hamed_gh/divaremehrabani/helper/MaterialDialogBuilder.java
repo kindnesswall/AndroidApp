@@ -6,7 +6,7 @@ import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 /**
- * Created by Hamed on 3/16/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class MaterialDialogBuilder {
 

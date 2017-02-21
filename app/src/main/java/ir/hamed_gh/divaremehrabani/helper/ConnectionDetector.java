@@ -8,7 +8,7 @@ import ir.hamed_gh.divaremehrabani.app.AppController;
 
 
 /**
- * Created by RezaRg on 12/10/14.
+ * Created by HamedGh on 3/8/2016.
  */
 public class ConnectionDetector {
 

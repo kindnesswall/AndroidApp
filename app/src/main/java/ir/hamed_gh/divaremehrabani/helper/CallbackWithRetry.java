@@ -9,7 +9,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by lms-3 on 02/07/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public abstract class CallbackWithRetry<T> implements Callback<T> {
     private static final String TAG = CallbackWithRetry.class.getSimpleName();

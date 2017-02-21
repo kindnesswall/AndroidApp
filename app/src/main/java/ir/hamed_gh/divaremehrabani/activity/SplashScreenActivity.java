@@ -14,7 +14,7 @@ import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
 
 /**
- * Created by Hamed on 2/14/17.
+ * Created by HamedGh on 3/8/2016.
  */
 
 public class SplashScreenActivity extends AppCompatActivity implements ChoosePlaceCallback {

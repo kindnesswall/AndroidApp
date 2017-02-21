@@ -1,7 +1,7 @@
 package ir.hamed_gh.divaremehrabani.app;
 
 /**
- * Created by 6 on 02/22/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class URIs {
 

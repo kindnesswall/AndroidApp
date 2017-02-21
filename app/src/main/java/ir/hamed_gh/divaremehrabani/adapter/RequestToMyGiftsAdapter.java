@@ -17,7 +17,7 @@ import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
- * Created by 5 on 3/8/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
 

@@ -8,9 +8,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Created by Hamed on 11/11/16.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class Gift implements Parcelable {
 
     @SerializedName("title")

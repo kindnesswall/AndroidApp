@@ -21,7 +21,7 @@ import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
 
 /**
- * Created by 5 on 02/21/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class CategoryFilteringDialogFragment extends DialogFragment {
 

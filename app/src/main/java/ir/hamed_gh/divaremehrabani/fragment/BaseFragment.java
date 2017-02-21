@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 
 /**
- * Created by aseman on 3/28/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class BaseFragment extends Fragment implements ApiRequest.Listener {
 

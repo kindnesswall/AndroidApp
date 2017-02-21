@@ -15,7 +15,7 @@ import ir.hamed_gh.divaremehrabani.holder.CategoryDialogHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
- * Created by 5 on 3/8/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class ChooseCategoriesDialogAdapter extends RecyclerView.Adapter<CategoryDialogHolder> {
 

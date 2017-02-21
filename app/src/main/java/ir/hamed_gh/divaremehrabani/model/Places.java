@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Created by Hamed on 10/12/16.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class Places {
 
     @SerializedName("places")

@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 
 /**
- * Created by Hamed on 4/13/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class CustomTabLayout extends TabLayout {
     public CustomTabLayout(Context context) {

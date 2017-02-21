@@ -1,9 +1,8 @@
 package ir.hamed_gh.divaremehrabani.model;
 
 /**
- * Created by Hamed on 1/17/17.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class GetGiftPathQuery {
 
     public String locationId;

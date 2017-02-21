@@ -15,7 +15,7 @@ import ir.hamed_gh.divaremehrabani.holder.ChoosePlaceHolder;
 import ir.hamed_gh.divaremehrabani.model.Place;
 
 /**
- * Created by 5 on 3/8/2016.
+ * Created by HamedGh on 3/8/2016.
  */
 public class ChoosePlaceAdapter extends RecyclerView.Adapter<ChoosePlaceHolder> {
 

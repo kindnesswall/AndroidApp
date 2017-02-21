@@ -19,7 +19,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * Created by Hamed on 5/6/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public interface RestAPI {
 

@@ -8,7 +8,7 @@ import ir.hamed_gh.divaremehrabani.R;
 
 
 /**
- * Created by Hamed on 6/10/16.
+ * Created by HamedGh on 3/8/2016.
  */
 public class GiftGalleryHolder extends RecyclerView.ViewHolder {
 

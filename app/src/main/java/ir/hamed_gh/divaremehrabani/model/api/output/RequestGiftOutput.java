@@ -1,8 +1,7 @@
 package ir.hamed_gh.divaremehrabani.model.api.output;
 
 /**
- * Created by Hamed on 2/9/17.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public class RequestGiftOutput {
 }

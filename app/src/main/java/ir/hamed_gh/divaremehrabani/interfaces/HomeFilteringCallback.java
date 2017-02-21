@@ -4,9 +4,8 @@ import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
- * Created by Hamed on 2/15/17.
+ * Created by HamedGh on 3/8/2016.
  */
-
 public interface HomeFilteringCallback {
 
     public void onApplyFiltering(Place place, Category category);

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Hamed on 10/12/16.
+ * Created by HamedGh on 3/8/2016.
  */
 
 public class Place implements Parcelable {
