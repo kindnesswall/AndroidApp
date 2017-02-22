@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.holder.GiftGalleryHolder;
+import ir.hamed_gh.divaremehrabani.interfaces.UpdateImageGallery;
 
 /**
  * Created by HamedGh on 3/8/2016.
@@ -46,6 +47,8 @@ public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> 
                 Toasti.showS("close!");
                 giftImageUrls.remove(i);
                 notifyDataSetChanged();
+
+                ((UpdateImageGallery)mContext).onUpdateGallery();
             }
         });
 

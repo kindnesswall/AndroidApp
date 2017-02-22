@@ -123,8 +123,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:padding="8dp"
-                android:background="@color/register_gift_warning_background">
+                android:background="@color/register_gift_warning_background"
+                android:padding="8dp">
 
                 <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
                     android:id="@+id/choose_category_tv"
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_alignRight="@id/choose_category_tv"
+                    android:layout_alignParentRight="true"
                     android:layout_below="@id/choose_category_tv"
 
                     android:text="@string/gift_category"
@@ -160,6 +160,7 @@
                     android:clickable="true">
 
                     <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        android:id="@+id/choose_category_btn_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -174,12 +175,12 @@
 
             <RelativeLayout
                 android:id="@+id/upload_image_lay"
-                android:layout_below="@id/choose_category_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/choose_category_lay"
                 android:layout_marginTop="4dp"
-                android:padding="8dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:padding="8dp">
 
                 <RelativeLayout
                     android:id="@+id/choose_image_btn"
@@ -191,7 +192,21 @@
                     android:background="@drawable/button_selector_gray"
                     android:clickable="true">
 
+
+                    <com.rey.material.widget.ProgressView
+                        android:id="@+id/upload_img_circular_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:pv_autostart="true"
+                        app:pv_circular="true"
+                        app:pv_progressMode="indeterminate"
+                        app:pv_progressStyle="@style/Material.Drawable.CircularProgress" />
+
                     <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        android:id="@+id/choose_image_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -218,22 +233,89 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="145dp"
-                    android:layout_marginTop="8dp"
                     android:layout_below="@id/choose_image_btn"
+                    android:layout_marginTop="8dp"
 
                     android:background="@color/grey_200"
 
                     android:clipToPadding="false"
                     android:paddingBottom="8dp"
-                    android:scrollbars="horizontal" />
-
-                <ImageView
-                    android:id="@+id/gift_imageview"
-                    android:layout_below="@id/choose_image_btn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@color/amber_400"
+                    android:scrollbars="horizontal"
                     android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/title_lay"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/upload_image_lay"
+                android:layout_marginTop="4dp"
+                android:background="@color/white"
+                android:padding="8dp">
+
+                <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    android:id="@+id/title_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentRight="true"
+
+                    android:text="عنوان"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16dp" />
+
+                <ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+                    android:id="@+id/title_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_txt" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/choose_place_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_lay"
+                android:layout_marginTop="4dp"
+                android:background="@color/white"
+                android:padding="8dp">
+
+                <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    android:id="@+id/gift_place_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+
+                    android:text="محل هدیه"
+                    android:textSize="18dp" />
+
+                <RelativeLayout
+                    android:id="@+id/choose_place_btn"
+                    android:layout_width="108dp"
+                    android:layout_height="@dimen/button_height"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/gift_place_txt"
+
+                    android:background="@drawable/button_selector"
+                    android:clickable="true">
+
+                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        android:id="@+id/choose_place_btn_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerInParent="true"
+                        android:text="انتخاب محل"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -241,10 +323,10 @@
                 android:id="@+id/register_gift_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/upload_image_lay"
+                android:layout_below="@id/choose_place_lay"
                 android:layout_marginTop="4dp"
-                android:padding="8dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:padding="8dp">
 
                 <RelativeLayout
                     android:id="@+id/register_gift_btn"

@@ -21,8 +21,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.rey.material.widget.ProgressView;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,11 +36,15 @@ import ir.hamed_gh.divaremehrabani.adapter.GiftGalleryAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCategoryDialogFragment;
+import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
+import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
+import ir.hamed_gh.divaremehrabani.interfaces.UpdateImageGallery;
+import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
@@ -52,7 +56,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterGiftActivity extends AppCompatActivity
-        implements ProgressRequestBody.UploadCallbacks, ApiRequest.Listener, ChooseCategoryCallback {
+        implements ProgressRequestBody.UploadCallbacks, ApiRequest.Listener, ChooseCategoryCallback, UpdateImageGallery,ChoosePlaceCallback {
 
     @Bind(R.id.main_toolbar)
     Toolbar mToolbar;
@@ -66,6 +70,9 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.choose_category_btn)
     RelativeLayout mChooseCategoryBtn;
 
+    @Bind(R.id.choose_place_btn)
+    RelativeLayout mChoosePlaceBtn;
+
     @Bind(R.id.toolbar_back_iv)
     ImageView mBackBtn;
 
@@ -75,14 +82,29 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.toolbar_save_iv)
     ImageView mSaveBtn;
 
+    @Bind(R.id.upload_img_circular_progress)
+    ProgressView mUploadImgCircularProgress;
+
     @Bind(R.id.choose_image_btn)
     RelativeLayout mChooseImageBtn;
 
-    @Bind(R.id.gift_imageview)
-    ImageView giftImageview;
-
     @Bind(R.id.register_gift_btn)
     RelativeLayout mRegisterGiftBtn;
+
+    @Bind(R.id.choose_category_lay)
+    RelativeLayout mChooseCategoryLay;
+
+    @Bind(R.id.choose_category_tv)
+    TextView mChooseCategoryTv;
+
+    @Bind(R.id.choose_category_btn_txt)
+    TextView mChooseCategoryBtnTxt;
+
+    @Bind(R.id.choose_place_btn_txt)
+    TextView mChoosePlaceBtnTxt;
+
+    @Bind(R.id.choose_image_txt)
+    TextView mChooseImageTxt;
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -91,6 +113,15 @@ public class RegisterGiftActivity extends AppCompatActivity
     private Uri imageUri;
     private Gift myGift = new Gift();
     private GiftGalleryAdapter giftGalleryAdapter;
+
+    @Override
+    public void onUpdateGallery() {
+        if (myGift.giftImages.size()>0){
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }else{
+            mRecyclerView.setVisibility(View.GONE);
+        }
+    }
 
     private void settingToolbar() {
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -169,6 +200,15 @@ public class RegisterGiftActivity extends AppCompatActivity
                 );
             }
         });
+
+        mChoosePlaceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+                choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+            }
+        });
     }
 
     /**
@@ -182,7 +222,6 @@ public class RegisterGiftActivity extends AppCompatActivity
         }
         return outputFileUri;
     }
-
 
     /**
      * Create a chooser intent to select the source to get image from.<br/>
@@ -269,10 +308,17 @@ public class RegisterGiftActivity extends AppCompatActivity
                 requestBody
         );
 
+        mUploadImgCircularProgress.setVisibility(View.VISIBLE);
+        mChooseImageTxt.setVisibility(View.INVISIBLE);
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,
                                    Response<ResponseBody> response) {
+
+                mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
+                mChooseImageTxt.setVisibility(View.VISIBLE);
+
                 if (!response.isSuccessful()) {
                     Toasti.showS("خطا در سرور");
                     return;
@@ -289,16 +335,9 @@ public class RegisterGiftActivity extends AppCompatActivity
                 if (uploadFileOutput.imageSrc != null) {
                     Log.d("Upload", "onResponse: " + uploadFileOutput.imageSrc);
 
-                    Glide
-                            .with(context)
-                            .load(uploadFileOutput.imageSrc)
-                            .centerCrop()
-                            .placeholder(R.color.background)
-                            .crossFade()
-                            .into(giftImageview);
-
                     myGift.giftImages.add(uploadFileOutput.imageSrc);
                     giftGalleryAdapter.notifyDataSetChanged();
+                    onUpdateGallery();
 
 //					ImageLoader.getInstance().displayImage(uploadFileOutput.imageSrc, giftImageview);
                 }
@@ -320,6 +359,9 @@ public class RegisterGiftActivity extends AppCompatActivity
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Upload error:", t.getMessage());
+
+                mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
+                mChooseImageTxt.setVisibility(View.VISIBLE);
             }
         });
 
@@ -402,7 +444,7 @@ public class RegisterGiftActivity extends AppCompatActivity
             loadMyGift();
         }
 
-        giftGalleryAdapter = new GiftGalleryAdapter(context, myGift.giftImages);
+        giftGalleryAdapter = new GiftGalleryAdapter(this, myGift.giftImages);
         mRecyclerView.setAdapter(giftGalleryAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
@@ -461,6 +503,14 @@ public class RegisterGiftActivity extends AppCompatActivity
 
     @Override
     public void onCategorySelected(Category category) {
+        mChooseCategoryLay.setBackgroundColor(getResources().getColor(R.color.white));
+        mChooseCategoryTv.setVisibility(View.GONE);
+        mChooseCategoryBtnTxt.setText(category.title);
+    }
 
+    @Override
+    public void onPlaceSelected(Place place) {
+        mChoosePlaceBtnTxt.setText(place.name);
+        myGift.locationId = place.id;
     }
 }
