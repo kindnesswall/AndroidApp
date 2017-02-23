@@ -60,7 +60,7 @@ public class AppController extends Application {
         editor.apply();
     }
 
-    public static void storeInt(String key, int value) {
+    public static void storeInt(String key, Integer value) {
         editor.putInt(key, value);
         editor.apply();
     }

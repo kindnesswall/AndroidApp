@@ -710,6 +710,7 @@ Fingerprint: %2$s"</string>
     <string name="place_equal">محل:</string>
     <string name="category_equal">دسته‌بندی:</string>
     <string name="remove_filter">حذف فیلتر</string>
+    <string name="gift_info_saved">اطلاعات هدیه ذخیره شد</string>
 
     <!-- from divar -->
 </resources>

@@ -80,6 +80,9 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.choose_category_btn)
     RelativeLayout mChooseCategoryBtn;
 
+    @Bind(R.id.after_category_select_lay)
+    RelativeLayout mAfterCategorySelectLay;
+
     @Bind(R.id.choose_place_btn)
     RelativeLayout mChoosePlaceBtn;
 
@@ -181,6 +184,8 @@ public class RegisterGiftActivity extends AppCompatActivity
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveMyGift();
+                Toasti.showS(getString(R.string.gift_info_saved));
                 onBackPressed();
             }
         });
@@ -188,7 +193,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppController.storeBoolean(Constants.MY_GIFT_SAVED, false);
+                deleteSavedGift();
                 finish();
             }
         });
@@ -197,6 +202,7 @@ public class RegisterGiftActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 saveMyGift();
+                Snackbari.showS(mTitleEt,getString(R.string.gift_info_saved));
             }
         });
 
@@ -410,26 +416,49 @@ public class RegisterGiftActivity extends AppCompatActivity
     }
 
     private void saveMyGift() {
-
         AppController.storeBoolean(Constants.MY_GIFT_SAVED, true);
 
-        AppController.storeString(Constants.MY_GIFT_TITLE, myGift.title);
+        AppController.storeString(Constants.MY_GIFT_TITLE, mTitleEt.getText().toString());
         AppController.storeString(Constants.MY_GIFT_PRICE, myGift.price);
         AppController.storeString(Constants.MY_GIFT_ADDRESS, myGift.address);
-        AppController.storeString(Constants.MY_GIFT_DESCRIPTION, myGift.description);
+        AppController.storeString(Constants.MY_GIFT_DESCRIPTION, mDescriptionEt.getText().toString());
+
         AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, myGift.categoryId);
-        AppController.storeString(Constants.MY_GIFT_LOCATION_ID, myGift.locationId);
+        AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, myGift.category);
+
+        AppController.storeString(Constants.MY_GIFT_LOCATION_ID, place.id);
+        AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, place.name);
 
         for (int i = 0; i < myGift.giftImages.size(); i++) {
             AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, myGift.giftImages.get(i));
         }
         AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, myGift.giftImages.size());
+    }
 
+    private void deleteSavedGift() {
+        AppController.storeBoolean(Constants.MY_GIFT_SAVED, false);
+
+        AppController.storeString(Constants.MY_GIFT_TITLE, null);
+        AppController.storeString(Constants.MY_GIFT_PRICE, null);
+        AppController.storeString(Constants.MY_GIFT_ADDRESS, null);
+        AppController.storeString(Constants.MY_GIFT_DESCRIPTION, null);
+
+        AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, null);
+        AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, null);
+
+        AppController.storeString(Constants.MY_GIFT_LOCATION_ID, null);
+        AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, null);
+
+        for (int i = 0; i < myGift.giftImages.size(); i++) {
+            AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, null);
+        }
+        AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, 0);
     }
 
     private void loadMyGift() {
         myGift.title = AppController.getStoredString(Constants.MY_GIFT_TITLE) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_TITLE) : "";
+        mTitleEt.setText(myGift.title);
 
         myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_PRICE) : "";
@@ -439,25 +468,41 @@ public class RegisterGiftActivity extends AppCompatActivity
 
         myGift.description = AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) : "";
+        mDescriptionEt.setText(myGift.description);
 
         myGift.categoryId = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) : "";
+        category = new Category();
+        category.categoryId = myGift.categoryId;
+        myGift.category = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) != null ?
+                AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) : "";
+        category.title = myGift.category;
+        changeUIAfterCategorySelect();
 
         myGift.locationId = AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) : "";
+        if (myGift.locationId!=null) {
+            place = new Place();
+            place.id = myGift.locationId;
+
+            myGift.location = AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) != null ?
+                    AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) : "";
+            place.name = myGift.location;
+            if (!myGift.location.equals("")) {
+                mChoosePlaceBtnTxt.setText(myGift.location);
+            }
+        }
 
         int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
         for (int i = 0; i < numberOfMyImages; i++) {
             myGift.giftImages.add(AppController.getStoredString(Constants.MY_GIFT_IMAGE + "_" + i));
         }
+        giftGalleryAdapter.notifyDataSetChanged();
+        onUpdateGallery();
     }
 
     private void init() {
         context = this;
-
-        if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED, false)) {
-            loadMyGift();
-        }
 
         giftGalleryAdapter = new GiftGalleryAdapter(this, myGift.giftImages);
         mRecyclerView.setAdapter(giftGalleryAdapter);
@@ -465,6 +510,10 @@ public class RegisterGiftActivity extends AppCompatActivity
 
         mTitleEt.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         mTitleEt.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED, false)) {
+            loadMyGift();
+        }
 
         settingToolbar();
     }
@@ -523,9 +572,19 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Override
     public void onCategorySelected(Category category) {
         this.category = category;
+        myGift.categoryId = category.categoryId;
+        myGift.category = category.title;
+
+        changeUIAfterCategorySelect();
+    }
+
+    private void changeUIAfterCategorySelect() {
         mChooseCategoryLay.setBackgroundColor(getResources().getColor(R.color.white));
         mChooseCategoryTv.setVisibility(View.GONE);
-        mChooseCategoryBtnTxt.setText(category.title);
+        if (!category.title.equals("")) {
+            mChooseCategoryBtnTxt.setText(category.title);
+        }
+        mAfterCategorySelectLay.setVisibility(View.VISIBLE);
     }
 
     @Override

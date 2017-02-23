@@ -61,4 +61,6 @@ public class Constants {
     public static final String CATEGORY_PAGETYPE = "CATEGORY_PAGETYPE";
     public static final String SEARCH_PAGETYPE = "SEARCH_PAGETYPE";
 
+    public static final String MY_GIFT_CATEGORY_NAME = "MY_GIFT_CATEGORY_NAME";
+    public static final String MY_GIFT_LOCATION_NAME = "MY_GIFT_LOCATION_NAME";
 }
