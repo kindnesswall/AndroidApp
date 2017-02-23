@@ -15,8 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,11 +37,13 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftGalleryAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChooseCategoryDialogFragment;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
+import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
@@ -67,6 +71,12 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.toolbar_send_btn_tv)
     TextView mToolbarSendBtnTv;
 
+    @Bind(R.id.description_et)
+    EditTextIranSans mDescriptionEt;
+
+    @Bind(R.id.title_et)
+    EditTextIranSans mTitleEt;
+
     @Bind(R.id.choose_category_btn)
     RelativeLayout mChooseCategoryBtn;
 
@@ -87,9 +97,6 @@ public class RegisterGiftActivity extends AppCompatActivity
 
     @Bind(R.id.choose_image_btn)
     RelativeLayout mChooseImageBtn;
-
-    @Bind(R.id.register_gift_btn)
-    RelativeLayout mRegisterGiftBtn;
 
     @Bind(R.id.choose_category_lay)
     RelativeLayout mChooseCategoryLay;
@@ -113,6 +120,8 @@ public class RegisterGiftActivity extends AppCompatActivity
     private Uri imageUri;
     private Gift myGift = new Gift();
     private GiftGalleryAdapter giftGalleryAdapter;
+    private Place place;
+    private Category category;
 
     @Override
     public void onUpdateGallery() {
@@ -138,7 +147,34 @@ public class RegisterGiftActivity extends AppCompatActivity
         mToolbarSendBtnTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasti.showS("ارسال");
+                if (mTitleEt.getText().toString().equals("")){
+                    Snackbari.showS(mTitleEt,"عنوان را وارد نمایید");
+                    return;
+                }else if (mDescriptionEt.getText().toString().equals("")){
+                    Snackbari.showS(mTitleEt,"توضیحات را وارد نمایید");
+                    return;
+                }else if (category==null){
+                    Snackbari.showS(mTitleEt,"دسته‌بندی را وارد نمایید");
+                    return;
+                }else if (place==null){
+                    Snackbari.showS(mTitleEt,"محل را وارد نمایید");
+                    return;
+                }else if (myGift.giftImages.size()==0){
+                    Snackbari.showS(mTitleEt,"حداقل یک عکس آپلود نمایید");
+                    return;
+                }
+
+                (new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
+                        new Gift(
+                                mDescriptionEt.getText().toString(),
+                                place.name,
+                                mTitleEt.getText().toString(),
+                                "20000000",
+                                category.categoryId,
+                                place.id,
+                                myGift.giftImages
+                        )
+                );
             }
         });
 
@@ -177,27 +213,6 @@ public class RegisterGiftActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivityForResult(getPickImageChooserIntent(), 200);
-            }
-        });
-
-        mRegisterGiftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<String> giftImages = new ArrayList<String>();
-                giftImages.add("http://awsm.ir/Upload/1822aaed-6a7c-4b77-9d63-6940e78633c3.jpg");
-                giftImages.add("http://awsm.ir/Upload/6ce02f2a-46b9-48eb-b87e-2ede15497a3b.jpg");
-
-                (new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
-                        new Gift(
-                                "چقده عالی",
-                                "نواب",
-                                "نقاشی های رویایی",
-                                "20000000",
-                                "1",
-                                "1",
-                                giftImages
-                        )
-                );
             }
         });
 
@@ -448,6 +463,9 @@ public class RegisterGiftActivity extends AppCompatActivity
         mRecyclerView.setAdapter(giftGalleryAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
+        mTitleEt.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        mTitleEt.setInputType(InputType.TYPE_CLASS_TEXT);
+
         settingToolbar();
     }
 
@@ -493,6 +511,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         if (response.body() instanceof Gift) {
             Gift gift = (Gift) response.body();
             Toasti.showS(gift.title);
+            finish();
         }
     }
 
@@ -503,6 +522,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 
     @Override
     public void onCategorySelected(Category category) {
+        this.category = category;
         mChooseCategoryLay.setBackgroundColor(getResources().getColor(R.color.white));
         mChooseCategoryTv.setVisibility(View.GONE);
         mChooseCategoryBtnTxt.setText(category.title);
@@ -510,6 +530,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 
     @Override
     public void onPlaceSelected(Place place) {
+        this.place = place;
         mChoosePlaceBtnTxt.setText(place.name);
         myGift.locationId = place.id;
     }

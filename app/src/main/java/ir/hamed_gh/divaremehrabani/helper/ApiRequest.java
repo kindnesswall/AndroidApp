@@ -239,6 +239,11 @@ public class ApiRequest {
                                    Response<Gift> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
+
+            @Override
+            public void onFailure(Call<Gift> call, Throwable t) {
+                super.onFailure(call, t);
+            }
         });
     }
 
