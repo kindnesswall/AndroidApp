@@ -303,7 +303,6 @@
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/choose_place_lay"
                 android:layout_width="match_parent"

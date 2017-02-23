@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,7 +27,10 @@ import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
+import ir.hamed_gh.divaremehrabani.model.Place;
+import ir.hamed_gh.divaremehrabani.model.Places;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -47,6 +54,15 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.detail_title_tv)
     TextView mDetailTitleTv;
 
+    @Bind(R.id.detail_register_time_tv)
+    TextView mDetailRegisterTimeTv;
+
+    @Bind(R.id.detail_place_tv)
+    TextView mDetailPlaceTv;
+
+    @Bind(R.id.detail_category_tv)
+    TextView mDetailCategoryTv;
+
     @Bind(R.id.detail_description_tv)
     TextView mDetailDescriptionTv;
 
@@ -64,6 +80,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     private Gift gift;
     private MyPageIndicator mIndicator;
     private ApiRequest apiRequest;
+    private Places allPlaces;
 
     public static Intent createIntent(Gift gift) {
         Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
@@ -78,8 +95,58 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             mToolbarTitleTv.setText(gift.title);
             mDetailDescriptionTv.setText(gift.description);
             mDetailTitleTv.setText(gift.title);
+            mDetailRegisterTimeTv.setText(gift.createDateTime);
+
+            readFromJson();
+            String place = findPlaceRecursion(gift.locationId);
+            int i = 0;
+            mDetailPlaceTv.setText(place);
+
+            mDetailCategoryTv.setText(gift.category);
         }
     }
+
+    private void readFromJson() {
+        String json = ReadJsonFile.loadJSONFromAsset(this);
+
+        Gson gson = new Gson();
+
+        allPlaces = gson.fromJson(json, Places.class);
+
+        Places level2 = new Places();
+        level2.setPlaces(new ArrayList<Place>());
+
+        Places level3 = new Places();
+        level3.setPlaces(new ArrayList<Place>());
+
+        Places level4 = new Places();
+        level4.setPlaces(new ArrayList<Place>());
+
+        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).name);
+        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).level);
+
+
+//        for (Place thisPlace : allPlaces.getPlaces()) {
+//            if (thisPlace.id.equals(gift)) {
+//                return thisPlace.name;
+//            }
+//        }
+    }
+
+    private String findPlaceRecursion(String id){
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.id.equals(id)) {
+                String parent = findPlaceRecursion(thisPlace.container_id);
+                if (!parent.equals("")) {
+                    return thisPlace.name + ", " + parent;
+                }else
+                    return thisPlace.name;
+            }
+        }
+        return "";
+    }
+
+
 
     private void setListeners() {
         mFirstRightIcon.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +196,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                 } else {
                     Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
                 }
-
             }
         });
     }

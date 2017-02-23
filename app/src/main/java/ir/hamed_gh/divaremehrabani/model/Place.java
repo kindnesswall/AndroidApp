@@ -18,10 +18,22 @@ public class Place implements Parcelable {
     public String level;
 
     @SerializedName("container_id")
-    public Integer container_id;
+    public String container_id;
 
     @SerializedName("id")
     public String id;
+
+//    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
+//        @Override
+//        public Place createFromParcel(Parcel source) {
+//            return new Place(source);
+//        }
+//
+//        @Override
+//        public Place[] newArray(int size) {
+//            return new Place[size];
+//        }
+//    };
 
     @Override
     public int describeContents() {
@@ -32,7 +44,7 @@ public class Place implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
         dest.writeString(this.level);
-        dest.writeValue(this.container_id);
+        dest.writeString(this.container_id);
         dest.writeString(this.id);
     }
 
@@ -42,7 +54,7 @@ public class Place implements Parcelable {
     protected Place(Parcel in) {
         this.name = in.readString();
         this.level = in.readString();
-        this.container_id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.container_id = in.readString();
         this.id = in.readString();
     }
 
