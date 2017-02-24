@@ -66,6 +66,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.detail_description_tv)
     TextView mDetailDescriptionTv;
 
+    @Bind(R.id.detail_price_tv)
+    TextView mDetailPriceTv;
+
     @Bind(R.id.pagesContainer)
     LinearLayout pagesContainer;
 
@@ -96,6 +99,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             mDetailDescriptionTv.setText(gift.description);
             mDetailTitleTv.setText(gift.title);
             mDetailRegisterTimeTv.setText(gift.createDateTime);
+            mDetailPriceTv.setText(gift.price);
 
             readFromJson();
             String place = findPlaceRecursion(gift.locationId);

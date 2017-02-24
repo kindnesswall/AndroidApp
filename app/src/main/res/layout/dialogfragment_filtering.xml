@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="202dp">
 
     <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
         android:id="@+id/filtering_basedon_tv"
@@ -52,7 +52,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/location_filter_lay"
+        android:id="@+id/city_filter_lay"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_below="@id/category_filter_lay"
@@ -60,7 +60,7 @@
         android:background="@color/background_gray">
 
         <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
-            android:id="@+id/location_filter_ic"
+            android:id="@+id/city_filter_ic"
             android:layout_width="24dp"
             android:layout_height="24dp"
 
@@ -70,14 +70,46 @@
             android:textSize="22dp" />
 
         <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/location_filter_tv"
+            android:id="@+id/city_filter_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
 
-            android:layout_toLeftOf="@id/location_filter_ic"
+            android:layout_toLeftOf="@id/city_filter_ic"
             android:paddingRight="8dp"
             android:text="@string/place_equal"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/region_filter_lay"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@id/city_filter_lay"
+        android:layout_marginTop="4dp"
+        android:background="@color/background_gray"
+        android:visibility="invisible">
+
+        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+            android:id="@+id/region_filter_ic"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textSize="22dp" />
+
+        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+            android:id="@+id/region_filter_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:layout_toLeftOf="@id/region_filter_ic"
+            android:paddingRight="8dp"
+            android:text="@string/region_equal"
             android:textSize="16dp" />
 
     </RelativeLayout>
@@ -86,7 +118,7 @@
         android:id="@+id/divider_lay"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/location_filter_lay"
+        android:layout_below="@id/region_filter_lay"
         android:background="@color/divider" />
 
     <RelativeLayout

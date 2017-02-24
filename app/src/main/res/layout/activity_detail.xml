@@ -242,6 +242,17 @@
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 							android:textColor="@color/grey_700"/>
 
+						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_price_txt"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="2dp"
+							android:layout_alignParentRight="true"
+							android:layout_centerVertical="true"
+							android:text="قیمت تقریبی"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+							android:textColor="@color/grey_700"/>
+
 					</LinearLayout>
 
 					<LinearLayout
@@ -249,6 +260,8 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_toLeftOf="@id/detail_txt_lay"
+						android:layout_marginRight="8dp"
+
 						android:orientation="vertical">
 
 						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
@@ -256,8 +269,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:padding="2dp"
-							android:layout_marginRight="8dp"
-							android:layout_toLeftOf="@id/detail_category_txt"
+							android:layout_gravity="right"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
@@ -265,8 +277,15 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:padding="2dp"
-							android:layout_marginRight="8dp"
-							android:layout_toLeftOf="@id/detail_place_txt"
+							android:layout_gravity="right"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_price_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="2dp"
+							android:layout_gravity="right"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 					</LinearLayout>

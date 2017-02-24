@@ -80,6 +80,9 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.title_et)
     EditTextIranSans mTitleEt;
 
+    @Bind(R.id.price_et)
+    EditTextIranSans mPriceEt;
+
     @Bind(R.id.choose_category_btn)
     RelativeLayout mChooseCategoryBtn;
 
@@ -182,7 +185,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                                 mDescriptionEt.getText().toString(),
                                 city.name,
                                 mTitleEt.getText().toString(),
-                                "20000000",
+                                mPriceEt.getText().toString(),
                                 category.categoryId,
                                 city.id,
                                 myGift.giftImages
@@ -441,6 +444,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         AppController.storeString(Constants.MY_GIFT_PRICE, myGift.price);
         AppController.storeString(Constants.MY_GIFT_ADDRESS, myGift.address);
         AppController.storeString(Constants.MY_GIFT_DESCRIPTION, mDescriptionEt.getText().toString());
+        AppController.storeString(Constants.MY_GIFT_PRICE, mPriceEt.getText().toString());
 
         AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, myGift.categoryId);
         AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, myGift.category);
@@ -468,6 +472,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         AppController.storeString(Constants.MY_GIFT_PRICE, null);
         AppController.storeString(Constants.MY_GIFT_ADDRESS, null);
         AppController.storeString(Constants.MY_GIFT_DESCRIPTION, null);
+        AppController.storeString(Constants.MY_GIFT_PRICE, null);
 
         AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, null);
         AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, null);
@@ -491,6 +496,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 
         myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_PRICE) : "";
+        mPriceEt.setText(myGift.price);
 
         myGift.address = AppController.getStoredString(Constants.MY_GIFT_ADDRESS) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_ADDRESS) : "";

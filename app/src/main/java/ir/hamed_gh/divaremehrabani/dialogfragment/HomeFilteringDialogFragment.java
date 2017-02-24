@@ -10,14 +10,20 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.HomeFilteringCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
+import ir.hamed_gh.divaremehrabani.model.Places;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 
 /**
@@ -30,11 +36,17 @@ public class HomeFilteringDialogFragment
     @Bind(R.id.category_filter_lay)
     RelativeLayout categoryFilterLay;
 
-    @Bind(R.id.location_filter_lay)
+    @Bind(R.id.city_filter_lay)
     RelativeLayout locationFilterLay;
+
+    @Bind(R.id.region_filter_lay)
+    RelativeLayout regionFilterLay;
 
     @Bind(R.id.apply_filter_tv)
     TextView applyFilterTv;
+
+    @Bind(R.id.region_filter_tv)
+    TextView regionFilterTv;
 
     @Bind(R.id.cancel_filter_tv)
     TextView cancelFilterTv;
@@ -42,11 +54,12 @@ public class HomeFilteringDialogFragment
     @Bind(R.id.categoryـfilter_tv)
     TextView mCategoryFilterTv;
 
-    @Bind(R.id.location_filter_tv)
+    @Bind(R.id.city_filter_tv)
     TextView mLocationFilterTv;
 
     Category choosenCategory;
     Place choosenPlace;
+    private Place region;
 
     public static HomeFilteringDialogFragment ShowME(
             FragmentManager fm,
@@ -81,11 +94,49 @@ public class HomeFilteringDialogFragment
         mLocationFilterTv.setText(
                 getText(R.string.place_equal) + " " + city.name);
         choosenPlace = city;
+        findCityRegion();
     }
 
     @Override
     public void onRegionSelected(Place region) {
+        this.region = region;
+        regionFilterTv.setText(
+                getText(R.string.region_equal) + " " +region.name);
+    }
 
+    private void findCityRegion() {
+        String json = ReadJsonFile.loadJSONFromAsset(getContext());
+
+        Gson gson = new Gson();
+
+        Places allPlaces = gson.fromJson(json, Places.class);
+
+        Places level3 = new Places();
+        level3.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place3") && thisPlace.container_id.equals(choosenPlace.id)) {
+                level3.addPlace(thisPlace);
+            }
+        }
+
+        Places level4 = new Places();
+        level4.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place4")) {
+                for (Place l3 : level3.getPlaces()) {
+                    if (thisPlace.container_id.equals(l3.id)){
+                        level4.addPlace(thisPlace);
+                    }
+                }
+            }
+        }
+        if (level4.getPlaces().size()>0){
+            regionFilterLay.setVisibility(View.VISIBLE);
+        }else {
+            regionFilterLay.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -138,6 +189,23 @@ public class HomeFilteringDialogFragment
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+//				choosePlaceDialogFragment.setArguments(bundle);
+
+                choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+                choosePlaceDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);
+//                choosePlaceDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
+            }
+        });
+
+        regionFilterLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//				Bundle bundle = new Bundle();
+//				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ChoosePlaceDialogFragment choosePlaceDialogFragment =
+                        ChoosePlaceDialogFragment.newInstance(choosenPlace.id);
 //				choosePlaceDialogFragment.setArguments(bundle);
 
                 choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());

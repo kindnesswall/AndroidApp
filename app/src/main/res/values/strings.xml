@@ -708,6 +708,7 @@ Fingerprint: %2$s"</string>
     <string name="no_gift_found">هیچ هدیه ای یافت نشد.</string>
     <string name="searching">در حال جستجو</string>
     <string name="place_equal">محل:</string>
+    <string name="region_equal">منطقه:</string>
     <string name="category_equal">دسته‌بندی:</string>
     <string name="remove_filter">حذف فیلتر</string>
     <string name="gift_info_saved">اطلاعات هدیه ذخیره شد</string>
