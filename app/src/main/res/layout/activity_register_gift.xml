@@ -330,7 +330,7 @@
 						android:textSize="18dp"/>
 
 					<RelativeLayout
-						android:id="@+id/choose_place_btn"
+						android:id="@+id/choose_city_btn"
 						android:layout_width="108dp"
 						android:layout_height="@dimen/button_height"
 
@@ -341,12 +341,37 @@
 						android:clickable="true">
 
 						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-							android:id="@+id/choose_place_btn_txt"
+							android:id="@+id/choose_city_btn_txt"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 
 							android:layout_centerInParent="true"
-							android:text="انتخاب محل"
+							android:text="انتخاب شهر"
+							android:textColor="@color/white"
+							android:textSize="16dp"/>
+
+					</RelativeLayout>
+
+					<RelativeLayout
+						android:id="@+id/choose_region_btn"
+						android:layout_width="108dp"
+						android:layout_height="@dimen/button_height"
+
+						android:layout_toRightOf="@id/choose_city_btn"
+						android:layout_below="@id/gift_place_txt"
+						android:layout_marginLeft="8dp"
+
+						android:background="@drawable/button_selector"
+						android:clickable="true"
+						android:visibility="invisible">
+
+						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/choose_region_btn_txt"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+
+							android:layout_centerInParent="true"
+							android:text="انتخاب منطقه"
 							android:textColor="@color/white"
 							android:textSize="16dp"/>
 

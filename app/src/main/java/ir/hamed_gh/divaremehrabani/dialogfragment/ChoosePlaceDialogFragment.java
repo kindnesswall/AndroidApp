@@ -21,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.ChoosePlaceAdapter;
+import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
@@ -39,12 +40,29 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
     @Bind(R.id.choose_place_et)
     EditTextIranSans editTextIranSans;
+
     private Places level2;
     private Places level2Original;
+
     private ChoosePlaceAdapter choosePlaceAdapter;
     private ChoosePlaceCallback mHost;
+    private String locationId;
 
-    private void readFromJson() {
+    private Places level4Original;
+    private Places level4;
+
+    public static ChoosePlaceDialogFragment newInstance(String locationId) {
+        ChoosePlaceDialogFragment f = new ChoosePlaceDialogFragment();
+
+        // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putString(Constants.LOCATION_ID, locationId);
+        f.setArguments(args);
+
+        return f;
+    }
+
+    private void readLevel2FromJson() {
         String json = ReadJsonFile.loadJSONFromAsset(getContext());
 
         Gson gson = new Gson();
@@ -73,12 +91,53 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
         }
     }
 
+    private void readLevel4FromJson() {
+        String json = ReadJsonFile.loadJSONFromAsset(getContext());
+
+        Gson gson = new Gson();
+
+        Places allPlaces = gson.fromJson(json, Places.class);
+
+        Places level3 = new Places();
+        level3.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place3")
+                    && thisPlace.container_id.equals(locationId)) {
+                level3.addPlace(thisPlace);
+            }
+        }
+
+        level4Original = new Places();
+        level4Original.setPlaces(new ArrayList<Place>());
+
+        level4 = new Places();
+        level4.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place4")) {
+                for (Place l3 : level3.getPlaces()) {
+                    if (thisPlace.container_id.equals(l3.id)){
+                        level4.addPlace(thisPlace);
+                        level4Original.addPlace(thisPlace);
+                    }
+                }
+            }
+        }
+    }
+
     private void init() {
 //		fromActivity = getArguments().getString(Constants.FROM_ACTIVITY);
+        Bundle bundle = getArguments();
+        if (bundle!=null && getArguments().getString(Constants.LOCATION_ID)!=null) {
+            locationId = getArguments().getString(Constants.LOCATION_ID);
+            readLevel4FromJson();
+            choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level4.getPlaces());
+        }else {
+            readLevel2FromJson();
+            choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level2.getPlaces());
+        }
 
-        readFromJson();
-
-        choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level2.getPlaces());
         recyclerView.setAdapter(choosePlaceAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -86,8 +145,11 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
     }
 
     public void onPlaceSelected(Place place) {
-
-        mHost.onPlaceSelected(place);
+        if (level4Original!=null && level4Original.getPlaces().size()>0) {
+            mHost.onRegionSelected(place);
+        }else {
+            mHost.onCitySelected(place);
+        }
         dismiss();
 
     }
@@ -101,11 +163,21 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                level2.getPlaces().clear();
-                for (Place p : level2Original.getPlaces()) {
+                if (level4Original.getPlaces().size()>0) {
+                    level4.getPlaces().clear();
+                    for (Place p : level4Original.getPlaces()) {
 
-                    if (p.name.startsWith(charSequence.toString())) {
-                        level2.addPlace(p);
+                        if (p.name.startsWith(charSequence.toString())) {
+                            level4.addPlace(p);
+                        }
+                    }
+                }else {
+                    level2.getPlaces().clear();
+                    for (Place p : level2Original.getPlaces()) {
+
+                        if (p.name.startsWith(charSequence.toString())) {
+                            level2.addPlace(p);
+                        }
                     }
                 }
                 choosePlaceAdapter.notifyDataSetChanged();

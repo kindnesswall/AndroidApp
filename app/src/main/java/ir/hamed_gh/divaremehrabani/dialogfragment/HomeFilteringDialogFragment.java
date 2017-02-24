@@ -70,17 +70,22 @@ public class HomeFilteringDialogFragment
             onCategorySelected(choosenCategory);
 
             choosenPlace = bundle.getParcelable(Constants.PLACE_PARCELABLE);
-            onPlaceSelected(choosenPlace);
+            onCitySelected(choosenPlace);
         }
     }
 
     @Override
-    public void onPlaceSelected(Place place) {
-        if (place == null) return;
+    public void onCitySelected(Place city) {
+        if (city == null) return;
 
         mLocationFilterTv.setText(
-                getText(R.string.place_equal) + " " + place.name);
-        choosenPlace = place;
+                getText(R.string.place_equal) + " " + city.name);
+        choosenPlace = city;
+    }
+
+    @Override
+    public void onRegionSelected(Place region) {
+
     }
 
     @Override

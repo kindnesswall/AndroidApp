@@ -7,6 +7,7 @@ import ir.hamed_gh.divaremehrabani.model.Place;
  */
 public interface ChoosePlaceCallback {
 
-    void onPlaceSelected(Place place);
+    void onCitySelected(Place city);
+    void onRegionSelected(Place region);
 
 }

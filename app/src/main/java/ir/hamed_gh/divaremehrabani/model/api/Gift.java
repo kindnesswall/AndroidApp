@@ -51,6 +51,12 @@ public class Gift implements Parcelable {
     @SerializedName("location")
     public String location;
 
+    @SerializedName("regionId")
+    public String regionId;
+
+    @SerializedName("region")
+    public String region;
+
     @SerializedName("giftImages")
     public ArrayList<String> giftImages = new ArrayList<>();
 

@@ -19,9 +19,14 @@ public class Constants {
     public static final String MY_GIFT_ADDRESS = "MY_GIFT_ADDRESS";
     public static final String MY_GIFT_DESCRIPTION = "MY_GIFT_DESCRIPTION";
     public static final String MY_GIFT_CATEGORY_ID = "MY_GIFT_CATEGORY_ID";
-    public static final String MY_GIFT_LOCATION_ID = "MY_GIFT_LOCATION_ID";
+    public static final String MY_GIFT_CATEGORY_NAME = "MY_GIFT_CATEGORY_NAME";
     public static final String MY_GIFT_IMAGE = "MY_GIFT_IMAGE";
     public static final String MY_GIFT_IMAGE_NUMBER = "MY_GIFT_IMAGE_NUMBER";
+    public static final String MY_GIFT_REGION_ID = "MY_GIFT_REGION_ID";
+    public static final String MY_GIFT_REGION_NAME = "MY_GIFT_REGION_NAME";
+    public static final String MY_GIFT_LOCATION_ID = "MY_GIFT_LOCATION_ID";
+    public static final String MY_GIFT_LOCATION_NAME = "MY_GIFT_LOCATION_NAME";
+
 //    public static final String MY_GIFT_IMAGE_1 = "MY_GIFT_IMAGE_1";
 //    public static final String MY_GIFT_IMAGE_2 = "MY_GIFT_IMAGE_2";
 //    public static final String MY_GIFT_IMAGE_3 = "MY_GIFT_IMAGE_3";
@@ -60,7 +65,4 @@ public class Constants {
     public static final String HOME_PAGETYPE = "HOME_PAGETYPE";
     public static final String CATEGORY_PAGETYPE = "CATEGORY_PAGETYPE";
     public static final String SEARCH_PAGETYPE = "SEARCH_PAGETYPE";
-
-    public static final String MY_GIFT_CATEGORY_NAME = "MY_GIFT_CATEGORY_NAME";
-    public static final String MY_GIFT_LOCATION_NAME = "MY_GIFT_LOCATION_NAME";
 }

@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -43,12 +44,14 @@ import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.FileUtils;
 import ir.hamed_gh.divaremehrabani.helper.ProgressRequestBody;
+import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.UpdateImageGallery;
 import ir.hamed_gh.divaremehrabani.model.Place;
+import ir.hamed_gh.divaremehrabani.model.Places;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.output.UploadFileOutput;
@@ -83,8 +86,11 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.after_category_select_lay)
     RelativeLayout mAfterCategorySelectLay;
 
-    @Bind(R.id.choose_place_btn)
-    RelativeLayout mChoosePlaceBtn;
+    @Bind(R.id.choose_city_btn)
+    RelativeLayout mChooseCityBtn;
+
+    @Bind(R.id.choose_region_btn)
+    RelativeLayout mChooseRegionBtn;
 
     @Bind(R.id.toolbar_back_iv)
     ImageView mBackBtn;
@@ -110,8 +116,11 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.choose_category_btn_txt)
     TextView mChooseCategoryBtnTxt;
 
-    @Bind(R.id.choose_place_btn_txt)
-    TextView mChoosePlaceBtnTxt;
+    @Bind(R.id.choose_city_btn_txt)
+    TextView mChooseCityBtnTxt;
+
+    @Bind(R.id.choose_region_btn_txt)
+    TextView mChooseRegionBtnTxt;
 
     @Bind(R.id.choose_image_txt)
     TextView mChooseImageTxt;
@@ -123,8 +132,9 @@ public class RegisterGiftActivity extends AppCompatActivity
     private Uri imageUri;
     private Gift myGift = new Gift();
     private GiftGalleryAdapter giftGalleryAdapter;
-    private Place place;
+    private Place city;
     private Category category;
+    private Place region;
 
     @Override
     public void onUpdateGallery() {
@@ -159,7 +169,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                 }else if (category==null){
                     Snackbari.showS(mTitleEt,"دسته‌بندی را وارد نمایید");
                     return;
-                }else if (place==null){
+                }else if (city ==null){
                     Snackbari.showS(mTitleEt,"محل را وارد نمایید");
                     return;
                 }else if (myGift.giftImages.size()==0){
@@ -170,14 +180,23 @@ public class RegisterGiftActivity extends AppCompatActivity
                 (new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
                         new Gift(
                                 mDescriptionEt.getText().toString(),
-                                place.name,
+                                city.name,
                                 mTitleEt.getText().toString(),
                                 "20000000",
                                 category.categoryId,
-                                place.id,
+                                city.id,
                                 myGift.giftImages
                         )
                 );
+            }
+        });
+
+        mChooseRegionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                ChoosePlaceDialogFragment choosePlaceDialogFragment = ChoosePlaceDialogFragment.newInstance(city.id);
+                choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
             }
         });
 
@@ -222,7 +241,7 @@ public class RegisterGiftActivity extends AppCompatActivity
             }
         });
 
-        mChoosePlaceBtn.setOnClickListener(new View.OnClickListener() {
+        mChooseCityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
@@ -426,8 +445,15 @@ public class RegisterGiftActivity extends AppCompatActivity
         AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, myGift.categoryId);
         AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, myGift.category);
 
-        AppController.storeString(Constants.MY_GIFT_LOCATION_ID, place.id);
-        AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, place.name);
+        if (city !=null) {
+            AppController.storeString(Constants.MY_GIFT_LOCATION_ID, city.id);
+            AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, city.name);
+        }
+
+        if (region !=null) {
+            AppController.storeString(Constants.MY_GIFT_REGION_ID, region.id);
+            AppController.storeString(Constants.MY_GIFT_REGION_NAME, region.name);
+        }
 
         for (int i = 0; i < myGift.giftImages.size(); i++) {
             AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, myGift.giftImages.get(i));
@@ -448,6 +474,9 @@ public class RegisterGiftActivity extends AppCompatActivity
 
         AppController.storeString(Constants.MY_GIFT_LOCATION_ID, null);
         AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, null);
+
+        AppController.storeString(Constants.MY_GIFT_REGION_ID, null);
+        AppController.storeString(Constants.MY_GIFT_REGION_NAME, null);
 
         for (int i = 0; i < myGift.giftImages.size(); i++) {
             AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, null);
@@ -482,16 +511,31 @@ public class RegisterGiftActivity extends AppCompatActivity
         myGift.locationId = AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) != null ?
                 AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) : "";
         if (myGift.locationId!=null) {
-            place = new Place();
-            place.id = myGift.locationId;
+            city = new Place();
+            city.id = myGift.locationId;
 
             myGift.location = AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) != null ?
                     AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) : "";
-            place.name = myGift.location;
+            city.name = myGift.location;
             if (!myGift.location.equals("")) {
-                mChoosePlaceBtnTxt.setText(myGift.location);
+                mChooseCityBtnTxt.setText(myGift.location);
             }
         }
+
+        myGift.regionId = AppController.getStoredString(Constants.MY_GIFT_REGION_ID) != null ?
+                AppController.getStoredString(Constants.MY_GIFT_REGION_ID) : "";
+        if (myGift.regionId!=null) {
+            region = new Place();
+            region.id = myGift.regionId;
+
+            myGift.region = AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) != null ?
+                    AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) : "";
+            region.name = myGift.region;
+            if (!myGift.region.equals("")) {
+                mChooseRegionBtnTxt.setText(myGift.region);
+            }
+        }
+        findCityRegion();
 
         int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
         for (int i = 0; i < numberOfMyImages; i++) {
@@ -516,6 +560,10 @@ public class RegisterGiftActivity extends AppCompatActivity
         }
 
         settingToolbar();
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     @Override
@@ -588,9 +636,55 @@ public class RegisterGiftActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlaceSelected(Place place) {
-        this.place = place;
-        mChoosePlaceBtnTxt.setText(place.name);
-        myGift.locationId = place.id;
+    public void onCitySelected(Place city) {
+        this.city = city;
+        mChooseCityBtnTxt.setText(city.name);
+        myGift.location = city.name;
+        myGift.locationId = city.id;
+        mChooseRegionBtnTxt.setText("انتخاب منطقه");
+        findCityRegion();
+    }
+
+    @Override
+    public void onRegionSelected(Place region) {
+        this.region = region;
+        mChooseRegionBtnTxt.setText(region.name);
+        myGift.location = region.name;
+        myGift.locationId = region.id;
+    }
+
+    private void findCityRegion() {
+        String json = ReadJsonFile.loadJSONFromAsset(this);
+
+        Gson gson = new Gson();
+
+        Places allPlaces = gson.fromJson(json, Places.class);
+
+        Places level3 = new Places();
+        level3.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place3") && thisPlace.container_id.equals(city.id)) {
+                level3.addPlace(thisPlace);
+            }
+        }
+
+        Places level4 = new Places();
+        level4.setPlaces(new ArrayList<Place>());
+
+        for (Place thisPlace : allPlaces.getPlaces()) {
+            if (thisPlace.level.equals("place4")) {
+                for (Place l3 : level3.getPlaces()) {
+                    if (thisPlace.container_id.equals(l3.id)){
+                        level4.addPlace(thisPlace);
+                    }
+                }
+            }
+        }
+        if (level4.getPlaces().size()>0){
+            mChooseRegionBtn.setVisibility(View.VISIBLE);
+        }else {
+            mChooseRegionBtn.setVisibility(View.INVISIBLE);
+        }
     }
 }

@@ -141,12 +141,17 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
     }
 
     @Override
-    public void onPlaceSelected(Place place) {
+    public void onCitySelected(Place city) {
 
-        AppController.storeString(Constants.MY_LOCATION_ID, place.id);
-        AppController.storeString(Constants.MY_LOCATION_NAME, place.name);
+        AppController.storeString(Constants.MY_LOCATION_ID, city.id);
+        AppController.storeString(Constants.MY_LOCATION_NAME, city.name);
 
-        mLocationTv.setText(place.name);
+        mLocationTv.setText(city.name);
+
+    }
+
+    @Override
+    public void onRegionSelected(Place region) {
 
     }
 }
