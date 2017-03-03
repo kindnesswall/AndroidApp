@@ -35,6 +35,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
     @Bind(R.id.location_lay)
     RelativeLayout locationLayout;
 
+    @Bind(R.id.bookmark_lay)
+    RelativeLayout bookmarkLayout;
+
     @Bind(R.id.statistic_lay)
     RelativeLayout statisticLayout;
 
@@ -136,6 +139,15 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
                         new StatisticFragment(), StatisticFragment.class.getName()
                 );
 
+            }
+        });
+
+        bookmarkLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((BottomBarActivity) getActivity()).replaceFragment(
+                        new BookmarkFragment(), BookmarkFragment.class.getName()
+                );
             }
         });
     }
