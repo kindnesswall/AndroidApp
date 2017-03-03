@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -84,6 +81,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     private MyPageIndicator mIndicator;
     private ApiRequest apiRequest;
     private Places allPlaces;
+    private String giftId;
 
     public static Intent createIntent(Gift gift) {
         Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
@@ -91,50 +89,46 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
         return intent;
     }
 
+    public static Intent createIntent(String giftId) {
+        Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+        intent.putExtra(Constants.GIFT_ID, giftId);
+        return intent;
+    }
+
     private void extractDataFromBundle() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             gift = (Gift) bundle.get(Constants.GIFT);
-            mToolbarTitleTv.setText(gift.title);
-            mDetailDescriptionTv.setText(gift.description);
-            mDetailTitleTv.setText(gift.title);
-            mDetailRegisterTimeTv.setText(gift.createDateTime);
-            mDetailPriceTv.setText(gift.price);
-
-            readFromJson();
-            String place = findPlaceRecursion(gift.locationId);
-            int i = 0;
-            mDetailPlaceTv.setText(place);
-
-            mDetailCategoryTv.setText(gift.category);
+            if (gift!=null) {
+                setInfo();
+            }
+            giftId = bundle.getString(Constants.GIFT_ID);
         }
+    }
+
+    private void setInfo() {
+        mToolbarTitleTv.setText(gift.title);
+        mDetailDescriptionTv.setText(gift.description);
+        mDetailTitleTv.setText(gift.title);
+        mDetailRegisterTimeTv.setText(gift.createDateTime);
+        mDetailPriceTv.setText(gift.price);
+
+        String place = findPlaceRecursion(gift.locationId);
+        mDetailPlaceTv.setText(place);
+
+        mDetailCategoryTv.setText(gift.category);
+
+        setupViewPager(viewPager);
+
+        mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
+        mIndicator.setPageCount(gift.giftImages != null ? gift.giftImages.size() : 0);
+        mIndicator.show();
     }
 
     private void readFromJson() {
         String json = ReadJsonFile.loadJSONFromAsset(this);
-
         Gson gson = new Gson();
-
         allPlaces = gson.fromJson(json, Places.class);
-
-        Places level2 = new Places();
-        level2.setPlaces(new ArrayList<Place>());
-
-        Places level3 = new Places();
-        level3.setPlaces(new ArrayList<Place>());
-
-        Places level4 = new Places();
-        level4.setPlaces(new ArrayList<Place>());
-
-        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).name);
-        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).level);
-
-
-//        for (Place thisPlace : allPlaces.getPlaces()) {
-//            if (thisPlace.id.equals(gift)) {
-//                return thisPlace.name;
-//            }
-//        }
     }
 
     private String findPlaceRecursion(String id){
@@ -206,15 +200,13 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     private void init() {
         ButterKnife.bind(this);
-        extractDataFromBundle();
-        setupViewPager(viewPager);
-
+        readFromJson();
         apiRequest = new ApiRequest(this, this);
 
-        mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
-        mIndicator.setPageCount(gift.giftImages != null ? gift.giftImages.size() : 0);
-        mIndicator.show();
-
+        extractDataFromBundle();
+        if (giftId != null) {
+            apiRequest.getGift(giftId);
+        }
         setListeners();
     }
 
@@ -244,6 +236,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     public void onResponse(Call call, Response response) {
         if (response.body() instanceof RequestGiftOutput) {
             Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
+        }else if (response.body() instanceof Gift){
+            gift = (Gift) response.body();
+            setInfo();
         }
     }
 

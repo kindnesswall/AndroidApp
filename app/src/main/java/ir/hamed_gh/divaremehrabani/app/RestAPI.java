@@ -31,6 +31,9 @@ public interface RestAPI {
                               @Query(Constants.CATEGORY_ID) String categoryId,
                               @Query(Constants.SEARCH_TEXT) String searchText);
 
+    @GET("Gift/{" + Constants.GIFT_ID + "}")
+    Call<Gift> getGift(@Path(Constants.GIFT_ID) String giftId);
+
     @POST("Upload")
     Call<ResponseBody> uploadFile(
             @Header(Constants.Authorization) String authorization,

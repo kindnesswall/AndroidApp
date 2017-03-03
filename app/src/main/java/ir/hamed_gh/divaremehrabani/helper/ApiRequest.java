@@ -149,6 +149,24 @@ public class ApiRequest {
 
     }
 
+    public void getGift(String giftId) {
+
+        Call<Gift> call = AppController.service.getGift(giftId);
+
+        call.enqueue(new CallbackWithRetry<Gift>(call, mContext) {
+            @Override
+            public void onResponse(Call<Gift> call, Response<Gift> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<Gift> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void getToken(String verificationCode) {
 
         Call<TokenOutput> call = AppController.accountService.token(

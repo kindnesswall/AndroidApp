@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rey.material.widget.ProgressView;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.activity.GiftDetailActivity;
 import ir.hamed_gh.divaremehrabani.adapter.RequestToAGiftAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
@@ -36,6 +38,9 @@ public class RequestsToAGiftFragment extends BaseFragment {
 
     @Bind(R.id.message_textview)
     TextView mMessageTv;
+
+    @Bind(R.id.info_lay)
+    RelativeLayout mInfoLay;
 
     private ArrayList<RequestModel> requestModels = new ArrayList<>();
     private RequestToAGiftAdapter adapter;
@@ -65,6 +70,15 @@ public class RequestsToAGiftFragment extends BaseFragment {
                         startIndex + Constants.LIMIT + ""
                 )
         );
+
+        mInfoLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(
+                        GiftDetailActivity.createIntent(giftId)
+                );
+            }
+        });
     }
 
     @Override
