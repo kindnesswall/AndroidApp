@@ -44,6 +44,26 @@ public class MyRequestsFragment extends BaseFragment {
         super.init();
 
         ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
+
+        if (AppController.getStoredString(Constants.Authorization) != null) {
+            setupViewPager(mainVp);
+            mainTabs.setupWithViewPager(mainVp);
+            mainVp.setCurrentItem(1, false);
+
+            myGiftTopLay.setVisibility(View.GONE);
+            myGiftBottomLay.setVisibility(View.VISIBLE);
+            mainVp.setCurrentItem(1, false);
+        } else {
+            myGiftTopLay.setVisibility(View.VISIBLE);
+            myGiftBottomLay.setVisibility(View.INVISIBLE);
+
+            myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+            });
+        }
     }
 
     @Override
@@ -74,25 +94,5 @@ public class MyRequestsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (AppController.getStoredString(Constants.Authorization) != null) {
-            setupViewPager(mainVp);
-            mainTabs.setupWithViewPager(mainVp);
-            mainVp.setCurrentItem(1, false);
-
-            myGiftTopLay.setVisibility(View.GONE);
-            myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(1, false);
-        } else {
-            myGiftTopLay.setVisibility(View.VISIBLE);
-            myGiftBottomLay.setVisibility(View.INVISIBLE);
-
-            myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-            });
-        }
     }
 }

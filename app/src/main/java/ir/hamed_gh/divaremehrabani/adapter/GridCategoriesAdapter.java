@@ -56,7 +56,7 @@ public class GridCategoriesAdapter extends RecyclerView.Adapter<CategoryGridHold
             public void onClick(View v) {
 
 
-                ((BottomBarActivity) mContext).setFragment(
+                ((BottomBarActivity) mContext).replaceFragment(
                         HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, categories.get(i)),
                         HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
                 );

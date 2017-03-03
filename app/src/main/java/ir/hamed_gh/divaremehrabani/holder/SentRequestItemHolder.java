@@ -2,6 +2,7 @@ package ir.hamed_gh.divaremehrabani.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import ir.hamed_gh.divaremehrabani.R;
@@ -15,11 +16,13 @@ public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 
     public View itemView;
 
+    public RelativeLayout rootLay;
+
     public SentRequestItemHolder(View itemView) {
         super(itemView);
 
         this.itemView = itemView;
-
+        rootLay = (RelativeLayout) itemView.findViewById(R.id.root_lay);
         mItemTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
 
     }

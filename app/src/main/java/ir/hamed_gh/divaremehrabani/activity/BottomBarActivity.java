@@ -54,20 +54,20 @@ public class BottomBarActivity extends AppCompatActivity {
         if (menuItemId == R.id.bottomBarHome) {
 
             mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-            setFragment(
+            replaceFragment(
                     HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
                     HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
             // The user reselected item number one, scroll your content to top.
         } else if (menuItemId == R.id.bottomBarCategories) {
 
             mToolbarTitleTextView.setText(R.string.categories);
-            setFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
+            replaceFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
 
             // The user selected item number one.
         } else if (menuItemId == R.id.bottomBarSearch) {
 
             mToolbarTitleTextView.setText(R.string.search);
-            setFragment(
+            replaceFragment(
                     HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
                     HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
             );
@@ -76,7 +76,7 @@ public class BottomBarActivity extends AppCompatActivity {
         } else if (menuItemId == R.id.bottomBarMyWall) {
 
             mToolbarTitleTextView.setText(R.string.my_wall);
-            setFragment(new MyWallFragment(), MyWallFragment.class.getName());
+            replaceFragment(new MyWallFragment(), MyWallFragment.class.getName());
 
             // The user selected item number one.
         }
@@ -131,7 +131,7 @@ public class BottomBarActivity extends AppCompatActivity {
 
         settingToolbar();
 
-        setFragment(
+        replaceFragment(
                 HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
                 HomeFragment.class.getName() + Constants.HOME_PAGETYPE
         );
@@ -181,13 +181,29 @@ public class BottomBarActivity extends AppCompatActivity {
         }
     }
 
-    public void setFragment(Fragment fragment, String title) {
+    public void replaceFragment(Fragment fragment, String title) {
         try {
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             fragmentTransaction.replace(R.id.container_body, fragment, title);
+            fragmentTransaction.addToBackStack(title);
+            fragmentTransaction.commit();
+
+        } catch (Exception e) {
+            //Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+            // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+        }
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        try {
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.add(R.id.container_body, fragment, title);
             fragmentTransaction.addToBackStack(title);
             fragmentTransaction.commit();
 

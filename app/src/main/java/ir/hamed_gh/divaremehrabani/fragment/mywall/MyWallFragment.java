@@ -103,7 +103,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
         myGiftLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BottomBarActivity) getActivity()).setFragment(
+                ((BottomBarActivity) getActivity()).replaceFragment(
                         new MyGiftsFragment(), MyGiftsFragment.class.getName()
                 );
             }
@@ -112,7 +112,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
         myRequestsLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BottomBarActivity) getActivity()).setFragment(
+                ((BottomBarActivity) getActivity()).replaceFragment(
                         new MyRequestsFragment(), MyRequestsFragment.class.getName()
                 );
             }
@@ -132,7 +132,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
             @Override
             public void onClick(View v) {
 
-                ((BottomBarActivity) getActivity()).setFragment(
+                ((BottomBarActivity) getActivity()).replaceFragment(
                         new StatisticFragment(), StatisticFragment.class.getName()
                 );
 

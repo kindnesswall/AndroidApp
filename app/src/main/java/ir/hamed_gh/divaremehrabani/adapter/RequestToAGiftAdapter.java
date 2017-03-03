@@ -28,7 +28,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemH
 
     @Override
     public SentRequestItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_sent_request, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_sent_requests, null);
         SentRequestItemHolder mh = new SentRequestItemHolder(v);
 
         return mh;
@@ -37,11 +37,11 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<SentRequestItemH
     @Override
     public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
 
-        myHolder.mItemTitleTv.setText(requestModels.get(i).gift);
+        myHolder.mItemTitleTv.setText(requestModels.get(i).fromUser);
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ((BottomBarActivity) mContext).setFragment(
+//                ((BottomBarActivity) mContext).replaceFragment(
 //                        new RequestsToAGiftFragment(), RequestsToAGiftFragment.class.getName()
 //                );
 

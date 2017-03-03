@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:background="#F1F1F1"
+	android:orientation="vertical">
+
+	<com.rey.material.widget.ProgressView
+		android:id="@+id/fragment_progressBar"
+
+		android:layout_width="36dp"
+		android:layout_height="36dp"
+		android:layout_centerInParent="true"
+
+		app:pv_autostart="true"
+		app:pv_circular="true"
+		app:pv_progressMode="indeterminate"
+		app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/message_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:layout_centerInParent="true"
+		android:visibility="invisible"/>
+
+
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="match_parent">
+
+		<RelativeLayout
+			android:id="@+id/info_lay"
+			android:layout_width="match_parent"
+			android:layout_height="48dp">
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/gift_name_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+
+				android:layout_marginRight="4dp"
+
+				android:text="نام هدیه: "
+			/>
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/gift_name_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+
+				android:layout_toLeftOf="@id/gift_name_txt"
+				android:layout_marginRight="2dp"
+				android:text="کتاب"
+				android:textColor="@color/black"
+
+				android:textSize="16dp"/>
+
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/total_requests_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+
+				android:layout_alignParentLeft="true"
+				android:layout_marginLeft="4dp"
+
+				android:text="342"
+
+				android:textColor="@color/black"
+				android:textSize="16dp"/>
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/total_requests_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+
+				android:layout_marginLeft="2dp"
+				android:layout_toRightOf="@id/total_requests_tv"
+
+				android:text="تعداد کل درخواست‌ها: "
+
+				android:textSize="16dp"/>
+
+
+			<RelativeLayout
+				android:id="@+id/divider_lay"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_below="@id/gift_name_tv"
+				android:background="#F1F1F1"/>
+
+		</RelativeLayout>
+
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@id/info_lay"
+			android:background="@color/grey_200"
+			android:visibility="invisible"/>
+
+	</RelativeLayout>
+
+</RelativeLayout>

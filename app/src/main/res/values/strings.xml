@@ -2,6 +2,11 @@
     <string name="app_name">DivarMehrabani</string>
     <string name="action_menu">منو</string>
 
+    <string name="waiting_request">(در انتظار پذیرش)</string>
+    <string name="accepted_request">(به شما داده شد)</string>
+    <string name="rejected_request">(درخواست شما رد شد)</string>
+    <string name="donated_request">(به فرد دیگری هدیه شد)</string>
+
     <string name="book">کتاب</string>
     <string name="clothes">پوشاک</string>
     <string name="accessories">لوازم</string>

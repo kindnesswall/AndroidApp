@@ -30,9 +30,23 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position%2;
+    }
+
+    @Override
     public SentRequestItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_sent_request, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_receive_requests, null);
         SentRequestItemHolder mh = new SentRequestItemHolder(v);
+
+//        switch (i){
+//            case 0:
+//                mh.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.lime_A700));
+//                break;
+//            case 1:
+//                mh.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.orange_A400));
+//                break;
+//        }
 
         return mh;
     }
@@ -49,11 +63,20 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
                 bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
                 requestsToAGiftFragment.setArguments(bundle);
 
-                ((BottomBarActivity) mContext).setFragment(
+                ((BottomBarActivity) mContext).addFragment(
                         requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
                 );
             }
         });
+
+//        switch (getItemViewType(i)){
+//            case 0:
+//                myHolder.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.lime_A700));
+//                break;
+//            case 1:
+//                myHolder.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.orange_A400));
+//                break;
+//        }
 
     }
 

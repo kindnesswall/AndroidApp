@@ -23,15 +23,31 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
     private Context mContext;
     private FragmentActivity activity;
 
+    private final int WAITING = 0,ACCEPTED = 1,REJECTED = 2,DONATED = 3;
+
     public SentRequestAdapter(Context context, ArrayList<RequestModel> requestModels) {
         this.requestModels = requestModels;
         this.mContext = context;
     }
 
     @Override
-    public SentRequestItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_sent_request, null);
+    public int getItemViewType(int position) {
+        return position%2;
+    }
+
+    @Override
+    public SentRequestItemHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_sent_requests, null);
         SentRequestItemHolder mh = new SentRequestItemHolder(v);
+
+//        switch (viewType){
+//            case 0:
+//                mh.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.lime_A700));
+//                break;
+//            case 1:
+//                mh.rootLay.setBackgroundColor(mContext.getResources().getColor(R.color.orange_A400));
+//                break;
+//        }
 
         return mh;
     }

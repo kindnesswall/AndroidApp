@@ -69,7 +69,7 @@ public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> 
 //            public void onClick(View v) {
 //
 //
-//                ((BottomBarActivity) mContext).setFragment(
+//                ((BottomBarActivity) mContext).replaceFragment(
 //                        GiftCategoryFilterFragment.newInstance(giftImageUrls.get(i)),
 //                        GiftCategoryFilterFragment.class.getName()
 //                );

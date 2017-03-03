@@ -72,7 +72,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
 
         ButterKnife.bind(this, rootView);
         init();
