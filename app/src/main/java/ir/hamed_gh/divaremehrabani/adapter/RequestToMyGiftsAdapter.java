@@ -61,6 +61,7 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
                 RequestsToAGiftFragment requestsToAGiftFragment = new RequestsToAGiftFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
+                bundle.putString(Constants.GIFT_NAME, gifts.get(i).title);
                 requestsToAGiftFragment.setArguments(bundle);
 
                 ((BottomBarActivity) mContext).addFragment(

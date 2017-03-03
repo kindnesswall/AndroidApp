@@ -13,6 +13,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import ir.hamed_gh.divaremehrabani.model.api.User;
+import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -151,7 +152,10 @@ public class ApiRequest {
 
     public void getGift(String giftId) {
 
-        Call<Gift> call = AppController.service.getGift(giftId);
+        Call<Gift> call = AppController.service.getGift(
+                "application/json",
+                AppController.getStoredString(Constants.Authorization),
+                giftId);
 
         call.enqueue(new CallbackWithRetry<Gift>(call, mContext) {
             @Override
@@ -161,6 +165,28 @@ public class ApiRequest {
 
             @Override
             public void onFailure(Call<Gift> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
+    public void bookmark(String giftId) {
+
+        Call<ResponseBody> call = AppController.service.bookmark(
+                "application/json",
+                AppController.getStoredString(Constants.Authorization),
+                new BookmarkInput(giftId)
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

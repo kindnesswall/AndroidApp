@@ -120,7 +120,8 @@
 
 							android:layout_toRightOf="@id/share_ic"
 							android:scaleType="center"
-							android:src="@mipmap/ic_action_action_bookmark_outline"/>
+							android:src="@mipmap/ic_action_action_bookmark_outline"
+							android:visibility="invisible"/>
 
 						<ImageView
 							android:id="@+id/first_right_icon_ic"

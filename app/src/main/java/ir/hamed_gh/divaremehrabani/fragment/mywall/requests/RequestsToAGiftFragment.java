@@ -19,6 +19,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.GiftDetailActivity;
 import ir.hamed_gh.divaremehrabani.adapter.RequestToAGiftAdapter;
 import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
@@ -39,6 +40,12 @@ public class RequestsToAGiftFragment extends BaseFragment {
     @Bind(R.id.message_textview)
     TextView mMessageTv;
 
+    @Bind(R.id.total_requests_tv)
+    TextViewIranSansRegular mTotalRequestsTv;
+
+    @Bind(R.id.gift_name_tv)
+    TextViewIranSansRegular mGiftNameTv;
+
     @Bind(R.id.info_lay)
     RelativeLayout mInfoLay;
 
@@ -48,6 +55,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
 
     private int startIndex = 0;
     private String giftId;
+    private String giftName;
 
     @Override
     protected void init() {
@@ -56,6 +64,8 @@ public class RequestsToAGiftFragment extends BaseFragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             giftId = bundle.getString(Constants.GIFT_ID);
+            giftName = bundle.getString(Constants.GIFT_NAME);
+            mGiftNameTv.setText(giftName);
         }
 
         adapter = new RequestToAGiftAdapter(context, requestModels);

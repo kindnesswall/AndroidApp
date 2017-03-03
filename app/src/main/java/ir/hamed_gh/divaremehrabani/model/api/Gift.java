@@ -18,6 +18,9 @@ public class Gift implements Parcelable {
     @SerializedName("address")
     public String address = "";
 
+    @SerializedName("bookmark")
+    public boolean bookmark;
+
     @SerializedName("description")
     public String description = "";
 
@@ -71,68 +74,41 @@ public class Gift implements Parcelable {
 
     @SerializedName("createTime")
     public String createTime = "";
+    public Gift(){
 
-    // No-arg Ctor
-    public Gift() {
     }
 
-    // Parcelling part
-    public Gift(Parcel in) {
-        this.title = in.readString();
-        this.address = in.readString();
-        this.description = in.readString();
-        this.price = in.readString();
-        this.status = in.readString();
-        this.userId = in.readString();
-        this.user = in.readString();
-        this.receivedUserId = in.readString();
-        this.receivedUser = in.readString();
-        this.categoryId = in.readString();
-        this.category = in.readString();
-        this.locationId = in.readString();
-        this.location = in.readString();
-        this.giftImages = (ArrayList<String>) in.readSerializable();
-        this.giftId = in.readString();
-        this.createDateTime = in.readString();
-        this.createDate = in.readString();
-        this.createTime = in.readString();
+    protected Gift(Parcel in) {
+        title = in.readString();
+        address = in.readString();
+        bookmark = in.readByte() != 0;
+        description = in.readString();
+        price = in.readString();
+        status = in.readString();
+        userId = in.readString();
+        user = in.readString();
+        receivedUserId = in.readString();
+        receivedUser = in.readString();
+        categoryId = in.readString();
+        category = in.readString();
+        locationId = in.readString();
+        location = in.readString();
+        regionId = in.readString();
+        region = in.readString();
+        giftImages = in.createStringArrayList();
+        giftId = in.readString();
+        createDateTime = in.readString();
+        createDate = in.readString();
+        createTime = in.readString();
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(address);
-        dest.writeString(description);
-        dest.writeString(price);
-        dest.writeString(status);
-        dest.writeString(userId);
-        dest.writeString(user);
-        dest.writeString(receivedUserId);
-        dest.writeString(receivedUser);
-        dest.writeString(categoryId);
-        dest.writeString(category);
-        dest.writeString(locationId);
-        dest.writeString(location);
-        dest.writeSerializable(giftImages);
-        dest.writeString(giftId);
-        dest.writeString(createDateTime);
-        dest.writeString(createDate);
-        dest.writeString(createTime);
-    }
-
-    /**
-     * Static field used to regenerate object, individually or as arrays
-     */
-    public static final Parcelable.Creator<Gift> CREATOR = new Parcelable.Creator<Gift>() {
-        public Gift createFromParcel(Parcel pc) {
-            return new Gift(pc);
+    public static final Creator<Gift> CREATOR = new Creator<Gift>() {
+        @Override
+        public Gift createFromParcel(Parcel in) {
+            return new Gift(in);
         }
 
+        @Override
         public Gift[] newArray(int size) {
             return new Gift[size];
         }
@@ -153,5 +129,35 @@ public class Gift implements Parcelable {
         this.categoryId = categoryId;
         this.locationId = locationId;
         this.giftImages = giftImages;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeString(address);
+        parcel.writeByte((byte) (bookmark ? 1 : 0));
+        parcel.writeString(description);
+        parcel.writeString(price);
+        parcel.writeString(status);
+        parcel.writeString(userId);
+        parcel.writeString(user);
+        parcel.writeString(receivedUserId);
+        parcel.writeString(receivedUser);
+        parcel.writeString(categoryId);
+        parcel.writeString(category);
+        parcel.writeString(locationId);
+        parcel.writeString(location);
+        parcel.writeString(regionId);
+        parcel.writeString(region);
+        parcel.writeStringList(giftImages);
+        parcel.writeString(giftId);
+        parcel.writeString(createDateTime);
+        parcel.writeString(createDate);
+        parcel.writeString(createTime);
     }
 }

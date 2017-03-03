@@ -7,6 +7,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.User;
+import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.RequestBody;
@@ -32,7 +33,16 @@ public interface RestAPI {
                               @Query(Constants.SEARCH_TEXT) String searchText);
 
     @GET("Gift/{" + Constants.GIFT_ID + "}")
-    Call<Gift> getGift(@Path(Constants.GIFT_ID) String giftId);
+    Call<Gift> getGift(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.GIFT_ID) String giftId);
+
+    @POST("BookmarkGift")
+    Call<ResponseBody> bookmark(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Body BookmarkInput bookmarkInput);
 
     @POST("Upload")
     Call<ResponseBody> uploadFile(

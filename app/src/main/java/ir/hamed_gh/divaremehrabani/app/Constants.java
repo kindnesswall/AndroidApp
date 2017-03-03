@@ -65,4 +65,5 @@ public class Constants {
     public static final String HOME_PAGETYPE = "HOME_PAGETYPE";
     public static final String CATEGORY_PAGETYPE = "CATEGORY_PAGETYPE";
     public static final String SEARCH_PAGETYPE = "SEARCH_PAGETYPE";
+    public static final String GIFT_NAME = "GIFT_NAME";
 }

@@ -26,6 +26,7 @@ import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
+import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
@@ -98,11 +99,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     private void extractDataFromBundle() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            giftId = bundle.getString(Constants.GIFT_ID);
             gift = (Gift) bundle.get(Constants.GIFT);
             if (gift!=null) {
                 setInfo();
+                giftId = gift.giftId;
             }
-            giftId = bundle.getString(Constants.GIFT_ID);
         }
     }
 
@@ -158,9 +160,13 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             @Override
             public void onClick(View v) {
 
-                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
-
-                mBookmarkIc.setOnClickListener(removeFromWishList);
+                if (AppController.getStoredString(Constants.Authorization)!=null) {
+                    mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
+                    mBookmarkIc.setOnClickListener(removeFromWishList);
+                    apiRequest.bookmark(giftId);
+                }else {
+                    Toasti.showS("برای افزودن به علاقه‌مندی باید وارد شوید.");
+                }
             }
         };
 
@@ -170,6 +176,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
                 mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
                 mBookmarkIc.setOnClickListener(addToWishList);
+                apiRequest.bookmark(giftId);
             }
         };
 
@@ -237,8 +244,19 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
         if (response.body() instanceof RequestGiftOutput) {
             Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
         }else if (response.body() instanceof Gift){
-            gift = (Gift) response.body();
-            setInfo();
+            Gift gift = (Gift) response.body();
+            if (this.gift==null) {
+                setInfo();
+                this.gift = gift;
+            }
+            if (gift.bookmark){
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
+                mBookmarkIc.setOnClickListener(removeFromWishList);
+            }else {
+                mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
+                mBookmarkIc.setOnClickListener(addToWishList);
+            }
+            mBookmarkIc.setVisibility(View.VISIBLE);
         }
     }
 
