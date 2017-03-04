@@ -18,6 +18,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -38,6 +39,22 @@ public interface RestAPI {
             @Header(Constants.ContentType) String contentType,
             @Header(Constants.Authorization) String authorization,
             @Path(Constants.GIFT_ID) String giftId);
+
+    @PUT("AcceptRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
+    Call<ResponseBody> acceptRequest(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.GIFT_ID) String giftId,
+            @Path(Constants.FROM_USER_ID) String userId
+    );
+
+    @PUT("DenyRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
+    Call<ResponseBody> denyRequest(
+            @Header(Constants.ContentType) String contentType,
+            @Header(Constants.Authorization) String authorization,
+            @Path(Constants.GIFT_ID) String giftId,
+            @Path(Constants.FROM_USER_ID) String userId
+    );
 
     @POST("BookmarkGift")
     Call<ResponseBody> bookmark(

@@ -151,6 +151,52 @@ public class ApiRequest {
 
     }
 
+    public void acceptRequest(String giftId, String fromUserId) {
+
+        Call<ResponseBody> call = AppController.service.acceptRequest(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                giftId,
+                fromUserId
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
+    public void denyRequest(String giftId, String fromUserId) {
+
+        Call<ResponseBody> call = AppController.service.denyRequest(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                giftId,
+                fromUserId
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void getGift(String giftId) {
 
         Call<Gift> call = AppController.service.getGift(

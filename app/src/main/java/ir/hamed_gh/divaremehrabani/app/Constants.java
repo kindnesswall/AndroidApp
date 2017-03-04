@@ -12,6 +12,7 @@ public class Constants {
 //    public static final String FROM_ACTIVITY = "FROM_ACTIVITY";
 
     public static final String GIFT_ID = "GIFT_ID";
+    public static final String FROM_USER_ID = "FROM_USER_ID";
 
     public static final String MY_GIFT_SAVED = "MY_GIFT_SAVED";
     public static final String MY_GIFT_TITLE = "MY_GIFT_TITLE";
