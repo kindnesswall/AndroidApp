@@ -120,9 +120,9 @@ public class UserProfileActivity extends AppCompatActivity implements ApiRequest
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
-        DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
-        ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
+        RegisteredGiftsFragment registeredGiftsFragment = RegisteredGiftsFragment.newInstance(userID);
+        DonatedGiftsFragment donatedGiftsFragment =  DonatedGiftsFragment.newInstance(userID);
+        ReceivedGiftsFragment receivedGiftsFragment = ReceivedGiftsFragment.newInstance(userID);
 
         adapter.addFrag(registeredGiftsFragment, "ثبت شده");
         adapter.addFrag(donatedGiftsFragment, "اهدایی");

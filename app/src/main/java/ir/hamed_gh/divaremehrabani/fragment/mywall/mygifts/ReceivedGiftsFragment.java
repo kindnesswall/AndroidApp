@@ -16,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
@@ -43,6 +44,15 @@ public class ReceivedGiftsFragment extends BaseFragment {
 
     private int startIndex = 0;
 
+    public static ReceivedGiftsFragment newInstance(String userId){
+        ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.USER_ID, userId);
+        receivedGiftsFragment.setArguments(bundle);
+
+        return receivedGiftsFragment;
+    }
+
     @Override
     protected void init() {
         super.init();
@@ -52,7 +62,12 @@ public class ReceivedGiftsFragment extends BaseFragment {
         linearLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
+        String userId = getArguments().getString(Constants.USER_ID);
+        if (userId == null)
+            userId = AppController.getStoredString(Constants.USER_ID);
+
         apiRequest.getReceivedGifts(
+                userId,
                 new StartLastIndex(
                         startIndex + "",
                         startIndex + Constants.LIMIT + ""

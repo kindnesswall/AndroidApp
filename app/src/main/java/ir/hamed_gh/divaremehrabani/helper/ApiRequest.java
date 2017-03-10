@@ -470,10 +470,11 @@ public class ApiRequest {
     }
 
 
-    public void getRegisteredGifts(StartLastIndex startLastIndex) {
+    public void getRegisteredGifts(String userId, StartLastIndex startLastIndex) {
         Call<ArrayList<Gift>> call = AppController.service.getMyRegisteredGifts(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
+                userId,
                 startLastIndex.startIndex,
                 startLastIndex.lastIndex
         );
@@ -492,10 +493,11 @@ public class ApiRequest {
         });
     }
 
-    public void getDonatedGifts(StartLastIndex startLastIndex) {
+    public void getDonatedGifts(String userId, StartLastIndex startLastIndex) {
         Call<ArrayList<Gift>> call = AppController.service.getMyDonatedGifts(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
+                userId,
                 startLastIndex.startIndex,
                 startLastIndex.lastIndex
         );
@@ -514,10 +516,11 @@ public class ApiRequest {
         });
     }
 
-    public void getReceivedGifts(StartLastIndex startLastIndex) {
+    public void getReceivedGifts(String userId, StartLastIndex startLastIndex) {
         Call<ArrayList<Gift>> call = AppController.service.getMyReceivedGifts(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
+                userId,
                 startLastIndex.startIndex,
                 startLastIndex.lastIndex
         );
