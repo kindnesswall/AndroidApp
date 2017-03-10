@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;

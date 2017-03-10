@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;

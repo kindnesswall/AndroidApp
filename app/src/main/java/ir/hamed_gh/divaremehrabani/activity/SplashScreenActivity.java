@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;

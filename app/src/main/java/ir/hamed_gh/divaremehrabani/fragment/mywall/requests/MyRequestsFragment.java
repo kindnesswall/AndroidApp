@@ -15,7 +15,7 @@ import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.activity.LoginActivity;
 import ir.hamed_gh.divaremehrabani.adapter.ViewPagerAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.CustomTabLayout;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 

@@ -1,5 +1,6 @@
 package ir.hamed_gh.divaremehrabani.app;
 
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

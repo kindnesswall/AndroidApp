@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.interfaces.ChooseCategoryCallback;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;

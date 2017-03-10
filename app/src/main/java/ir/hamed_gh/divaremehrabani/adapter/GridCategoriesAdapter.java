@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
 import ir.hamed_gh.divaremehrabani.fragment.category.CategoriesGridFragment;
 import ir.hamed_gh.divaremehrabani.holder.CategoryGridHolder;

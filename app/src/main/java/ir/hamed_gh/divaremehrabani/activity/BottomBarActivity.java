@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.app.Constants;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;

@@ -1,4 +1,4 @@
-package ir.hamed_gh.divaremehrabani.app;
+package ir.hamed_gh.divaremehrabani.constants;
 
 /**
  * Created by HamedGh on 3/8/2016.
