@@ -24,8 +24,8 @@ public interface AccountRestAPI {
     );
 
     @FormUrlEncoded
-    @POST("token")
-    Call<TokenOutput> token(@Field("username") String username,
+    @POST("Account/Login")
+    Call<TokenOutput> login(@Field("username") String username,
                             @Field("password") String password,
                             @Field("grant_type") String grant_type);
 }

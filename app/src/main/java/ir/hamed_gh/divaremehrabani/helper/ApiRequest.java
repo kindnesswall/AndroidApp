@@ -240,9 +240,9 @@ public class ApiRequest {
 
     }
 
-    public void getToken(String verificationCode) {
+    public void login(String verificationCode) {
 
-        Call<TokenOutput> call = AppController.accountService.token(
+        Call<TokenOutput> call = AppController.accountService.login(
                 AppController.getStoredString(Constants.TELEPHONE),
                 verificationCode,
                 "password"

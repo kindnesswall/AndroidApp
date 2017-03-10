@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             @Override
             public void onClick(View v) {
                 Toasti.showS("send verification code");
-                apiRequest.getToken(phoneConfirimationCodeEt.getText().toString());
+                apiRequest.login(phoneConfirimationCodeEt.getText().toString());
             }
         };
 
