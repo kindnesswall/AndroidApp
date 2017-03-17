@@ -79,6 +79,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
     @Bind(R.id.search_textbox_lay)
     RelativeLayout mSearchTextboxLay;
     Place place;
+    Place region;
+
     Category category;
     private String pageType;
     private String searchTxt = "";
@@ -177,9 +179,9 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
             public void onClick(View v) {
 
                 HomeFilteringDialogFragment fragment = HomeFilteringDialogFragment.ShowME(
-                        getActivity().getSupportFragmentManager(),
                         category,
-                        place
+                        place,
+                        region
                 );
 
                 fragment.setTargetFragment(HomeFragment.this, 0);
@@ -269,8 +271,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
         apiRequest.getGifts(
                 new GetGiftPathQuery(
                         (place == null ? AppController.getStoredString(Constants.MY_LOCATION_ID) : place.id),
-                        "0",
-                        (category == null ? "1" : category.categoryId),
+                        (region == null ? "0" : region.id),
+                        (category == null ? "0" : category.categoryId),
                         startIndex + "",
                         startIndex + Constants.LIMIT + "",
                         searchTxt
@@ -321,13 +323,15 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
     }
 
     @Override
-    public void onApplyFiltering(Place place, Category category) {
+    public void onApplyFiltering(Place place, Place region, Category category) {
         this.place = place;
         this.category = category;
+        this.region = region;
 
         progressView.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.INVISIBLE);
         mMessageTextView.setVisibility(View.INVISIBLE);
+
         if (place != null || category != null) {
             setFilteringBtnColor(R.color.colorPrimary);
         }

@@ -59,16 +59,17 @@ public class HomeFilteringDialogFragment
 
     Category choosenCategory;
     Place choosenPlace;
-    private Place region;
+    Place choosenRegion;
 
     public static HomeFilteringDialogFragment ShowME(
-            FragmentManager fm,
             Category category,
-            Place place) {
+            Place place,
+            Place region) {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.CATEGORY_PARCELABLE, category);
         bundle.putParcelable(Constants.PLACE_PARCELABLE, place);
+        bundle.putParcelable(Constants.REGION_PARCELABLE, region);
 
         HomeFilteringDialogFragment fragment = new HomeFilteringDialogFragment();
         fragment.setArguments(bundle);
@@ -84,13 +85,17 @@ public class HomeFilteringDialogFragment
 
             choosenPlace = bundle.getParcelable(Constants.PLACE_PARCELABLE);
             onCitySelected(choosenPlace);
+            choosenRegion = bundle.getParcelable(Constants.REGION_PARCELABLE);
+            onRegionSelected(choosenRegion);
         }
     }
 
     @Override
     public void onCitySelected(Place city) {
         if (city == null) return;
-
+        if (choosenPlace!=city){
+            onRegionSelected(null);
+        }
         mLocationFilterTv.setText(
                 getText(R.string.place_equal) + " " + city.name);
         choosenPlace = city;
@@ -99,9 +104,14 @@ public class HomeFilteringDialogFragment
 
     @Override
     public void onRegionSelected(Place region) {
-        this.region = region;
-        regionFilterTv.setText(
-                getText(R.string.region_equal) + " " +region.name);
+        this.choosenRegion = region;
+        if (region== null){
+            regionFilterTv.setText(
+                    getText(R.string.region_equal));
+        }else {
+            regionFilterTv.setText(
+                    getText(R.string.region_equal) + " " + region.name);
+        }
     }
 
     private void findCityRegion() {
@@ -184,33 +194,27 @@ public class HomeFilteringDialogFragment
         locationFilterLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//				Bundle bundle = new Bundle();
-//				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
-//				choosePlaceDialogFragment.setArguments(bundle);
 
                 choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
                 choosePlaceDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);
-//                choosePlaceDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
+
             }
         });
 
         regionFilterLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//				Bundle bundle = new Bundle();
-//				bundle.putString(Constants.FROM_ACTIVITY, HomeFilteringDialogFragment.class.getName());
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ChoosePlaceDialogFragment choosePlaceDialogFragment =
                         ChoosePlaceDialogFragment.newInstance(choosenPlace.id);
-//				choosePlaceDialogFragment.setArguments(bundle);
 
                 choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
                 choosePlaceDialogFragment.setTargetFragment(HomeFilteringDialogFragment.this, 0);
-//                choosePlaceDialogFragment.onDismiss(HomeFilteringDialogFragment.this);
+
             }
         });
 
@@ -219,7 +223,7 @@ public class HomeFilteringDialogFragment
             public void onClick(View v) {
 
                 ((HomeFilteringCallback) getTargetFragment())
-                        .onApplyFiltering(choosenPlace, choosenCategory);
+                        .onApplyFiltering(choosenPlace, choosenRegion, choosenCategory);
                 dismiss();
 
             }
@@ -229,7 +233,7 @@ public class HomeFilteringDialogFragment
             @Override
             public void onClick(View v) {
                 ((HomeFilteringCallback) getTargetFragment())
-                        .onApplyFiltering(null, null);
+                        .onApplyFiltering(null,null, null);
                 dismiss();
             }
         });
