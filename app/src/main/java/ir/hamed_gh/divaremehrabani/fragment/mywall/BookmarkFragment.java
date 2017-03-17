@@ -20,7 +20,6 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
-import ir.hamed_gh.divaremehrabani.model.api.output.BookmarkListOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -88,10 +87,10 @@ public class BookmarkFragment extends BaseFragment {
         mRecyclerView.setVisibility(View.VISIBLE);
         progressView.setVisibility(View.INVISIBLE);
 
-        ArrayList<BookmarkListOutput> gifts = (ArrayList<BookmarkListOutput>) response.body();
-        for (int i = 0; i < gifts.size(); i++) {
-            this.gifts.add(gifts.get(i).gift);
-        }
+        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+//        for (int i = 0; i < gifts.size(); i++) {
+            this.gifts.addAll(gifts);
+//        }
         adapter.notifyDataSetChanged();
 
         if (gifts.size() > 0) {

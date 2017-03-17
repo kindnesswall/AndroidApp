@@ -16,7 +16,6 @@ import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.output.BookmarkListOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
@@ -411,22 +410,22 @@ public class ApiRequest {
     }
 
     public void getBookmarkList(StartLastIndex startLastIndex) {
-        Call<ArrayList<BookmarkListOutput>> call = AppController.service.getBookmarkList(
+        Call<ArrayList<Gift>> call = AppController.service.getBookmarkList(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
                 startLastIndex.startIndex,
                 startLastIndex.lastIndex
         );
 
-        call.enqueue(new CallbackWithRetry<ArrayList<BookmarkListOutput>>(call, mContext) {
+        call.enqueue(new CallbackWithRetry<ArrayList<Gift>>(call, mContext) {
             @Override
-            public void onResponse(Call<ArrayList<BookmarkListOutput>> call,
-                                   Response<ArrayList<BookmarkListOutput>> response) {
+            public void onResponse(Call<ArrayList<Gift>> call,
+                                   Response<ArrayList<Gift>> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
 
             @Override
-            public void onFailure(Call<ArrayList<BookmarkListOutput>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

@@ -10,7 +10,6 @@ import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.output.BookmarkListOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -116,7 +115,7 @@ public interface RestAPI {
 	);
 
 	@GET("BookmarkList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-	Call<ArrayList<BookmarkListOutput>> getBookmarkList(
+	Call<ArrayList<Gift>> getBookmarkList(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.StartIndex) String startIndex,
