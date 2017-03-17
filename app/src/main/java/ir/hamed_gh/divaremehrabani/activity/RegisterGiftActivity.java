@@ -188,6 +188,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                                 mPriceEt.getText().toString(),
                                 category.categoryId,
                                 city.id,
+                                (region==null? "0" : region.id),
                                 myGift.giftImages
                         )
                 );

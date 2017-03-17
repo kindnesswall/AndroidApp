@@ -123,6 +123,7 @@ public class Gift implements Parcelable {
                 String price,
                 String categoryId,
                 String locationId,
+                String regionId,
                 ArrayList<String> giftImages) {
 
         this.description = description;
@@ -130,6 +131,7 @@ public class Gift implements Parcelable {
         this.title = title;
         this.price = price;
         this.categoryId = categoryId;
+        this.regionId = regionId;
         this.locationId = locationId;
         this.giftImages = giftImages;
     }
