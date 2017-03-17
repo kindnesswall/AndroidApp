@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.GiftDetailActivity;
-import ir.hamed_gh.divaremehrabani.holder.ItemHolder;
+import ir.hamed_gh.divaremehrabani.holder.GiftHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
+public class GiftListAdapter extends RecyclerView.Adapter<GiftHolder> {
 
     String schoolId, childID;
     private ArrayList<Gift> gifts;
@@ -32,17 +32,17 @@ public class GiftListAdapter extends RecyclerView.Adapter<ItemHolder> {
     }
 
     @Override
-    public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public GiftHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_ad_gift, null);
-        ItemHolder mh = new ItemHolder(v);
+        GiftHolder mh = new GiftHolder(v);
 
         return mh;
     }
 
     @Override
-    public void onBindViewHolder(ItemHolder myHolder, final int i) {
+    public void onBindViewHolder(GiftHolder myHolder, final int i) {
 
-//	    myHolder.mItemTitleTv.setText(gifts.get(i).getGalleryId());
+//	    myHolder.mTitleTv.setText(gifts.get(i).getGalleryId());
 
         //TODO load image of item
         String image_url;

@@ -10,20 +10,21 @@ import ir.hamed_gh.divaremehrabani.R;
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class SentRequestItemHolder extends RecyclerView.ViewHolder {
+public class ReceiveGiftsRequestHolder extends RecyclerView.ViewHolder {
 
-    public TextView mItemTitleTv,mUnseenMsgTv;
+    public TextView mTitleTv,mUnseenMsgTv;
 
     public View itemView;
 
     public RelativeLayout rootLay;
 
-    public SentRequestItemHolder(View itemView) {
+    public ReceiveGiftsRequestHolder(View itemView) {
         super(itemView);
 
         this.itemView = itemView;
         rootLay = (RelativeLayout) itemView.findViewById(R.id.root_lay);
-        mItemTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
+        mTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
+        mUnseenMsgTv = (TextView) itemView.findViewById(R.id.unseen_msg_tv);
 
     }
 }

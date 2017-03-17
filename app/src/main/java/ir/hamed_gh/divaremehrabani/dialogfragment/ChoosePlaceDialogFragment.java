@@ -56,7 +56,7 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
-        args.putString(Constants.LOCATION_ID, locationId);
+        args.putString(Constants.CITY_ID, locationId);
         f.setArguments(args);
 
         return f;
@@ -129,8 +129,8 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
     private void init() {
 //		fromActivity = getArguments().getString(Constants.FROM_ACTIVITY);
         Bundle bundle = getArguments();
-        if (bundle!=null && getArguments().getString(Constants.LOCATION_ID)!=null) {
-            locationId = getArguments().getString(Constants.LOCATION_ID);
+        if (bundle!=null && getArguments().getString(Constants.CITY_ID)!=null) {
+            locationId = getArguments().getString(Constants.CITY_ID);
             readLevel4FromJson();
             choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level4.getPlaces());
         }else {

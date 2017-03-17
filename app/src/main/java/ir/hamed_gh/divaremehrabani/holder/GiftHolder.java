@@ -10,14 +10,14 @@ import ir.hamed_gh.divaremehrabani.R;
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class GiftHolder extends RecyclerView.ViewHolder{
 
-    protected TextView mItemTitleTv, mGiftLocationTv, mGiftCreatedTimeTv;
-    protected ImageView mItemIv;
+    public TextView mTitleTv, mGiftLocationTv, mGiftCreatedTimeTv;
+    public ImageView mItemIv;
     public View itemView;
 
     public TextView getGiftTitleTv() {
-        return mItemTitleTv;
+        return mTitleTv;
     }
 
     public TextView getGiftLocationTv() {
@@ -32,20 +32,15 @@ public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickL
         return mItemIv;
     }
 
-    public ItemHolder(View itemView) {
+    public GiftHolder(View itemView) {
         super(itemView);
 
         this.itemView = itemView;
 
-        mItemTitleTv = (TextView) itemView.findViewById(R.id.row_title_textview);
+        mTitleTv = (TextView) itemView.findViewById(R.id.row_title_textview);
         mGiftLocationTv = (TextView) itemView.findViewById(R.id.row_ad_gift_location_tv);
         mGiftCreatedTimeTv = (TextView) itemView.findViewById(R.id.row_ad_gift_time_tv);
 
         mItemIv = (ImageView) itemView.findViewById(R.id.row_imageview);
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

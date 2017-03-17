@@ -128,13 +128,14 @@ public class ApiRequest {
         }
     }
 
-    public void getGifts(GetGiftPathQuery getGiftPathQuery) {
+    public void getGifts(final GetGiftPathQuery getGiftPathQuery) {
 
         Call<List<Gift>> call = AppController.service.getGifts(
-                getGiftPathQuery.locationId,
+                getGiftPathQuery.cityId,
+                getGiftPathQuery.regionId,
+                getGiftPathQuery.categoryId,
                 getGiftPathQuery.startIndex,
                 getGiftPathQuery.lastIndex,
-                getGiftPathQuery.categoryId,
                 getGiftPathQuery.searchText);
 
         call.enqueue(new CallbackWithRetry<List<Gift>>(call, mContext) {
@@ -253,6 +254,11 @@ public class ApiRequest {
             public void onResponse(Call<TokenOutput> call, Response<TokenOutput> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
+
+            @Override
+            public void onFailure(Call<TokenOutput> call, Throwable t) {
+                super.onFailure(call, t);
+            }
         });
 
     }
@@ -303,7 +309,9 @@ public class ApiRequest {
 
     public void getCategories() {
 
-        Call<ArrayList<Category>> call = AppController.service.getCategories();
+        Call<ArrayList<Category>> call = AppController.service.getCategories(
+                "0","100","1"
+        );
 
         call.enqueue(new CallbackWithRetry<ArrayList<Category>>(call, mContext) {
             @Override

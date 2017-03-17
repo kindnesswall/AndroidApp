@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class Gift implements Parcelable {
 
+    @SerializedName("requestCount")
+    public String requestCount = "";
+
     @SerializedName("title")
     public String title = "";
 
@@ -48,7 +51,7 @@ public class Gift implements Parcelable {
     @SerializedName("category")
     public String category;
 
-    @SerializedName("locationId")
+    @SerializedName("cityId")
     public String locationId;
 
     @SerializedName("location")

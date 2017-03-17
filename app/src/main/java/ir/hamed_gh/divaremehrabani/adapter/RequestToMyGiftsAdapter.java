@@ -13,13 +13,13 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.BottomBarActivity;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
-import ir.hamed_gh.divaremehrabani.holder.SentRequestItemHolder;
+import ir.hamed_gh.divaremehrabani.holder.ReceiveGiftsRequestHolder;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestItemHolder> {
+public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRequestHolder> {
 
     private ArrayList<Gift> gifts;
     private Context mContext;
@@ -35,9 +35,9 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     }
 
     @Override
-    public SentRequestItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ReceiveGiftsRequestHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_receive_requests, null);
-        SentRequestItemHolder mh = new SentRequestItemHolder(v);
+        ReceiveGiftsRequestHolder mh = new ReceiveGiftsRequestHolder(v);
 
 //        switch (i){
 //            case 0:
@@ -52,16 +52,21 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<SentRequestIte
     }
 
     @Override
-    public void onBindViewHolder(final SentRequestItemHolder myHolder, final int i) {
+    public void onBindViewHolder(final ReceiveGiftsRequestHolder myHolder, final int i) {
 
-        myHolder.mItemTitleTv.setText(gifts.get(i).title);
+        myHolder.mTitleTv.setText(gifts.get(i).title);
+        myHolder.mUnseenMsgTv.setText(gifts.get(i).requestCount);
+
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RequestsToAGiftFragment requestsToAGiftFragment = new RequestsToAGiftFragment();
+
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
                 bundle.putString(Constants.GIFT_NAME, gifts.get(i).title);
+                bundle.putString(Constants.GIFT_REQUEST_COUNT, gifts.get(i).requestCount);
+
                 requestsToAGiftFragment.setArguments(bundle);
 
                 ((BottomBarActivity) mContext).addFragment(

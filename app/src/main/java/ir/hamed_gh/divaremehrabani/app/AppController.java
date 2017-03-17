@@ -104,7 +104,7 @@ public class AppController extends Application {
 
         retrofitInitialization();
 
-//        AppController.storeString(Constants.LOCATION_ID,"1");
+//        AppController.storeString(Constants.CITY_ID,"1");
 
     }
 

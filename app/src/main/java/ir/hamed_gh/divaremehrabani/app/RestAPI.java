@@ -28,47 +28,55 @@ import retrofit2.http.Query;
  */
 public interface RestAPI {
 
-    @GET("Gift/{" + Constants.LOCATION_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<List<Gift>> getGifts(@Path(Constants.LOCATION_ID) String locationId,
-                              @Path(Constants.StartIndex) String startIndex,
-                              @Path(Constants.LastIndex) String lastIndex,
-                              @Query(Constants.CATEGORY_ID) String categoryId,
-                              @Query(Constants.SEARCH_TEXT) String searchText);
+	@GET("Gift/{"
+			+ Constants.CITY_ID + "}/{"
+			+ Constants.REGION_ID + "}/{"
+			+ Constants.CATEGORY_ID + "}/{"
+			+ Constants.StartIndex + "}/{"
+			+ Constants.LastIndex + "}")
+	Call<List<Gift>> getGifts(
+			@Path(Constants.CITY_ID) String locationId,
+			@Path(Constants.REGION_ID) String regoin,
+			@Path(Constants.CATEGORY_ID) String categoryId,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex,
+			@Query(Constants.SEARCH_TEXT) String searchText
+	);
 
-    @GET("Gift/{" + Constants.GIFT_ID + "}")
-    Call<Gift> getGift(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.GIFT_ID) String giftId);
+	@GET("Gift/{" + Constants.GIFT_ID + "}")
+	Call<Gift> getGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId);
 
-    @PUT("AcceptRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
-    Call<ResponseBody> acceptRequest(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.GIFT_ID) String giftId,
-            @Path(Constants.FROM_USER_ID) String userId
-    );
+	@PUT("AcceptRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
+	Call<ResponseBody> acceptRequest(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId,
+			@Path(Constants.FROM_USER_ID) String userId
+	);
 
-    @PUT("DenyRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
-    Call<ResponseBody> denyRequest(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.GIFT_ID) String giftId,
-            @Path(Constants.FROM_USER_ID) String userId
-    );
+	@PUT("DenyRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
+	Call<ResponseBody> denyRequest(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId,
+			@Path(Constants.FROM_USER_ID) String userId
+	);
 
-    @POST("BookmarkGift")
-    Call<ResponseBody> bookmark(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Body BookmarkInput bookmarkInput);
+	@POST("BookmarkGift")
+	Call<ResponseBody> bookmark(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body BookmarkInput bookmarkInput);
 
-    @POST("Upload")
-    Call<ResponseBody> uploadFile(
-            @Header(Constants.Authorization) String authorization,
-            @Header("fileName") String fileName,
-            @Body RequestBody photo
-    );
+	@POST("Upload")
+	Call<ResponseBody> uploadFile(
+			@Header(Constants.Authorization) String authorization,
+			@Header("fileName") String fileName,
+			@Body RequestBody photo
+	);
 
 //    @POST("Upload")
 //    Call<ResponseBody> uploadGiftImage(@Header("token") String token,
@@ -79,90 +87,98 @@ public interface RestAPI {
 //	Call<List<Location>> getLocations();
 
 //	@GET("Location/{" + Constants.ID + "}")
-//	Call<Location> getLocation(@Path(Constants.ID) String locationId);
+//	Call<Location> getLocation(@Path(Constants.ID) String cityId);
 
-    @GET("Category")
-    Call<ArrayList<Category>> getCategories();
+	@GET("Category/{"
+			+ Constants.StartIndex + "}/{"
+			+ Constants.LastIndex + "}/{"
+			+ Constants.DensityId + "}"
+	)
+	Call<ArrayList<Category>> getCategories(
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex,
+			@Path(Constants.DensityId) String DensityId
+	);
 
-    @POST("Gift")
-    Call<Gift> registerGift(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Body Gift gift
-    );
+	@POST("Gift")
+	Call<Gift> registerGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body Gift gift
+	);
 
-    @GET("SentRequestList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<RequestModel>> getSentRequestList(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("SentRequestList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<RequestModel>> getSentRequestList(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @GET("BookmarkList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<BookmarkListOutput>> getBookmarkList(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("BookmarkList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<BookmarkListOutput>> getBookmarkList(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @POST("RequestGift/")
-    Call<RequestGiftOutput> sendRequestGift(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Body RequestGiftInput requestGiftInput);
+	@POST("RequestGift/")
+	Call<RequestGiftOutput> sendRequestGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body RequestGiftInput requestGiftInput);
 
-    @GET("RequestedGifts/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<Gift>> getRequestsMyGifts(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("GiftsRequested/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<Gift>> getRequestsMyGifts(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @GET("User/{" + Constants.USER_ID + "}")
-    Call<User> getUser(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.USER_ID) String userID
-    );
+	@GET("User/{" + Constants.USER_ID + "}")
+	Call<User> getUser(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.USER_ID) String userID
+	);
 
-    @GET("RecievedRequestList/{" + Constants.GIFT_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<RequestModel>> getRecievedRequestList(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.GIFT_ID) String giftId,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("RecievedRequestList/{" + Constants.GIFT_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<RequestModel>> getRecievedRequestList(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @GET("RegisteredGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<Gift>> getMyRegisteredGifts(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.USER_ID) String userId,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("RegisteredGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<Gift>> getMyRegisteredGifts(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.USER_ID) String userId,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @GET("DonatedGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<Gift>> getMyDonatedGifts(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.USER_ID) String userId,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("DonatedGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<Gift>> getMyDonatedGifts(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.USER_ID) String userId,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
-    @GET("ReceivedGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
-    Call<ArrayList<Gift>> getMyReceivedGifts(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization,
-            @Path(Constants.USER_ID) String userId,
-            @Path(Constants.StartIndex) String startIndex,
-            @Path(Constants.LastIndex) String lastIndex
-    );
+	@GET("ReceivedGifts/{" + Constants.USER_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
+	Call<ArrayList<Gift>> getMyReceivedGifts(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.USER_ID) String userId,
+			@Path(Constants.StartIndex) String startIndex,
+			@Path(Constants.LastIndex) String lastIndex
+	);
 
 
 }

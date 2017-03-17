@@ -39,7 +39,8 @@ public class Constants {
     public static final String CATEGORY_ID = "categoryId";
 //    public static final String CATEGORY_NAME = "CATEGORY_NAME";
 
-    public static final String LOCATION_ID = "LOCATION_ID";
+    public static final String CITY_ID = "CITY_ID";
+    public static final String REGION_ID = "REGION_ID";
 //    public static final String LOCATION_NAME = "LCATOION_NAME";
 
     public static final String TELEPHONE = "TELEPHONE";
@@ -53,10 +54,11 @@ public class Constants {
     public static final String ContentType = "Content-Type";
     public static final String JSON_TYPE = "application/json";
 
+    public static final String DensityId = "DensityId";
     public static final String StartIndex = "startIndex";
     public static final String LastIndex = "lastIndex";
     public static final String SEARCH_TEXT = "searchText";
-    public static final String LocationId = "locationId";
+    public static final String LocationId = "cityId";
     public static final String ID = "Id";
 
     public static final String PLACE_PARCELABLE = "PLACE_PARCELABLE";
@@ -67,4 +69,5 @@ public class Constants {
     public static final String CATEGORY_PAGETYPE = "CATEGORY_PAGETYPE";
     public static final String SEARCH_PAGETYPE = "SEARCH_PAGETYPE";
     public static final String GIFT_NAME = "GIFT_NAME";
+    public static final String GIFT_REQUEST_COUNT = "GIFT_REQUEST_COUNT";
 }

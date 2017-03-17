@@ -155,6 +155,10 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
                     Constants.USERNAME,
                     tokenOutput.userName);
 
+            AppController.storeString(
+                    Constants.USER_ID,
+                    tokenOutput.userId);
+
             finish();
         } else {
             enterVerificationCode();

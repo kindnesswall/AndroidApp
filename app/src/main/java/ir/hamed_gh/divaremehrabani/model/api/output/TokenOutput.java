@@ -20,6 +20,9 @@ public class TokenOutput {
     @SerializedName("userName")
     public String userName;
 
+    @SerializedName("userId")
+    public String userId;
+
     @SerializedName(".issued")
     public String issued;
 

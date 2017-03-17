@@ -26,6 +26,8 @@ import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static ir.hamed_gh.divaremehrabani.R.id.total_requests_tv;
+
 /**
  * Created by HamedGh on 3/8/2016.
  */
@@ -40,7 +42,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
     @Bind(R.id.message_textview)
     TextView mMessageTv;
 
-    @Bind(R.id.total_requests_tv)
+    @Bind(total_requests_tv)
     TextViewIranSansRegular mTotalRequestsTv;
 
     @Bind(R.id.gift_name_tv)
@@ -56,6 +58,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
     private int startIndex = 0;
     private String giftId;
     private String giftName;
+    private String requestCounts;
 
     @Override
     protected void init() {
@@ -65,7 +68,9 @@ public class RequestsToAGiftFragment extends BaseFragment {
         if (bundle != null) {
             giftId = bundle.getString(Constants.GIFT_ID);
             giftName = bundle.getString(Constants.GIFT_NAME);
+            requestCounts = bundle.getString(Constants.GIFT_REQUEST_COUNT);
             mGiftNameTv.setText(giftName);
+            mTotalRequestsTv.setText(requestCounts);
         }
 
         adapter = new RequestToAGiftAdapter(context, requestModels);

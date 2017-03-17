@@ -43,6 +43,7 @@ public class DonatedGiftsFragment extends BaseFragment {
     private LinearLayoutManager linearLayoutManager;
 
     private int startIndex = 0;
+    private String userId;
 
     public static DonatedGiftsFragment newInstance(String userId){
         DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
@@ -62,7 +63,9 @@ public class DonatedGiftsFragment extends BaseFragment {
         linearLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        String userId = getArguments().getString(Constants.USER_ID);
+        if (getArguments()!=null){
+            userId = getArguments().getString(Constants.USER_ID);
+        }
         if (userId == null)
             userId = AppController.getStoredString(Constants.USER_ID);
 
