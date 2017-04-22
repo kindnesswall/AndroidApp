@@ -23,7 +23,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:layout_alignParentBottom="true"
-		android:background="@color/colorPrimary">
+		android:background="@color/colorPrimary"
+		android:visibility="gone">
 
 		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/request_tv"
@@ -33,6 +34,39 @@
 			android:text="درخواست"
 			android:textColor="@color/white"
 			android:textSize="16dp"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/callSmsBottomBarLayBtn"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		android:background="@color/colorPrimary">
+
+		<RelativeLayout
+			android:id="@+id/divider_lay"
+			android:layout_width="2dp"
+			android:layout_height="match_parent"
+			android:layout_centerHorizontal="true"
+			android:background="@color/horizontal_divider"/>
+
+		<ImageView
+			android:id="@+id/call_iv"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="5dp"
+			android:layout_toLeftOf="@id/divider_lay"
+			android:src="@mipmap/ic_phone_grey600_36dp"/>
+
+		<ImageView
+			android:id="@+id/sms_iv"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="5dp"
+			android:layout_toRightOf="@id/divider_lay"
+			android:src="@mipmap/ic_message_grey600_36dp"/>
 
 	</RelativeLayout>
 
@@ -109,8 +143,8 @@
 							android:layout_alignParentLeft="true"
 							android:layout_centerVertical="true"
 							android:scaleType="center"
-							android:visibility="gone"
-							android:src="@mipmap/ic_action_social_share"/>
+							android:src="@mipmap/ic_action_social_share"
+							android:visibility="gone"/>
 
 						<ImageView
 							android:id="@+id/bookmark_ic"
@@ -226,8 +260,8 @@
 							android:id="@+id/detail_category_txt"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_centerVertical="true"
+							android:padding="2dp"
 							android:text="دسته‌بندی"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 							android:textColor="@color/grey_700"/>
@@ -236,9 +270,9 @@
 							android:id="@+id/detail_place_txt"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_alignParentRight="true"
 							android:layout_centerVertical="true"
+							android:padding="2dp"
 							android:text="محل"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 							android:textColor="@color/grey_700"/>
@@ -247,9 +281,9 @@
 							android:id="@+id/detail_price_txt"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_alignParentRight="true"
 							android:layout_centerVertical="true"
+							android:padding="2dp"
 							android:text="قیمت تقریبی"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 							android:textColor="@color/grey_700"/>
@@ -260,8 +294,8 @@
 						android:id="@+id/detail_tv_lay"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_toLeftOf="@id/detail_txt_lay"
 						android:layout_marginRight="8dp"
+						android:layout_toLeftOf="@id/detail_txt_lay"
 
 						android:orientation="vertical">
 
@@ -269,24 +303,24 @@
 							android:id="@+id/detail_category_tv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_gravity="right"
+							android:padding="2dp"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 							android:id="@+id/detail_place_tv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_gravity="right"
+							android:padding="2dp"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 						<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 							android:id="@+id/detail_price_tv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:padding="2dp"
 							android:layout_gravity="right"
+							android:padding="2dp"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 					</LinearLayout>

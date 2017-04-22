@@ -1,13 +1,15 @@
-package ir.hamed_gh.divaremehrabani.model.api.output;
+package ir.hamed_gh.divaremehrabani.model.api;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.BufferedSource;
 
 /**
- * Created by HamedGh on 3/8/2016.
+ * Created by Hamed on 4/21/17.
  */
-public class RequestGiftOutput extends ResponseBody {
+
+public class DeleteOutput extends ResponseBody{
+
 	@Override
 	public MediaType contentType() {
 		return null;

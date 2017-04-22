@@ -16,7 +16,6 @@ import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -174,6 +173,28 @@ public class ApiRequest {
 
     }
 
+    public void deleteMyRequest(String giftId) {
+
+        Call<ResponseBody> call = AppController.service.deleteMyRequest(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                giftId
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void denyRequest(String giftId, String fromUserId) {
 
         Call<ResponseBody> call = AppController.service.denyRequest(
@@ -200,7 +221,7 @@ public class ApiRequest {
     public void getGift(String giftId) {
 
         Call<Gift> call = AppController.service.getGift(
-                "application/json",
+                Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
                 giftId);
 
@@ -346,21 +367,21 @@ public class ApiRequest {
     }
 
     public void sendRequestGift(RequestGiftInput requestGiftInput) {
-        Call<RequestGiftOutput> call = AppController.service.sendRequestGift(
+        Call<ResponseBody> call = AppController.service.sendRequestGift(
                 Constants.JSON_TYPE,
                 AppController.getStoredString(Constants.Authorization),
                 requestGiftInput
         );
 
-        call.enqueue(new CallbackWithRetry<RequestGiftOutput>(call, mContext) {
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
             @Override
-            public void onResponse(Call<RequestGiftOutput> call,
-                                   Response<RequestGiftOutput> response) {
+            public void onResponse(Call<ResponseBody> call,
+                                   Response<ResponseBody> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
 
             @Override
-            public void onFailure(Call<RequestGiftOutput> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

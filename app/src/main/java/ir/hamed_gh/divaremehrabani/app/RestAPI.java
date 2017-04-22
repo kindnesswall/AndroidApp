@@ -10,11 +10,11 @@ import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -47,6 +47,13 @@ public interface RestAPI {
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.GIFT_ID) String giftId);
+
+	@DELETE("DeleteMyRequest/{" + Constants.GIFT_ID + "}")
+	Call<ResponseBody> deleteMyRequest(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId
+	);
 
 	@PUT("AcceptRequest/{" + Constants.GIFT_ID + "}/{" + Constants.FROM_USER_ID + "}")
 	Call<ResponseBody> acceptRequest(
@@ -123,7 +130,7 @@ public interface RestAPI {
 	);
 
 	@POST("RequestGift/")
-	Call<RequestGiftOutput> sendRequestGift(
+	Call<ResponseBody> sendRequestGift(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Body RequestGiftInput requestGiftInput);

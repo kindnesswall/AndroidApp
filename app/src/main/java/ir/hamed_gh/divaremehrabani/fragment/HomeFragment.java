@@ -270,12 +270,14 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
     private void getGifts() {
         apiRequest.getGifts(
                 new GetGiftPathQuery(
+
                         (place == null ? AppController.getStoredString(Constants.MY_LOCATION_ID) : place.id),
                         (region == null ? "0" : region.id),
                         (category == null ? "0" : category.categoryId),
                         startIndex + "",
                         startIndex + Constants.LIMIT + "",
                         searchTxt
+
                 )
         );
 

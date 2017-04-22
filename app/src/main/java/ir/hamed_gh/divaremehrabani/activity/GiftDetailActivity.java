@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
+import ir.hamed_gh.divaremehrabani.constants.GiftStatus;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
@@ -29,6 +30,7 @@ import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
+import ir.hamed_gh.divaremehrabani.model.api.DeleteOutput;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
@@ -42,6 +44,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     @Bind(R.id.share_ic)
     ImageView mShareIc;
+
+    @Bind(R.id.call_iv)
+    ImageView mCallBtn;
+
+    @Bind(R.id.sms_iv)
+    ImageView mSmsBtn;
 
     @Bind(R.id.viewpager)
     ViewPager viewPager;
@@ -61,6 +69,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.detail_category_tv)
     TextView mDetailCategoryTv;
 
+    @Bind(R.id.request_tv)
+    TextView mRequestTv;
+
     @Bind(R.id.detail_description_tv)
     TextView mDetailDescriptionTv;
 
@@ -73,6 +84,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.bottomBarLayBtn)
     RelativeLayout bottomBarLayBtn;
 
+    @Bind(R.id.callSmsBottomBarLayBtn)
+    RelativeLayout callSmsBottomBarLayBtn;
+
     @Bind(R.id.first_right_icon_ic)
     ImageView mFirstRightIcon;
 
@@ -83,6 +97,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     private ApiRequest apiRequest;
     private Places allPlaces;
     private String giftId;
+    private String giftStatus;
 
     public static Intent createIntent(Gift gift) {
         Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
@@ -146,8 +161,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
         return "";
     }
 
-
-
     private void setListeners() {
         mFirstRightIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +190,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                 mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark_outline);
                 mBookmarkIc.setOnClickListener(addToWishList);
                 apiRequest.bookmark(giftId);
+
             }
         };
 
@@ -189,20 +203,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             }
         });
 
-        bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (AppController.getStoredString(Constants.Authorization) != null) {
-                    apiRequest.sendRequestGift(
-                            new RequestGiftInput(
-                                    gift.giftId
-                            )
-                    );
-                } else {
-                    Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
-                }
-            }
-        });
     }
 
     private void init() {
@@ -242,6 +242,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Override
     public void onResponse(Call call, Response response) {
         if (response.body() instanceof RequestGiftOutput) {
+            cancelMyRequest();
             Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
         }else if (response.body() instanceof Gift){
             Gift gift = (Gift) response.body();
@@ -249,6 +250,57 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                 setInfo();
                 this.gift = gift;
             }
+
+            giftStatus = gift.status;
+            switch (gift.status){
+                case GiftStatus.REJECTED_BY_ADMIN:
+	                bottomBarLayBtn.setVisibility(View.VISIBLE);
+	                mRequestTv.setText("هدیه شما پذیرفته نشد.");
+                    break;
+
+                case GiftStatus.PUBLISHED:
+                    if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
+                        bottomBarLayBtn.setVisibility(View.GONE);
+                    }else{
+                       setRequestBtn();
+                    }
+//                    mRequestTv.setText("GiftStatus.PUBLISHED");
+                    break;
+
+                case GiftStatus.DONATED_TO_ME:
+                    callSmsBottomBarLayBtn.setVisibility(View.VISIBLE);
+                    bottomBarLayBtn.setVisibility(View.GONE);
+                    mCallBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toasti.showS("Call");
+                        }
+                    });
+                    mSmsBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toasti.showS("Sms");
+                        }
+                    });
+                    break;
+
+                case GiftStatus.DONATED_TO_SOMEONE_ELSE:
+                    callSmsBottomBarLayBtn.setVisibility(View.GONE);
+                    bottomBarLayBtn.setVisibility(View.GONE);
+                    mDetailTitleTv.setText(gift.title + "(این هدیه اهدا شده است) ");
+
+                    break;
+
+                case GiftStatus.I_SENT_MY_REQUEST_FOR_IT:
+	                cancelMyRequest();
+                    break;
+                case GiftStatus.MY_REQUEST_REJECTED:
+	                bottomBarLayBtn.setVisibility(View.VISIBLE);
+
+	                mRequestTv.setText("درخواست شما رد شد");
+                    break;
+            }
+
             if (gift.bookmark){
                 mBookmarkIc.setImageResource(R.mipmap.ic_action_action_bookmark);
                 mBookmarkIc.setOnClickListener(removeFromWishList);
@@ -257,7 +309,46 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                 mBookmarkIc.setOnClickListener(addToWishList);
             }
             mBookmarkIc.setVisibility(View.VISIBLE);
+
+        }else if(response.body() instanceof DeleteOutput){
+
+            setRequestBtn();
+
         }
+    }
+
+    private void setRequestBtn() {
+        bottomBarLayBtn.setVisibility(View.VISIBLE);
+
+        mRequestTv.setText("درخواست");
+        bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (AppController.getStoredString(Constants.Authorization) != null) {
+                    apiRequest.sendRequestGift(
+                            new RequestGiftInput(
+                                    gift.giftId
+                            )
+                    );
+                } else {
+                    Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
+                }
+
+            }
+        });
+
+    }
+
+    private void cancelMyRequest() {
+        bottomBarLayBtn.setVisibility(View.VISIBLE);
+        mRequestTv.setText("لغو درخواست");
+        bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                apiRequest.deleteMyRequest(giftId);
+            }
+        });
     }
 
     @Override
