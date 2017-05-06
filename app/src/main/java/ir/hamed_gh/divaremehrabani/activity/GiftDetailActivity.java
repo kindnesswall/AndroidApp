@@ -242,9 +242,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Override
     public void onResponse(Call call, Response response) {
         if (response.body() instanceof RequestGiftOutput) {
+
             cancelMyRequest();
             Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
+
         }else if (response.body() instanceof Gift){
+
             Gift gift = (Gift) response.body();
             if (this.gift==null) {
                 setInfo();
@@ -331,6 +334,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                                     gift.giftId
                             )
                     );
+                    cancelMyRequest();
                 } else {
                     Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
                 }
@@ -347,6 +351,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             @Override
             public void onClick(View view) {
                 apiRequest.deleteMyRequest(giftId);
+                setRequestBtn();
             }
         });
     }

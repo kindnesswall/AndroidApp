@@ -110,7 +110,8 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 
     @Override
     public void onResponse(Call call, Response response, int position) {
-
+        requestModels.remove(position);
+        notifyDataSetChanged();
     }
 
     @Override

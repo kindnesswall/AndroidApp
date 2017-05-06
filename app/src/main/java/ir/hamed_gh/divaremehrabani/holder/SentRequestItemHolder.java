@@ -16,13 +16,17 @@ public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 
     public View itemView;
 
-    public RelativeLayout rootLay;
+    public RelativeLayout rootLay, btnLay;
 
     public SentRequestItemHolder(View itemView) {
+
         super(itemView);
 
         this.itemView = itemView;
+
         rootLay = (RelativeLayout) itemView.findViewById(R.id.root_lay);
+        btnLay = (RelativeLayout) itemView.findViewById(R.id.btn_lay);
+
         mItemTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
 
     }

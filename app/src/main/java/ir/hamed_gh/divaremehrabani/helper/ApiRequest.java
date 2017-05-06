@@ -173,6 +173,28 @@ public class ApiRequest {
 
     }
 
+    public void deleteMyRequest(String giftId, final int position) {
+
+        Call<ResponseBody> call = AppController.service.deleteMyRequest(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                giftId
+        );
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this, position));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void deleteMyRequest(String giftId) {
 
         Call<ResponseBody> call = AppController.service.deleteMyRequest(
@@ -293,6 +315,11 @@ public class ApiRequest {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
         });
 
     }
@@ -340,6 +367,11 @@ public class ApiRequest {
 
                 handlingOnResponse(new HandlingResponse(call, response, this));
 
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+                super.onFailure(call, t);
             }
         });
 

@@ -52,12 +52,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
         linearLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        apiRequest.getRequestsToMyGifts(
-                new StartLastIndex(
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + ""
-                )
-        );
+
     }
 
     @Override
@@ -71,6 +66,19 @@ public class ReceivedRequestsFragment extends BaseFragment {
         init();
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        gifts.clear();
+        apiRequest.getRequestsToMyGifts(
+                new StartLastIndex(
+                        startIndex + "",
+                        startIndex + Constants.LIMIT + ""
+                )
+        );
     }
 
     @Override
