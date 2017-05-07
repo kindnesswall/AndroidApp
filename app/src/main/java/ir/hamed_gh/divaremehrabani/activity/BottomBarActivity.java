@@ -20,12 +20,16 @@ import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
-import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
 import ir.hamed_gh.divaremehrabani.bottombar.OnMenuTabClickListener;
+import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.HomeFragment;
 import ir.hamed_gh.divaremehrabani.fragment.category.CategoriesGridFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.BookmarkFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.StatisticFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 
 public class BottomBarActivity extends AppCompatActivity {
 
@@ -35,6 +39,12 @@ public class BottomBarActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @Bind(R.id.toolbar_new_gift_btn_tv)
     TextView mToolbarNewGiftBtnTv;
+    int menuItemIdSelected = -1;
+
+    HomeFragment homeFragment;
+    HomeFragment searchFragment;
+    CategoriesGridFragment categoriesGridFragment;
+    MyWallFragment myWallFragment;
 
     private Context context;
     private BottomBar mBottomBar;
@@ -51,35 +61,69 @@ public class BottomBarActivity extends AppCompatActivity {
     }
 
     private void TabSelected(int menuItemId) {
+
         if (menuItemId == R.id.bottomBarHome) {
 
-            mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-            replaceFragment(
-                    HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
-                    HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+            if (menuItemId != menuItemIdSelected) {
+                clearStack();
+
+                mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+                replaceFragment(
+                        homeFragment,
+                        HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+            }
+            menuItemIdSelected = menuItemId;
+
             // The user reselected item number one, scroll your content to top.
         } else if (menuItemId == R.id.bottomBarCategories) {
 
-            mToolbarTitleTextView.setText(R.string.categories);
-            replaceFragment(new CategoriesGridFragment(), CategoriesGridFragment.class.getName());
+            if (menuItemId != menuItemIdSelected) {
+                clearStack();
+
+                mToolbarTitleTextView.setText(R.string.categories);
+                replaceFragment(
+                        categoriesGridFragment,
+                        CategoriesGridFragment.class.getName()
+                );
+            }
+            menuItemIdSelected = menuItemId;
 
             // The user selected item number one.
         } else if (menuItemId == R.id.bottomBarSearch) {
 
-            mToolbarTitleTextView.setText(R.string.search);
-            replaceFragment(
-                    HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null),
-                    HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
-            );
+            if (menuItemId != menuItemIdSelected) {
+                clearStack();
+
+                mToolbarTitleTextView.setText(R.string.search);
+                replaceFragment(
+                        searchFragment,
+                        HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+                );
+            }
+            menuItemIdSelected = menuItemId;
 
             // The user selected item number one.
         } else if (menuItemId == R.id.bottomBarMyWall) {
 
-            mToolbarTitleTextView.setText(R.string.my_wall);
-            replaceFragment(new MyWallFragment(), MyWallFragment.class.getName());
+            if (menuItemId != menuItemIdSelected) {
+                clearStack();
+
+                mToolbarTitleTextView.setText(R.string.my_wall);
+                replaceFragment(myWallFragment, MyWallFragment.class.getName());
+            }
+            menuItemIdSelected = menuItemId;
 
             // The user selected item number one.
         }
+    }
+
+    private void clearStack() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
+
     }
 
     private void settingBottomBar(Bundle savedInstanceState) {
@@ -128,6 +172,11 @@ public class BottomBarActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         context = this;
+
+        homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
+        searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+        categoriesGridFragment = new CategoriesGridFragment();
+        myWallFragment = new MyWallFragment();
 
         settingToolbar();
 
@@ -199,7 +248,6 @@ public class BottomBarActivity extends AppCompatActivity {
 
     public void addFragment(Fragment fragment, String title) {
         try {
-
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -213,4 +261,56 @@ public class BottomBarActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+            String tag = backEntry.getName();
+
+            if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
+                    ) {
+                finish();
+            } else if(
+                    tag.equals(BookmarkFragment.class.getName()) ||
+                            tag.equals(StatisticFragment.class.getName()) ||
+                            tag.equals(MyRequestsFragment.class.getName()) ||
+                            tag.equals(MyGiftsFragment.class.getName()) ||
+                            tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
+                    ){
+                super.onBackPressed();
+            }else {
+
+                mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+                replaceFragment(
+                        homeFragment,
+                        HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+
+            }
+        }
+
+//
+//        FragmentManager fm = getSupportFragmentManager();
+//        Fragment fragment = fm.findFragmentByTag(HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+//
+//        if (fragment!=null){
+//            finish();
+//        }else {
+//
+//            mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+//            replaceFragment(
+//                    homeFragment,
+//                    HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+//
+//        }
+
+//        if (fm.getBackStackEntryCount()<=0) {
+//            return;
+//        }else {
+//
+//
+//        }
+//        finish();
+    }
 }
