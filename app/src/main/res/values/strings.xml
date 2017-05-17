@@ -7,6 +7,13 @@
     <string name="rejected_request">(درخواست شما رد شد)</string>
     <string name="donated_request">(به فرد دیگری هدیه شد)</string>
 
+    <string name="conneciton_internet_failed_message">ظاهرا در ارتباط شما با اینترنت مشکلی وجود
+		دارد
+	</string>
+
+    <string name="conneciton_server_failed_message">ظاهرا در ارتباط شما با سرور مشکلی وجود دارد
+	</string>
+
     <string name="book">کتاب</string>
     <string name="clothes">پوشاک</string>
     <string name="accessories">لوازم</string>

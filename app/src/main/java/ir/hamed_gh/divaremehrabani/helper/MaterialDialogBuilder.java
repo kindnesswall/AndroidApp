@@ -32,7 +32,7 @@ public class MaterialDialogBuilder {
                 .titleGravity(dir)
                 .contentGravity(dir)
                 .buttonsGravity(btnDir)
-                .typeface("iran_sans_regular.ttf", "iran_sans_regular.ttf");
+                .typeface("divar_mehrabani.ttf", "divar_mehrabani.ttf");
     }
 
 }
