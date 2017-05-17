@@ -16,7 +16,7 @@
         android:paddingRight="10dp"
         android:paddingTop="50dp">
 
-        <ir.fam.core.customview.textview.TextViewIranSansBold
+        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
             android:id="@+id/txt_internet_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary">
 
-                    <ir.fam.core.customview.textview.TextViewIranSansBold
+                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
                         android:id="@+id/btn_try_connect_to_internet"
                         android:layout_width="match_parent"
                         android:layout_height="36dp"
