@@ -1,5 +1,6 @@
 package ir.hamed_gh.divaremehrabani.helper;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.io.IOException;
@@ -42,7 +43,11 @@ public abstract class CallbackWithRetry<T> implements Callback<T> {
             //nothing to do when reason is by our wish to cancle it
         } else {
             if (t instanceof IOException) {//network problem
-                ConnectionDetector.ShowNetwrokConnectionProblemDialog(context, this);
+
+                if (((Activity) context).hasWindowFocus()) {
+                    ConnectionDetector.ShowNetwrokConnectionProblemDialog(context, this);
+                }
+                
             }
         }
     }
