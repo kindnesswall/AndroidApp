@@ -70,6 +70,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
         if (AppController.getStoredString(Constants.Authorization) != null) {
             mLogoutLay.setVisibility(View.VISIBLE);
+
         } else {
             mLogoutLay.setVisibility(View.INVISIBLE);
         }

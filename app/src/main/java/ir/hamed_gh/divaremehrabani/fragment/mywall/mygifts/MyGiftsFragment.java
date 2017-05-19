@@ -45,24 +45,7 @@ public class MyGiftsFragment extends BaseFragment {
 
         ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
 
-        if (AppController.getStoredString(Constants.Authorization) != null) {
-            setupViewPager(mainVp);
-            mainTabs.setupWithViewPager(mainVp);
 
-            myGiftTopLay.setVisibility(View.GONE);
-            myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(2, false);
-        } else {
-            myGiftTopLay.setVisibility(View.VISIBLE);
-            myGiftBottomLay.setVisibility(View.INVISIBLE);
-
-            myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-            });
-        }
     }
 
     @Override
@@ -96,6 +79,23 @@ public class MyGiftsFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
+        if (AppController.getStoredString(Constants.Authorization) != null) {
+            setupViewPager(mainVp);
+            mainTabs.setupWithViewPager(mainVp);
 
+            myGiftTopLay.setVisibility(View.GONE);
+            myGiftBottomLay.setVisibility(View.VISIBLE);
+            mainVp.setCurrentItem(2, false);
+        } else {
+            myGiftTopLay.setVisibility(View.VISIBLE);
+            myGiftBottomLay.setVisibility(View.INVISIBLE);
+
+            myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+            });
+        }
     }
 }
