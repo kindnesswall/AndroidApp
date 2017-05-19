@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rey.material.widget.ProgressView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
@@ -45,6 +47,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
     @Bind(R.id.login_get_verification_tv)
     TextViewIranSansRegular login_get_verification_tv;
 
+    @Bind(R.id.progressView)
+    ProgressView progressView;
+
     private Context context;
 
     View.OnClickListener enterPhoneNumber;
@@ -73,8 +78,10 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
         enterVerificationCodeListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasti.showS("send verification code");
                 apiRequest.login(phoneConfirimationCodeEt.getText().toString());
+
+                progressView.setVisibility(View.VISIBLE);
+                login_get_verification_tv.setVisibility(View.INVISIBLE);
             }
         };
 
@@ -82,6 +89,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
             @Override
             public void onClick(View v) {
                 apiRequest.register(phoneConfirimationCodeEt.getText().toString());
+                
+                progressView.setVisibility(View.VISIBLE);
+                login_get_verification_tv.setVisibility(View.INVISIBLE);
             }
         };
 
@@ -98,10 +108,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
         if (AppController.getStoredString(Constants.TELEPHONE) == null) {
             enterTelephoneNumber();
-            loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
         } else {
             enterVerificationCode();
-            loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
         }
     }
 
@@ -131,6 +139,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
         login_get_verification_tv.setText(getString(R.string.sign_up));
         not_recieved_code_btn.setVisibility(View.INVISIBLE);
+
+        loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
     }
 
     public void enterVerificationCode() {
@@ -145,6 +155,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
     @Override
     public void onResponse(Call call, Response response) {
+        progressView.setVisibility(View.INVISIBLE);
+        login_get_verification_tv.setVisibility(View.VISIBLE);
+
         if (response.body() instanceof TokenOutput) {
             TokenOutput tokenOutput = (TokenOutput) response.body();
             AppController.storeString(
@@ -167,6 +180,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
     @Override
     public void onFailure(Call call, Throwable t) {
+        progressView.setVisibility(View.INVISIBLE);
+        login_get_verification_tv.setVisibility(View.VISIBLE);
+
         Toasti.showS("onFailure");
     }
 }

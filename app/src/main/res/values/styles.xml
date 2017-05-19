@@ -46,8 +46,13 @@
     </style>
 
     <style name="InDeterminateCircularProgressDrawableStyle" parent="Material.Drawable.CircularProgress">
-        <item name="cpd_strokeColor">@color/blue_level</item>
-        <item name="cpd_strokeSecondaryColor">@color/blue_circle_unselected_level</item>
+        <item name="cpd_strokeColor">@color/colorPrimary</item>
+        <item name="cpd_strokeSecondaryColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="InDeterminateWhiteCircularProgressDrawableStyle" parent="Material.Drawable.CircularProgress">
+        <item name="cpd_strokeColor">@color/white</item>
+        <item name="cpd_strokeSecondaryColor">@color/dark_white</item>
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
