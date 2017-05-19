@@ -60,6 +60,8 @@ public class BottomBarActivity extends AppCompatActivity {
         mToolbarTitleTextView.setText("دیوار مهربانی");
     }
 
+    private Boolean unlock = false;
+
     private void TabSelected(int menuItemId) {
 
         if (menuItemId == R.id.bottomBarHome) {
@@ -67,6 +69,7 @@ public class BottomBarActivity extends AppCompatActivity {
             if (menuItemId != menuItemIdSelected) {
                 clearStack();
 
+                unlock = true;
                 mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
                 replaceFragment(
                         homeFragment,
@@ -75,11 +78,12 @@ public class BottomBarActivity extends AppCompatActivity {
             menuItemIdSelected = menuItemId;
 
             // The user reselected item number one, scroll your content to top.
-        } else if (menuItemId == R.id.bottomBarCategories) {
+        } else if (menuItemId == R.id.bottomBarCategories ) {
 
             if (menuItemId != menuItemIdSelected) {
                 clearStack();
 
+                unlock = true;
                 mToolbarTitleTextView.setText(R.string.categories);
                 replaceFragment(
                         categoriesGridFragment,
@@ -94,6 +98,7 @@ public class BottomBarActivity extends AppCompatActivity {
             if (menuItemId != menuItemIdSelected) {
                 clearStack();
 
+                unlock = true;
                 mToolbarTitleTextView.setText(R.string.search);
                 replaceFragment(
                         searchFragment,
@@ -103,7 +108,7 @@ public class BottomBarActivity extends AppCompatActivity {
             menuItemIdSelected = menuItemId;
 
             // The user selected item number one.
-        } else if (menuItemId == R.id.bottomBarMyWall) {
+        } else if (menuItemId == R.id.bottomBarMyWall && unlock) {
 
             if (menuItemId != menuItemIdSelected) {
                 clearStack();
@@ -179,11 +184,6 @@ public class BottomBarActivity extends AppCompatActivity {
         myWallFragment = new MyWallFragment();
 
         settingToolbar();
-
-        replaceFragment(
-                HomeFragment.newInstance(Constants.HOME_PAGETYPE, null),
-                HomeFragment.class.getName() + Constants.HOME_PAGETYPE
-        );
 
         settingBottomBar(savedInstanceState);
 
