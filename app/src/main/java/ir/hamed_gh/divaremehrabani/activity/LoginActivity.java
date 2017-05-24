@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
     public void enterTelephoneNumber() {
         AppController.storeString(Constants.TELEPHONE, null);
         phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
-        phoneConfirimationCodeEt.setText("09011090098");
+        phoneConfirimationCodeEt.setText("");
 
         login_get_verification_tv.setText(getString(R.string.sign_up));
         not_recieved_code_btn.setVisibility(View.INVISIBLE);
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
     public void enterVerificationCode() {
         phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
-        phoneConfirimationCodeEt.setText("111111");
+        phoneConfirimationCodeEt.setText("");
 
         login_get_verification_tv.setText(getString(R.string.sign_in));
 
