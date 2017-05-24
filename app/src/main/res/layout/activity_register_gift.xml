@@ -296,7 +296,7 @@
 
 						android:layout_alignParentRight="true"
 
-						android:text="قیمت تقریبی"
+						android:text="قیمت تقریبی(تومان)"
 						android:textColor="@color/text_primary"
 						android:textSize="16dp"/>
 
