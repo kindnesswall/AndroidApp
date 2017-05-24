@@ -166,6 +166,10 @@ public class RegisterGiftActivity extends AppCompatActivity
                 if (mTitleEt.getText().toString().equals("")){
                     Snackbari.showS(mTitleEt,"عنوان را وارد نمایید");
                     return;
+                }else if(mPriceEt.getText().toString().equals("")) {
+                    Snackbari.showS(mTitleEt,"قیمت" +
+                            " را وارد نمایید");
+                    return;
                 }else if (mDescriptionEt.getText().toString().equals("")){
                     Snackbari.showS(mTitleEt,"توضیحات را وارد نمایید");
                     return;
