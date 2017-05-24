@@ -1,55 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	android:id="@+id/root_lay"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="@color/white">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_lay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/rw_sent_request_name_tv"
-		android:layout_width="wrap_content"
-		android:layout_height="48dp"
+    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/rw_sent_request_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
 
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/unseen_msg_tv"
 
-		android:layout_marginBottom="3dp"
-		android:layout_marginLeft="6dp"
-		android:layout_marginRight="6dp"
-		android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="3dp"
 
-		android:paddingRight="18dp"
-		android:paddingTop="8dp"
+        android:paddingRight="18dp"
+        android:paddingTop="8dp"
 
-		android:text="کتاب"
-		android:textColor="@color/black"
+        android:text="کتاب"
+        android:textColor="@color/black"
 
-		android:textSize="16dp"/>
+        android:textSize="16dp" />
 
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/unseen_msg_tv"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/unseen_msg_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
 
-		android:layout_alignParentLeft="true"
-		android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="درخواست"
 
-		android:layout_marginLeft="4dp"
+        android:textColor="#f00"
+        android:textSize="16dp" />
 
-		android:background="@drawable/bg_red"
-		android:paddingLeft="4dp"
+    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/unseen_msg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/unseen_msg_txt"
+        android:layout_marginLeft="4dp"
+        android:gravity="center"
+        android:text="8"
 
-		android:paddingRight="4dp"
-		android:text="342"
+        android:textColor="#f00"
+        android:textSize="16dp" />
 
-		android:textColor="@color/white"
-		android:textSize="16dp"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="17dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@drawable/bg_red"-->
 
-	<RelativeLayout android:layout_width="match_parent"
-	                android:layout_height="1dp"
-	                android:layout_below="@id/rw_sent_request_name_tv"
-	                android:background="#F1F1F1"/>
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:gravity="center">-->
+
+        <!---->
+
+    <!--</RelativeLayout>-->
+
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/lay_notification"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="17dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:background="@drawable/bg_red"-->
+        <!--android:gravity="center"-->
+        <!--android:visibility="gone">-->
+
+        <!--<ir.fam.vc.customview.textview.TextViewIranSansRegular-->
+            <!--android:id="@+id/unseen_msg_tv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="6dp"-->
+            <!--android:layout_marginRight="6dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="8"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="10dp" />-->
+
+    <!--</RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rw_sent_request_name_tv"
+        android:background="#F1F1F1" />
 
 </RelativeLayout>
