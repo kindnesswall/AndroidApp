@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
@@ -48,8 +50,16 @@ public class GridCategoriesAdapter extends RecyclerView.Adapter<CategoryGridHold
     public void onBindViewHolder(CategoryGridHolder categoryGridHolder, final int i) {
 
         categoryGridHolder.getmCategoryTv().setText(categories.get(i).title);
-//		categoryGridHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
-        categoryGridHolder.getmCategoryFontIcon().setText(fontIcons[i]);
+        Glide
+                .with(mContext)
+                .load(categories.get(i).imageUrl)
+                .centerCrop()
+                .placeholder(R.color.background)
+                .crossFade()
+                .into(categoryGridHolder.mCategoryIc);
+
+//		categoryGridHolder.mItemView.setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
+//        categoryGridHolder.getmCategoryFontIcon().setText(fontIcons[i]);
 
         categoryGridHolder.mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
