@@ -38,6 +38,7 @@ public class ReceivedGiftsFragment extends BaseFragment {
     @Bind(R.id.message_textview)
     TextView mMessageTv;
 
+    View rootView;
     private ArrayList<Gift> gifts = new ArrayList<>();
     private GiftListAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
@@ -83,7 +84,12 @@ public class ReceivedGiftsFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        if (rootView != null) {
+            if (rootView.getParent() != null)
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
+            return rootView;
+        }
+        rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
         ButterKnife.bind(this, rootView);
         init();

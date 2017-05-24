@@ -59,6 +59,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
     private String giftId;
     private String giftName;
     private String requestCounts;
+    View rootView;
 
     @Override
     protected void init() {
@@ -101,7 +102,12 @@ public class RequestsToAGiftFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
+        if (rootView != null) {
+            if (rootView.getParent() != null)
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
+            return rootView;
+        }
+        rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
 
         ButterKnife.bind(this, rootView);
         init();

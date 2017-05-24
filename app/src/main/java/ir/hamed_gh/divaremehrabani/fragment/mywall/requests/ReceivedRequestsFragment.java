@@ -40,6 +40,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
     private ArrayList<Gift> gifts = new ArrayList<>();
     private RequestToMyGiftsAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
+    View rootView;
 
     private int startIndex = 0;
 
@@ -60,7 +61,12 @@ public class ReceivedRequestsFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        if (rootView != null) {
+            if (rootView.getParent() != null)
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
+            return rootView;
+        }
+        rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
         ButterKnife.bind(this, rootView);
         init();

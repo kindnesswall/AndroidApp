@@ -65,8 +65,8 @@ public class MyRequestsFragment extends BaseFragment {
         SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
         ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
 
-        adapter.addFrag(receivedRequestsFragment, "دریافتی");
         adapter.addFrag(sentRequestsFragment, "ارسالی");
+        adapter.addFrag(receivedRequestsFragment, "دریافتی");
 
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
