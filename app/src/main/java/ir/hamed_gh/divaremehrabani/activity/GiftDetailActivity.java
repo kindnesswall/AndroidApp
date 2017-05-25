@@ -14,8 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.andexert.library.RippleView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.rey.material.widget.ProgressView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,15 +28,16 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.constants.GiftStatus;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
-import ir.hamed_gh.divaremehrabani.model.api.DeleteOutput;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -72,6 +76,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.request_tv)
     TextView mRequestTv;
 
+//    @Bind(R.id.delete_tv)
+//    TextView mDeleteTv;
+
     @Bind(R.id.detail_description_tv)
     TextView mDetailDescriptionTv;
 
@@ -80,6 +87,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     @Bind(R.id.pagesContainer)
     LinearLayout pagesContainer;
+
+//    @Bind(R.id.deleteLayBtn)
+//    RelativeLayout deleteLayBtn;
 
     @Bind(R.id.bottomBarLayBtn)
     RelativeLayout bottomBarLayBtn;
@@ -90,6 +100,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.first_right_icon_ic)
     ImageView mFirstRightIcon;
 
+//    @Bind(R.id.delete_progressView)
+//    ProgressView mDeleteProgressView;
+
+    @Bind(R.id.request_progressView)
+    ProgressView mRequestProgressView;
+
     View.OnClickListener addToWishList;
     View.OnClickListener removeFromWishList;
     private Gift gift;
@@ -98,6 +114,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     private Places allPlaces;
     private String giftId;
     private String giftStatus;
+    Context mContext;
 
     public static Intent createIntent(Gift gift) {
         Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
@@ -207,6 +224,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     private void init() {
         ButterKnife.bind(this);
+        mContext = this;
+
         readFromJson();
         apiRequest = new ApiRequest(this, this);
 
@@ -248,29 +267,35 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
         }else if (response.body() instanceof Gift){
 
-            Gift gift = (Gift) response.body();
-            if (this.gift==null) {
-                setInfo();
-                this.gift = gift;
-            }
+//            Gift gift =
+//            if (this.gift==null) {
+            gift = (Gift) response.body();
+            setInfo();
 
             giftStatus = gift.status;
+
+            if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
+//                deleteLayBtn.setVisibility(View.VISIBLE);
+                setDeleteBtn(getResources().getString(R.string.delete_gift));
+            }
+
             switch (gift.status){
                 case GiftStatus.REJECTED_BY_ADMIN:
-	                bottomBarLayBtn.setVisibility(View.VISIBLE);
-	                mRequestTv.setText("هدیه شما پذیرفته نشد.");
+	                setDeleteBtn("هدیه شما پذیرفته نشد.");
+//	                mRequestTv.setText();
+//                    deleteLayBtn.setVisibility(View.VISIBLE);
                     break;
 
                 case GiftStatus.PUBLISHED:
-                    if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
-                        bottomBarLayBtn.setVisibility(View.GONE);
-                    }else{
+                    if (!gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
                        setRequestBtn();
+//                        deleteLayBtn.setVisibility(View.GONE);
                     }
 //                    mRequestTv.setText("GiftStatus.PUBLISHED");
                     break;
 
                 case GiftStatus.DONATED_TO_ME:
+//                    deleteLayBtn.setVisibility(View.GONE);
                     callSmsBottomBarLayBtn.setVisibility(View.VISIBLE);
                     bottomBarLayBtn.setVisibility(View.GONE);
                     mCallBtn.setOnClickListener(new View.OnClickListener() {
@@ -288,6 +313,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                     break;
 
                 case GiftStatus.DONATED_TO_SOMEONE_ELSE:
+//                    deleteLayBtn.setVisibility(View.GONE);
                     callSmsBottomBarLayBtn.setVisibility(View.GONE);
                     bottomBarLayBtn.setVisibility(View.GONE);
                     mDetailTitleTv.setText(gift.title + "(این هدیه اهدا شده است) ");
@@ -295,10 +321,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                     break;
 
                 case GiftStatus.I_SENT_MY_REQUEST_FOR_IT:
-	                cancelMyRequest();
+//                    deleteLayBtn.setVisibility(View.GONE);
+                    cancelMyRequest();
                     break;
                 case GiftStatus.MY_REQUEST_REJECTED:
-	                bottomBarLayBtn.setVisibility(View.VISIBLE);
+//                    deleteLayBtn.setVisibility(View.GONE);
+                    bottomBarLayBtn.setVisibility(View.VISIBLE);
 
 	                mRequestTv.setText("درخواست شما رد شد");
                     break;
@@ -313,11 +341,51 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             }
             mBookmarkIc.setVisibility(View.VISIBLE);
 
-        }else if(response.body() instanceof DeleteOutput){
+        }else if(response.body() instanceof ResponseBody){
 
-            setRequestBtn();
-
+            if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
+                Toasti.showS("هدیه شما با موفقیت حذف شد");
+                finish();
+            }else {
+                setRequestBtn();
+            }
+//            mDeleteProgressView.setVisibility(View.INVISIBLE);
+//            mDeleteTv.setText(getResources().getString(R.string.delete_gift));
         }
+    }
+
+    private void setDeleteBtn(String btnText) {
+        bottomBarLayBtn.setVisibility(View.VISIBLE);
+        mRequestTv.setText(btnText);
+
+        bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext);
+                final MaterialDialog dialog = builder
+                        .customView(R.layout.dialog_delete_gift, false).show();
+
+                RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+                yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        mRequestProgressView.setVisibility(View.VISIBLE);
+                        mRequestTv.setText("");
+                        apiRequest.deleteGift(giftId);
+                        dialog.dismiss();
+                    }
+                });
+
+                RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+                noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     private void setRequestBtn() {

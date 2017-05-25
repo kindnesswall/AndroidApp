@@ -240,6 +240,27 @@ public class ApiRequest {
 
     }
 
+    public void deleteGift(String giftId) {
+
+        Call<ResponseBody> call = AppController.service.deleteGift(
+                Constants.JSON_TYPE,
+                AppController.getStoredString(Constants.Authorization),
+                giftId);
+
+        call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void getGift(String giftId) {
 
         Call<Gift> call = AppController.service.getGift(

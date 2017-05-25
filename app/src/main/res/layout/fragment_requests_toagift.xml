@@ -85,7 +85,6 @@
 				android:text="2"
 
 				android:layout_toRightOf="@id/total_requests_txt"
-				android:textColor="@color/black"
 				android:textSize="16dp"/>
 
 

@@ -42,6 +42,12 @@ public interface RestAPI {
 			@Query(Constants.SEARCH_TEXT) String searchText
 	);
 
+	@DELETE("Gift/{" + Constants.GIFT_ID + "}")
+	Call<ResponseBody> deleteGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId);
+
 	@GET("Gift/{" + Constants.GIFT_ID + "}")
 	Call<Gift> getGift(
 			@Header(Constants.ContentType) String contentType,
