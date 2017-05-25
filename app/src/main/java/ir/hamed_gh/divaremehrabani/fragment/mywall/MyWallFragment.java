@@ -32,6 +32,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
     @Bind(R.id.location_tv)
     TextView mLocationTv;
 
+    @Bind(R.id.logout_txt)
+    TextView mLogoutTxt;
+
     @Bind(R.id.location_lay)
     RelativeLayout locationLayout;
 
@@ -70,7 +73,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
         if (AppController.getStoredString(Constants.Authorization) != null) {
             mLogoutLay.setVisibility(View.VISIBLE);
-
+            mLogoutTxt.setText(
+                   "خروج (" + AppController.getStoredString(Constants.TELEPHONE) + ")"
+            );
         } else {
             mLogoutLay.setVisibility(View.INVISIBLE);
         }
