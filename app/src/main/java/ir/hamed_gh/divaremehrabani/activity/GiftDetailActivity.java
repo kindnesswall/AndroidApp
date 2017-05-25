@@ -76,9 +76,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.request_tv)
     TextView mRequestTv;
 
-//    @Bind(R.id.delete_tv)
-//    TextView mDeleteTv;
-
     @Bind(R.id.detail_description_tv)
     TextView mDetailDescriptionTv;
 
@@ -88,9 +85,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.pagesContainer)
     LinearLayout pagesContainer;
 
-//    @Bind(R.id.deleteLayBtn)
-//    RelativeLayout deleteLayBtn;
-
     @Bind(R.id.bottomBarLayBtn)
     RelativeLayout bottomBarLayBtn;
 
@@ -99,9 +93,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
     @Bind(R.id.first_right_icon_ic)
     ImageView mFirstRightIcon;
-
-//    @Bind(R.id.delete_progressView)
-//    ProgressView mDeleteProgressView;
 
     @Bind(R.id.request_progressView)
     ProgressView mRequestProgressView;
@@ -153,10 +144,13 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
         mDetailCategoryTv.setText(gift.category);
 
         setupViewPager(viewPager);
-
-        mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
-        mIndicator.setPageCount(gift.giftImages != null ? gift.giftImages.size() : 0);
-        mIndicator.show();
+        if (gift.giftImages.size()>1) {
+            mIndicator = new MyPageIndicator(this, pagesContainer, viewPager, R.drawable.indicator_circle);
+            mIndicator.setPageCount(gift.giftImages != null ? gift.giftImages.size() : 0);
+            mIndicator.show();
+        }else {
+            pagesContainer.setVisibility(View.GONE);
+        }
     }
 
     private void readFromJson() {
@@ -267,35 +261,27 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
         }else if (response.body() instanceof Gift){
 
-//            Gift gift =
-//            if (this.gift==null) {
             gift = (Gift) response.body();
             setInfo();
 
             giftStatus = gift.status;
 
             if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
-//                deleteLayBtn.setVisibility(View.VISIBLE);
                 setDeleteBtn(getResources().getString(R.string.delete_gift));
             }
 
             switch (gift.status){
                 case GiftStatus.REJECTED_BY_ADMIN:
 	                setDeleteBtn("هدیه شما پذیرفته نشد.");
-//	                mRequestTv.setText();
-//                    deleteLayBtn.setVisibility(View.VISIBLE);
                     break;
 
                 case GiftStatus.PUBLISHED:
                     if (!gift.userId.equals(AppController.getStoredString(Constants.USER_ID))){
                        setRequestBtn();
-//                        deleteLayBtn.setVisibility(View.GONE);
                     }
-//                    mRequestTv.setText("GiftStatus.PUBLISHED");
                     break;
 
                 case GiftStatus.DONATED_TO_ME:
-//                    deleteLayBtn.setVisibility(View.GONE);
                     callSmsBottomBarLayBtn.setVisibility(View.VISIBLE);
                     bottomBarLayBtn.setVisibility(View.GONE);
                     mCallBtn.setOnClickListener(new View.OnClickListener() {
@@ -313,7 +299,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                     break;
 
                 case GiftStatus.DONATED_TO_SOMEONE_ELSE:
-//                    deleteLayBtn.setVisibility(View.GONE);
                     callSmsBottomBarLayBtn.setVisibility(View.GONE);
                     bottomBarLayBtn.setVisibility(View.GONE);
                     mDetailTitleTv.setText(gift.title + "(این هدیه اهدا شده است) ");
@@ -321,11 +306,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                     break;
 
                 case GiftStatus.I_SENT_MY_REQUEST_FOR_IT:
-//                    deleteLayBtn.setVisibility(View.GONE);
                     cancelMyRequest();
                     break;
                 case GiftStatus.MY_REQUEST_REJECTED:
-//                    deleteLayBtn.setVisibility(View.GONE);
                     bottomBarLayBtn.setVisibility(View.VISIBLE);
 
 	                mRequestTv.setText("درخواست شما رد شد");
@@ -349,8 +332,6 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             }else {
                 setRequestBtn();
             }
-//            mDeleteProgressView.setVisibility(View.INVISIBLE);
-//            mDeleteTv.setText(getResources().getString(R.string.delete_gift));
         }
     }
 
