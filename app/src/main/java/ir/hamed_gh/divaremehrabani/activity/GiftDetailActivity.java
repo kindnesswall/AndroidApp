@@ -2,6 +2,7 @@ package ir.hamed_gh.divaremehrabani.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -287,13 +288,24 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                     mCallBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toasti.showS("Call");
+
+                            String uri = "tel:" + "00000000000";
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse(uri));
+                            mContext.startActivity(intent);
+
                         }
                     });
                     mSmsBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toasti.showS("Sms");
+
+                            mContext.startActivity(
+                                    new Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.fromParts("sms", "00000000000", null)
+                                    )
+                            );
                         }
                     });
                     break;

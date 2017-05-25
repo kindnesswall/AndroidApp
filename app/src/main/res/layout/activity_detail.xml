@@ -18,77 +18,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-	<RelativeLayout
-		android:id="@+id/bottomBarLayBtn"
-		android:layout_width="match_parent"
-		android:layout_height="48dp"
-		android:layout_alignParentBottom="true"
-		android:background="@color/colorPrimary"
-		android:visibility="gone">
-
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/request_tv"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:text="درخواست"
-			android:textColor="@color/white"
-			android:textSize="16dp"/>
-
-		<com.rey.material.widget.ProgressView
-			android:id="@+id/request_progressView"
-			android:layout_width="24dp"
-			android:layout_height="24dp"
-			android:layout_centerInParent="true"
-
-			app:pv_autostart="true"
-			app:pv_circular="true"
-			app:pv_progressMode="indeterminate"
-			app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"
-
-			android:visibility="invisible"
-			app:cpd_strokeSize="2dp"
-		/>
-
-	</RelativeLayout>
-
-	<RelativeLayout
-		android:id="@+id/callSmsBottomBarLayBtn"
-		android:layout_width="match_parent"
-		android:layout_height="48dp"
-		android:layout_alignParentBottom="true"
-		android:background="@color/colorPrimary"
-		android:visibility="gone">
-
-		<RelativeLayout
-			android:id="@+id/divider_lay"
-			android:layout_width="2dp"
-			android:layout_height="match_parent"
-			android:layout_centerHorizontal="true"
-			android:background="@color/horizontal_divider"/>
-
-		<ImageView
-			android:id="@+id/call_iv"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_toLeftOf="@id/divider_lay"
-			android:padding="5dp"
-			android:src="@mipmap/ic_phone_grey600_36dp"/>
-
-		<ImageView
-			android:id="@+id/sms_iv"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_toRightOf="@id/divider_lay"
-			android:padding="5dp"
-			android:src="@mipmap/ic_message_grey600_36dp"/>
-
-	</RelativeLayout>
-
 	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@id/bottomBarLayBtn">
+		android:visibility="visible">
 
 		<android.support.design.widget.AppBarLayout
 			android:id="@+id/app_bar_layout"
@@ -299,7 +232,7 @@
 							android:layout_alignParentRight="true"
 							android:layout_centerVertical="true"
 							android:padding="2dp"
-							android:text="قیمت تقریبی"
+							android:text="قیمت تقریبی(تومان)"
 							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 							android:textColor="@color/grey_700"/>
 
@@ -375,4 +308,99 @@
 
 	</android.support.design.widget.CoordinatorLayout>
 
+	<RelativeLayout
+		android:id="@+id/bottomLay"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+
+		<RelativeLayout
+			android:id="@+id/bottomBarLayBtn"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorPrimary"
+			android:visibility="gone">
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/request_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:text="درخواست"
+				android:textColor="@color/white"
+				android:textSize="16dp"/>
+
+			<com.rey.material.widget.ProgressView
+				android:id="@+id/request_progressView"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_centerInParent="true"
+
+				android:visibility="invisible"
+				app:cpd_strokeSize="2dp"
+				app:pv_autostart="true"
+				app:pv_circular="true"
+
+				app:pv_progressMode="indeterminate"
+				app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"
+			/>
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/callSmsBottomBarLayBtn"
+			android:layout_width="match_parent"
+			android:layout_height="66dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorPrimary"
+			android:visibility="visible">
+
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/contact_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:layout_marginRight="6dp"
+				android:layout_marginTop="4dp"
+
+				android:text="ارتباط با هدیه دهنده:"
+				android:textColor="@color/white"
+				android:textSize="16dp"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="48dp"
+				android:layout_below="@id/contact_text"
+				android:visibility="visible">
+
+				<!--<RelativeLayout-->
+					<!--android:id="@+id/divider_lay"-->
+					<!--android:layout_width="2dp"-->
+					<!--android:layout_height="match_parent"-->
+					<!--android:layout_centerHorizontal="true"-->
+					<!--android:background="@color/horizontal_divider"/>-->
+
+				<ImageView
+					android:id="@+id/call_iv"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:padding="8dp"
+					android:src="@mipmap/ic_phone_white_36dp"/>
+
+				<ImageView
+					android:id="@+id/sms_iv"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:padding="8dp"
+					android:src="@mipmap/ic_message_white_36dp"/>
+
+			</LinearLayout>
+
+		</RelativeLayout>
+
+	</RelativeLayout>
 </RelativeLayout>
