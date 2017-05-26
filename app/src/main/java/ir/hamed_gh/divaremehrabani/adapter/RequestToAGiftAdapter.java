@@ -49,6 +49,9 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
         myHolder.mDenyIconIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 apiRequest.denyRequest(
                         requestModels.get(i).giftId,
                         requestModels.get(i).fromUserId

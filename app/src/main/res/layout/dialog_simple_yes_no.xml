@@ -11,6 +11,8 @@
 		android:layout_height="wrap_content"
 	    android:text="آیا از حذف این هدیه مطمئن هستید؟"
 	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="6dp"
 	    android:layout_marginTop="18dp"/>
 
 	<com.andexert.library.RippleView

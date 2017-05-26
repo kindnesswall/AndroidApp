@@ -381,7 +381,7 @@
 			android:layout_height="66dp"
 			android:layout_alignParentBottom="true"
 			android:background="@color/colorPrimary"
-			android:visibility="visible">
+			android:visibility="gone">
 
 			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 				android:id="@+id/contact_text"

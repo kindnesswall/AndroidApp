@@ -388,9 +388,10 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             @Override
             public void onClick(View view) {
 
-                MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext);
-                final MaterialDialog dialog = builder
-                        .customView(R.layout.dialog_delete_gift, false).show();
+                MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false);
+
+                final MaterialDialog dialog = builder.build();
+                ((TextView)dialog.findViewById(R.id.message_textview)).setText("آیا از حذف این هدیه مطمئن هستید؟");
 
                 RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
                 yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
@@ -410,6 +411,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
                         dialog.dismiss();
                     }
                 });
+
+                dialog.show();
             }
         });
     }
