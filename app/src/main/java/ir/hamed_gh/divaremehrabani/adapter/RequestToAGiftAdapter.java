@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -17,17 +18,20 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.UserProfileActivity;
+import ir.hamed_gh.divaremehrabani.constants.RequestName;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
+import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.holder.RequestToAGiftHolder;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
+import ir.hamed_gh.divaremehrabani.model.api.StatusOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHolder> implements ApiRequest.AdapterListener {
+public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHolder> implements ApiRequest.AdapterTagListener {
 
 	private final ApiRequest apiRequest;
 	private ArrayList<RequestModel> requestModels;
@@ -37,6 +41,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 	private ProgressView yesProgressView;
 	private TextView yesTextView;
 	private RippleView noBtnRipple;
+	private MaterialDialog afterAcceptDialog;
 
 	public RequestToAGiftAdapter(Context context, ArrayList<RequestModel> requestModels) {
 		this.requestModels = requestModels;
@@ -169,16 +174,75 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 	}
 
 	@Override
-	public void onResponse(Call call, Response response, int position) {
-//        requestModels.remove(position);
-//        notifyDataSetChanged();
+	public void onResponse(Call call, Response response, int position, String tag) {
 
-		yesNoDialog.dismiss();
+		if (response.body() instanceof StatusOutput) {
+			StatusOutput statusOutput = (StatusOutput) response.body();
+			if (statusOutput.tag.equals(RequestName.DenyRequest)){
+				requestModels.remove(position);
+				notifyDataSetChanged();
+			}else if (statusOutput.tag.equals(RequestName.AcceptRequest)){
+				afterAcceptDialog =
+						MaterialDialogBuilder
+								.create(mContext)
+								.customView(R.layout.dialog_after_accept_request, false)
+								.build();
+
+				TextView message = (TextView) afterAcceptDialog.findViewById(R.id.message_textview);
+				message.setText(
+						" اهدا شد." + requestModels.get(position).fromUser + "هدیه شما به "
+				);
+
+				ImageView callIV = (ImageView) afterAcceptDialog.findViewById(R.id.call_iv);
+				callIV.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Toasti.showS("callIV");
+					}
+				});
+
+				ImageView smsIV = (ImageView) afterAcceptDialog.findViewById(R.id.sms_iv);
+				smsIV.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Toasti.showS("smsIV");
+					}
+				});
+
+				ImageView profileIV = (ImageView) afterAcceptDialog.findViewById(R.id.profile_iv);
+				profileIV.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Toasti.showS("profileIV");
+					}
+				});
+
+				RippleView giftPageRv = (RippleView)afterAcceptDialog.findViewById(R.id.gift_page_ripple_btn);
+				giftPageRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						Toasti.showS("giftPageRv");
+					}
+				});
+
+				RippleView okRv = (RippleView)afterAcceptDialog.findViewById(R.id.ok_ripple_btn);
+				okRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						Toasti.showS("ok");
+					}
+				});
+
+				afterAcceptDialog.show();
+			}
+			yesNoDialog.dismiss();
+		}
 
 	}
 
 	@Override
-	public void onFailure(Call call, Throwable t) {
+	public void onFailure(Call call, Throwable t, String tag) {
 
 	}
+
 }

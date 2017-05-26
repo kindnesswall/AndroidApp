@@ -42,7 +42,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.Listener {
+public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.TagListener {
 
 	@Bind(R.id.bookmark_ic)
 	ImageView mBookmarkIc;
@@ -287,7 +287,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	}
 
 	@Override
-	public void onResponse(Call call, Response response) {
+	public void onResponse(Call call, Response response, String tag) {
 		if (response.body() instanceof RequestGiftOutput) {
 
 			cancelMyRequest();
@@ -454,7 +454,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	}
 
 	@Override
-	public void onFailure(Call call, Throwable t) {
+	public void onFailure(Call call, Throwable t, String tag) {
 
 	}
 

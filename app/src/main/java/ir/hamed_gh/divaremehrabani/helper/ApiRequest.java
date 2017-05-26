@@ -7,11 +7,13 @@ import java.util.List;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
+import ir.hamed_gh.divaremehrabani.constants.RequestName;
 import ir.hamed_gh.divaremehrabani.model.GetGiftPathQuery;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
+import ir.hamed_gh.divaremehrabani.model.api.StatusOutput;
 import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
@@ -28,11 +30,24 @@ public class ApiRequest {
 
 	private Listener listener;
 	private AdapterListener adapterListener;
+	private AdapterTagListener adapterTagListener;
 	private ActivityListener activityListener;
+	private TagListener tagListener;
+
 	private Context mContext;
+
+	public ApiRequest(Context context, TagListener tagListener) {
+		this.tagListener = tagListener;
+		mContext = context;
+	}
 
 	public ApiRequest(Context context, AdapterListener adapterListener) {
 		this.adapterListener = adapterListener;
+		mContext = context;
+	}
+
+	public ApiRequest(Context context, AdapterTagListener adapterTagListener) {
+		this.adapterTagListener = adapterTagListener;
 		mContext = context;
 	}
 
@@ -47,18 +62,39 @@ public class ApiRequest {
 	}
 
 	private void handlingOnResponse(HandlingResponse handlingResponse) {
+		handlingOnResponse(handlingResponse, "");
+	}
+
+	private void handlingOnResponse(HandlingResponse handlingResponse, String TAG) {
 
 		if (!handlingResponse.response.isSuccessful()) {
-			ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
+			if(ConnectionDetector.isConnectedToInternet())
+				ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
+			else
+				ConnectionDetector.ShowNetwrokConnectionProblemDialog(mContext, handlingResponse.callbackWithRetry);
 			return;
 		}
 
+		if ((handlingResponse.response).body() instanceof StatusOutput) {
+			((StatusOutput) (handlingResponse.response).body()).tag = TAG;
+		}
 
 		if (listener != null) {
 			listener.onResponse(handlingResponse.call, handlingResponse.response);
 		} else if (adapterListener != null) {
 			adapterListener.onResponse(handlingResponse.call, handlingResponse.response,
 					handlingResponse.position);
+		}else if (tagListener != null){
+			tagListener.onResponse(
+					handlingResponse.call,
+					handlingResponse.response,TAG);
+		}else if (adapterTagListener != null){
+			adapterTagListener.onResponse(
+					handlingResponse.call,
+					handlingResponse.response,
+					handlingResponse.position,
+					TAG
+			);
 		}
 	}
 
@@ -98,7 +134,8 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this),
+						RequestName.AcceptRequest);
 			}
 
 			@Override
@@ -120,7 +157,9 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this, position));
+				handlingOnResponse(
+						new HandlingResponse(call, response, this, position),
+						RequestName.DeleteMyRequest);
 			}
 
 			@Override
@@ -142,7 +181,7 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.DeleteMyRequest);
 			}
 
 			@Override
@@ -165,7 +204,7 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.DenyRequest);
 			}
 
 			@Override
@@ -186,7 +225,7 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.DeleteGift);
 			}
 
 			@Override
@@ -229,7 +268,7 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.Bookmark);
 			}
 
 			@Override
@@ -336,7 +375,7 @@ public class ApiRequest {
 			@Override
 			public void onResponse(Call<ResponseBody> call,
 			                       Response<ResponseBody> response) {
-				handlingOnResponse(new HandlingResponse(call, response, this));
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.SendRequestGift);
 			}
 
 			@Override
@@ -548,8 +587,17 @@ public class ApiRequest {
 
 	public interface Listener {
 		void onResponse(Call call, Response response);
-
 		void onFailure(Call call, Throwable t);
+	}
+
+	public interface TagListener {
+		void onResponse(Call call, Response response, String tag);
+		void onFailure(Call call, Throwable t, String tag);
+	}
+
+	public interface AdapterTagListener {
+		void onResponse(Call call, Response response, int position, String tag);
+		void onFailure(Call call, Throwable t, String tag);
 	}
 
 	public interface AdapterListener {
@@ -569,20 +617,32 @@ public class ApiRequest {
 		public Response response;
 		public CallbackWithRetry callbackWithRetry;
 		public int position;
-		public String action;
+		public String tag;
+
+		public HandlingResponse(
+				Call call,
+				Response response,
+				CallbackWithRetry callbackWithRetry,
+				String tag
+		) {
+			this.call = call;
+			this.response = response;
+			this.callbackWithRetry = callbackWithRetry;
+			this.tag = tag;
+		}
 
 		public HandlingResponse(
 				Call call,
 				Response response,
 				CallbackWithRetry callbackWithRetry,
 				int position,
-				String action
+				String tag
 		) {
 			this.call = call;
 			this.response = response;
 			this.callbackWithRetry = callbackWithRetry;
 			this.position = position;
-			this.action = action;
+			this.tag = tag;
 		}
 
 		public HandlingResponse(

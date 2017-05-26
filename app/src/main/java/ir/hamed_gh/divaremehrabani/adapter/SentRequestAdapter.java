@@ -19,7 +19,7 @@ import retrofit2.Response;
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHolder> implements ApiRequest.AdapterListener {
+public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHolder> implements ApiRequest.AdapterTagListener {
 
 	private final int WAITING = 0, ACCEPTED = 1, REJECTED = 2, DONATED = 3;
 	String schoolId, childID;
@@ -75,13 +75,13 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 	}
 
 	@Override
-	public void onResponse(Call call, Response response, int position) {
+	public void onResponse(Call call, Response response, int position, String tag) {
 		requestModels.remove(position);
 		notifyDataSetChanged();
 	}
 
 	@Override
-	public void onFailure(Call call, Throwable t) {
+	public void onFailure(Call call, Throwable t, String tag) {
 
 	}
 }

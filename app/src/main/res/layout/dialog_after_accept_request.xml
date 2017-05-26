@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/message_textview"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"/>
+
+	<RelativeLayout
+		android:id="@+id/first_divider_lay"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@id/message_textview"
+		android:layout_marginTop="4dp"
+		android:background="@color/dark_white"
+	/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/contact_txt"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/first_divider_lay"
+		android:layout_marginTop="4dp"
+
+		android:text="ارتباط با دریافت کننده هدیه"/>
+
+	<LinearLayout
+		android:id="@+id/contact_lay"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="4dp"
+		android:layout_below="@id/contact_txt"
+		android:orientation="horizontal"
+		android:weightSum="3">
+
+		<ImageView
+			android:id="@+id/call_iv"
+			android:layout_width="0dp"
+			android:layout_height="48dp" android:layout_weight="1"
+			android:padding="6dp"
+			android:src="@mipmap/ic_phone_grey600_36dp"/>
+
+		<ImageView
+			android:id="@+id/sms_iv"
+			android:layout_width="0dp"
+			android:layout_height="48dp" android:layout_weight="1"
+			android:padding="6dp"
+			android:src="@mipmap/ic_message_grey600_36dp"/>
+
+		<ImageView
+			android:id="@+id/profile_iv"
+			android:layout_width="0dp"
+			android:layout_height="48dp" android:layout_weight="1"
+			android:padding="6dp"
+			android:src="@mipmap/ic_action_contact"/>
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:id="@+id/second_divider_lay"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="4dp"
+		android:layout_below="@id/contact_lay"
+		android:background="@color/dark_white"
+	/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/second_divider_lay"
+		android:layout_marginTop="12dp">
+
+		<com.andexert.library.RippleView
+			android:id="@+id/gift_page_ripple_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="10dp"
+			app:rv_color="@color/white"
+			app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+			<android.support.v7.widget.CardView
+				android:id="@+id/gift_page_btn_cardview"
+				android:layout_width="136dp"
+				android:layout_height="36dp"
+				android:layout_gravity="right"
+				app:cardBackgroundColor="@color/colorPrimary">
+
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+						android:id="@+id/btn_gift_page"
+						android:layout_width="match_parent"
+						android:layout_height="36dp"
+						android:layout_centerInParent="true"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="6dp"
+						android:gravity="center"
+						android:text="مشاهده هدیه"
+						android:textColor="@color/white"
+						android:textSize="12sp"/>
+
+				</RelativeLayout>
+
+			</android.support.v7.widget.CardView>
+
+		</com.andexert.library.RippleView>
+
+		<com.andexert.library.RippleView
+			android:id="@+id/ok_ripple_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="8dp"
+			android:layout_marginTop="10dp"
+			app:rv_color="@color/white"
+			app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+			<android.support.v7.widget.CardView
+				android:id="@+id/ok_btn_cardview"
+				android:layout_width="136dp"
+				android:layout_height="36dp"
+				android:layout_gravity="right"
+				app:cardBackgroundColor="@color/colorPrimary">
+
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+						android:id="@+id/btn_ok"
+						android:layout_width="match_parent"
+						android:layout_height="36dp"
+						android:layout_centerInParent="true"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="6dp"
+						android:gravity="center"
+						android:text="بستن"
+						android:textColor="@color/white"
+						android:textSize="12sp"/>
+
+				</RelativeLayout>
+
+			</android.support.v7.widget.CardView>
+
+		</com.andexert.library.RippleView>
+
+	</RelativeLayout>
+
+</RelativeLayout>
