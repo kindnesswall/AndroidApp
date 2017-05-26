@@ -92,6 +92,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
     @Bind(R.id.callSmsBottomBarLayBtn)
     RelativeLayout callSmsBottomBarLayBtn;
 
+    @Bind(R.id.report_lay)
+    RelativeLayout mReportLay;
+
     @Bind(R.id.first_right_icon_ic)
     ImageView mFirstRightIcon;
 
@@ -215,6 +218,36 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
             }
         });
 
+        mReportLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext);
+                final MaterialDialog dialog = builder
+                        .customView(R.layout.dialog_report_gift, false).show();
+
+                RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+                yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+
+                        Toasti.showS("yes");
+                        dialog.dismiss();
+                    }
+                });
+
+                RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+                noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+
+                        Toasti.showS("no");
+                        dialog.dismiss();
+
+                    }
+                });
+
+            }
+        });
     }
 
     private void init() {
