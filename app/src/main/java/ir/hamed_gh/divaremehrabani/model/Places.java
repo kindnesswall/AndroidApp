@@ -9,19 +9,19 @@ import java.util.ArrayList;
  */
 public class Places {
 
-    @SerializedName("places")
-    ArrayList<Place> places;
+	@SerializedName("places")
+	ArrayList<Place> places;
 
-    public ArrayList<Place> getPlaces() {
-        return places;
-    }
+	public ArrayList<Place> getPlaces() {
+		return places;
+	}
 
-    public void setPlaces(ArrayList<Place> places) {
-        this.places = places;
-    }
+	public void setPlaces(ArrayList<Place> places) {
+		this.places = places;
+	}
 
-    public void addPlace(Place place) {
-        places.add(place);
-    }
+	public void addPlace(Place place) {
+		places.add(place);
+	}
 
 }

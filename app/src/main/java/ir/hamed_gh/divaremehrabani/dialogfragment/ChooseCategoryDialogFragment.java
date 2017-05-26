@@ -29,87 +29,87 @@ import retrofit2.Response;
  */
 public class ChooseCategoryDialogFragment extends DialogFragment implements ApiRequest.Listener {
 
-    @Bind(R.id.choose_place_recyclerview)
-    RecyclerView recyclerView;
+	@Bind(R.id.choose_place_recyclerview)
+	RecyclerView recyclerView;
 
-    @Bind(R.id.choose_place_progressBar)
-    ProgressView mProgressView;
+	@Bind(R.id.choose_place_progressBar)
+	ProgressView mProgressView;
 
-    ArrayList<Category> categories = new ArrayList<>();
-    ApiRequest apiRequest;
-    private ChooseCategoriesDialogAdapter chooseCategoriesDialogAdapter;
-    private ChooseCategoryCallback mHost;
+	ArrayList<Category> categories = new ArrayList<>();
+	ApiRequest apiRequest;
+	private ChooseCategoriesDialogAdapter chooseCategoriesDialogAdapter;
+	private ChooseCategoryCallback mHost;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.dialogfragment_choose_category, container, false);
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.dialogfragment_choose_category, container, false);
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        ButterKnife.bind(this, rootView);
+		ButterKnife.bind(this, rootView);
 
-        apiRequest = new ApiRequest(getActivity(), this);
-        apiRequest.getCategories();
+		apiRequest = new ApiRequest(getActivity(), this);
+		apiRequest.getCategories();
 
-        chooseCategoriesDialogAdapter =
-                new ChooseCategoriesDialogAdapter(getActivity(), this, categories);
-        recyclerView.setAdapter(chooseCategoriesDialogAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		chooseCategoriesDialogAdapter =
+				new ChooseCategoriesDialogAdapter(getActivity(), this, categories);
+		recyclerView.setAdapter(chooseCategoriesDialogAdapter);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        return rootView;
-    }
+		return rootView;
+	}
 
-    public void onCategorySelected(Category category) {
-        mHost.onCategorySelected(category);
-        dismiss();
-    }
+	public void onCategorySelected(Category category) {
+		mHost.onCategorySelected(category);
+		dismiss();
+	}
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
 
-        if (getTargetFragment() == null) {
-            mHost = (ChooseCategoryCallback) context;
-        } else {
-            mHost =
-                    (ChooseCategoryCallback) getTargetFragment();
-        }
-    }
+		if (getTargetFragment() == null) {
+			mHost = (ChooseCategoryCallback) context;
+		} else {
+			mHost =
+					(ChooseCategoryCallback) getTargetFragment();
+		}
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
 
-        getDialog().getWindow().setLayout(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-    }
+		getDialog().getWindow().setLayout(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+		);
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        getDialog().getWindow().setLayout(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-    }
+		getDialog().getWindow().setLayout(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+		);
+	}
 
-    @Override
-    public void onResponse(Call call, Response response) {
-        ArrayList<Category> categories = (ArrayList<Category>) response.body();
-        this.categories.addAll(categories);
-        chooseCategoriesDialogAdapter.notifyDataSetChanged();
+	@Override
+	public void onResponse(Call call, Response response) {
+		ArrayList<Category> categories = (ArrayList<Category>) response.body();
+		this.categories.addAll(categories);
+		chooseCategoriesDialogAdapter.notifyDataSetChanged();
 
-        mProgressView.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.VISIBLE);
-    }
+		mProgressView.setVisibility(View.INVISIBLE);
+		recyclerView.setVisibility(View.VISIBLE);
+	}
 
-    @Override
-    public void onFailure(Call call, Throwable t) {
-        mProgressView.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
-    }
+	@Override
+	public void onFailure(Call call, Throwable t) {
+		mProgressView.setVisibility(View.INVISIBLE);
+		recyclerView.setVisibility(View.INVISIBLE);
+	}
 }

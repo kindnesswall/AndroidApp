@@ -5,11 +5,11 @@ package ir.hamed_gh.divaremehrabani.model.api;
  */
 public class StartLastIndex {
 
-    public String startIndex;
-    public String lastIndex;
+	public String startIndex;
+	public String lastIndex;
 
-    public StartLastIndex(String startIndex, String lastIndex) {
-        this.startIndex = startIndex;
-        this.lastIndex = lastIndex;
-    }
+	public StartLastIndex(String startIndex, String lastIndex) {
+		this.startIndex = startIndex;
+		this.lastIndex = lastIndex;
+	}
 }

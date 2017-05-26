@@ -5,5 +5,5 @@ package ir.hamed_gh.divaremehrabani.interfaces;
  */
 
 public interface UpdateImageGallery {
-    public void onUpdateGallery();
+	public void onUpdateGallery();
 }

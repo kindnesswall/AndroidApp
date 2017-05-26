@@ -25,68 +25,68 @@ import ir.hamed_gh.divaremehrabani.model.Places;
  */
 public class CategoryFilteringDialogFragment extends DialogFragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.dialogfragment_choose_place, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.dialogfragment_choose_place, container, false);
 
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        ButterKnife.bind(this, rootView);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_place_recyclerview);
-        EditTextIranSans editTextIranSans = (EditTextIranSans) rootView.findViewById(R.id.choose_place_et);
+		ButterKnife.bind(this, rootView);
+		RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.choose_place_recyclerview);
+		EditTextIranSans editTextIranSans = (EditTextIranSans) rootView.findViewById(R.id.choose_place_et);
 //		int color = AppController.getAppContext().getResources().getColor(R.color.colorAccent);
 //		editTextIranSans.getCompoundDrawables()[2].setColorFilter( color, PorterDuff.Mode.SRC_ATOP);
-        String json = ReadJsonFile.loadJSONFromAsset(getContext());
+		String json = ReadJsonFile.loadJSONFromAsset(getContext());
 
-        Gson gson = new Gson();
+		Gson gson = new Gson();
 
-        Places allPlaces = gson.fromJson(json, Places.class);
+		Places allPlaces = gson.fromJson(json, Places.class);
 
-        Places level2 = new Places();
-        level2.setPlaces(new ArrayList<Place>());
+		Places level2 = new Places();
+		level2.setPlaces(new ArrayList<Place>());
 
-        Places level3 = new Places();
-        level3.setPlaces(new ArrayList<Place>());
+		Places level3 = new Places();
+		level3.setPlaces(new ArrayList<Place>());
 
-        Places level4 = new Places();
-        level4.setPlaces(new ArrayList<Place>());
+		Places level4 = new Places();
+		level4.setPlaces(new ArrayList<Place>());
 
-        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).name);
-        Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).level);
+		Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).name);
+		Log.d("Gson Test", ">> " + allPlaces.getPlaces().get(1).level);
 
-        for (Place thisPlace : allPlaces.getPlaces()) {
-            if (thisPlace.level.equals("place2")) {
-                level2.addPlace(thisPlace);
-            }
-        }
+		for (Place thisPlace : allPlaces.getPlaces()) {
+			if (thisPlace.level.equals("place2")) {
+				level2.addPlace(thisPlace);
+			}
+		}
 
 //        ChoosePlaceAdapter chooseCityAdapter =
 //                new ChoosePlaceAdapter(this, getContext(), level2.getPlaces());
 //        recyclerView.setAdapter(chooseCityAdapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        return rootView;
-    }
+		return rootView;
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
 
-        getDialog().getWindow().setLayout(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-    }
+		getDialog().getWindow().setLayout(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+		);
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        getDialog().getWindow().setLayout(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-    }
+		getDialog().getWindow().setLayout(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+		);
+	}
 }

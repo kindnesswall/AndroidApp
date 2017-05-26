@@ -28,76 +28,74 @@ import retrofit2.Response;
  */
 public class SentRequestsFragment extends BaseFragment {
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTv;
+	@Bind(R.id.message_textview)
+	TextView mMessageTv;
+	View rootView;
+	private ArrayList<RequestModel> requestModels = new ArrayList<>();
+	private SentRequestAdapter adapter;
+	private LinearLayoutManager linearLayoutManager;
+	private int startIndex = 0;
 
-    private ArrayList<RequestModel> requestModels = new ArrayList<>();
-    private SentRequestAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+	@Override
+	protected void init() {
+		super.init();
 
-    private int startIndex = 0;
-    View rootView;
+		adapter = new SentRequestAdapter(context, requestModels);
+		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-    @Override
-    protected void init() {
-        super.init();
+		apiRequest.getSentRequestList(
+				new StartLastIndex(
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
+	}
 
-        adapter = new SentRequestAdapter(context, requestModels);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
 
-        apiRequest.getSentRequestList(
-                new StartLastIndex(
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + ""
-                )
-        );
-    }
+		super.onCreate(savedInstanceState);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+		ButterKnife.bind(this, rootView);
+		init();
 
-        super.onCreate(savedInstanceState);
-        if (rootView != null) {
-            if (rootView.getParent() != null)
-                ((ViewGroup) rootView.getParent()).removeView(rootView);
-            return rootView;
-        }
-        rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		return rootView;
+	}
 
-        ButterKnife.bind(this, rootView);
-        init();
+	@Override
+	public void onResponse(Call call, Response response) {
 
-        return rootView;
-    }
+		progressView.setVisibility(View.INVISIBLE);
 
-    @Override
-    public void onResponse(Call call, Response response) {
+		ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
+		this.requestModels.addAll(requestModels);
+		adapter.notifyDataSetChanged();
 
-        progressView.setVisibility(View.INVISIBLE);
+		if (requestModels.size() > 0) {
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTv.setVisibility(View.INVISIBLE);
+		} else {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTv.setVisibility(View.VISIBLE);
+			mMessageTv.setText(
+					"شما هیچ درخواستی ارسال نکرده‌اید."
+			);
+		}
 
-        ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
-        this.requestModels.addAll(requestModels);
-        adapter.notifyDataSetChanged();
-
-        if (requestModels.size() > 0) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mMessageTv.setVisibility(View.INVISIBLE);
-        } else {
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mMessageTv.setVisibility(View.VISIBLE);
-            mMessageTv.setText(
-                    "شما هیچ درخواستی ارسال نکرده‌اید."
-            );
-        }
-
-    }
+	}
 }

@@ -26,163 +26,161 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements ApiRequest.Listener {
 
-    @Bind(R.id.main_toolbar)
-    Toolbar mToolbar;
+	@Bind(R.id.main_toolbar)
+	Toolbar mToolbar;
 
-    @Bind(R.id.toolbar_title_textView)
-    TextView mToolbarTitleTextView;
+	@Bind(R.id.toolbar_title_textView)
+	TextView mToolbarTitleTextView;
 
-    @Bind(R.id.toolbar_back_iv)
-    ImageView mBackBtn;
+	@Bind(R.id.toolbar_back_iv)
+	ImageView mBackBtn;
 
-    @Bind(R.id.not_recieved_code_btn)
-    RelativeLayout not_recieved_code_btn;
+	@Bind(R.id.not_recieved_code_btn)
+	RelativeLayout not_recieved_code_btn;
 
-    @Bind(R.id.login_get_verification_btn)
-    RelativeLayout loginGetVerificationBtn;
+	@Bind(R.id.login_get_verification_btn)
+	RelativeLayout loginGetVerificationBtn;
 
-    @Bind(R.id.phone_confirimation_code_et)
-    EditTextIranSans phoneConfirimationCodeEt;
+	@Bind(R.id.phone_confirimation_code_et)
+	EditTextIranSans phoneConfirimationCodeEt;
 
-    @Bind(R.id.login_get_verification_tv)
-    TextViewIranSansRegular login_get_verification_tv;
+	@Bind(R.id.login_get_verification_tv)
+	TextViewIranSansRegular login_get_verification_tv;
 
-    @Bind(R.id.progressView)
-    ProgressView progressView;
+	@Bind(R.id.progressView)
+	ProgressView progressView;
+	View.OnClickListener enterPhoneNumber;
+	View.OnClickListener enterVerificationCodeListener;
+	private Context context;
+	private ApiRequest apiRequest;
 
-    private Context context;
+	private void settingToolbar() {
+		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+		setSupportActionBar(mToolbar);
+		try {
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		} catch (Exception e) {
 
-    View.OnClickListener enterPhoneNumber;
-    View.OnClickListener enterVerificationCodeListener;
-    private ApiRequest apiRequest;
-
-    private void settingToolbar() {
-        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        setSupportActionBar(mToolbar);
-        try {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        } catch (Exception e) {
-
-        }
+		}
 //        mToolbarTitleTextView.setText("دیوار مهربانی");
-    }
+	}
 
-    private void setListeners() {
-        mBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+	private void setListeners() {
+		mBackBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 
-        enterVerificationCodeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                apiRequest.login(phoneConfirimationCodeEt.getText().toString());
+		enterVerificationCodeListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				apiRequest.login(phoneConfirimationCodeEt.getText().toString());
 
-                progressView.setVisibility(View.VISIBLE);
-                login_get_verification_tv.setVisibility(View.INVISIBLE);
-            }
-        };
+				progressView.setVisibility(View.VISIBLE);
+				login_get_verification_tv.setVisibility(View.INVISIBLE);
+			}
+		};
 
-        enterPhoneNumber = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                apiRequest.register(phoneConfirimationCodeEt.getText().toString());
-                
-                progressView.setVisibility(View.VISIBLE);
-                login_get_verification_tv.setVisibility(View.INVISIBLE);
-            }
-        };
+		enterPhoneNumber = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				apiRequest.register(phoneConfirimationCodeEt.getText().toString());
 
-        not_recieved_code_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppController.storeString(
-                        Constants.TELEPHONE, null
-                );
+				progressView.setVisibility(View.VISIBLE);
+				login_get_verification_tv.setVisibility(View.INVISIBLE);
+			}
+		};
 
-                enterTelephoneNumber();
-            }
-        });
+		not_recieved_code_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AppController.storeString(
+						Constants.TELEPHONE, null
+				);
 
-        if (AppController.getStoredString(Constants.TELEPHONE) == null) {
-            enterTelephoneNumber();
-        } else {
-            enterVerificationCode();
-        }
-    }
+				enterTelephoneNumber();
+			}
+		});
 
-    private void init() {
-        context = this;
-        apiRequest = new ApiRequest(context, this);
+		if (AppController.getStoredString(Constants.TELEPHONE) == null) {
+			enterTelephoneNumber();
+		} else {
+			enterVerificationCode();
+		}
+	}
 
-        settingToolbar();
-    }
+	private void init() {
+		context = this;
+		apiRequest = new ApiRequest(context, this);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
+		settingToolbar();
+	}
 
-        init();
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_login);
+		ButterKnife.bind(this);
 
-        setListeners();
-    }
+		init();
+
+		setListeners();
+	}
 
 
-    public void enterTelephoneNumber() {
-        AppController.storeString(Constants.TELEPHONE, null);
-        phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
-        phoneConfirimationCodeEt.setText("");
+	public void enterTelephoneNumber() {
+		AppController.storeString(Constants.TELEPHONE, null);
+		phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
+		phoneConfirimationCodeEt.setText("");
 
-        login_get_verification_tv.setText(getString(R.string.sign_up));
-        not_recieved_code_btn.setVisibility(View.INVISIBLE);
+		login_get_verification_tv.setText(getString(R.string.sign_up));
+		not_recieved_code_btn.setVisibility(View.INVISIBLE);
 
-        loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
-    }
+		loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
+	}
 
-    public void enterVerificationCode() {
-        phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
-        phoneConfirimationCodeEt.setText("");
+	public void enterVerificationCode() {
+		phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
+		phoneConfirimationCodeEt.setText("");
 
-        login_get_verification_tv.setText(getString(R.string.sign_in));
+		login_get_verification_tv.setText(getString(R.string.sign_in));
 
-        not_recieved_code_btn.setVisibility(View.VISIBLE);
-        loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
-    }
+		not_recieved_code_btn.setVisibility(View.VISIBLE);
+		loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
+	}
 
-    @Override
-    public void onResponse(Call call, Response response) {
-        progressView.setVisibility(View.INVISIBLE);
-        login_get_verification_tv.setVisibility(View.VISIBLE);
+	@Override
+	public void onResponse(Call call, Response response) {
+		progressView.setVisibility(View.INVISIBLE);
+		login_get_verification_tv.setVisibility(View.VISIBLE);
 
-        if (response.body() instanceof TokenOutput) {
-            TokenOutput tokenOutput = (TokenOutput) response.body();
-            AppController.storeString(
-                    Constants.Authorization,
-                    Constants.BEARER + " " + tokenOutput.access_token);
+		if (response.body() instanceof TokenOutput) {
+			TokenOutput tokenOutput = (TokenOutput) response.body();
+			AppController.storeString(
+					Constants.Authorization,
+					Constants.BEARER + " " + tokenOutput.access_token);
 
-            AppController.storeString(
-                    Constants.USERNAME,
-                    tokenOutput.userName);
+			AppController.storeString(
+					Constants.USERNAME,
+					tokenOutput.userName);
 
-            AppController.storeString(
-                    Constants.USER_ID,
-                    tokenOutput.userId);
+			AppController.storeString(
+					Constants.USER_ID,
+					tokenOutput.userId);
 
-            finish();
-        } else {
-            enterVerificationCode();
-        }
-    }
+			finish();
+		} else {
+			enterVerificationCode();
+		}
+	}
 
-    @Override
-    public void onFailure(Call call, Throwable t) {
-        progressView.setVisibility(View.INVISIBLE);
-        login_get_verification_tv.setVisibility(View.VISIBLE);
+	@Override
+	public void onFailure(Call call, Throwable t) {
+		progressView.setVisibility(View.INVISIBLE);
+		login_get_verification_tv.setVisibility(View.VISIBLE);
 
-        Toasti.showS("onFailure");
-    }
+		Toasti.showS("onFailure");
+	}
 }

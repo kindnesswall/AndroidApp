@@ -16,27 +16,27 @@ import retrofit2.Response;
  */
 public class BaseFragment extends Fragment implements ApiRequest.Listener {
 
-    protected Context context;
-    protected AppCompatActivity mainActivity;
-    private TextView mToolbarTitleTextView;
-    protected ApiRequest apiRequest;
+	protected Context context;
+	protected AppCompatActivity mainActivity;
+	protected ApiRequest apiRequest;
+	private TextView mToolbarTitleTextView;
 
-    protected void init() {
-        context = getActivity();
-        mainActivity = (AppCompatActivity) getActivity();
+	protected void init() {
+		context = getActivity();
+		mainActivity = (AppCompatActivity) getActivity();
 
-        mToolbarTitleTextView = (TextView) ((AppCompatActivity) context).findViewById(R.id.toolbar_title_textView);
+		mToolbarTitleTextView = (TextView) ((AppCompatActivity) context).findViewById(R.id.toolbar_title_textView);
 
-        apiRequest = new ApiRequest(context, this);
-    }
+		apiRequest = new ApiRequest(context, this);
+	}
 
-    @Override
-    public void onResponse(Call call, Response response) {
+	@Override
+	public void onResponse(Call call, Response response) {
 
-    }
+	}
 
-    @Override
-    public void onFailure(Call call, Throwable t) {
+	@Override
+	public void onFailure(Call call, Throwable t) {
 
-    }
+	}
 }

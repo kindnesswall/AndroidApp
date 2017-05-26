@@ -13,6 +13,6 @@ public class UploadFileOutput {
 //	@SerializedName("name")
 //	public String name;
 
-    @SerializedName("imageSrc")
-    public String imageSrc;
+	@SerializedName("imageSrc")
+	public String imageSrc;
 }

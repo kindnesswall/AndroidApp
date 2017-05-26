@@ -8,7 +8,7 @@ import okio.BufferedSource;
  * Created by Hamed on 4/21/17.
  */
 
-public class DeleteOutput extends ResponseBody{
+public class DeleteOutput extends ResponseBody {
 
 	@Override
 	public MediaType contentType() {

@@ -21,44 +21,44 @@ import ir.hamed_gh.divaremehrabani.interfaces.UpdateImageGallery;
  */
 public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> {
 
-    private Context mContext;
-    private ArrayList<String> giftImageUrls;
-    private FragmentActivity activity;
+	private Context mContext;
+	private ArrayList<String> giftImageUrls;
+	private FragmentActivity activity;
 
-    public GiftGalleryAdapter(Context context, ArrayList<String> giftImageUrls) {
-        this.mContext = context;
-        this.giftImageUrls = giftImageUrls;
-    }
+	public GiftGalleryAdapter(Context context, ArrayList<String> giftImageUrls) {
+		this.mContext = context;
+		this.giftImageUrls = giftImageUrls;
+	}
 
-    @Override
-    public GiftGalleryHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_gift_gallery, null);
-        GiftGalleryHolder giftGalleryHolder = new GiftGalleryHolder(v);
+	@Override
+	public GiftGalleryHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_gift_gallery, null);
+		GiftGalleryHolder giftGalleryHolder = new GiftGalleryHolder(v);
 
-        return giftGalleryHolder;
-    }
+		return giftGalleryHolder;
+	}
 
-    @Override
-    public void onBindViewHolder(GiftGalleryHolder giftGalleryHolder, final int i) {
+	@Override
+	public void onBindViewHolder(GiftGalleryHolder giftGalleryHolder, final int i) {
 
-        giftGalleryHolder.mCloseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toasti.showS("close!");
-                giftImageUrls.remove(i);
-                notifyDataSetChanged();
+		giftGalleryHolder.mCloseBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toasti.showS("close!");
+				giftImageUrls.remove(i);
+				notifyDataSetChanged();
 
-                ((UpdateImageGallery)mContext).onUpdateGallery();
-            }
-        });
+				((UpdateImageGallery) mContext).onUpdateGallery();
+			}
+		});
 
-        Glide
-                .with(mContext)
-                .load(giftImageUrls.get(i))
-                .centerCrop()
-                .placeholder(R.color.background)
-                .crossFade()
-                .into(giftGalleryHolder.mImageView);
+		Glide
+				.with(mContext)
+				.load(giftImageUrls.get(i))
+				.centerCrop()
+				.placeholder(R.color.background)
+				.crossFade()
+				.into(giftGalleryHolder.mImageView);
 
 //        categoryGridHolder.getmCategoryTv().setText(giftImageUrls.get(i).title);
 //		categoryGridHolder.getmCategoryIc().setImageDrawable(mContext.getResources().getDrawable(iconRes[i]));
@@ -76,12 +76,12 @@ public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> 
 //
 //            }
 //        });
-    }
+	}
 
-    @Override
-    public int getItemCount() {
+	@Override
+	public int getItemCount() {
 
-        return giftImageUrls != null ? giftImageUrls.size() : 0;
+		return giftImageUrls != null ? giftImageUrls.size() : 0;
 
-    }
+	}
 }

@@ -8,37 +8,37 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("firstName")
-    public String firstName;
+	@SerializedName("firstName")
+	public String firstName;
 
-    @SerializedName("lastName")
-    public String lastName;
+	@SerializedName("lastName")
+	public String lastName;
 
-    @SerializedName("email")
-    public String email;
+	@SerializedName("email")
+	public String email;
 
-    @SerializedName("userName")
-    public String userName;
+	@SerializedName("userName")
+	public String userName;
 
-    @SerializedName("mobileNumber")
-    public String mobileNumber;
+	@SerializedName("mobileNumber")
+	public String mobileNumber;
 
-    @SerializedName("mobileNumberConfirmed")
-    public String mobileNumberConfirmed;
+	@SerializedName("mobileNumberConfirmed")
+	public String mobileNumberConfirmed;
 
-    @SerializedName("imageUrl")
-    public String imageUrl;
+	@SerializedName("imageUrl")
+	public String imageUrl;
 
-    @SerializedName("id")
-    public String id;
+	@SerializedName("id")
+	public String id;
 
-    @SerializedName("createDateTime")
-    public String createDateTime;
+	@SerializedName("createDateTime")
+	public String createDateTime;
 
-    @SerializedName("createDate")
-    public String createDate;
+	@SerializedName("createDate")
+	public String createDate;
 
-    @SerializedName("createTime")
-    public String createTime;
+	@SerializedName("createTime")
+	public String createTime;
 
 }

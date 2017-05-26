@@ -33,108 +33,106 @@ import static ir.hamed_gh.divaremehrabani.R.id.total_requests_tv;
  */
 public class RequestsToAGiftFragment extends BaseFragment {
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTv;
+	@Bind(R.id.message_textview)
+	TextView mMessageTv;
 
-    @Bind(total_requests_tv)
-    TextViewIranSansRegular mTotalRequestsTv;
+	@Bind(total_requests_tv)
+	TextViewIranSansRegular mTotalRequestsTv;
 
-    @Bind(R.id.gift_name_tv)
-    TextViewIranSansRegular mGiftNameTv;
+	@Bind(R.id.gift_name_tv)
+	TextViewIranSansRegular mGiftNameTv;
 
-    @Bind(R.id.info_lay)
-    RelativeLayout mInfoLay;
+	@Bind(R.id.info_lay)
+	RelativeLayout mInfoLay;
+	View rootView;
+	private ArrayList<RequestModel> requestModels = new ArrayList<>();
+	private RequestToAGiftAdapter adapter;
+	private LinearLayoutManager linearLayoutManager;
+	private int startIndex = 0;
+	private String giftId;
+	private String giftName;
+	private String requestCounts;
 
-    private ArrayList<RequestModel> requestModels = new ArrayList<>();
-    private RequestToAGiftAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+	@Override
+	protected void init() {
+		super.init();
 
-    private int startIndex = 0;
-    private String giftId;
-    private String giftName;
-    private String requestCounts;
-    View rootView;
+		Bundle bundle = this.getArguments();
+		if (bundle != null) {
+			giftId = bundle.getString(Constants.GIFT_ID);
+			giftName = bundle.getString(Constants.GIFT_NAME);
+			requestCounts = bundle.getString(Constants.GIFT_REQUEST_COUNT);
+			mGiftNameTv.setText(giftName);
+			mTotalRequestsTv.setText(requestCounts);
+		}
 
-    @Override
-    protected void init() {
-        super.init();
+		adapter = new RequestToAGiftAdapter(context, requestModels);
+		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            giftId = bundle.getString(Constants.GIFT_ID);
-            giftName = bundle.getString(Constants.GIFT_NAME);
-            requestCounts = bundle.getString(Constants.GIFT_REQUEST_COUNT);
-            mGiftNameTv.setText(giftName);
-            mTotalRequestsTv.setText(requestCounts);
-        }
+		apiRequest.getRecievedRequestList(
+				new RecievedRequestListInput(
+						giftId,
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
 
-        adapter = new RequestToAGiftAdapter(context, requestModels);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+		mInfoLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				getActivity().startActivity(
+						GiftDetailActivity.createIntent(giftId)
+				);
+			}
+		});
+	}
 
-        apiRequest.getRecievedRequestList(
-                new RecievedRequestListInput(
-                        giftId,
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + ""
-                )
-        );
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
 
-        mInfoLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivity(
-                        GiftDetailActivity.createIntent(giftId)
-                );
-            }
-        });
-    }
+		super.onCreate(savedInstanceState);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+		ButterKnife.bind(this, rootView);
+		init();
 
-        super.onCreate(savedInstanceState);
-        if (rootView != null) {
-            if (rootView.getParent() != null)
-                ((ViewGroup) rootView.getParent()).removeView(rootView);
-            return rootView;
-        }
-        rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
+		return rootView;
+	}
 
-        ButterKnife.bind(this, rootView);
-        init();
+	@Override
+	public void onResponse(Call call, Response response) {
 
-        return rootView;
-    }
+		progressView.setVisibility(View.INVISIBLE);
 
-    @Override
-    public void onResponse(Call call, Response response) {
+		ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
+		this.requestModels.addAll(requestModels);
+		adapter.notifyDataSetChanged();
 
-        progressView.setVisibility(View.INVISIBLE);
+		if (requestModels.size() > 0) {
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTv.setVisibility(View.INVISIBLE);
+		} else {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTv.setVisibility(View.VISIBLE);
+			mMessageTv.setText(
+					"شما هیچ درخواستی دریافت نکرده‌اید."
+			);
+		}
 
-        ArrayList<RequestModel> requestModels = (ArrayList<RequestModel>) response.body();
-        this.requestModels.addAll(requestModels);
-        adapter.notifyDataSetChanged();
-
-        if (requestModels.size() > 0) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mMessageTv.setVisibility(View.INVISIBLE);
-        } else {
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mMessageTv.setVisibility(View.VISIBLE);
-            mMessageTv.setText(
-                    "شما هیچ درخواستی دریافت نکرده‌اید."
-            );
-        }
-
-    }
+	}
 
 }

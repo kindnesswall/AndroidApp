@@ -29,95 +29,93 @@ import retrofit2.Response;
  */
 public class RegisteredGiftsFragment extends BaseFragment {
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTv;
+	@Bind(R.id.message_textview)
+	TextView mMessageTv;
+	View rootView;
+	private ArrayList<Gift> gifts = new ArrayList<>();
+	private GiftListAdapter adapter;
+	private LinearLayoutManager linearLayoutManager;
+	private int startIndex = 0;
+	private String userId;
 
-    private ArrayList<Gift> gifts = new ArrayList<>();
-    private GiftListAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+	public static RegisteredGiftsFragment newInstance(String userId) {
+		RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(Constants.USER_ID, userId);
+		registeredGiftsFragment.setArguments(bundle);
 
-    private int startIndex = 0;
-    private String userId;
-    View rootView;
+		return registeredGiftsFragment;
+	}
 
-    public static RegisteredGiftsFragment newInstance(String userId){
-        RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.USER_ID, userId);
-        registeredGiftsFragment.setArguments(bundle);
+	@Override
+	protected void init() {
+		super.init();
 
-        return registeredGiftsFragment;
-    }
+		adapter = new GiftListAdapter(context, gifts);
+		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-    @Override
-    protected void init() {
-        super.init();
+		if (getArguments() != null) {
+			userId = getArguments().getString(Constants.USER_ID);
+		}
+		if (userId == null)
+			userId = AppController.getStoredString(Constants.USER_ID);
 
-        adapter = new GiftListAdapter(context, gifts);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+		apiRequest.getRegisteredGifts(
+				userId,
+				new StartLastIndex(
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
+	}
 
-        if (getArguments()!=null){
-            userId = getArguments().getString(Constants.USER_ID);
-        }
-        if (userId == null)
-            userId = AppController.getStoredString(Constants.USER_ID);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
 
-        apiRequest.getRegisteredGifts(
-                userId,
-                new StartLastIndex(
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + ""
-                )
-        );
-    }
+		super.onCreate(savedInstanceState);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+		ButterKnife.bind(this, rootView);
+		init();
 
-        super.onCreate(savedInstanceState);
-        if (rootView != null) {
-            if (rootView.getParent() != null)
-                ((ViewGroup) rootView.getParent()).removeView(rootView);
-            return rootView;
-        }
-        rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		return rootView;
+	}
 
-        ButterKnife.bind(this, rootView);
-        init();
+	@Override
+	public void onResponse(Call call, Response response) {
 
-        return rootView;
-    }
+		mRecyclerView.setVisibility(View.VISIBLE);
+		progressView.setVisibility(View.INVISIBLE);
 
-    @Override
-    public void onResponse(Call call, Response response) {
+		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+		this.gifts.addAll(gifts);
+		adapter.notifyDataSetChanged();
 
-        mRecyclerView.setVisibility(View.VISIBLE);
-        progressView.setVisibility(View.INVISIBLE);
+		if (gifts.size() > 0) {
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTv.setVisibility(View.INVISIBLE);
+		} else {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTv.setVisibility(View.VISIBLE);
+			mMessageTv.setText(
+					"شما هیچ هدیه‌ی ثبت نکرده اید."
+			);
+		}
 
-        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-        this.gifts.addAll(gifts);
-        adapter.notifyDataSetChanged();
-
-        if (gifts.size() > 0) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mMessageTv.setVisibility(View.INVISIBLE);
-        } else {
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mMessageTv.setVisibility(View.VISIBLE);
-            mMessageTv.setText(
-                    "شما هیچ هدیه‌ی ثبت نکرده اید."
-            );
-        }
-
-    }
+	}
 
 }

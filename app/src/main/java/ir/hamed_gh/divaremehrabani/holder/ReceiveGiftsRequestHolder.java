@@ -12,19 +12,19 @@ import ir.hamed_gh.divaremehrabani.R;
  */
 public class ReceiveGiftsRequestHolder extends RecyclerView.ViewHolder {
 
-    public TextView mTitleTv,mUnseenMsgTv;
+	public TextView mTitleTv, mUnseenMsgTv;
 
-    public View itemView;
+	public View itemView;
 
-    public RelativeLayout rootLay;
+	public RelativeLayout rootLay;
 
-    public ReceiveGiftsRequestHolder(View itemView) {
-        super(itemView);
+	public ReceiveGiftsRequestHolder(View itemView) {
+		super(itemView);
 
-        this.itemView = itemView;
-        rootLay = (RelativeLayout) itemView.findViewById(R.id.root_lay);
-        mTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
-        mUnseenMsgTv = (TextView) itemView.findViewById(R.id.unseen_msg_tv);
+		this.itemView = itemView;
+		rootLay = (RelativeLayout) itemView.findViewById(R.id.root_lay);
+		mTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
+		mUnseenMsgTv = (TextView) itemView.findViewById(R.id.unseen_msg_tv);
 
-    }
+	}
 }

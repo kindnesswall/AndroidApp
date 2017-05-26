@@ -7,25 +7,25 @@ import com.google.gson.annotations.SerializedName;
  */
 public class RequestModel {
 
-    @SerializedName("giftId")
-    public String giftId;
+	@SerializedName("giftId")
+	public String giftId;
 
-    @SerializedName("gift")
-    public String gift;
+	@SerializedName("gift")
+	public String gift;
 
-    @SerializedName("fromUserId")
-    public String fromUserId;
+	@SerializedName("fromUserId")
+	public String fromUserId;
 
-    @SerializedName("fromUser")
-    public String fromUser;
+	@SerializedName("fromUser")
+	public String fromUser;
 
-    @SerializedName("toUserId")
-    public String toUserId;
+	@SerializedName("toUserId")
+	public String toUserId;
 
-    @SerializedName("toUser")
-    public String toUser;
+	@SerializedName("toUser")
+	public String toUser;
 
-    @SerializedName("toStatus")
-    public String toStatus;
+	@SerializedName("toStatus")
+	public String toStatus;
 
 }

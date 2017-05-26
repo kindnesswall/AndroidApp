@@ -10,37 +10,37 @@ import ir.hamed_gh.divaremehrabani.R;
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class GiftHolder extends RecyclerView.ViewHolder{
+public class GiftHolder extends RecyclerView.ViewHolder {
 
-    public TextView mTitleTv, mGiftLocationTv, mGiftCreatedTimeTv;
-    public ImageView mItemIv;
-    public View itemView;
+	public TextView mTitleTv, mGiftLocationTv, mGiftCreatedTimeTv;
+	public ImageView mItemIv;
+	public View itemView;
 
-    public TextView getGiftTitleTv() {
-        return mTitleTv;
-    }
+	public GiftHolder(View itemView) {
+		super(itemView);
 
-    public TextView getGiftLocationTv() {
-        return mGiftLocationTv;
-    }
+		this.itemView = itemView;
 
-    public TextView getGiftCreatedTimeTv() {
-        return mGiftCreatedTimeTv;
-    }
+		mTitleTv = (TextView) itemView.findViewById(R.id.row_title_textview);
+		mGiftLocationTv = (TextView) itemView.findViewById(R.id.row_ad_gift_location_tv);
+		mGiftCreatedTimeTv = (TextView) itemView.findViewById(R.id.row_ad_gift_time_tv);
 
-    public ImageView getmItemIv() {
-        return mItemIv;
-    }
+		mItemIv = (ImageView) itemView.findViewById(R.id.row_imageview);
+	}
 
-    public GiftHolder(View itemView) {
-        super(itemView);
+	public TextView getGiftTitleTv() {
+		return mTitleTv;
+	}
 
-        this.itemView = itemView;
+	public TextView getGiftLocationTv() {
+		return mGiftLocationTv;
+	}
 
-        mTitleTv = (TextView) itemView.findViewById(R.id.row_title_textview);
-        mGiftLocationTv = (TextView) itemView.findViewById(R.id.row_ad_gift_location_tv);
-        mGiftCreatedTimeTv = (TextView) itemView.findViewById(R.id.row_ad_gift_time_tv);
+	public TextView getGiftCreatedTimeTv() {
+		return mGiftCreatedTimeTv;
+	}
 
-        mItemIv = (ImageView) itemView.findViewById(R.id.row_imageview);
-    }
+	public ImageView getmItemIv() {
+		return mItemIv;
+	}
 }

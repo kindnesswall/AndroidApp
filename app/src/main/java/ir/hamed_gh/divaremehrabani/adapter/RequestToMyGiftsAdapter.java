@@ -21,23 +21,23 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
  */
 public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRequestHolder> {
 
-    private ArrayList<Gift> gifts;
-    private Context mContext;
+	private ArrayList<Gift> gifts;
+	private Context mContext;
 
-    public RequestToMyGiftsAdapter(Context context, ArrayList<Gift> gifts) {
-        this.gifts = gifts;
-        this.mContext = context;
-    }
+	public RequestToMyGiftsAdapter(Context context, ArrayList<Gift> gifts) {
+		this.gifts = gifts;
+		this.mContext = context;
+	}
 
-    @Override
-    public int getItemViewType(int position) {
-        return position%2;
-    }
+	@Override
+	public int getItemViewType(int position) {
+		return position % 2;
+	}
 
-    @Override
-    public ReceiveGiftsRequestHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_receive_requests, null);
-        ReceiveGiftsRequestHolder mh = new ReceiveGiftsRequestHolder(v);
+	@Override
+	public ReceiveGiftsRequestHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_receive_requests, null);
+		ReceiveGiftsRequestHolder mh = new ReceiveGiftsRequestHolder(v);
 
 //        switch (i){
 //            case 0:
@@ -48,32 +48,32 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRe
 //                break;
 //        }
 
-        return mh;
-    }
+		return mh;
+	}
 
-    @Override
-    public void onBindViewHolder(final ReceiveGiftsRequestHolder myHolder, final int i) {
+	@Override
+	public void onBindViewHolder(final ReceiveGiftsRequestHolder myHolder, final int i) {
 
-        myHolder.mTitleTv.setText(gifts.get(i).title);
-        myHolder.mUnseenMsgTv.setText(gifts.get(i).requestCount);
+		myHolder.mTitleTv.setText(gifts.get(i).title);
+		myHolder.mUnseenMsgTv.setText(gifts.get(i).requestCount);
 
-        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RequestsToAGiftFragment requestsToAGiftFragment = new RequestsToAGiftFragment();
+		myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				RequestsToAGiftFragment requestsToAGiftFragment = new RequestsToAGiftFragment();
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
-                bundle.putString(Constants.GIFT_NAME, gifts.get(i).title);
-                bundle.putString(Constants.GIFT_REQUEST_COUNT, gifts.get(i).requestCount);
+				Bundle bundle = new Bundle();
+				bundle.putString(Constants.GIFT_ID, gifts.get(i).giftId);
+				bundle.putString(Constants.GIFT_NAME, gifts.get(i).title);
+				bundle.putString(Constants.GIFT_REQUEST_COUNT, gifts.get(i).requestCount);
 
-                requestsToAGiftFragment.setArguments(bundle);
+				requestsToAGiftFragment.setArguments(bundle);
 
-                ((BottomBarActivity) mContext).addFragment(
-                        requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
-                );
-            }
-        });
+				((BottomBarActivity) mContext).addFragment(
+						requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
+				);
+			}
+		});
 
 //        switch (getItemViewType(i)){
 //            case 0:
@@ -84,10 +84,10 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRe
 //                break;
 //        }
 
-    }
+	}
 
-    @Override
-    public int getItemCount() {
-        return (null != gifts ? gifts.size() : 0);
-    }
+	@Override
+	public int getItemCount() {
+		return (null != gifts ? gifts.size() : 0);
+	}
 }

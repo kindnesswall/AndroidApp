@@ -15,17 +15,17 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
  */
 public class StatisticFragment extends BaseFragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
 
-        ButterKnife.bind(this, rootView);
-        init();
+		ButterKnife.bind(this, rootView);
+		init();
 
-        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
+		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
 
-        return rootView;
-    }
+		return rootView;
+	}
 }

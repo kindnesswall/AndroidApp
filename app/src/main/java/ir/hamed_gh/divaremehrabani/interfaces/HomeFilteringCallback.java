@@ -8,6 +8,6 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
  */
 public interface HomeFilteringCallback {
 
-    void onApplyFiltering(Place place,Place region, Category category);
+	void onApplyFiltering(Place place, Place region, Category category);
 
 }

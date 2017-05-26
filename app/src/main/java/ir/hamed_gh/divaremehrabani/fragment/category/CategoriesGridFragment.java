@@ -26,47 +26,46 @@ import retrofit2.Response;
  */
 public class CategoriesGridFragment extends BaseFragment {
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView mProgressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView mProgressView;
+	ArrayList<Category> categories = new ArrayList<>();
+	String TAG = CategoriesGridFragment.class.getName();
+	private GridCategoriesAdapter adapter;
 
-    private GridCategoriesAdapter adapter;
-    ArrayList<Category> categories = new ArrayList<>();
-    String TAG = CategoriesGridFragment.class.getName();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
-
-        ButterKnife.bind(this, rootView);
-        init();
+		ButterKnife.bind(this, rootView);
+		init();
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
         /* Initialize recyclerview */
-        adapter = new GridCategoriesAdapter(context, categories);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+		adapter = new GridCategoriesAdapter(context, categories);
+		mRecyclerView.setAdapter(adapter);
+		mRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
-        apiRequest.getCategories();
+		apiRequest.getCategories();
 
-        return rootView;
-    }
+		return rootView;
+	}
 
-    @Override
-    public void onResponse(Call call, Response response) {
-        super.onResponse(call, response);
-        Log.d(TAG, "onResponse");
+	@Override
+	public void onResponse(Call call, Response response) {
+		super.onResponse(call, response);
+		Log.d(TAG, "onResponse");
 
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mProgressView.setVisibility(View.INVISIBLE);
+		mRecyclerView.setVisibility(View.VISIBLE);
+		mProgressView.setVisibility(View.INVISIBLE);
 
-        ArrayList<Category> categories = (ArrayList<Category>) response.body();
-        this.categories.clear();
-        this.categories.addAll(categories);
-        adapter.notifyDataSetChanged();
-    }
+		ArrayList<Category> categories = (ArrayList<Category>) response.body();
+		this.categories.clear();
+		this.categories.addAll(categories);
+		adapter.notifyDataSetChanged();
+	}
 }

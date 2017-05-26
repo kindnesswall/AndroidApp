@@ -12,23 +12,23 @@ import ir.hamed_gh.divaremehrabani.R;
  */
 public class CategoryDialogHolder extends RecyclerView.ViewHolder {
 
-    //	private ImageView mCategoryIc;
-    private TextView mCategoryTv;
-    public View mItemView;
+	public View mItemView;
+	//	private ImageView mCategoryIc;
+	private TextView mCategoryTv;
 
-    public CategoryDialogHolder(View itemView) {
-        super(itemView);
+	public CategoryDialogHolder(View itemView) {
+		super(itemView);
 
 //		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
-        mCategoryTv = (TextView) itemView.findViewById(R.id.rw_category_name_tv);
-        mItemView = itemView;
-    }
+		mCategoryTv = (TextView) itemView.findViewById(R.id.rw_category_name_tv);
+		mItemView = itemView;
+	}
 
 //	public ImageView getmCategoryIc() {
 //		return mCategoryIc;
 //	}
 
-    public TextView getmCategoryTv() {
-        return mCategoryTv;
-    }
+	public TextView getmCategoryTv() {
+		return mCategoryTv;
+	}
 }

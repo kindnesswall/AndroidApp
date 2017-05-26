@@ -13,21 +13,21 @@ import ir.hamed_gh.divaremehrabani.R;
  */
 public class CategoryGridHolder extends RecyclerView.ViewHolder {
 
-    public ImageView mCategoryIc;
-    private TextView mCategoryTv;
-//    private TextView mCategoryFontIcon;
-    public View mItemView;
+	public ImageView mCategoryIc;
+	//    private TextView mCategoryFontIcon;
+	public View mItemView;
+	private TextView mCategoryTv;
 
-    public CategoryGridHolder(View itemView) {
-        super(itemView);
+	public CategoryGridHolder(View itemView) {
+		super(itemView);
 
 		mCategoryIc = (ImageView) itemView.findViewById(R.id.cell_category_ic);
-        mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
+		mCategoryTv = (TextView) itemView.findViewById(R.id.cell_category_tv);
 //        mCategoryFontIcon = (TextView) itemView.findViewById(R.id.cell_category_font_icon);
-        mItemView = itemView;
-    }
+		mItemView = itemView;
+	}
 
-    public TextView getmCategoryTv() {
-        return mCategoryTv;
-    }
+	public TextView getmCategoryTv() {
+		return mCategoryTv;
+	}
 }

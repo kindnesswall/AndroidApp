@@ -24,78 +24,78 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
  */
 public class MyGiftsFragment extends BaseFragment {
 
-    @Bind(R.id.my_gift_login_btn)
-    RelativeLayout myGiftLoginBtn;
+	@Bind(R.id.my_gift_login_btn)
+	RelativeLayout myGiftLoginBtn;
 
-    @Bind(R.id.my_gift_top_lay)
-    RelativeLayout myGiftTopLay;
+	@Bind(R.id.my_gift_top_lay)
+	RelativeLayout myGiftTopLay;
 
-    @Bind(R.id.my_gift_bottom_lay)
-    RelativeLayout myGiftBottomLay;
+	@Bind(R.id.my_gift_bottom_lay)
+	RelativeLayout myGiftBottomLay;
 
-    @Bind(R.id.main_tabs)
-    CustomTabLayout mainTabs;
+	@Bind(R.id.main_tabs)
+	CustomTabLayout mainTabs;
 
-    @Bind(R.id.main_vp)
-    ViewPager mainVp;
+	@Bind(R.id.main_vp)
+	ViewPager mainVp;
 
-    @Override
-    protected void init() {
-        super.init();
+	@Override
+	protected void init() {
+		super.init();
 
-        ((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
+		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
 
 
-    }
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_my_gifts, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_my_gifts, container, false);
 
-        ButterKnife.bind(this, rootView);
-        init();
+		ButterKnife.bind(this, rootView);
+		init();
 
-        return rootView;
-    }
+		return rootView;
+	}
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
+	private void setupViewPager(ViewPager viewPager) {
+		ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
 
-        RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
-        DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
-        ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
+		RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
+		DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
+		ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
 
-        adapter.addFrag(registeredGiftsFragment, "ثبت شده");
-        adapter.addFrag(donatedGiftsFragment, "اهدایی");
-        adapter.addFrag(receivedGiftsFragment, "دریافتی");
+		adapter.addFrag(registeredGiftsFragment, "ثبت شده");
+		adapter.addFrag(donatedGiftsFragment, "اهدایی");
+		adapter.addFrag(receivedGiftsFragment, "دریافتی");
 
-        viewPager.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
+		viewPager.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        if (AppController.getStoredString(Constants.Authorization) != null) {
-            setupViewPager(mainVp);
-            mainTabs.setupWithViewPager(mainVp);
+		if (AppController.getStoredString(Constants.Authorization) != null) {
+			setupViewPager(mainVp);
+			mainTabs.setupWithViewPager(mainVp);
 
-            myGiftTopLay.setVisibility(View.GONE);
-            myGiftBottomLay.setVisibility(View.VISIBLE);
-            mainVp.setCurrentItem(2, false);
-        } else {
-            myGiftTopLay.setVisibility(View.VISIBLE);
-            myGiftBottomLay.setVisibility(View.INVISIBLE);
+			myGiftTopLay.setVisibility(View.GONE);
+			myGiftBottomLay.setVisibility(View.VISIBLE);
+			mainVp.setCurrentItem(2, false);
+		} else {
+			myGiftTopLay.setVisibility(View.VISIBLE);
+			myGiftBottomLay.setVisibility(View.INVISIBLE);
 
-            myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-            });
-        }
-    }
+			myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getActivity(), LoginActivity.class));
+				}
+			});
+		}
+	}
 }

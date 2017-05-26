@@ -18,23 +18,23 @@ package ir.hamed_gh.divaremehrabani.bottombar;
  */
 
 public interface OnTabClickListener {
-    /**
-     * The method being called when currently visible {@link com.roughike.bottombar.BottomBarTab} changes.
-     * <p>
-     * This listener is fired for the first time after the items have been set and
-     * also after a configuration change, such as when screen orientation changes
-     * from portrait to landscape.
-     *
-     * @param position the new visible {@link com.roughike.bottombar.BottomBarTab}
-     */
-    void onTabSelected(int position);
+	/**
+	 * The method being called when currently visible {@link com.roughike.bottombar.BottomBarTab} changes.
+	 * <p>
+	 * This listener is fired for the first time after the items have been set and
+	 * also after a configuration change, such as when screen orientation changes
+	 * from portrait to landscape.
+	 *
+	 * @param position the new visible {@link com.roughike.bottombar.BottomBarTab}
+	 */
+	void onTabSelected(int position);
 
-    /**
-     * The method being called when currently visible {@link com.roughike.bottombar.BottomBarTab} is
-     * reselected. Use this method for scrolling to the top of your content,
-     * as recommended by the Material Design spec
-     *
-     * @param position the {@link com.roughike.bottombar.BottomBarTab} that was reselected.
-     */
-    void onTabReSelected(int position);
+	/**
+	 * The method being called when currently visible {@link com.roughike.bottombar.BottomBarTab} is
+	 * reselected. Use this method for scrolling to the top of your content,
+	 * as recommended by the Material Design spec
+	 *
+	 * @param position the {@link com.roughike.bottombar.BottomBarTab} that was reselected.
+	 */
+	void onTabReSelected(int position);
 }

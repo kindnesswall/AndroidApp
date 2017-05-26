@@ -33,125 +33,124 @@ import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 
 public class BottomBarActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar_title_textView)
-    public TextView mToolbarTitleTextView;
-    @Bind(R.id.main_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.toolbar_new_gift_btn_tv)
-    TextView mToolbarNewGiftBtnTv;
-    int menuItemIdSelected = -1;
+	@Bind(R.id.toolbar_title_textView)
+	public TextView mToolbarTitleTextView;
+	@Bind(R.id.main_toolbar)
+	Toolbar mToolbar;
+	@Bind(R.id.toolbar_new_gift_btn_tv)
+	TextView mToolbarNewGiftBtnTv;
+	int menuItemIdSelected = -1;
 
-    HomeFragment homeFragment;
-    HomeFragment searchFragment;
-    CategoriesGridFragment categoriesGridFragment;
-    MyWallFragment myWallFragment;
+	HomeFragment homeFragment;
+	HomeFragment searchFragment;
+	CategoriesGridFragment categoriesGridFragment;
+	MyWallFragment myWallFragment;
 
-    private Context context;
-    private BottomBar mBottomBar;
+	private Context context;
+	private BottomBar mBottomBar;
+	private Boolean unlock = false;
 
-    private void settingToolbar() {
-        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        setSupportActionBar(mToolbar);
-        try {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        } catch (Exception e) {
+	private void settingToolbar() {
+		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+		setSupportActionBar(mToolbar);
+		try {
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		} catch (Exception e) {
 
-        }
-        mToolbarTitleTextView.setText("دیوار مهربانی");
-    }
+		}
+		mToolbarTitleTextView.setText("دیوار مهربانی");
+	}
 
-    private Boolean unlock = false;
+	private void TabSelected(int menuItemId) {
 
-    private void TabSelected(int menuItemId) {
+		if (menuItemId == R.id.bottomBarHome) {
 
-        if (menuItemId == R.id.bottomBarHome) {
+			if (menuItemId != menuItemIdSelected) {
+				clearStack();
 
-            if (menuItemId != menuItemIdSelected) {
-                clearStack();
+				unlock = true;
+				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+				replaceFragment(
+						homeFragment,
+						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+			}
+			menuItemIdSelected = menuItemId;
 
-                unlock = true;
-                mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-                replaceFragment(
-                        homeFragment,
-                        HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-            }
-            menuItemIdSelected = menuItemId;
+			// The user reselected item number one, scroll your content to top.
+		} else if (menuItemId == R.id.bottomBarCategories) {
 
-            // The user reselected item number one, scroll your content to top.
-        } else if (menuItemId == R.id.bottomBarCategories ) {
+			if (menuItemId != menuItemIdSelected) {
+				clearStack();
 
-            if (menuItemId != menuItemIdSelected) {
-                clearStack();
+				unlock = true;
+				mToolbarTitleTextView.setText(R.string.categories);
+				replaceFragment(
+						categoriesGridFragment,
+						CategoriesGridFragment.class.getName()
+				);
+			}
+			menuItemIdSelected = menuItemId;
 
-                unlock = true;
-                mToolbarTitleTextView.setText(R.string.categories);
-                replaceFragment(
-                        categoriesGridFragment,
-                        CategoriesGridFragment.class.getName()
-                );
-            }
-            menuItemIdSelected = menuItemId;
+			// The user selected item number one.
+		} else if (menuItemId == R.id.bottomBarSearch) {
 
-            // The user selected item number one.
-        } else if (menuItemId == R.id.bottomBarSearch) {
+			if (menuItemId != menuItemIdSelected) {
+				clearStack();
 
-            if (menuItemId != menuItemIdSelected) {
-                clearStack();
+				unlock = true;
+				mToolbarTitleTextView.setText(R.string.search);
+				replaceFragment(
+						searchFragment,
+						HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+				);
+			}
+			menuItemIdSelected = menuItemId;
 
-                unlock = true;
-                mToolbarTitleTextView.setText(R.string.search);
-                replaceFragment(
-                        searchFragment,
-                        HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
-                );
-            }
-            menuItemIdSelected = menuItemId;
+			// The user selected item number one.
+		} else if (menuItemId == R.id.bottomBarMyWall && unlock) {
 
-            // The user selected item number one.
-        } else if (menuItemId == R.id.bottomBarMyWall && unlock) {
+			if (menuItemId != menuItemIdSelected) {
+				clearStack();
 
-            if (menuItemId != menuItemIdSelected) {
-                clearStack();
+				mToolbarTitleTextView.setText(R.string.my_wall);
+				replaceFragment(myWallFragment, MyWallFragment.class.getName());
+			}
+			menuItemIdSelected = menuItemId;
 
-                mToolbarTitleTextView.setText(R.string.my_wall);
-                replaceFragment(myWallFragment, MyWallFragment.class.getName());
-            }
-            menuItemIdSelected = menuItemId;
+			// The user selected item number one.
+		}
+	}
 
-            // The user selected item number one.
-        }
-    }
+	private void clearStack() {
 
-    private void clearStack() {
+		FragmentManager fm = getSupportFragmentManager();
+		for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+			fm.popBackStack();
+		}
 
-        FragmentManager fm = getSupportFragmentManager();
-        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-            fm.popBackStack();
-        }
+	}
 
-    }
+	private void settingBottomBar(Bundle savedInstanceState) {
+		mBottomBar = BottomBar.attach(this, savedInstanceState);
+		mBottomBar.noTopOffset();
+		mBottomBar.useFixedMode();
+		mBottomBar.setTypeFace("fonts/IRANSansMobile_Light-4.1.ttf");
+		mBottomBar.setItems(R.menu.menu_bottombar);
+		mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+		int color = getResources().getColor(R.color.white);
 
-    private void settingBottomBar(Bundle savedInstanceState) {
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.noTopOffset();
-        mBottomBar.useFixedMode();
-        mBottomBar.setTypeFace("fonts/IRANSansMobile_Light-4.1.ttf");
-        mBottomBar.setItems(R.menu.menu_bottombar);
-        mBottomBar.findViewById(R.id.bb_bottom_bar_background_view).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        int color = getResources().getColor(R.color.white);
-
-        ((ImageView) mBottomBar.findViewById(R.id.bb_bottom_bar_icon)).setColorFilter(color);
+		((ImageView) mBottomBar.findViewById(R.id.bb_bottom_bar_icon)).setColorFilter(color);
 
 
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                TabSelected(menuItemId);
-            }
+		mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+			@Override
+			public void onMenuTabSelected(@IdRes int menuItemId) {
+				TabSelected(menuItemId);
+			}
 
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                TabSelected(menuItemId);
+			@Override
+			public void onMenuTabReSelected(@IdRes int menuItemId) {
+				TabSelected(menuItemId);
 //				if (menuItemId == R.id.bottomBarHome) {
 //					Toasti.showS("Home reselected");
 //					// The user reselected item number one, scroll your content to top.
@@ -165,130 +164,130 @@ public class BottomBarActivity extends AppCompatActivity {
 //					Toasti.showS("MyWall reselected");
 //					// The user selected item number one.
 //				}
-            }
-        });
-    }
+			}
+		});
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.activity_bottombar);
-        ButterKnife.bind(this);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Fabric.with(this, new Crashlytics());
+		setContentView(R.layout.activity_bottombar);
+		ButterKnife.bind(this);
 
-        context = this;
+		context = this;
 
-        homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
-        searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
-        categoriesGridFragment = new CategoriesGridFragment();
-        myWallFragment = new MyWallFragment();
+		homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
+		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+		categoriesGridFragment = new CategoriesGridFragment();
+		myWallFragment = new MyWallFragment();
 
-        settingToolbar();
+		settingToolbar();
 
-        settingBottomBar(savedInstanceState);
+		settingBottomBar(savedInstanceState);
 
-        mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-                if (AppController.getStoredString(Constants.Authorization) != null) {
-                    startActivity(new Intent(context, RegisterGiftActivity.class));
+				if (AppController.getStoredString(Constants.Authorization) != null) {
+					startActivity(new Intent(context, RegisterGiftActivity.class));
 
-                } else {
+				} else {
 
-                    startActivity(new Intent(context, LoginActivity.class));
+					startActivity(new Intent(context, LoginActivity.class));
 
-                }
+				}
 
-            }
-        });
+			}
+		});
 
-        mBottomBar.selectTabAtPosition(3, false);
-    }
+		mBottomBar.selectTabAtPosition(3, false);
+	}
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
 
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        mBottomBar.onSaveInstanceState(outState);
-    }
+		// Necessary to restore the BottomBar's state, otherwise we would
+		// lose the current tab on orientation change.
+		mBottomBar.onSaveInstanceState(outState);
+	}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+	@Override
+	protected void onResume() {
+		super.onResume();
 
-    }
+	}
 
-    @Override
-    protected void onPostResume() {
-        try {
-            super.onPostResume();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	protected void onPostResume() {
+		try {
+			super.onPostResume();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void replaceFragment(Fragment fragment, String title) {
-        try {
+	public void replaceFragment(Fragment fragment, String title) {
+		try {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            fragmentTransaction.replace(R.id.container_body, fragment, title);
-            fragmentTransaction.addToBackStack(title);
-            fragmentTransaction.commit();
+			fragmentTransaction.replace(R.id.container_body, fragment, title);
+			fragmentTransaction.addToBackStack(title);
+			fragmentTransaction.commit();
 
-        } catch (Exception e) {
-            //Todo : when app is finishing and homefragment request is not cancled or other requests exists:
-            // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
-        }
-    }
+		} catch (Exception e) {
+			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+			// java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+		}
+	}
 
-    public void addFragment(Fragment fragment, String title) {
-        try {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+	public void addFragment(Fragment fragment, String title) {
+		try {
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            fragmentTransaction.add(R.id.container_body, fragment, title);
-            fragmentTransaction.addToBackStack(title);
-            fragmentTransaction.commit();
+			fragmentTransaction.add(R.id.container_body, fragment, title);
+			fragmentTransaction.addToBackStack(title);
+			fragmentTransaction.commit();
 
-        } catch (Exception e) {
-            //Todo : when app is finishing and homefragment request is not cancled or other requests exists:
-            // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
-        }
-    }
+		} catch (Exception e) {
+			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+			// java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+		}
+	}
 
-    @Override
-    public void onBackPressed() {
+	@Override
+	public void onBackPressed() {
 
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
-            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-            String tag = backEntry.getName();
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+			FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+			String tag = backEntry.getName();
 
-            if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
-                    ) {
-                finish();
-            } else if(
-                    tag.equals(BookmarkFragment.class.getName()) ||
-                            tag.equals(StatisticFragment.class.getName()) ||
-                            tag.equals(MyRequestsFragment.class.getName()) ||
-                            tag.equals(MyGiftsFragment.class.getName()) ||
-                            tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
-                    ){
-                super.onBackPressed();
-            }else {
+			if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
+					) {
+				finish();
+			} else if (
+					tag.equals(BookmarkFragment.class.getName()) ||
+							tag.equals(StatisticFragment.class.getName()) ||
+							tag.equals(MyRequestsFragment.class.getName()) ||
+							tag.equals(MyGiftsFragment.class.getName()) ||
+							tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
+					) {
+				super.onBackPressed();
+			} else {
 
-                mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-                replaceFragment(
-                        homeFragment,
-                        HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+				replaceFragment(
+						homeFragment,
+						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
 
-            }
-        }
+			}
+		}
 
 //
 //        FragmentManager fm = getSupportFragmentManager();
@@ -312,5 +311,5 @@ public class BottomBarActivity extends AppCompatActivity {
 //
 //        }
 //        finish();
-    }
+	}
 }

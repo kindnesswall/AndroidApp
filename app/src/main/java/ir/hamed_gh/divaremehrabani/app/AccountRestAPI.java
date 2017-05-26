@@ -15,18 +15,18 @@ import retrofit2.http.Path;
  */
 public interface AccountRestAPI {
 
-    @POST("Account/Register/{telephone}")
-    Call<ResponseBody> register(@Path("telephone") String telephone);
+	@POST("Account/Register/{telephone}")
+	Call<ResponseBody> register(@Path("telephone") String telephone);
 
-    @POST("Account/Logout")
-    Call<ResponseBody> logout(
-            @Header(Constants.ContentType) String contentType,
-            @Header(Constants.Authorization) String authorization
-    );
+	@POST("Account/Logout")
+	Call<ResponseBody> logout(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization
+	);
 
-    @FormUrlEncoded
-    @POST("Account/Login")
-    Call<TokenOutput> login(@Field("username") String username,
-                            @Field("password") String password,
-                            @Field("grant_type") String grant_type);
+	@FormUrlEncoded
+	@POST("Account/Login")
+	Call<TokenOutput> login(@Field("username") String username,
+	                        @Field("password") String password,
+	                        @Field("grant_type") String grant_type);
 }

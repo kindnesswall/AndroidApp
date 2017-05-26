@@ -7,6 +7,6 @@ import ir.hamed_gh.divaremehrabani.model.api.Category;
  */
 public interface ChooseCategoryCallback {
 
-    public void onCategorySelected(Category category);
+	public void onCategorySelected(Category category);
 
 }

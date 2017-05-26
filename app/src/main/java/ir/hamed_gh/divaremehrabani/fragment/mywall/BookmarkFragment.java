@@ -28,82 +28,82 @@ import retrofit2.Response;
  */
 public class BookmarkFragment extends BaseFragment {
 
-    @Bind(R.id.fragment_progressBar)
-    ProgressView progressView;
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+	@Bind(R.id.recycler_view)
+	RecyclerView mRecyclerView;
 
-    @Bind(R.id.message_textview)
-    TextView mMessageTv;
+	@Bind(R.id.message_textview)
+	TextView mMessageTv;
 
-    private ArrayList<Gift> gifts = new ArrayList<>();
-    private GiftListAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+	private ArrayList<Gift> gifts = new ArrayList<>();
+	private GiftListAdapter adapter;
+	private LinearLayoutManager linearLayoutManager;
 
-    private int startIndex = 0;
+	private int startIndex = 0;
 
-    @Override
-    protected void init() {
-        super.init();
+	@Override
+	protected void init() {
+		super.init();
 
-        adapter = new GiftListAdapter(context, gifts);
-        mRecyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(context);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+		adapter = new GiftListAdapter(context, gifts);
+		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-    }
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        gifts.clear();
-        apiRequest.getBookmarkList(
-                new StartLastIndex(
-                        startIndex + "",
-                        startIndex + Constants.LIMIT + ""
-                )
-        );
+		gifts.clear();
+		apiRequest.getBookmarkList(
+				new StartLastIndex(
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
 
-    }
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		super.onCreate(savedInstanceState);
+		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-        ButterKnife.bind(this, rootView);
-        init();
+		ButterKnife.bind(this, rootView);
+		init();
 
-        return rootView;
-    }
+		return rootView;
+	}
 
-    @Override
-    public void onResponse(Call call, Response response) {
+	@Override
+	public void onResponse(Call call, Response response) {
 
-        mRecyclerView.setVisibility(View.VISIBLE);
-        progressView.setVisibility(View.INVISIBLE);
+		mRecyclerView.setVisibility(View.VISIBLE);
+		progressView.setVisibility(View.INVISIBLE);
 
-        ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
 //        for (int i = 0; i < gifts.size(); i++) {
-            this.gifts.addAll(gifts);
+		this.gifts.addAll(gifts);
 //        }
-        adapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 
-        if (gifts.size() > 0) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mMessageTv.setVisibility(View.INVISIBLE);
-        } else {
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mMessageTv.setVisibility(View.VISIBLE);
-            mMessageTv.setText(
-                    "شما هیچ هدیه‌ی را به علاقه‌مندیهای خود اضافه نکرده‌اید."
-            );
-        }
+		if (gifts.size() > 0) {
+			mRecyclerView.setVisibility(View.VISIBLE);
+			mMessageTv.setVisibility(View.INVISIBLE);
+		} else {
+			mRecyclerView.setVisibility(View.INVISIBLE);
+			mMessageTv.setVisibility(View.VISIBLE);
+			mMessageTv.setText(
+					"شما هیچ هدیه‌ی را به علاقه‌مندیهای خود اضافه نکرده‌اید."
+			);
+		}
 
-    }
+	}
 
 }

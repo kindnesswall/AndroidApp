@@ -11,17 +11,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class Place implements Parcelable {
 
-    @SerializedName("name")
-    public String name;
+	public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
+		@Override
+		public Place createFromParcel(Parcel source) {
+			return new Place(source);
+		}
 
-    @SerializedName("level")
-    public String level;
-
-    @SerializedName("container_id")
-    public String container_id;
-
-    @SerializedName("id")
-    public String id;
+		@Override
+		public Place[] newArray(int size) {
+			return new Place[size];
+		}
+	};
+	@SerializedName("name")
+	public String name;
+	@SerializedName("level")
+	public String level;
+	@SerializedName("container_id")
+	public String container_id;
 
 //    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
 //        @Override
@@ -34,39 +40,29 @@ public class Place implements Parcelable {
 //            return new Place[size];
 //        }
 //    };
+	@SerializedName("id")
+	public String id;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+	public Place() {
+	}
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.level);
-        dest.writeString(this.container_id);
-        dest.writeString(this.id);
-    }
+	protected Place(Parcel in) {
+		this.name = in.readString();
+		this.level = in.readString();
+		this.container_id = in.readString();
+		this.id = in.readString();
+	}
 
-    public Place() {
-    }
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-    protected Place(Parcel in) {
-        this.name = in.readString();
-        this.level = in.readString();
-        this.container_id = in.readString();
-        this.id = in.readString();
-    }
-
-    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
-        @Override
-        public Place createFromParcel(Parcel source) {
-            return new Place(source);
-        }
-
-        @Override
-        public Place[] newArray(int size) {
-            return new Place[size];
-        }
-    };
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.name);
+		dest.writeString(this.level);
+		dest.writeString(this.container_id);
+		dest.writeString(this.id);
+	}
 }

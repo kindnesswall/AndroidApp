@@ -90,17 +90,6 @@ public interface RestAPI {
 			@Body RequestBody photo
 	);
 
-//    @POST("Upload")
-//    Call<ResponseBody> uploadGiftImage(@Header("token") String token,
-//                                    @Header("fileName") String fileName,
-//                                    @Body RequestBody photo);
-
-//	@GET("Location")
-//	Call<List<Location>> getLocations();
-
-//	@GET("Location/{" + Constants.ID + "}")
-//	Call<Location> getLocation(@Path(Constants.ID) String cityId);
-
 	@GET("Category/{"
 			+ Constants.StartIndex + "}/{"
 			+ Constants.LastIndex + "}/{"

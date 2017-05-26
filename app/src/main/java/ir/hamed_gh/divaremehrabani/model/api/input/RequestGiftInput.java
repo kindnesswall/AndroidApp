@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 public class RequestGiftInput {
 
-    @SerializedName("giftId")
-    public String giftId;
+	@SerializedName("giftId")
+	public String giftId;
 
-    public RequestGiftInput(String giftId) {
-        this.giftId = giftId;
-    }
+	public RequestGiftInput(String giftId) {
+		this.giftId = giftId;
+	}
 }

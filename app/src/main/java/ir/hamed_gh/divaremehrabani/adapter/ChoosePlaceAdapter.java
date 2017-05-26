@@ -19,54 +19,54 @@ import ir.hamed_gh.divaremehrabani.model.Place;
  */
 public class ChoosePlaceAdapter extends RecyclerView.Adapter<ChoosePlaceHolder> {
 
-    private ChoosePlaceDialogFragment dialogFragment;
-    private Context mContext;
-    //    private String fromActivity;
-    private ArrayList<Place> places;
-    private FragmentActivity activity;
+	private ChoosePlaceDialogFragment dialogFragment;
+	private Context mContext;
+	//    private String fromActivity;
+	private ArrayList<Place> places;
+	private FragmentActivity activity;
 
-    public ChoosePlaceAdapter(ChoosePlaceDialogFragment dialogFragment,
-                              Context context,
-                              ArrayList<Place> places) {
+	public ChoosePlaceAdapter(ChoosePlaceDialogFragment dialogFragment,
+	                          Context context,
+	                          ArrayList<Place> places) {
 
-        this.dialogFragment = dialogFragment;
-        this.mContext = context;
+		this.dialogFragment = dialogFragment;
+		this.mContext = context;
 //        this.fromActivity = fromActivity;
-        this.places = places;
-    }
+		this.places = places;
+	}
 
-    @Override
-    public ChoosePlaceHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_choose_place, null);
-        ChoosePlaceHolder choosePlaceHolder = new ChoosePlaceHolder(v);
+	@Override
+	public ChoosePlaceHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_choose_place, null);
+		ChoosePlaceHolder choosePlaceHolder = new ChoosePlaceHolder(v);
 
-        return choosePlaceHolder;
-    }
+		return choosePlaceHolder;
+	}
 
-    @Override
-    public void onBindViewHolder(ChoosePlaceHolder choosePlaceHolder, final int i) {
+	@Override
+	public void onBindViewHolder(ChoosePlaceHolder choosePlaceHolder, final int i) {
 
-        choosePlaceHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+		choosePlaceHolder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
 //                else{
 
-                dialogFragment.onPlaceSelected(places.get(i));
+				dialogFragment.onPlaceSelected(places.get(i));
 
 //                }
 
-            }
-        });
+			}
+		});
 
-        choosePlaceHolder.getPlaceNameTv().setText(places.get(i).name);
+		choosePlaceHolder.getPlaceNameTv().setText(places.get(i).name);
 
-    }
+	}
 
-    @Override
-    public int getItemCount() {
+	@Override
+	public int getItemCount() {
 
-        return places.size();
+		return places.size();
 
-    }
+	}
 }
