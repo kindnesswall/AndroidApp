@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F1F1F1">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F1F1F1">
 
-    <com.rey.material.widget.ProgressView
-        android:id="@+id/fragment_progressBar"
+	<com.rey.material.widget.ProgressView
+		android:id="@+id/fragment_progressBar"
 
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_centerInParent="true"
+		android:layout_width="36dp"
+		android:layout_height="36dp"
+		android:layout_centerInParent="true"
 
-        app:pv_autostart="true"
-        app:pv_circular="true"
-        app:pv_progressMode="indeterminate"
-        app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle" />
+		app:pv_autostart="true"
+		app:pv_circular="true"
+		app:pv_progressMode="indeterminate"
+		app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
-    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-        android:id="@+id/message_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/message_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 
-        android:layout_centerInParent="true"
-        android:visibility="invisible" />
+		android:layout_centerInParent="true"
+		android:visibility="invisible"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_200"
-        android:visibility="invisible" />
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/grey_200"
+		android:visibility="invisible"/>
 
 </RelativeLayout>

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                android:padding="5dp">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-	    android:text="آیا از حذف این هدیه مطمئن هستید؟"
-	    android:layout_centerHorizontal="true"
-	    android:layout_alignParentRight="true"
-	    android:layout_marginRight="6dp"
-	    android:layout_marginTop="18dp"/>
+		android:layout_alignParentRight="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginRight="6dp"
+		android:layout_marginTop="18dp"
+		android:text="آیا از حذف این هدیه مطمئن هستید؟"/>
 
 	<com.andexert.library.RippleView
 		android:id="@+id/yes_ripple_btn_cardview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/message_textview"
-		android:layout_marginTop="50dp"
 		android:layout_alignParentRight="true"
+		android:layout_below="@id/message_textview"
 		android:layout_marginRight="8dp"
+		android:layout_marginTop="50dp"
 		app:rv_color="@color/white"
 		app:rv_rippleDuration="@integer/rv_rippleDuration">
 
@@ -48,7 +48,7 @@
 					android:gravity="center"
 					android:text="بله"
 					android:textColor="@color/white"
-					android:textSize="12sp" />
+					android:textSize="12sp"/>
 
 				<com.rey.material.widget.ProgressView
 					android:id="@+id/yes_progressView"
@@ -75,9 +75,9 @@
 		android:id="@+id/no_ripple_btn_cardview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/message_textview"
-
 		android:layout_alignParentLeft="true"
+
+		android:layout_below="@id/message_textview"
 		android:layout_marginLeft="8dp"
 
 		android:layout_marginTop="50dp"
@@ -107,7 +107,7 @@
 					android:gravity="center"
 					android:text="خیر"
 					android:textColor="@color/white"
-					android:textSize="12sp" />
+					android:textSize="12sp"/>
 
 			</RelativeLayout>
 

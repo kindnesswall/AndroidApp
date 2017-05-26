@@ -1,151 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="202dp">
+                android:layout_width="match_parent"
+                android:layout_height="202dp">
 
-    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-        android:id="@+id/filtering_basedon_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/filtering_basedon_tv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:background="@color/colorPrimary"
+		android:gravity="right"
 
-        android:gravity="right"
-        android:paddingBottom="14dp"
-        android:paddingRight="12dp"
+		android:paddingBottom="14dp"
+		android:paddingRight="12dp"
+		android:paddingTop="14dp"
 
-        android:paddingTop="14dp"
+		android:text="فیلتر بر اساس:"
 
-        android:text="فیلتر بر اساس:"
-        android:textSize="16sp" />
+		android:textColor="@color/white"
+		android:textSize="16sp"/>
 
-    <RelativeLayout
-        android:id="@+id/category_filter_lay"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_below="@id/filtering_basedon_tv"
-        android:layout_marginTop="4dp"
-        android:background="@color/background_gray">
+	<RelativeLayout
+		android:id="@+id/category_filter_lay"
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		android:layout_below="@id/filtering_basedon_tv"
+		android:layout_marginTop="4dp"
+		android:background="@color/background_gray">
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
-            android:id="@+id/categoryـfilter_ic"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/categoryـfilter_ic"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:textSize="22dp" />
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:text=""
+			android:textSize="22dp"/>
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/categoryـfilter_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/categoryـfilter_tv"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
 
-            android:layout_toLeftOf="@id/categoryـfilter_ic"
-            android:paddingRight="8dp"
-            android:text="@string/category_equal"
-            android:textSize="16dp" />
+			android:layout_toLeftOf="@id/categoryـfilter_ic"
+			android:paddingRight="8dp"
+			android:text="@string/category_equal"
+			android:textSize="16dp"/>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/city_filter_lay"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_below="@id/category_filter_lay"
-        android:layout_marginTop="4dp"
-        android:background="@color/background_gray">
+	<RelativeLayout
+		android:id="@+id/city_filter_lay"
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		android:layout_below="@id/category_filter_lay"
+		android:layout_marginTop="4dp"
+		android:background="@color/background_gray">
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
-            android:id="@+id/city_filter_ic"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/city_filter_ic"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:textSize="22dp" />
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:text=""
+			android:textSize="22dp"/>
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/city_filter_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/city_filter_tv"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
 
-            android:layout_toLeftOf="@id/city_filter_ic"
-            android:paddingRight="8dp"
-            android:text="@string/place_equal"
-            android:textSize="16dp" />
+			android:layout_toLeftOf="@id/city_filter_ic"
+			android:paddingRight="8dp"
+			android:text="@string/place_equal"
+			android:textSize="16dp"/>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/region_filter_lay"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_below="@id/city_filter_lay"
-        android:layout_marginTop="4dp"
-        android:background="@color/background_gray"
-        android:visibility="invisible">
+	<RelativeLayout
+		android:id="@+id/region_filter_lay"
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		android:layout_below="@id/city_filter_lay"
+		android:layout_marginTop="4dp"
+		android:background="@color/background_gray"
+		android:visibility="invisible">
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
-            android:id="@+id/region_filter_ic"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			android:id="@+id/region_filter_ic"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:textSize="22dp" />
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:text=""
+			android:textSize="22dp"/>
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/region_filter_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/region_filter_tv"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
 
-            android:layout_toLeftOf="@id/region_filter_ic"
-            android:paddingRight="8dp"
-            android:text="@string/region_equal"
-            android:textSize="16dp" />
+			android:layout_toLeftOf="@id/region_filter_ic"
+			android:paddingRight="8dp"
+			android:text="@string/region_equal"
+			android:textSize="16dp"/>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/divider_lay"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/region_filter_lay"
-        android:background="@color/divider" />
+	<RelativeLayout
+		android:id="@+id/divider_lay"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@id/region_filter_lay"
+		android:background="@color/divider"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_below="@id/divider_lay">
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		android:layout_below="@id/divider_lay">
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
-            android:id="@+id/apply_filter_tv"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            android:textSize="14dp"
-            android:text="اعمال"
-            android:textColor="@color/colorPrimary" />
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+			android:id="@+id/apply_filter_tv"
+			android:layout_width="80dp"
+			android:layout_height="match_parent"
+			android:layout_alignParentLeft="true"
+			android:gravity="center"
+			android:text="اعمال"
+			android:textColor="@color/colorPrimary"
+			android:textSize="14dp"/>
 
-        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
-            android:id="@+id/cancel_filter_tv"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/apply_filter_tv"
-            android:gravity="center"
-            android:textSize="14dp"
-            android:text="@string/remove_filter"
-            android:textColor="@color/colorPrimary" />
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+			android:id="@+id/cancel_filter_tv"
+			android:layout_width="80dp"
+			android:layout_height="match_parent"
+			android:layout_toRightOf="@id/apply_filter_tv"
+			android:gravity="center"
+			android:text="@string/remove_filter"
+			android:textColor="@color/colorPrimary"
+			android:textSize="14dp"/>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
 </RelativeLayout>

@@ -39,12 +39,12 @@
 				android:id="@+id/gift_name_txt"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
-				android:gravity="center"
-
 				android:layout_alignParentRight="true"
-				android:layout_alignParentTop="true"
 
+				android:layout_alignParentTop="true"
 				android:layout_marginRight="12dp"
+
+				android:gravity="center"
 
 				android:text="نام هدیه: "
 			/>
@@ -53,10 +53,10 @@
 				android:id="@+id/gift_name_tv"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
-				android:gravity="center"
+				android:layout_marginRight="2dp"
 
 				android:layout_toLeftOf="@id/gift_name_txt"
-				android:layout_marginRight="2dp"
+				android:gravity="center"
 				android:text=""
 				android:textColor="@color/black"
 
@@ -67,10 +67,10 @@
 				android:id="@+id/total_requests_txt"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
-				android:gravity="center"
-
 				android:layout_alignParentLeft="true"
+
 				android:layout_marginLeft="12dp"
+				android:gravity="center"
 
 				android:text=" درخواست"
 
@@ -80,11 +80,11 @@
 				android:id="@+id/total_requests_tv"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
+				android:layout_toRightOf="@id/total_requests_txt"
+
 				android:gravity="center"
 
 				android:text="2"
-
-				android:layout_toRightOf="@id/total_requests_txt"
 				android:textSize="16dp"/>
 
 

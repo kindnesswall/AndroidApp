@@ -387,9 +387,9 @@
 						android:layout_width="108dp"
 						android:layout_height="@dimen/button_height"
 
-						android:layout_toRightOf="@id/choose_city_btn"
 						android:layout_below="@id/gift_place_txt"
 						android:layout_marginLeft="8dp"
+						android:layout_toRightOf="@id/choose_city_btn"
 
 						android:background="@drawable/button_selector"
 						android:clickable="true"

@@ -23,36 +23,36 @@
 		android:id="@+id/rw_deny_icon_iv"
 		android:layout_width="36dp"
 		android:layout_height="56dp"
-		android:paddingTop="14dp"
-		android:paddingBottom="14dp"
 		android:layout_alignParentRight="true"
+		android:paddingBottom="14dp"
+		android:paddingTop="14dp"
 		android:src="@mipmap/ic_close_grey600_36dp"/>
 
 	<ImageView
 		android:id="@+id/rw_accept_icon_iv"
 		android:layout_width="36dp"
 		android:layout_height="56dp"
-		android:paddingTop="14dp"
-		android:paddingBottom="14dp"
 		android:layout_toLeftOf="@id/rw_deny_icon_iv"
+		android:paddingBottom="14dp"
+		android:paddingTop="14dp"
 		android:src="@mipmap/ic_check_grey600_48dp"/>
 
 	<ImageView
 		android:id="@+id/rw_sms_icon_iv"
 		android:layout_width="36dp"
 		android:layout_height="56dp"
-		android:paddingTop="14dp"
-		android:paddingBottom="14dp"
 		android:layout_toLeftOf="@id/rw_accept_icon_iv"
+		android:paddingBottom="14dp"
+		android:paddingTop="14dp"
 		android:src="@mipmap/ic_message_grey600_36dp"/>
 
 	<ImageView
 		android:id="@+id/rw_call_icon_iv"
 		android:layout_width="36dp"
 		android:layout_height="56dp"
-		android:paddingTop="14dp"
-		android:paddingBottom="14dp"
 		android:layout_toLeftOf="@id/rw_sms_icon_iv"
+		android:paddingBottom="14dp"
+		android:paddingTop="14dp"
 		android:src="@mipmap/ic_phone_grey600_36dp"/>
 
 

@@ -1,23 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/bottomBarMyWall"
-        android:icon="@mipmap/ic_person_white_24dp"
-        android:title="دیوار من" />
+	<item
+		android:id="@+id/bottomBarMyWall"
+		android:icon="@mipmap/ic_person_white_24dp"
+		android:title="دیوار من"/>
 
-    <item
-        android:id="@+id/bottomBarSearch"
-        android:icon="@mipmap/ic_search_white_24dp"
-        android:title="جستجو" />
+	<item
+		android:id="@+id/bottomBarSearch"
+		android:icon="@mipmap/ic_search_white_24dp"
+		android:title="جستجو"/>
 
-    <item
-        android:id="@+id/bottomBarCategories"
-        android:icon="@mipmap/ic_list_white_24dp"
-        android:title="دسته بندی ها" />
+	<item
+		android:id="@+id/bottomBarCategories"
+		android:icon="@mipmap/ic_list_white_24dp"
+		android:title="دسته بندی ها"/>
 
-    <item
-        android:id="@+id/bottomBarHome"
-        android:icon="@mipmap/ic_home_white_24dp"
-        android:title="صفحه اصلی" />
+	<item
+		android:id="@+id/bottomBarHome"
+		android:icon="@mipmap/ic_home_white_24dp"
+		android:title="صفحه اصلی"/>
 
 </menu>

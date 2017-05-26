@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                android:padding="5dp">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-	    android:text="لطفا علت گزارش را بنویسید:"
-	    android:layout_centerHorizontal="true"
-	    android:layout_alignParentRight="true"
-	    android:layout_marginTop="18dp"/>
+		android:layout_alignParentRight="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="18dp"
+		android:text="لطفا علت گزارش را بنویسید:"/>
 
 	<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
 		android:id="@+id/message_et"
 		android:layout_width="match_parent"
 		android:layout_height="150dp"
 
-		android:gravity="right"
-		android:inputType="textMultiLine"
-
 		android:layout_below="@id/message_textview"
 		android:layout_centerHorizontal="true"
-		android:layout_marginTop="18dp"/>
+
+		android:layout_marginTop="18dp"
+		android:gravity="right"
+		android:inputType="textMultiLine"/>
 
 	<com.andexert.library.RippleView
 		android:id="@+id/yes_ripple_btn_cardview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/message_et"
-		android:layout_marginTop="10dp"
 		android:layout_alignParentRight="true"
+		android:layout_below="@id/message_et"
 		android:layout_marginRight="8dp"
+		android:layout_marginTop="10dp"
 		app:rv_color="@color/white"
 		app:rv_rippleDuration="@integer/rv_rippleDuration">
 
@@ -59,7 +59,7 @@
 					android:gravity="center"
 					android:text="ارسال"
 					android:textColor="@color/white"
-					android:textSize="12sp" />
+					android:textSize="12sp"/>
 
 			</RelativeLayout>
 
@@ -71,9 +71,9 @@
 		android:id="@+id/no_ripple_btn_cardview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/message_et"
-
 		android:layout_alignParentLeft="true"
+
+		android:layout_below="@id/message_et"
 		android:layout_marginLeft="8dp"
 
 		android:layout_marginTop="10dp"
@@ -103,7 +103,7 @@
 					android:gravity="center"
 					android:text="صرفه‌نظر"
 					android:textColor="@color/white"
-					android:textSize="12sp" />
+					android:textSize="12sp"/>
 
 			</RelativeLayout>
 
