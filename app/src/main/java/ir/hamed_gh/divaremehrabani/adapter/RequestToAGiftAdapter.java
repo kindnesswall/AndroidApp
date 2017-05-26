@@ -7,12 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.andexert.library.RippleView;
+import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.activity.UserProfileActivity;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
 import ir.hamed_gh.divaremehrabani.holder.RequestToAGiftHolder;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import retrofit2.Call;
@@ -26,11 +32,23 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
     private final ApiRequest apiRequest;
     private ArrayList<RequestModel> requestModels;
     private Context mContext;
+    private MaterialDialog yesNoDialog;
+    private RippleView yesBtnRipple;
+    private ProgressView yesProgressView;
+    private TextView yesTextView;
+    private RippleView noBtnRipple;
 
     public RequestToAGiftAdapter(Context context, ArrayList<RequestModel> requestModels) {
         this.requestModels = requestModels;
         this.mContext = context;
         apiRequest = new ApiRequest(mContext,this);
+
+        yesNoDialog = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false).build();
+        yesBtnRipple = (RippleView) yesNoDialog.findViewById(R.id.yes_ripple_btn_cardview);
+        yesProgressView = (ProgressView)yesNoDialog.findViewById(R.id.yes_progressView);
+        yesTextView = (TextView) yesNoDialog.findViewById(R.id.btn_yes);
+        noBtnRipple = (RippleView) yesNoDialog.findViewById(R.id.no_ripple_btn_cardview);
+
     }
 
     @Override
@@ -50,22 +68,61 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             @Override
             public void onClick(View view) {
 
+                ((TextView)yesNoDialog.findViewById(R.id.message_textview)).setText("آیا از رد این درخواست مطمئن هستید؟");
 
+                yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
 
-                apiRequest.denyRequest(
-                        requestModels.get(i).giftId,
-                        requestModels.get(i).fromUserId
-                );
+                        apiRequest.denyRequest(
+                                requestModels.get(i).giftId,
+                                requestModels.get(i).fromUserId
+                        );
+
+                        yesProgressView.setVisibility(View.VISIBLE);
+                        yesTextView.setText("");
+                    }
+                });
+
+                noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        yesNoDialog.dismiss();
+                    }
+                });
+
+                yesNoDialog.show();
             }
         });
 
         myHolder.mAcceptIconIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                apiRequest.acceptRequest(
-                        requestModels.get(i).giftId,
-                        requestModels.get(i).fromUserId
-                );
+
+                ((TextView)yesNoDialog.findViewById(R.id.message_textview)).setText("آیا از تایید این درخواست مطمئن هستید؟");
+
+                yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+
+                        apiRequest.acceptRequest(
+                                requestModels.get(i).giftId,
+                                requestModels.get(i).fromUserId
+                        );
+
+                        yesProgressView.setVisibility(View.VISIBLE);
+                        yesTextView.setText("");
+                    }
+                });
+
+                noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        yesNoDialog.dismiss();
+                    }
+                });
+
+                yesNoDialog.show();
             }
         });
 
@@ -113,8 +170,11 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 
     @Override
     public void onResponse(Call call, Response response, int position) {
-        requestModels.remove(position);
-        notifyDataSetChanged();
+//        requestModels.remove(position);
+//        notifyDataSetChanged();
+
+        yesNoDialog.dismiss();
+
     }
 
     @Override
