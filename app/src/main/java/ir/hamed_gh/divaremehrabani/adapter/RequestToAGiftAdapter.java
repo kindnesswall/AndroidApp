@@ -24,7 +24,7 @@ import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.holder.RequestToAGiftHolder;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
-import ir.hamed_gh.divaremehrabani.model.api.StatusOutput;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -176,7 +176,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
     @Override
     public void onResponse(Call call, Response response, int position, String tag) {
 
-        if (response.body() instanceof StatusOutput) {
+        if (response.body() instanceof ResponseBody) {
             if (tag.equals(RequestName.DenyRequest)) {
                 requestModels.remove(position);
                 notifyDataSetChanged();
@@ -189,7 +189,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 
                 TextView message = (TextView) afterAcceptDialog.findViewById(R.id.message_textview);
                 message.setText(
-                        " اهدا شد." + requestModels.get(position).fromUser + "هدیه شما به "
+                        "هدیه شما به " + requestModels.get(position).fromUser  +  " اهدا شد."
                 );
 
                 ImageView callIV = (ImageView) afterAcceptDialog.findViewById(R.id.call_iv);

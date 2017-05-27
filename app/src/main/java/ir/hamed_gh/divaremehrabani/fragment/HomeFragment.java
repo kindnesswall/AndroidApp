@@ -89,6 +89,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	private int pageNumber = 0;
 	private int startIndex = 0;
 	private LinearLayoutManager linearLayoutManager;
+	private View rootView;
 
 	public static HomeFragment newInstance(String pageType, Category category) {
 		HomeFragment fragment = new HomeFragment();
@@ -148,7 +149,12 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_information, container, false);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_information, container, false);
 		ButterKnife.bind(this, rootView);
 
 		init();

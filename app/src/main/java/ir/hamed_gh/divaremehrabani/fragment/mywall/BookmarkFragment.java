@@ -42,6 +42,7 @@ public class BookmarkFragment extends BaseFragment {
 	private LinearLayoutManager linearLayoutManager;
 
 	private int startIndex = 0;
+	private View rootView;
 
 	@Override
 	protected void init() {
@@ -73,7 +74,12 @@ public class BookmarkFragment extends BaseFragment {
 	                         Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();

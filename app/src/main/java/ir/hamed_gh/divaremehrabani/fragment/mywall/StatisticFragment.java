@@ -15,11 +15,18 @@ import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
  */
 public class StatisticFragment extends BaseFragment {
 
+	private View rootView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();

@@ -34,12 +34,18 @@ public class CategoriesGridFragment extends BaseFragment {
 	ArrayList<Category> categories = new ArrayList<>();
 	String TAG = CategoriesGridFragment.class.getName();
 	private GridCategoriesAdapter adapter;
+	private View rootView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();

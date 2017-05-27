@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+				android:padding="8dp">
 
 	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="match_parent" android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
+		android:textSize="16sp"
 		android:layout_alignParentTop="true"/>
 
 	<RelativeLayout
@@ -41,14 +43,14 @@
 			android:id="@+id/call_iv"
 			android:layout_width="0dp"
 			android:layout_height="48dp" android:layout_weight="1"
-			android:padding="6dp"
+			android:padding="12dp"
 			android:src="@mipmap/ic_phone_grey600_36dp"/>
 
 		<ImageView
 			android:id="@+id/sms_iv"
 			android:layout_width="0dp"
 			android:layout_height="48dp" android:layout_weight="1"
-			android:padding="6dp"
+			android:padding="12dp"
 			android:src="@mipmap/ic_message_grey600_36dp"/>
 
 		<ImageView

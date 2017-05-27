@@ -69,20 +69,13 @@ public class ReceivedRequestsFragment extends BaseFragment {
 		ButterKnife.bind(this, rootView);
 		init();
 
-		return rootView;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-
-		gifts.clear();
 		apiRequest.getRequestsToMyGifts(
 				new StartLastIndex(
 						startIndex + "",
 						startIndex + Constants.LIMIT + ""
 				)
 		);
+		return rootView;
 	}
 
 	@Override

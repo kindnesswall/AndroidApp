@@ -38,6 +38,7 @@ public class MyRequestsFragment extends BaseFragment {
 
 	@Bind(R.id.main_vp)
 	ViewPager mainVp;
+	private View rootView;
 
 	@Override
 	protected void init() {
@@ -51,7 +52,12 @@ public class MyRequestsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View rootView = inflater.inflate(R.layout.fragment_my_requests, container, false);
+		if (rootView != null) {
+			if (rootView.getParent() != null)
+				((ViewGroup) rootView.getParent()).removeView(rootView);
+			return rootView;
+		}
+		rootView = inflater.inflate(R.layout.fragment_my_requests, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();

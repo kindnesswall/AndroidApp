@@ -108,6 +108,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
 		rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
 
 		ButterKnife.bind(this, rootView);
+		requestModels.clear();
 		init();
 
 		return rootView;
