@@ -1,6 +1,7 @@
 package ir.hamed_gh.divaremehrabani.activity;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.NumberTranslator;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import retrofit2.Call;
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private Context context;
 	private ApiRequest apiRequest;
 
+	String regexStr = "^[0-9]*$";
+
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 		setSupportActionBar(mToolbar);
@@ -76,7 +80,14 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		enterVerificationCodeListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				apiRequest.login(phoneConfirimationCodeEt.getText().toString());
+
+				String confirmationCode = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
+
+				if (!confirmationCode.trim().matches(regexStr)){
+					Toasti.showS("کد وارد شده صحیح نمی‌باشد");
+					return;
+				}
+				apiRequest.login(confirmationCode);
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);
@@ -86,7 +97,15 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		enterPhoneNumber = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				apiRequest.register(phoneConfirimationCodeEt.getText().toString());
+
+				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
+
+				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)){
+					Toasti.showS("شماره تلفن وارد شده صحیح نمی‌باشد");
+					return;
+				}
+
+				apiRequest.register(phoneNumber);
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);
@@ -114,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private void init() {
 		context = this;
 		apiRequest = new ApiRequest(context, this);
-
+		phoneConfirimationCodeEt.setRawInputType(Configuration.KEYBOARD_QWERTY);
 		settingToolbar();
 	}
 
@@ -170,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 					Constants.USER_ID,
 					tokenOutput.userId);
 
+			Toasti.showL("شما با شماره تلفن " + NumberTranslator.toPersian(AppController.getStoredString(Constants.TELEPHONE)) + " وارد شدید.");
 			finish();
 		} else {
 			enterVerificationCode();
