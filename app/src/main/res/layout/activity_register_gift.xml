@@ -54,32 +54,55 @@
 			android:textSize="16sp"
 			android:visibility="visible"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/toolbar_send_btn_tv"
+		<RelativeLayout
+			android:id="@+id/send_btn_lay"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_alignParentLeft="true"
+			android:layout_height="wrap_content">
 
-			android:background="?attr/selectableItemBackground"
-			android:clickable="true"
+			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/toolbar_send_btn_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_alignParentLeft="true"
 
-			android:drawableRight="@mipmap/ic_action_action_done"
-			android:gravity="center_vertical"
+				android:background="?attr/selectableItemBackground"
+				android:clickable="true"
 
-			android:paddingLeft="14dp"
+				android:drawableRight="@mipmap/ic_action_action_done"
+				android:gravity="center_vertical"
 
-			android:paddingRight="14dp"
-			android:text="@string/send"
+				android:paddingLeft="14dp"
 
-			android:textColor="#FFFFFF"
-			android:textSize="13dp"/>
+				android:paddingRight="14dp"
+				android:text="@string/send"
+
+				android:textColor="#FFFFFF"
+				android:textSize="13dp"
+				android:visibility="visible"/>
+
+			<com.rey.material.widget.ProgressView
+				android:id="@+id/send_progressView"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_centerInParent="true"
+
+				android:visibility="invisible"
+				app:cpd_strokeSize="0dp"
+				app:pv_autostart="true"
+				app:pv_circular="true"
+
+				app:pv_progressMode="indeterminate"
+				app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"
+			/>
+
+		</RelativeLayout>
 
 		<ImageView
 			android:id="@+id/toolbar_save_iv"
 			android:layout_width="48dp"
 			android:layout_height="match_parent"
 
-			android:layout_toRightOf="@id/toolbar_send_btn_tv"
+			android:layout_toRightOf="@id/send_btn_lay"
 
 			android:background="?attr/selectableItemBackground"
 			android:clickable="true"

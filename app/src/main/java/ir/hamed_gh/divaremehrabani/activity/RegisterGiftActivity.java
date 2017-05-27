@@ -107,6 +107,9 @@ public class RegisterGiftActivity extends AppCompatActivity
 	@Bind(R.id.upload_img_circular_progress)
 	ProgressView mUploadImgCircularProgress;
 
+	@Bind(R.id.send_progressView)
+	ProgressView mSendProgressView;
+
 	@Bind(R.id.choose_image_btn)
 	RelativeLayout mChooseImageBtn;
 
@@ -196,6 +199,10 @@ public class RegisterGiftActivity extends AppCompatActivity
 								myGift.giftImages
 						)
 				);
+				mToolbarSendBtnTv.setVisibility(View.INVISIBLE);
+				mSendProgressView.setVisibility(View.VISIBLE);
+
+				deleteSavedGift();
 			}
 		});
 
@@ -369,6 +376,10 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 				if (!response.isSuccessful()) {
 					Toasti.showS("خطا در سرور");
+
+					mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
+					mChooseImageTxt.setVisibility(View.VISIBLE);
+
 					return;
 				}
 
@@ -618,14 +629,15 @@ public class RegisterGiftActivity extends AppCompatActivity
 	public void onResponse(Call call, Response response) {
 		if (response.body() instanceof Gift) {
 			Gift gift = (Gift) response.body();
-			Toasti.showS(gift.title);
+			Toasti.showS("هدیه شما با موفقیت ثبت شد.");
 			finish();
 		}
 	}
 
 	@Override
 	public void onFailure(Call call, Throwable t) {
-
+		mToolbarSendBtnTv.setVisibility(View.VISIBLE);
+		mSendProgressView.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
