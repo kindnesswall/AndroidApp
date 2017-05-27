@@ -27,6 +27,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.constants.GiftStatus;
+import ir.hamed_gh.divaremehrabani.constants.RequestName;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
@@ -371,11 +372,15 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 		} else if (response.body() instanceof ResponseBody) {
 
-			if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))) {
+			if (tag.equals(RequestName.SendRequestGift)){
+				cancelMyRequest();
+			}else if (tag.equals(RequestName.DeleteGift)) {
 				Toasti.showS("هدیه شما با موفقیت حذف شد");
 				finish();
-			} else {
+			}else if (tag.equals(RequestName.DeleteMyRequest)) {
 				setRequestBtn();
+			}else if (tag.equals(RequestName.Bookmark)){
+
 			}
 		}
 	}
@@ -419,19 +424,47 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 	private void setRequestBtn() {
 		bottomBarLayBtn.setVisibility(View.VISIBLE);
-
+		mRequestProgressView.setVisibility(View.INVISIBLE);
 		mRequestTv.setText("درخواست");
 		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
 				if (AppController.getStoredString(Constants.Authorization) != null) {
-					apiRequest.sendRequestGift(
-							new RequestGiftInput(
-									gift.giftId
-							)
-					);
-					cancelMyRequest();
+
+					MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false);
+
+					final MaterialDialog dialog = builder.build();
+					((TextView) dialog.findViewById(R.id.message_textview)).setText("آیا از ارسال درخواست برای دریافت این هدیه مطمئن هستید؟");
+
+					RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+					yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+
+							mRequestProgressView.setVisibility(View.VISIBLE);
+							mRequestTv.setText("");
+
+							apiRequest.sendRequestGift(
+									new RequestGiftInput(
+											gift.giftId
+									)
+							);
+							dialog.dismiss();
+						}
+					});
+
+					RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+					noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+							dialog.dismiss();
+						}
+					});
+
+					dialog.show();
+
+
 				} else {
 					Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
 				}
@@ -443,12 +476,40 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 	private void cancelMyRequest() {
 		bottomBarLayBtn.setVisibility(View.VISIBLE);
+		mRequestProgressView.setVisibility(View.INVISIBLE);
 		mRequestTv.setText("لغو درخواست");
 		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				apiRequest.deleteMyRequest(giftId);
-				setRequestBtn();
+
+				MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false);
+
+				final MaterialDialog dialog = builder.build();
+				((TextView) dialog.findViewById(R.id.message_textview)).setText("آیا از لغو درخواست خود برای دریافت این هدیه مطمئن هستید؟");
+
+				RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+
+						mRequestProgressView.setVisibility(View.VISIBLE);
+						mRequestTv.setText("");
+						apiRequest.deleteMyRequest(giftId);
+
+						dialog.dismiss();
+					}
+				});
+
+				RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						dialog.dismiss();
+					}
+				});
+
+				dialog.show();
+
 			}
 		});
 	}
