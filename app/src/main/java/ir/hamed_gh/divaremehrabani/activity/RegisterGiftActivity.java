@@ -142,6 +142,28 @@ public class RegisterGiftActivity extends AppCompatActivity
 	private Category category;
 	private Place region;
 
+	private boolean extractDataFromBundle() {
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			myGift = (Gift) bundle.get(Constants.GIFT);
+			if (myGift != null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static Intent createIntent(Gift gift) {
+		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		intent.putExtra(Constants.GIFT, gift);
+		return intent;
+	}
+
+	public static Intent createIntent() {
+		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		return intent;
+	}
+
 	@Override
 	public void onUpdateGallery() {
 		if (myGift.giftImages.size() > 0) {
@@ -505,66 +527,80 @@ public class RegisterGiftActivity extends AppCompatActivity
 		AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, 0);
 	}
 
-	private void loadMyGift() {
-		myGift.title = AppController.getStoredString(Constants.MY_GIFT_TITLE) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_TITLE) : "";
+	private void setInfo() {
+
 		mTitleEt.setText(myGift.title);
-
-		myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_PRICE) : "";
 		mPriceEt.setText(myGift.price);
-
-		myGift.address = AppController.getStoredString(Constants.MY_GIFT_ADDRESS) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_ADDRESS) : "";
-
-		myGift.description = AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) : "";
 		mDescriptionEt.setText(myGift.description);
 
-		myGift.categoryId = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) : "";
 		category = new Category();
 		category.categoryId = myGift.categoryId;
-		myGift.category = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) : "";
 		category.title = myGift.category;
 		changeUIAfterCategorySelect();
 
-		myGift.locationId = AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) : "";
 		if (myGift.locationId != null) {
 			city = new Place();
 			city.id = myGift.locationId;
 
-			myGift.location = AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) != null ?
-					AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) : "";
 			city.name = myGift.location;
 			if (!myGift.location.equals("")) {
 				mChooseCityBtnTxt.setText(myGift.location);
 			}
 		}
 
-		myGift.regionId = AppController.getStoredString(Constants.MY_GIFT_REGION_ID) != null ?
-				AppController.getStoredString(Constants.MY_GIFT_REGION_ID) : "";
 		if (myGift.regionId != null) {
 			region = new Place();
 			region.id = myGift.regionId;
 
-			myGift.region = AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) != null ?
-					AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) : "";
 			region.name = myGift.region;
 			if (!myGift.region.equals("")) {
 				mChooseRegionBtnTxt.setText(myGift.region);
 			}
 		}
 		findCityRegion();
+		giftGalleryAdapter.notifyDataSetChanged();
+		onUpdateGallery();
+
+	}
+
+	private void loadMyGiftFromPreference() {
+		myGift.title = AppController.getStoredString(Constants.MY_GIFT_TITLE) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_TITLE) : "";
+
+		myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_PRICE) : "";
+
+		myGift.address = AppController.getStoredString(Constants.MY_GIFT_ADDRESS) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_ADDRESS) : "";
+
+		myGift.description = AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_DESCRIPTION) : "";
+
+
+		myGift.categoryId = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_CATEGORY_ID) : "";
+
+		myGift.category = AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_CATEGORY_NAME) : "";
+
+		myGift.locationId = AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_LOCATION_ID) : "";
+		if (myGift.locationId != null) {
+			myGift.location = AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) != null ?
+					AppController.getStoredString(Constants.MY_GIFT_LOCATION_NAME) : "";
+		}
+
+		myGift.regionId = AppController.getStoredString(Constants.MY_GIFT_REGION_ID) != null ?
+				AppController.getStoredString(Constants.MY_GIFT_REGION_ID) : "";
+		if (myGift.regionId != null) {
+			myGift.region = AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) != null ?
+					AppController.getStoredString(Constants.MY_GIFT_REGION_NAME) : "";
+		}
 
 		int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
 		for (int i = 0; i < numberOfMyImages; i++) {
 			myGift.giftImages.add(AppController.getStoredString(Constants.MY_GIFT_IMAGE + "_" + i));
 		}
-		giftGalleryAdapter.notifyDataSetChanged();
-		onUpdateGallery();
 	}
 
 	private void init() {
@@ -577,8 +613,11 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mTitleEt.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 		mTitleEt.setInputType(InputType.TYPE_CLASS_TEXT);
 
-		if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED, false)) {
-			loadMyGift();
+		if (extractDataFromBundle()){
+			setInfo();
+		} else if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED, false)) {
+			loadMyGiftFromPreference();
+			setInfo();
 		}
 
 		settingToolbar();

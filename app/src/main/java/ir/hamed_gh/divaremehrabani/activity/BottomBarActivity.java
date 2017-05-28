@@ -1,7 +1,6 @@
 package ir.hamed_gh.divaremehrabani.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -191,12 +190,9 @@ public class BottomBarActivity extends AppCompatActivity {
 			public void onClick(View v) {
 
 				if (AppController.getStoredString(Constants.Authorization) != null) {
-					startActivity(new Intent(context, RegisterGiftActivity.class));
-
+					startActivity(RegisterGiftActivity.createIntent());
 				} else {
-
-					startActivity(new Intent(context, LoginActivity.class));
-
+					startActivity(LoginActivity.createIntent());
 				}
 
 			}
