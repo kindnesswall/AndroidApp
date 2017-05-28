@@ -108,6 +108,13 @@ public interface RestAPI {
 			@Body Gift gift
 	);
 
+	@PUT("Gift")
+	Call<Gift> editGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body Gift gift
+	);
+
 	@GET("SentRequestList/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")
 	Call<ArrayList<RequestModel>> getSentRequestList(
 			@Header(Constants.ContentType) String contentType,

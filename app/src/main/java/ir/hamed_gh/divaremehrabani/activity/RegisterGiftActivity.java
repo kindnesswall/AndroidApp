@@ -141,6 +141,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 	private Place city;
 	private Category category;
 	private Place region;
+	private boolean editVersion;
 
 	private boolean extractDataFromBundle() {
 		Bundle bundle = getIntent().getExtras();
@@ -188,6 +189,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mToolbarSendBtnTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				if (mTitleEt.getText().toString().equals("")) {
 					Snackbari.showS(mTitleEt, "عنوان را وارد نمایید");
 					return;
@@ -209,22 +211,29 @@ public class RegisterGiftActivity extends AppCompatActivity
 					return;
 				}
 
-				(new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
-						new Gift(
-								mDescriptionEt.getText().toString(),
-								region != null ? (city.name + ", " + region.name) : city.name,
-								mTitleEt.getText().toString(),
-								mPriceEt.getText().toString(),
-								category.categoryId,
-								city.id,
-								(region == null ? "0" : region.id),
-								myGift.giftImages
-						)
+				Gift tempGift = new Gift(
+						mDescriptionEt.getText().toString(),
+						region != null ? (city.name + ", " + region.name) : city.name,
+						mTitleEt.getText().toString(),
+						mPriceEt.getText().toString(),
+						category.categoryId,
+						city.id,
+						(region == null ? "0" : region.id),
+						myGift.giftImages
 				);
+
+				if (editVersion) {
+					(new ApiRequest(context, RegisterGiftActivity.this)).editGift(
+							tempGift
+					);
+				}else {
+					(new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
+							tempGift
+					);
+					deleteSavedGift();
+				}
 				mToolbarSendBtnTv.setVisibility(View.INVISIBLE);
 				mSendProgressView.setVisibility(View.VISIBLE);
-
-				deleteSavedGift();
 			}
 		});
 
@@ -613,8 +622,12 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mTitleEt.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 		mTitleEt.setInputType(InputType.TYPE_CLASS_TEXT);
 
-		if (extractDataFromBundle()){
+		editVersion = extractDataFromBundle();
+		if (editVersion){
 			setInfo();
+			mSaveBtn.setVisibility(View.INVISIBLE);
+			mCancelBtn.setVisibility(View.INVISIBLE);
+			mToolbarSendBtnTv.setText("ویرایش");
 		} else if (AppController.getStoredBoolean(Constants.MY_GIFT_SAVED, false)) {
 			loadMyGiftFromPreference();
 			setInfo();

@@ -51,8 +51,6 @@ public class UserProfileActivity extends AppCompatActivity implements ApiRequest
 	private ApiRequest apiRequest;
 	private String userID;
 
-	private int startIndex = 0;
-
 	public static Intent createIntent(String id) {
 		Intent intent = new Intent(AppController.getAppContext(), UserProfileActivity.class);
 		intent.putExtra(Constants.USER_ID, id);

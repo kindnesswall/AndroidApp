@@ -343,6 +343,27 @@ public class ApiRequest {
 
 	}
 
+	public void editGift(Gift gift) {
+		Call<Gift> call = AppController.service.editGift(
+				"application/json",
+				AppController.getStoredString(Constants.Authorization),
+				gift
+		);
+
+		call.enqueue(new CallbackWithRetry<Gift>(call, mContext) {
+			@Override
+			public void onResponse(Call<Gift> call,
+								   Response<Gift> response) {
+				handlingOnResponse(new HandlingResponse(call, response, this));
+			}
+
+			@Override
+			public void onFailure(Call<Gift> call, Throwable t) {
+				super.onFailure(call, t);
+			}
+		});
+	}
+
 	public void registerGift(Gift gift) {
 		Call<Gift> call = AppController.service.registerGift(
 				"application/json",
