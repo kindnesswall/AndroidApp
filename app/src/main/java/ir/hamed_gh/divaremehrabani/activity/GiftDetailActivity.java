@@ -84,14 +84,29 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.detail_price_tv)
 	TextView mDetailPriceTv;
 
+	@Bind(R.id.delete_tv)
+	TextView mDeleteTv;
+
+	@Bind(R.id.edit_tv)
+	TextView mEditTv;
+
 	@Bind(R.id.pagesContainer)
 	LinearLayout pagesContainer;
 
-	@Bind(R.id.bottomBarLayBtn)
-	RelativeLayout bottomBarLayBtn;
+	@Bind(R.id.request_lay)
+	RelativeLayout mRequestLay;
 
-	@Bind(R.id.callSmsBottomBarLayBtn)
-	RelativeLayout callSmsBottomBarLayBtn;
+	@Bind(R.id.contact_lay)
+	RelativeLayout mContactLay;
+
+	@Bind(R.id.edit_delete_lay)
+	RelativeLayout mEditDeleteLay;
+
+	@Bind(R.id.edit_lay)
+	RelativeLayout mEditLay;
+
+	@Bind(R.id.delete_lay)
+	RelativeLayout mDeleteLay;
 
 	@Bind(R.id.report_lay)
 	RelativeLayout mReportLay;
@@ -101,6 +116,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 	@Bind(R.id.request_progressView)
 	ProgressView mRequestProgressView;
+
+	@Bind(R.id.edit_progressView)
+	ProgressView mEditProgressView;
+
+	@Bind(R.id.delete_progressView)
+	ProgressView mDeleteProgressView;
 
 	View.OnClickListener addToWishList;
 	View.OnClickListener removeFromWishList;
@@ -291,8 +312,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	public void onResponse(Call call, Response response, String tag) {
 		if (response.body() instanceof RequestGiftOutput) {
 
-			cancelMyRequest();
-			Snackbari.showS(bottomBarLayBtn, "درخواست ارسال شد");
+			setCancelRequestBtn();
+			Snackbari.showS(mRequestLay, "درخواست ارسال شد");
 
 		} else if (response.body() instanceof Gift) {
 
@@ -302,12 +323,14 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 			giftStatus = gift.status;
 
 			if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))) {
-				setDeleteBtn(getResources().getString(R.string.delete_gift));
+				setEditDeleteBtn();
 			}
 
 			switch (gift.status) {
 				case GiftStatus.REJECTED_BY_ADMIN:
-					setDeleteBtn("هدیه شما پذیرفته نشد.");
+					showRejectedDialog();
+					mDetailTitleTv.setText(" (هدیه شما پذیرفته نشد)" + gift.title);
+
 					break;
 
 				case GiftStatus.PUBLISHED:
@@ -317,47 +340,23 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					break;
 
 				case GiftStatus.DONATED_TO_ME:
-					callSmsBottomBarLayBtn.setVisibility(View.VISIBLE);
-					bottomBarLayBtn.setVisibility(View.GONE);
-					mCallBtn.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-
-							String uri = "tel:" + "00000000000";
-							Intent intent = new Intent(Intent.ACTION_DIAL);
-							intent.setData(Uri.parse(uri));
-							mContext.startActivity(intent);
-
-						}
-					});
-					mSmsBtn.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-
-							mContext.startActivity(
-									new Intent(
-											Intent.ACTION_VIEW,
-											Uri.fromParts("sms", "00000000000", null)
-									)
-							);
-						}
-					});
+					setCallSmsBtn();
 					break;
 
 				case GiftStatus.DONATED_TO_SOMEONE_ELSE:
-					callSmsBottomBarLayBtn.setVisibility(View.GONE);
-					bottomBarLayBtn.setVisibility(View.GONE);
-					mDetailTitleTv.setText(gift.title + "(این هدیه اهدا شده است) ");
+					hideAllBottomBtns();
+					mDetailTitleTv.setText(" (این هدیه اهدا شده است)" + gift.title);
 
 					break;
 
 				case GiftStatus.I_SENT_MY_REQUEST_FOR_IT:
-					cancelMyRequest();
+					setCancelRequestBtn();
 					break;
-				case GiftStatus.MY_REQUEST_REJECTED:
-					bottomBarLayBtn.setVisibility(View.VISIBLE);
 
-					mRequestTv.setText("درخواست شما رد شد");
+				case GiftStatus.MY_REQUEST_REJECTED:
+					hideAllBottomBtns();
+					mDetailTitleTv.setText(" (درخواست شما رد شد)" + gift.title);
+
 					break;
 			}
 
@@ -373,7 +372,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		} else if (response.body() instanceof ResponseBody) {
 
 			if (tag.equals(RequestName.SendRequestGift)){
-				cancelMyRequest();
+				setCancelRequestBtn();
 			}else if (tag.equals(RequestName.DeleteGift)) {
 				Toasti.showS("هدیه شما با موفقیت حذف شد");
 				finish();
@@ -385,11 +384,67 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		}
 	}
 
-	private void setDeleteBtn(String btnText) {
-		bottomBarLayBtn.setVisibility(View.VISIBLE);
-		mRequestTv.setText(btnText);
+	private void hideAllBottomBtns(){
+		mContactLay.setVisibility(View.GONE);
+		mRequestLay.setVisibility(View.GONE);
+		mEditDeleteLay.setVisibility(View.GONE);
+	}
 
-		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+	private void showRejectedDialog() {
+
+		MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_alert, false);
+
+		final MaterialDialog dialog = builder.build();
+		((TextView) dialog.findViewById(R.id.message_textview)).setText("هدیه شما توسط مدیریت برنامه پذیرفته نشده است.");
+
+		RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+		noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+			@Override
+			public void onComplete(RippleView rippleView) {
+				dialog.dismiss();
+			}
+		});
+
+		dialog.show();
+
+	}
+
+	private void setCallSmsBtn(){
+		mContactLay.setVisibility(View.VISIBLE);
+		mRequestLay.setVisibility(View.GONE);
+		mEditDeleteLay.setVisibility(View.GONE);
+
+		mCallBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				String uri = "tel:" + "00000000000";
+				Intent intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse(uri));
+				mContext.startActivity(intent);
+
+			}
+		});
+		mSmsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				mContext.startActivity(
+						new Intent(
+								Intent.ACTION_VIEW,
+								Uri.fromParts("sms", "00000000000", null)
+						)
+				);
+			}
+		});
+	}
+
+	private void setEditDeleteBtn() {
+		mEditDeleteLay.setVisibility(View.VISIBLE);
+		mRequestLay.setVisibility(View.GONE);
+		mContactLay.setVisibility(View.GONE);
+
+		mDeleteLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
@@ -402,8 +457,10 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
 					@Override
 					public void onComplete(RippleView rippleView) {
-						mRequestProgressView.setVisibility(View.VISIBLE);
-						mRequestTv.setText("");
+
+						mDeleteTv.setVisibility(View.INVISIBLE);
+						mDeleteProgressView.setVisibility(View.VISIBLE);
+
 						apiRequest.deleteGift(giftId);
 						dialog.dismiss();
 					}
@@ -420,13 +477,24 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				dialog.show();
 			}
 		});
+
+		mEditLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(mContext, RegisterGiftActivity.class));
+			}
+		});
 	}
 
 	private void setRequestBtn() {
-		bottomBarLayBtn.setVisibility(View.VISIBLE);
+		mRequestLay.setVisibility(View.VISIBLE);
+		mEditDeleteLay.setVisibility(View.GONE);
+		mContactLay.setVisibility(View.GONE);
+
 		mRequestProgressView.setVisibility(View.INVISIBLE);
 		mRequestTv.setText("درخواست");
-		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+
+		mRequestLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
@@ -466,7 +534,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 
 				} else {
-					Snackbari.showS(bottomBarLayBtn, "ابتدا لاگین شوید");
+					Snackbari.showS(mRequestLay, "ابتدا لاگین شوید");
 				}
 
 			}
@@ -474,11 +542,15 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 	}
 
-	private void cancelMyRequest() {
-		bottomBarLayBtn.setVisibility(View.VISIBLE);
+	private void setCancelRequestBtn() {
+		mRequestLay.setVisibility(View.VISIBLE);
+		mEditDeleteLay.setVisibility(View.GONE);
+		mContactLay.setVisibility(View.GONE);
+
 		mRequestProgressView.setVisibility(View.INVISIBLE);
 		mRequestTv.setText("لغو درخواست");
-		bottomBarLayBtn.setOnClickListener(new View.OnClickListener() {
+
+		mRequestLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 

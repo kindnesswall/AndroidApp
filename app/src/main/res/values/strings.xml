@@ -893,6 +893,7 @@
 	<string name="remove_filter">حذف فیلتر</string>
 	<string name="gift_info_saved">اطلاعات هدیه ذخیره شد</string>
 	<string name="delete_gift">حذف هدیه</string>
+	<string name="edit_gift">ویرایش هدیه</string>
 
 	<!-- from divar -->
 </resources>
