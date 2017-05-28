@@ -1,6 +1,7 @@
 package ir.hamed_gh.divaremehrabani.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,11 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private ApiRequest apiRequest;
 
 	String regexStr = "^[0-9]*$";
+
+	public static Intent createIntent() {
+		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		return intent;
+	}
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
