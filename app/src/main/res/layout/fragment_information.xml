@@ -21,26 +21,12 @@
 			android:background="@color/white"
 			android:visibility="gone">
 
-			<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
-				android:id="@+id/search_et"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_alignParentTop="true"
-				android:background="@android:color/transparent"
-				android:hint="@string/search_hint"
-				android:paddingLeft="8dp"
-
-				android:paddingRight="8dp"
-
-				android:textSize="15dp"/>
-
 			<ImageView
 				android:id="@+id/search_btn"
 				android:layout_width="42dp"
 				android:layout_height="38dp"
 
-				android:layout_alignLeft="@id/search_et"
-
+				android:layout_alignParentLeft="true"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="4dp"
 				android:background="@color/colorPrimary"
@@ -51,7 +37,7 @@
 				android:id="@+id/search_backspace_btn"
 				android:layout_width="38dp"
 				android:layout_height="38dp"
-
+				
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="8dp"
 				android:layout_toRightOf="@id/search_btn"
@@ -61,8 +47,22 @@
 				android:paddingTop="8dp"
 				android:src="@mipmap/ic_backspace_black_24dp"
 				android:visibility="invisible"
-
 			/>
+
+			<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+				android:id="@+id/search_et"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_alignParentTop="true"
+
+				android:layout_toRightOf="@id/search_backspace_btn"
+				android:background="@android:color/transparent"
+				android:hint="@string/search_hint"
+				android:paddingLeft="8dp"
+
+				android:paddingRight="8dp"
+
+				android:textSize="15dp"/>
 
 		</RelativeLayout>
 
