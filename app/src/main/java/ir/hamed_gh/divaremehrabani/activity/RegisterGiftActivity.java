@@ -155,13 +155,13 @@ public class RegisterGiftActivity extends AppCompatActivity
 	}
 
 	public static Intent createIntent(Gift gift) {
-		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		Intent intent = new Intent(AppController.getAppContext(), RegisterGiftActivity.class);
 		intent.putExtra(Constants.GIFT, gift);
 		return intent;
 	}
 
 	public static Intent createIntent() {
-		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		Intent intent = new Intent(AppController.getAppContext(), RegisterGiftActivity.class);
 		return intent;
 	}
 

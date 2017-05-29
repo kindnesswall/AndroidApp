@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	String regexStr = "^[0-9]*$";
 
 	public static Intent createIntent() {
-		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
+		Intent intent = new Intent(AppController.getAppContext(), LoginActivity.class);
 		return intent;
 	}
 
