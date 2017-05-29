@@ -552,7 +552,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 			city.id = myGift.locationId;
 
 			city.name = myGift.location;
-			if (!myGift.location.equals("")) {
+			if (myGift.location!=null && !myGift.location.equals("")) {
 				mChooseCityBtnTxt.setText(myGift.location);
 			}
 		}
@@ -562,11 +562,15 @@ public class RegisterGiftActivity extends AppCompatActivity
 			region.id = myGift.regionId;
 
 			region.name = myGift.region;
-			if (!myGift.region.equals("")) {
+			if (myGift.region!=null && !myGift.region.equals("")) {
 				mChooseRegionBtnTxt.setText(myGift.region);
 			}
 		}
 		findCityRegion();
+		giftGalleryAdapter = new GiftGalleryAdapter(this, myGift.giftImages);
+		mRecyclerView.setAdapter(giftGalleryAdapter);
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+
 		giftGalleryAdapter.notifyDataSetChanged();
 		onUpdateGallery();
 
