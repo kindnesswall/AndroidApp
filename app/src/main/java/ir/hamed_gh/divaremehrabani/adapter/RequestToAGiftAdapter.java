@@ -69,7 +69,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
 
         myHolder.mPhoneTv.setText(requestModels.get(i).fromUser);
 
-        myHolder.mDenyIconIv.setOnClickListener(new View.OnClickListener() {
+        myHolder.rejectLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -100,7 +100,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             }
         });
 
-        myHolder.mAcceptIconIv.setOnClickListener(new View.OnClickListener() {
+        myHolder.acceptLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -131,7 +131,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             }
         });
 
-        myHolder.mSmsIconIv.setOnClickListener(new View.OnClickListener() {
+        myHolder.smsLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mContext.startActivity(
@@ -143,7 +143,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             }
         });
 
-        myHolder.mCallIconIv.setOnClickListener(new View.OnClickListener() {
+        myHolder.callLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

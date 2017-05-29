@@ -1,118 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/message_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="18dp"
+        android:text="آیا از حذف این هدیه مطمئن هستید؟" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_textview"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/yes_ripple_btn_cardview"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+
+            app:rv_color="@color/white"
+            app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/yes_btn_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
-		android:id="@+id/message_textview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_centerHorizontal="true"
-		android:layout_marginRight="6dp"
-		android:layout_marginTop="18dp"
-		android:text="آیا از حذف این هدیه مطمئن هستید؟"/>
-
-	<com.andexert.library.RippleView
-		android:id="@+id/yes_ripple_btn_cardview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_below="@id/message_textview"
-		android:layout_marginRight="8dp"
-		android:layout_marginTop="50dp"
-		app:rv_color="@color/white"
-		app:rv_rippleDuration="@integer/rv_rippleDuration">
-
-		<android.support.v7.widget.CardView
-			android:id="@+id/yes_btn_cardview"
-			android:layout_width="136dp"
-			android:layout_height="36dp"
-			android:layout_gravity="right"
-			app:cardBackgroundColor="@color/colorPrimary">
+                android:layout_height="36dp"
+                android:layout_gravity="right"
+                app:cardBackgroundColor="@color/colorPrimary">
 
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
-					android:id="@+id/btn_yes"
-					android:layout_width="match_parent"
-					android:layout_height="36dp"
-					android:layout_centerInParent="true"
-					android:layout_marginLeft="6dp"
-					android:layout_marginRight="6dp"
-					android:gravity="center"
-					android:text="بله"
-					android:textColor="@color/white"
-					android:textSize="12sp"/>
+                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+                        android:id="@+id/btn_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
 
-				<com.rey.material.widget.ProgressView
-					android:id="@+id/yes_progressView"
-					android:layout_width="24dp"
-					android:layout_height="24dp"
-					android:layout_centerInParent="true"
+                        android:layout_centerInParent="true"
 
-					android:visibility="invisible"
-					app:cpd_strokeSize="2dp"
-					app:pv_autostart="true"
-					app:pv_circular="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
 
-					app:pv_progressMode="indeterminate"
-					app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"
-				/>
+                        android:gravity="center"
+                        android:text="بله"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
-			</RelativeLayout>
+                    <com.rey.material.widget.ProgressView
+                        android:id="@+id/yes_progressView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
 
-		</android.support.v7.widget.CardView>
+                        android:visibility="invisible"
+                        app:cpd_strokeSize="2dp"
+                        app:pv_autostart="true"
+                        app:pv_circular="true"
 
-	</com.andexert.library.RippleView>
+                        app:pv_progressMode="indeterminate"
+                        app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle" />
 
-	<com.andexert.library.RippleView
-		android:id="@+id/no_ripple_btn_cardview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
+                </RelativeLayout>
 
-		android:layout_below="@id/message_textview"
-		android:layout_marginLeft="8dp"
+            </android.support.v7.widget.CardView>
 
-		android:layout_marginTop="50dp"
-		app:rv_color="@color/white"
-		app:rv_rippleDuration="@integer/rv_rippleDuration">
+        </com.andexert.library.RippleView>
 
-		<android.support.v7.widget.CardView
-			android:id="@+id/no_btn_cardview"
-			android:layout_width="136dp"
-			android:layout_height="36dp"
-			android:layout_gravity="right"
-			app:cardBackgroundColor="@color/colorPrimary">
+        <com.andexert.library.RippleView
+            android:id="@+id/no_ripple_btn_cardview"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+
+            app:rv_color="@color/white"
+            app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/no_btn_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="right"
+                app:cardBackgroundColor="@color/colorPrimary">
 
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
-					android:id="@+id/btn_no"
-					android:layout_width="match_parent"
-					android:layout_height="36dp"
-					android:layout_alignParentRight="true"
-					android:layout_centerInParent="true"
-					android:layout_marginLeft="6dp"
-					android:layout_marginRight="6dp"
-					android:gravity="center"
-					android:text="خیر"
-					android:textColor="@color/white"
-					android:textSize="12sp"/>
+                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+                        android:id="@+id/btn_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:gravity="center"
+                        android:text="خیر"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
-			</RelativeLayout>
+                </RelativeLayout>
 
-		</android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-	</com.andexert.library.RippleView>
+        </com.andexert.library.RippleView>
+
+    </LinearLayout>
 
 </RelativeLayout>
