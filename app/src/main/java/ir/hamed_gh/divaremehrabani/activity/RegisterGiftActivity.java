@@ -664,11 +664,6 @@ public class RegisterGiftActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onProgressUpdate(int percentage) {
         Log.d("Upload", "onProgressUpdate: " + percentage);
     }

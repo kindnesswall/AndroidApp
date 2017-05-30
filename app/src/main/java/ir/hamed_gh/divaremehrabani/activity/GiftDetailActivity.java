@@ -280,10 +280,17 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		apiRequest = new ApiRequest(this, this);
 
 		extractDataFromBundle();
+
+		setListeners();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
 		if (giftId != null) {
 			apiRequest.getGift(giftId);
 		}
-		setListeners();
 	}
 
 	@Override
