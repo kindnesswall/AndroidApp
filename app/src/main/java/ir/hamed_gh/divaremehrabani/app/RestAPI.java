@@ -108,10 +108,11 @@ public interface RestAPI {
 			@Body Gift gift
 	);
 
-	@PUT("Gift")
-	Call<Gift> editGift(
+	@PUT("Gift/{" + Constants.GIFT_ID + "}")
+	Call<ResponseBody> editGift(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
+			@Path(Constants.GIFT_ID) String giftId,
 			@Body Gift gift
 	);
 
