@@ -62,6 +62,21 @@ public class MyRequestsFragment extends BaseFragment {
 		ButterKnife.bind(this, rootView);
 		init();
 
+		if (AppController.getStoredString(Constants.Authorization) != null) {
+			setupViewPager(mainVp);
+			mainTabs.setupWithViewPager(mainVp);
+			mainVp.setCurrentItem(1, false);
+
+		} else {
+
+			myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getActivity(), LoginActivity.class));
+				}
+			});
+		}
+
 		return rootView;
 	}
 
@@ -83,23 +98,13 @@ public class MyRequestsFragment extends BaseFragment {
 		super.onResume();
 
 		if (AppController.getStoredString(Constants.Authorization) != null) {
-			setupViewPager(mainVp);
-			mainTabs.setupWithViewPager(mainVp);
-			mainVp.setCurrentItem(1, false);
 
 			myGiftTopLay.setVisibility(View.GONE);
 			myGiftBottomLay.setVisibility(View.VISIBLE);
-			mainVp.setCurrentItem(1, false);
 		} else {
 			myGiftTopLay.setVisibility(View.VISIBLE);
 			myGiftBottomLay.setVisibility(View.INVISIBLE);
 
-			myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					startActivity(new Intent(getActivity(), LoginActivity.class));
-				}
-			});
 		}
 	}
 }
