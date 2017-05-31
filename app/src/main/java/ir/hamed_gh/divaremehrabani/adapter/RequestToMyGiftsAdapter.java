@@ -69,7 +69,7 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRe
 
 				requestsToAGiftFragment.setArguments(bundle);
 
-				((BottomBarActivity) mContext).addFragment(
+				((BottomBarActivity) mContext).replaceFragment(
 						requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
 				);
 			}

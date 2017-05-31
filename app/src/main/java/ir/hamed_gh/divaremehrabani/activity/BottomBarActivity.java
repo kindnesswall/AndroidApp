@@ -234,6 +234,7 @@ public class BottomBarActivity extends AppCompatActivity {
 			fragmentTransaction.replace(R.id.container_body, fragment, title);
 			fragmentTransaction.addToBackStack(title);
 			fragmentTransaction.commit();
+			fragmentManager.executePendingTransactions();
 
 		} catch (Exception e) {
 			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
@@ -249,6 +250,8 @@ public class BottomBarActivity extends AppCompatActivity {
 			fragmentTransaction.add(R.id.container_body, fragment, title);
 			fragmentTransaction.addToBackStack(title);
 			fragmentTransaction.commit();
+
+            fragmentManager.executePendingTransactions();
 
 		} catch (Exception e) {
 			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:

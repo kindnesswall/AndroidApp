@@ -1780,6 +1780,8 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 						.replace(mFragmentContainer, newFragment.getFragment())
 						.commit();
 			}
+
+			((android.support.v4.app.FragmentManager)mFragmentManager).executePendingTransactions();
 		}
 
 		mShouldUpdateFragmentInitially = false;
