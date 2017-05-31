@@ -67,7 +67,7 @@ public class MyGiftsFragment extends BaseFragment {
 	}
 
 	private void setupViewPager(ViewPager viewPager) {
-		ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
 		RegisteredGiftsFragment registeredGiftsFragment = new RegisteredGiftsFragment();
 		DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();

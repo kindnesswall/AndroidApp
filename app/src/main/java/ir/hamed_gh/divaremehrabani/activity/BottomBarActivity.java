@@ -29,6 +29,7 @@ import ir.hamed_gh.divaremehrabani.fragment.mywall.MyWallFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.StatisticFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
+import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
 
 public class BottomBarActivity extends AppCompatActivity {
 
@@ -274,6 +275,7 @@ public class BottomBarActivity extends AppCompatActivity {
 					tag.equals(BookmarkFragment.class.getName()) ||
 							tag.equals(StatisticFragment.class.getName()) ||
 							tag.equals(MyRequestsFragment.class.getName()) ||
+							tag.equals(RequestsToAGiftFragment.class.getName()) ||
 							tag.equals(MyGiftsFragment.class.getName()) ||
 							tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
 					) {

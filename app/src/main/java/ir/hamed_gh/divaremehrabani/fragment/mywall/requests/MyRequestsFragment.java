@@ -66,7 +66,7 @@ public class MyRequestsFragment extends BaseFragment {
 	}
 
 	private void setupViewPager(ViewPager viewPager) {
-		ViewPagerAdapter adapter = new ViewPagerAdapter(mainActivity.getSupportFragmentManager());
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
 		SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
 		ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
