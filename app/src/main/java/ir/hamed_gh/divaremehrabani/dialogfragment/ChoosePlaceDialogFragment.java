@@ -163,7 +163,7 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				if (level4Original.getPlaces().size() > 0) {
+				if (level4Original!=null && level4Original.getPlaces().size() > 0) {
 					level4.getPlaces().clear();
 					for (Place p : level4Original.getPlaces()) {
 
