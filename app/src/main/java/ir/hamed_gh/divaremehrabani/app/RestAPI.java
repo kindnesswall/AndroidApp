@@ -9,6 +9,7 @@ import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.RequestModel;
 import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
+import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -106,6 +107,14 @@ public interface RestAPI {
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Body Gift gift
+	);
+
+
+	@POST("SendFeedback")
+	Call<ResponseBody> reportGift(
+			@Header(Constants.ContentType) String contentType,
+			@Header(Constants.Authorization) String authorization,
+			@Body ReportInput reportInput
 	);
 
 	@PUT("Gift/{" + Constants.GIFT_ID + "}")

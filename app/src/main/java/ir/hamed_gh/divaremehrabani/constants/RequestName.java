@@ -12,5 +12,6 @@ public class RequestName {
 	public static String SendRequestGift = "SendRequestGift";
 	public static String Bookmark = "Bookmark";
 	public static String DeleteMyRequest = "DeleteMyRequest";
+	public static String ReportGift = "ReportGift";
 
 }

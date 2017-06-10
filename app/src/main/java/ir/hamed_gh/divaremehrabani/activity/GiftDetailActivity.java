@@ -29,6 +29,7 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.constants.GiftStatus;
 import ir.hamed_gh.divaremehrabani.constants.RequestName;
 import ir.hamed_gh.divaremehrabani.customviews.customindicator.MyPageIndicator;
+import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
 import ir.hamed_gh.divaremehrabani.helper.ReadJsonFile;
@@ -37,6 +38,7 @@ import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.model.Place;
 import ir.hamed_gh.divaremehrabani.model.Places;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
+import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RequestGiftOutput;
 import okhttp3.ResponseBody;
@@ -252,8 +254,16 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					@Override
 					public void onComplete(RippleView rippleView) {
 
-						Toasti.showS("yes");
-						dialog.dismiss();
+						String message = ((EditTextIranSans)dialog.findViewById(R.id.message_et)).getText().toString();
+						if (message!=null && !message.equals("")) {
+							ReportInput reportInput = new ReportInput();
+							reportInput.giftId = gift.giftId;
+							reportInput.message = message;
+							apiRequest.reportGift(reportInput);
+							dialog.dismiss();
+						}else {
+							Toasti.showS("لطفا توضیحاتی را ارائه دهید.");
+						}
 					}
 				});
 
@@ -262,7 +272,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					@Override
 					public void onComplete(RippleView rippleView) {
 
-						Toasti.showS("no");
+//						Toasti.showS("no");
 						dialog.dismiss();
 
 					}
@@ -387,6 +397,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				setRequestBtn();
 			}else if (tag.equals(RequestName.Bookmark)){
 
+			}else if (tag.equals(RequestName.ReportGift)){
+				Toasti.showS("گزارش ارسال گردید");
 			}
 		}
 	}

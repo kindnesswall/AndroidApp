@@ -17,6 +17,7 @@ import ir.hamed_gh.divaremehrabani.model.api.StatusOutput;
 import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
+import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
@@ -445,6 +446,27 @@ public class ApiRequest {
 
 			@Override
 			public void onFailure(Call<ArrayList<RequestModel>> call, Throwable t) {
+				super.onFailure(call, t);
+			}
+		});
+	}
+
+	public void reportGift(ReportInput reportInput) {
+		Call<ResponseBody> call = AppController.service.reportGift(
+				Constants.JSON_TYPE,
+				AppController.getStoredString(Constants.Authorization),
+				reportInput
+		);
+
+		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+			@Override
+			public void onResponse(Call<ResponseBody> call,
+			                       Response<ResponseBody> response) {
+				handlingOnResponse(new HandlingResponse(call, response, this), RequestName.ReportGift);
+			}
+
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
 				super.onFailure(call, t);
 			}
 		});
