@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import ir.hamed_gh.divaremehrabani.R;
-import ir.hamed_gh.divaremehrabani.helper.Toasti;
 import ir.hamed_gh.divaremehrabani.holder.GiftGalleryHolder;
 import ir.hamed_gh.divaremehrabani.interfaces.UpdateImageGallery;
 
@@ -44,7 +43,7 @@ public class GiftGalleryAdapter extends RecyclerView.Adapter<GiftGalleryHolder> 
 		giftGalleryHolder.mCloseBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toasti.showS("close!");
+
 				giftImageUrls.remove(i);
 				notifyDataSetChanged();
 

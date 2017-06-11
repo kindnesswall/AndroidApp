@@ -19,6 +19,7 @@ import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -305,16 +306,16 @@ public class ApiRequest {
 	public void register(String telephone) {
 
 		AppController.storeString(Constants.TELEPHONE, telephone);
-		Call<ResponseBody> call = AppController.accountService.register(telephone);
+		Call<RegisterOutput> call = AppController.accountService.register(telephone);
 
-		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
+		call.enqueue(new CallbackWithRetry<RegisterOutput>(call, mContext) {
 			@Override
-			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+			public void onResponse(Call<RegisterOutput> call, Response<RegisterOutput> response) {
 				handlingOnResponse(new HandlingResponse(call, response, this));
 			}
 
 			@Override
-			public void onFailure(Call<ResponseBody> call, Throwable t) {
+			public void onFailure(Call<RegisterOutput> call, Throwable t) {
 				super.onFailure(call, t);
 			}
 		});

@@ -1,11 +1,13 @@
 package ir.hamed_gh.divaremehrabani.fragment.mywall;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rey.material.widget.ProgressView;
@@ -15,7 +17,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
+import ir.hamed_gh.divaremehrabani.activity.LoginActivity;
 import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
+import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
@@ -36,6 +40,15 @@ public class BookmarkFragment extends BaseFragment {
 
 	@Bind(R.id.message_textview)
 	TextView mMessageTv;
+
+	@Bind(R.id.login_btn)
+	RelativeLayout mLoginBtn;
+
+	@Bind(R.id.bookmark_top_lay)
+	RelativeLayout mBookmarkTopLay;
+
+	@Bind(R.id.bookmark_main_lay)
+	RelativeLayout mBookmarkMainLay;
 
 	private ArrayList<Gift> gifts = new ArrayList<>();
 	private GiftListAdapter adapter;
@@ -59,14 +72,26 @@ public class BookmarkFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 
-		gifts.clear();
-		apiRequest.getBookmarkList(
-				new StartLastIndex(
-						startIndex + "",
-						startIndex + Constants.LIMIT + ""
-				)
-		);
 
+
+		if (AppController.getStoredString(Constants.Authorization) != null) {
+
+			mBookmarkTopLay.setVisibility(View.GONE);
+			mBookmarkMainLay.setVisibility(View.VISIBLE);
+
+			if (gifts.size()<=0){
+				apiRequest.getBookmarkList(
+						new StartLastIndex(
+								startIndex + "",
+								startIndex + Constants.LIMIT + ""
+						)
+				);
+			}
+
+		} else {
+			mBookmarkTopLay.setVisibility(View.VISIBLE);
+			mBookmarkMainLay.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	@Override
@@ -79,10 +104,28 @@ public class BookmarkFragment extends BaseFragment {
 				((ViewGroup) rootView.getParent()).removeView(rootView);
 			return rootView;
 		}
-		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+		rootView = inflater.inflate(R.layout.fragment_bookmark, container, false);
 
 		ButterKnife.bind(this, rootView);
 		init();
+
+		gifts.clear();
+		if (AppController.getStoredString(Constants.Authorization) != null) {
+//			apiRequest.getBookmarkList(
+//					new StartLastIndex(
+//							startIndex + "",
+//							startIndex + Constants.LIMIT + ""
+//					)
+//			);
+		}else {
+
+			mLoginBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(getActivity(), LoginActivity.class));
+				}
+			});
+		}
 
 		return rootView;
 	}

@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.andexert.library.RippleView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.divaremehrabani.R;
@@ -18,6 +21,7 @@ import ir.hamed_gh.divaremehrabani.dialogfragment.ChoosePlaceDialogFragment;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
+import ir.hamed_gh.divaremehrabani.helper.MaterialDialogBuilder;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.interfaces.ChoosePlaceCallback;
 import ir.hamed_gh.divaremehrabani.model.Place;
@@ -77,6 +81,13 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 	protected void init() {
 		super.init();
 
+		mLocationTv.setText(AppController.getStoredString(Constants.MY_LOCATION_NAME));
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 			mLogoutLay.setVisibility(View.VISIBLE);
 			mLogoutTxt.setText(
@@ -85,13 +96,6 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		} else {
 			mLogoutLay.setVisibility(View.INVISIBLE);
 		}
-
-		mLocationTv.setText(AppController.getStoredString(Constants.MY_LOCATION_NAME));
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
 
 		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("دیوار من");
 
@@ -107,10 +111,40 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 			@Override
 			public void onClick(View v) {
 
-				apiRequest.logout();
-				mLogoutLay.setVisibility(View.INVISIBLE);
-				AppController.storeString(Constants.Authorization, null);
-				AppController.storeString(Constants.TELEPHONE, null);
+				MaterialDialog.Builder builder =
+						MaterialDialogBuilder.create(getContext())
+								.customView(R.layout.dialog_simple_yes_no, false);
+
+				final MaterialDialog dialog = builder.build();
+				((TextView) dialog.findViewById(R.id.message_textview)).setText(
+						getContext().getResources().getString(R.string.dialog_exit_account)
+				);
+
+				RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+
+						apiRequest.logout();
+						mLogoutLay.setVisibility(View.INVISIBLE);
+						AppController.storeString(Constants.Authorization, null);
+						AppController.storeString(Constants.TELEPHONE, null);
+
+						dialog.dismiss();
+					}
+				});
+
+				RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						dialog.dismiss();
+					}
+				});
+
+				dialog.show();
+
+
 
 			}
 		});

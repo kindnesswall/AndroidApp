@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +23,9 @@ import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.NumberTranslator;
+import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -38,8 +41,11 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	@Bind(R.id.toolbar_back_iv)
 	ImageView mBackBtn;
 
-	@Bind(R.id.not_recieved_code_btn)
-	RelativeLayout not_recieved_code_btn;
+	@Bind(R.id.second_btn_lay)
+	RelativeLayout secondBtnLay;
+
+	@Bind(R.id.second_btn_tv)
+	TextView secondBtnTv;
 
 	@Bind(R.id.login_get_verification_btn)
 	RelativeLayout loginGetVerificationBtn;
@@ -52,12 +58,14 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 	@Bind(R.id.progressView)
 	ProgressView progressView;
+
 	View.OnClickListener enterPhoneNumber;
 	View.OnClickListener enterVerificationCodeListener;
+	String regexStr = "^[0-9]*$";
 	private Context context;
 	private ApiRequest apiRequest;
-
-	String regexStr = "^[0-9]*$";
+	private View.OnClickListener notRecievedCode;
+	private View.OnClickListener enterVerificationCodeState;
 
 	public static Intent createIntent() {
 		Intent intent = new Intent(AppController.getAppContext(), LoginActivity.class);
@@ -89,14 +97,21 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 				String confirmationCode = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
 
-				if (!confirmationCode.trim().matches(regexStr)){
-					Toasti.showS("کد وارد شده صحیح نمی‌باشد");
+				if (!confirmationCode.trim().matches(regexStr)) {
+					Snackbari.showS(
+							mBackBtn,
+							"کد وارد شده صحیح نمی‌باشد"
+					);
+
 					return;
 				}
 				apiRequest.login(confirmationCode);
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);
+
+				secondBtnLay.setOnClickListener(notRecievedCode);
+
 			}
 		};
 
@@ -106,8 +121,12 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
 
-				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)){
-					Toasti.showS("شماره تلفن وارد شده صحیح نمی‌باشد");
+				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
+					Snackbari.showS(
+							mBackBtn,
+							"شماره تلفن وارد شده صحیح نمی‌باشد"
+					);
+
 					return;
 				}
 
@@ -115,10 +134,14 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);
+
+				secondBtnLay.setOnClickListener(enterVerificationCodeState);
+
 			}
 		};
 
-		not_recieved_code_btn.setOnClickListener(new View.OnClickListener() {
+
+		notRecievedCode = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				AppController.storeString(
@@ -127,7 +150,29 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 				enterTelephoneNumber();
 			}
-		});
+		};
+
+		enterVerificationCodeState = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
+
+				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
+					Snackbari.showS(
+							mBackBtn,
+							"شماره تلفن وارد شده صحیح نمی‌باشد"
+					);
+
+					return;
+				}
+
+				AppController.storeString(
+						Constants.TELEPHONE, phoneNumber
+				);
+
+				enterVerificationCode();
+			}
+		};
 
 		if (AppController.getStoredString(Constants.TELEPHONE) == null) {
 			enterTelephoneNumber();
@@ -161,7 +206,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		phoneConfirimationCodeEt.setText("");
 
 		login_get_verification_tv.setText(getString(R.string.sign_up));
-		not_recieved_code_btn.setVisibility(View.INVISIBLE);
+//		secondBtnLay.setVisibility(View.INVISIBLE);
+		secondBtnTv.setText("ورود کد تایید");
+		secondBtnLay.setOnClickListener(enterVerificationCodeState);
 
 		loginGetVerificationBtn.setOnClickListener(enterPhoneNumber);
 	}
@@ -172,7 +219,10 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 		login_get_verification_tv.setText(getString(R.string.sign_in));
 
-		not_recieved_code_btn.setVisibility(View.VISIBLE);
+//		secondBtnLay.setVisibility(View.VISIBLE);
+		secondBtnTv.setText(getResources().getString(R.string.verification_not_received));
+		secondBtnLay.setOnClickListener(notRecievedCode);
+
 		loginGetVerificationBtn.setOnClickListener(enterVerificationCodeListener);
 	}
 
@@ -195,10 +245,32 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 					Constants.USER_ID,
 					tokenOutput.userId);
 
-			Toasti.showL("شما با شماره تلفن " + NumberTranslator.toPersian(AppController.getStoredString(Constants.TELEPHONE)) + " وارد شدید.");
+			Toasti.showS(
+					"شما با شماره تلفن " +
+							NumberTranslator.toPersian(AppController.getStoredString(Constants.TELEPHONE)) +
+							" وارد شدید."
+			);
+
 			finish();
-		} else {
-			enterVerificationCode();
+		} else if (response.body() instanceof RegisterOutput){
+			String remainingSeconds = ((RegisterOutput)response.body()).remainingSeconds;
+
+			if (remainingSeconds!=null && !remainingSeconds.equals("") ){
+				// Check if no view has focus:
+				View view = this.getCurrentFocus();
+				if (view != null) {
+					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+				}
+
+				Snackbari.showS(mToolbarTitleTextView,
+						"لطفا "+
+								remainingSeconds
+								+" ثانیه دیگر امتحان کنید"
+						);
+			}else {
+				enterVerificationCode();
+			}
 		}
 	}
 
@@ -206,7 +278,5 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	public void onFailure(Call call, Throwable t) {
 		progressView.setVisibility(View.INVISIBLE);
 		login_get_verification_tv.setVisibility(View.VISIBLE);
-
-		Toasti.showS("onFailure");
 	}
 }

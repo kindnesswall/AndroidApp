@@ -217,7 +217,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					mBookmarkIc.setOnClickListener(removeFromWishList);
 					apiRequest.bookmark(giftId);
 				} else {
-					Toasti.showS("برای افزودن به علاقه‌مندی باید وارد شوید.");
+					Snackbari.showS(
+							mBookmarkIc,
+							"برای افزودن به علاقه‌مندی باید وارد شوید.");
 				}
 			}
 		};

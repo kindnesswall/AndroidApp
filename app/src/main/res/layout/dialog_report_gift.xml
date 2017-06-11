@@ -101,7 +101,7 @@
 					android:layout_marginLeft="6dp"
 					android:layout_marginRight="6dp"
 					android:gravity="center"
-					android:text="صرفه‌نظر"
+					android:text="صرف‌نظر"
 					android:textColor="@color/white"
 					android:textSize="12sp"/>
 
