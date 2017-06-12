@@ -389,7 +389,6 @@
 	<string name="from_label">"From: "</string>
 	<string name="ga_sampleFrequency">0.01</string>
 	<string name="ga_trackingId">UA-69407878-1</string>
-	<string name="gcm_defaultSenderId">55892264082</string>
 	<string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
 	<string name="gcm_error">From GCM: error (%1$s).</string>
 	<string name="gcm_message">From GCM: you got message!</string>
@@ -400,12 +399,13 @@
 	<string name="get_verification_code">دریافت کد فعال‌سازی</string>
 	<string name="going_offline">Going offline.</string>
 	<string name="going_online">Going online.</string>
-	<string name="google_api_key">AIzaSyDFarXpJXEQ0gwao-3xTF9Yhck85xxei4A</string>
-	<string name="google_app_id">1:55892264082:android:1baa9c4a5d80f9d3</string>
-	<string name="google_crash_reporting_api_key">AIzaSyDFarXpJXEQ0gwao-3xTF9Yhck85xxei4A</string>
-	<string name="google_play_services_unavailable">برای استفاده از نقشه باید آخرین نسخه Google Play
-		Services را نصب کنید!
-	</string>
+	<!--<string name="gcm_defaultSenderId">55892264082</string>-->
+	<!--<string name="google_api_key">AIzaSyDFarXpJXEQ0gwao-3xTF9Yhck85xxei4A</string>-->
+	<!--<string name="google_app_id">1:55892264082:android:1baa9c4a5d80f9d3</string>-->
+	<!--<string name="google_crash_reporting_api_key">AIzaSyDFarXpJXEQ0gwao-3xTF9Yhck85xxei4A</string>-->
+	<!--<string name="google_play_services_unavailable">برای استفاده از نقشه باید آخرین نسخه Google Play-->
+		<!--Services را نصب کنید!-->
+	<!--</string>-->
 	<string name="hide_my_email">آدرس ایمیلم را به دیگران نمایش نده</string>
 	<string name="hide_my_phone">شماره تلفنم را به دیگران نمایش نده</string>
 	<string name="hint_email_field">آدرس ایمیل شما</string>
