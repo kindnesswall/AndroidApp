@@ -12,11 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.fabric.sdk.android.Fabric;
+
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
@@ -171,7 +169,6 @@ public class BottomBarActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Fabric.with(this, new Crashlytics());
 		setContentView(R.layout.activity_bottombar);
 		ButterKnife.bind(this);
 

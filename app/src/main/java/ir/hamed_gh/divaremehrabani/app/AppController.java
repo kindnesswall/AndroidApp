@@ -1,10 +1,14 @@
 package ir.hamed_gh.divaremehrabani.app;
 
 import android.app.Application;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -22,6 +26,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by HamedGh on 3/8/2016.
  */
 public class AppController extends Application {
+	public static final String REGISTRATION_COMPLETE = "registrationComplete";
+	public static final String PUSH_NOTIFICATION = "pushNotification";
+
+	public static final int NOTIFICATION_ID = 100;
+	public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
+	private static NotificationManager notificationManager;
 
 	public static final String TAG = AppController.class
 			.getSimpleName();
@@ -38,6 +48,10 @@ public class AppController extends Application {
 
 	private OkHttpClient httpClient;
 	private Retrofit.Builder retrofitBuilder;
+
+	public static NotificationManager getNotificationManager() {
+		return notificationManager;
+	}
 
 	public static SharedPreferences getPreferences() {
 		return preferences;
@@ -70,6 +84,24 @@ public class AppController extends Application {
 		editor.apply();
 	}
 
+	public static ArrayList<String> getStoredNotifs(String notifications) {
+		Set<String> set = preferences.getStringSet(notifications, new HashSet<String>());
+		return new ArrayList<String>(set);
+	}
+
+	public static void storeNotifs(ArrayList<String> list, String key) {
+		Set<String> set = new HashSet<>();
+		set.addAll(list);
+		editor.putStringSet(key,set);
+		editor.apply();
+	}
+
+	public static void removeShared(String key)
+	{
+		editor.remove(key).apply();
+	}
+
+
 	public static Context getAppContext() {
 		return AppController.context;
 	}
@@ -101,6 +133,8 @@ public class AppController extends Application {
 //                .build();
 //
 //        ImageLoader.getInstance().init(config);
+
+		notificationManager = (NotificationManager) mInstance.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		retrofitInitialization();
 

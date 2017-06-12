@@ -71,4 +71,7 @@ public class Constants {
 	public static final String SEARCH_PAGETYPE = "SEARCH_PAGETYPE";
 	public static final String GIFT_NAME = "GIFT_NAME";
 	public static final String GIFT_REQUEST_COUNT = "GIFT_REQUEST_COUNT";
+
+	public static final String FIREBASE_REG_TOKEN = "FIREBASE_REG_TOKEN";
+	public static final String NOTIF_DATA = "NOTIF_DATA";
 }
