@@ -10,6 +10,8 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.DeviceInfo;
+import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -34,8 +36,10 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService imple
 //        Toasti.showS(getAppContext() , "GET REGID" + Constants.FIREBASE_REG_TOKEN);
         // sending reg id to server
         apiRequest = new ApiRequest(this, this);
-//        String deviceID = DeviceInfo.getDeviceID(this);
-//        apiRequest.setDevice(new SetDeviceInput(refreshedToken, deviceID));
+        String deviceID = DeviceInfo.getDeviceID(this);
+        Log.d("deviceID", deviceID);
+
+        apiRequest.setDevice(new SetDeviceInput(refreshedToken, deviceID));
 
         // Notify UI that registration has completed, so the progress indicator can be hidden.
         Intent registrationComplete = new Intent(REGISTRATION_COMPLETE);

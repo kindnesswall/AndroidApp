@@ -1,5 +1,6 @@
 package ir.hamed_gh.divaremehrabani.helper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
@@ -22,8 +23,10 @@ import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.UpdateInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.SetDeviceOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 import okhttp3.ResponseBody;
@@ -75,9 +78,13 @@ public class ApiRequest {
 	private void handlingOnResponse(HandlingResponse handlingResponse, String TAG) {
 
 		if (!handlingResponse.response.isSuccessful()) {
-			if(ConnectionDetector.isConnectedToInternet())
-				ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
-			else
+			if(ConnectionDetector.isConnectedToInternet()) {
+				if ((mContext instanceof Activity) && ((Activity) mContext).hasWindowFocus()) {
+					ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
+				}else {
+					Toasti.showS("مشکل ارتباط با سرور");
+				}
+			}else
 				ConnectionDetector.ShowNetwrokConnectionProblemDialog(mContext, handlingResponse.callbackWithRetry);
 			return;
 		}
@@ -644,6 +651,23 @@ public class ApiRequest {
 //				} else {
 //					Toasti.showS(mContext, getString(R.string.onFailuer));
 //				}
+			}
+		});
+	}
+
+	public void setDevice(SetDeviceInput device) {
+		Call<SetDeviceOutput> result =
+				AppController.accountService.setDevice(device);
+
+		result.enqueue(new CallbackWithRetry<SetDeviceOutput>(result, mContext) {
+			@Override
+			public void onResponse(Call<SetDeviceOutput> call, Response<SetDeviceOutput> response) {
+				handlingOnResponse(new HandlingResponse(call, response, this));
+			}
+
+			@Override
+			public void onFailure(Call<SetDeviceOutput> call, Throwable t) {
+				Toasti.showS("مشکل ارتباط با سرور");
 			}
 		});
 	}

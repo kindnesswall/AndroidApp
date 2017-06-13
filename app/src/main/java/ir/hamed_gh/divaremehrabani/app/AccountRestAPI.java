@@ -1,10 +1,13 @@
 package ir.hamed_gh.divaremehrabani.app;
 
 import ir.hamed_gh.divaremehrabani.constants.Constants;
+import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.SetDeviceOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
@@ -30,4 +33,7 @@ public interface AccountRestAPI {
 	Call<TokenOutput> login(@Field("username") String username,
 	                        @Field("password") String password,
 	                        @Field("grant_type") String grant_type);
+
+	@POST("Account/SetDevice")
+	Call<SetDeviceOutput> setDevice(@Body SetDeviceInput setDeviceInput);
 }

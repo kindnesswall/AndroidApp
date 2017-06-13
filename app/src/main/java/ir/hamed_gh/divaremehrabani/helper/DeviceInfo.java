@@ -56,8 +56,8 @@ public class DeviceInfo {
 		return Settings.Secure.getString(AppController.getAppContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 	}
 
-	public static String getDeviceID() {
-		final TelephonyManager tm = (TelephonyManager) AppController.getAppContext().getSystemService(Context.TELEPHONY_SERVICE);
+	public static String getDeviceID(Context ctx) {
+		final TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
 		return tm.getDeviceId();
 	}
 
