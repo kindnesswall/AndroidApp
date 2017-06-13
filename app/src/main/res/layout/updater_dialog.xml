@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/title_dialog_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:layout_margin="16dp"
+		android:text="عنوان"
+		android:textColor="@color/light_black"
+		android:textSize="12sp"/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/notes_text_dialog_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/title_dialog_tv"
+		android:layout_marginBottom="8dp"
+		android:layout_marginRight="16dp"
+		android:maxLines="10"
+		android:scrollbars="vertical"
+		android:text="تغییرات :"
+		android:textColor="@color/light_black"
+		android:textSize="10sp"/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/main_text_dialog_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/notes_text_dialog_tv"
+		android:layout_marginBottom="8dp"
+		android:layout_marginRight="16dp"
+		android:maxLines="2"
+		android:text="نسخه جدید برنامه موجود می باشد ، آیا به روز رسانی می نمایید؟"
+		android:textColor="@color/light_black"
+		android:textSize="10sp"/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/posetive_btn_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_below="@+id/main_text_dialog_tv"
+		android:layout_marginLeft="8dp"
+		android:gravity="center"
+		android:padding="8dp"
+		android:text="به روزرسانی"
+		android:textColor="@color/primaryDialog"
+		android:textSize="12sp"/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/negative_btn_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/main_text_dialog_tv"
+		android:layout_marginLeft="16dp"
+		android:layout_toRightOf="@+id/posetive_btn_text"
+		android:gravity="center"
+		android:padding="8dp"
+		android:text="بعدا"
+		android:textColor="@color/primaryDialog"
+		android:textSize="12sp"/>
+
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/never_btn_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/main_text_dialog_tv"
+		android:layout_marginLeft="16dp"
+		android:layout_toRightOf="@+id/negative_btn_text"
+		android:gravity="center"
+		android:padding="8dp"
+		android:text="خیر"
+		android:textColor="@color/primaryDialog"
+		android:textSize="12sp"/>
+
+	<ProgressBar
+		android:id="@+id/update_progressbar"
+		style="@android:style/Widget.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="20dp"
+		android:layout_below="@id/posetive_btn_text"
+		android:layout_centerHorizontal="true"
+		android:layout_margin="15dp"
+		android:max="100"
+		android:padding="1dp"
+		android:progress="0"
+		android:progressDrawable="@drawable/updater_progressbar"
+		android:visibility="gone"
+		/>
+
+	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		android:text="%0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@+id/update_progressbar"
+		android:layout_alignRight="@+id/update_progressbar"
+		android:layout_alignEnd="@+id/update_progressbar"
+		android:paddingRight="10dp"
+		android:id="@+id/progressPercentage"
+		android:textColor="@color/primaryDialog"
+		android:textSize="12sp"
+		android:visibility="gone"/>
+
+	<RelativeLayout
+		android:id="@+id/cancel_lay"
+		android:layout_below="@id/update_progressbar"
+		android:background="@color/primaryDialog"
+		android:layout_centerHorizontal="true"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:visibility="gone">
+
+		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:gravity="center"
+			android:text="@string/cancel"
+			android:textColor="@color/white"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp"
+			android:textSize="12sp" />
+
+	</RelativeLayout>
+
+</RelativeLayout>

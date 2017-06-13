@@ -11,6 +11,8 @@ import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.input.UpdateInput;
+import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -198,5 +200,6 @@ public interface RestAPI {
 			@Path(Constants.LastIndex) String lastIndex
 	);
 
-
+	@POST("get_updated_version")
+	Call<UpdateOutput> getUpdatedVersion(@Body UpdateInput updateInput);
 }

@@ -110,6 +110,16 @@ public class AppController extends Application {
 		return mInstance;
 	}
 
+	private boolean isCheckedUpdate = false;
+
+	public boolean isCheckedUpdate() {
+		return isCheckedUpdate;
+	}
+
+	public void setIsCheckedUpdate(boolean isCheckedUpdate) {
+		this.isCheckedUpdate = isCheckedUpdate;
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

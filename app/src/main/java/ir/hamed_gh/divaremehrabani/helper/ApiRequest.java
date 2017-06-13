@@ -1,6 +1,9 @@
 package ir.hamed_gh.divaremehrabani.helper;
 
 import android.content.Context;
+import android.view.View;
+
+import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +22,10 @@ import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RecievedRequestListInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
+import ir.hamed_gh.divaremehrabani.model.api.input.UpdateInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
+import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -605,6 +610,40 @@ public class ApiRequest {
 			@Override
 			public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
 				super.onFailure(call, t);
+			}
+		});
+	}
+
+	public void getUpdatedVersion(UpdateInput updateInput, final ProgressView progressView) {
+		Call<UpdateOutput> result = AppController.service.getUpdatedVersion(
+				updateInput);
+		//TODO : add call ArrayList
+		//callArrayList.add(result);
+		result.enqueue(new CallbackWithRetry<UpdateOutput>(result, mContext) {
+			@Override
+			public void onResponse(Call<UpdateOutput> call, Response<UpdateOutput> response) {
+				handlingOnResponse(new HandlingResponse(call, response, this));
+			}
+
+			@Override
+			public void retry() {
+				//Todo : has problem in progress view visibility
+				if (progressView != null)
+					progressView.setVisibility(View.VISIBLE);
+				super.retry();
+
+			}
+
+			@Override
+			public void onFailure(Call<UpdateOutput> call, Throwable t) {
+				super.onFailure(call, t);
+
+//				if (t instanceof IOException) {//network problem
+//					progressView.setVisibility(View.VISIBLE);
+//					startActivity(NoInternetActivity.createIntentUpdateCallFailure(this));
+//				} else {
+//					Toasti.showS(mContext, getString(R.string.onFailuer));
+//				}
 			}
 		});
 	}

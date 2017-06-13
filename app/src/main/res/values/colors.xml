@@ -3,6 +3,8 @@
 	<color name="background">#F3F4F8</color>
 	<color name="background_gray">#F1F1F1</color>
 
+	<color name="primaryDialog">@color/colorPrimary</color>
+
 	<!-- colors from divar -->
 
 	<color name="action_bar_splitter">#ffdddddd</color>

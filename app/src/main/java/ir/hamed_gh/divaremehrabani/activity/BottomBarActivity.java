@@ -1,6 +1,8 @@
 package ir.hamed_gh.divaremehrabani.activity;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -14,7 +16,6 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.bottombar.BottomBar;
@@ -28,6 +29,9 @@ import ir.hamed_gh.divaremehrabani.fragment.mywall.StatisticFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
+import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.helper.UpdateChecker;
+import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 
 public class BottomBarActivity extends AppCompatActivity {
 
@@ -47,6 +51,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	private Context context;
 	private BottomBar mBottomBar;
 	private Boolean unlock = false;
+	private String currentVersionName;
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -173,6 +178,7 @@ public class BottomBarActivity extends AppCompatActivity {
 		ButterKnife.bind(this);
 
 		context = this;
+		currentVersionName = UpdateChecker.getAppVersion(context);
 
 		homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
 		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
@@ -310,4 +316,60 @@ public class BottomBarActivity extends AppCompatActivity {
 //        }
 //        finish();
 	}
+
+	private void onUpdateVersionResponse(UpdateOutput updateOutput) {
+
+//		switch (updateOutput.status) {
+//			case "0":
+//				Toasti.showS(mContext, getString(R.string.internal_error));
+//				break;
+//			case "1":
+
+				boolean isForcedUpdate;
+
+				if (updateOutput.force_update != null && updateOutput.force_update.equalsIgnoreCase("true")) {
+					isForcedUpdate = true;
+				} else {
+					isForcedUpdate = false;//todo use this
+				}
+
+				UpdateChecker updateChecker = new UpdateChecker(
+						getResources().getString(R.string.app_name),
+						updateOutput.version,
+						updateOutput.apk_url,
+						null,
+						updateOutput.changes);
+
+				if (!isForcedUpdate) {
+//					callApiGetHomeByTagId();
+				}
+
+				if (currentVersionName.compareToIgnoreCase(updateChecker.mUpdateDetail.latestVersion) < 0) {
+					//Notify Update
+					Intent[] intents = new Intent[1];
+					intents[0] = Intent.makeMainActivity(new ComponentName(AppController.getAppContext(),
+							BottomBarActivity.class));
+					// intents[1] = new Intent(AppController.getAppContext(), HomeActivity.class);
+					updateChecker.showUpdaterDialog(
+							context,
+							getString(R.string.update_to_new_version),
+							getString(R.string.exist_new_version),
+							updateOutput.changes,
+							updateOutput.version,
+							intents,
+							isForcedUpdate);
+
+					AppController.getInstance().setIsCheckedUpdate(true);
+
+				}
+
+//				break;
+//			default:
+//				callApiGetHomeByTagId();
+//				break;
+//		}
+
+
+	}
+
 }

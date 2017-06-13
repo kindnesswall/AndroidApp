@@ -2,6 +2,9 @@
 	<string name="app_name">DivarMehrabani</string>
 	<string name="action_menu">منو</string>
 
+	<string name="update_to_new_version">به روزرسانی به نسخه جدید</string>
+	<string name="exist_new_version">نسخه جدید برنامه موجود می باشد ، آیا به روز رسانی می نمایید؟</string>
+
 	<string name="waiting_request">(در انتظار پذیرش)</string>
 	<string name="accepted_request">(به شما داده شد)</string>
 	<string name="rejected_request">(درخواست شما رد شد)</string>
