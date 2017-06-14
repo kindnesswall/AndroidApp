@@ -90,6 +90,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	private int startIndex = 0;
 	private LinearLayoutManager linearLayoutManager;
 	private View rootView;
+	private int count = 0;
 
 	public static HomeFragment newInstance(String pageType, Category category) {
 		HomeFragment fragment = new HomeFragment();

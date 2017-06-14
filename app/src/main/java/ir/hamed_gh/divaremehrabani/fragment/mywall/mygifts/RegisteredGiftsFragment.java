@@ -19,6 +19,7 @@ import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
+import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import retrofit2.Call;
@@ -62,12 +63,24 @@ public class RegisteredGiftsFragment extends BaseFragment {
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
 
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				getRegisteredGifts();
+			}
+		});
+		getRegisteredGifts();
+
 		if (getArguments() != null) {
 			userId = getArguments().getString(Constants.USER_ID);
 		}
 		if (userId == null)
 			userId = AppController.getStoredString(Constants.USER_ID);
 
+	}
+
+	private void getRegisteredGifts() {
 		apiRequest.getRegisteredGifts(
 				userId,
 				new StartLastIndex(
@@ -75,6 +88,8 @@ public class RegisteredGiftsFragment extends BaseFragment {
 						startIndex + Constants.LIMIT + ""
 				)
 		);
+
+		startIndex += Constants.LIMIT;
 	}
 
 	@Override

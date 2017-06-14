@@ -22,6 +22,7 @@ import ir.hamed_gh.divaremehrabani.adapter.GiftListAdapter;
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
+import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import retrofit2.Call;
@@ -63,16 +64,33 @@ public class BookmarkFragment extends BaseFragment {
 
 		adapter = new GiftListAdapter(context, gifts);
 		mRecyclerView.setAdapter(adapter);
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				getBookmarks();
+			}
+		});
+
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
 
 	}
 
+	private void getBookmarks() {
+		apiRequest.getBookmarkList(
+				new StartLastIndex(
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
+
+		startIndex += Constants.LIMIT;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
-
-
 
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 
@@ -80,12 +98,7 @@ public class BookmarkFragment extends BaseFragment {
 			mBookmarkMainLay.setVisibility(View.VISIBLE);
 
 			if (gifts.size()<=0){
-				apiRequest.getBookmarkList(
-						new StartLastIndex(
-								startIndex + "",
-								startIndex + Constants.LIMIT + ""
-						)
-				);
+				getBookmarks();
 			}
 
 		} else {
@@ -111,7 +124,7 @@ public class BookmarkFragment extends BaseFragment {
 
 		gifts.clear();
 		if (AppController.getStoredString(Constants.Authorization) != null) {
-//			apiRequest.getBookmarkList(
+//			apiRequest.getBookmarks(
 //					new StartLastIndex(
 //							startIndex + "",
 //							startIndex + Constants.LIMIT + ""

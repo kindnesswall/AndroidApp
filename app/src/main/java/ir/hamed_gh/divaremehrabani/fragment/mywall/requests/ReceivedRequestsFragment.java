@@ -18,6 +18,7 @@ import ir.hamed_gh.divaremehrabani.R;
 import ir.hamed_gh.divaremehrabani.adapter.RequestToMyGiftsAdapter;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.fragment.BaseFragment;
+import ir.hamed_gh.divaremehrabani.helper.EndlessRecyclerViewScrollListener;
 import ir.hamed_gh.divaremehrabani.model.api.Gift;
 import ir.hamed_gh.divaremehrabani.model.api.StartLastIndex;
 import retrofit2.Call;
@@ -50,8 +51,25 @@ public class ReceivedRequestsFragment extends BaseFragment {
 		mRecyclerView.setAdapter(adapter);
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				getRequestsToMyGifts();
+			}
+		});
+		getRequestsToMyGifts();
+	}
 
+	private void getRequestsToMyGifts() {
+		apiRequest.getRequestsToMyGifts(
+				new StartLastIndex(
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
 
+		startIndex += Constants.LIMIT;
 	}
 
 	@Override
@@ -69,12 +87,6 @@ public class ReceivedRequestsFragment extends BaseFragment {
 		ButterKnife.bind(this, rootView);
 		init();
 
-		apiRequest.getRequestsToMyGifts(
-				new StartLastIndex(
-						startIndex + "",
-						startIndex + Constants.LIMIT + ""
-				)
-		);
 		return rootView;
 	}
 

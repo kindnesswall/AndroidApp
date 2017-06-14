@@ -46,7 +46,6 @@ public class MyGiftsFragment extends BaseFragment {
 
 		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("هدیه‌های من");
 
-
 	}
 
 	@Override
