@@ -26,7 +26,6 @@ import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.UpdateInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
-import ir.hamed_gh.divaremehrabani.model.api.output.SetDeviceOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 import okhttp3.ResponseBody;
@@ -656,17 +655,20 @@ public class ApiRequest {
 	}
 
 	public void setDevice(SetDeviceInput device) {
-		Call<SetDeviceOutput> result =
-				AppController.accountService.setDevice(device);
+		Call<ResponseBody> result =
+				AppController.accountService.setDevice(
+						Constants.JSON_TYPE,
+						device
+				);
 
-		result.enqueue(new CallbackWithRetry<SetDeviceOutput>(result, mContext) {
+		result.enqueue(new CallbackWithRetry<ResponseBody>(result, mContext) {
 			@Override
-			public void onResponse(Call<SetDeviceOutput> call, Response<SetDeviceOutput> response) {
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				handlingOnResponse(new HandlingResponse(call, response, this));
 			}
 
 			@Override
-			public void onFailure(Call<SetDeviceOutput> call, Throwable t) {
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
 				Toasti.showS("مشکل ارتباط با سرور");
 			}
 		});
@@ -675,7 +677,8 @@ public class ApiRequest {
 	public void logout() {
 		Call<ResponseBody> call = AppController.accountService.logout(
 				Constants.JSON_TYPE,
-				AppController.getStoredString(Constants.Authorization)
+				AppController.getStoredString(Constants.Authorization),
+				AppController.getStoredString(Constants.FIREBASE_REG_TOKEN)
 		);
 
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {

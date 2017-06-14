@@ -12,6 +12,7 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
 import ir.hamed_gh.divaremehrabani.helper.DeviceInfo;
 import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -49,7 +50,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService imple
 
     @Override
     public void onResponse(Call call, Response response) {
-//        if (response.body() instanceof SetDeviceOutput) {
+        if (response.body() instanceof ResponseBody) {
+            AppController.storeBoolean(Constants.CALLED_SETDEVICE_BEFORE, true);
 //            SetDeviceOutput output = ((SetDeviceOutput) response.body());
 //            switch (output.status) {
 //                case "1":
@@ -60,11 +62,12 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService imple
 ////                    Toasti.showS(this, "wrong result");
 //                    break;
 //            }
-//        }
+        }
     }
 
     @Override
     public void onFailure(Call call, Throwable t) {
-
+        int i = 0;
+        Log.d(TAG, "onFailure: ");
     }
 }

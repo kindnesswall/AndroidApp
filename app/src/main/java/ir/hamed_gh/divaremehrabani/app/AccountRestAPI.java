@@ -3,7 +3,6 @@ package ir.hamed_gh.divaremehrabani.app;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
-import ir.hamed_gh.divaremehrabani.model.api.output.SetDeviceOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,10 +21,11 @@ public interface AccountRestAPI {
 	@POST("Account/Register/{telephone}")
 	Call<RegisterOutput> register(@Path("telephone") String telephone);
 
-	@POST("Account/Logout")
+	@POST("Account/Logout/{registerationId}")
 	Call<ResponseBody> logout(
 			@Header(Constants.ContentType) String contentType,
-			@Header(Constants.Authorization) String authorization
+			@Header(Constants.Authorization) String authorization,
+			@Path("registerationId") String registerationId
 	);
 
 	@FormUrlEncoded
@@ -35,5 +35,8 @@ public interface AccountRestAPI {
 	                        @Field("grant_type") String grant_type);
 
 	@POST("Account/SetDevice")
-	Call<SetDeviceOutput> setDevice(@Body SetDeviceInput setDeviceInput);
+	Call<ResponseBody> setDevice(
+			@Header(Constants.ContentType) String contentType,
+			@Body SetDeviceInput setDeviceInput
+	);
 }

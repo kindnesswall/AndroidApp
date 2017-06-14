@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -22,9 +23,11 @@ import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans;
 import ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular;
 import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.DeviceInfo;
 import ir.hamed_gh.divaremehrabani.helper.NumberTranslator;
 import ir.hamed_gh.divaremehrabani.helper.Snackbari;
 import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.model.api.input.SetDeviceInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.RegisterOutput;
 import ir.hamed_gh.divaremehrabani.model.api.output.TokenOutput;
 import retrofit2.Call;
@@ -184,6 +187,16 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private void init() {
 		context = this;
 		apiRequest = new ApiRequest(context, this);
+		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false)){
+			String deviceID = DeviceInfo.getDeviceID(this);
+			Log.d("deviceID", deviceID);
+			apiRequest.setDevice(
+					new SetDeviceInput(
+							AppController.getStoredString(Constants.FIREBASE_REG_TOKEN),
+							deviceID
+					)
+			);
+		}
 		phoneConfirimationCodeEt.setRawInputType(Configuration.KEYBOARD_QWERTY);
 		settingToolbar();
 	}

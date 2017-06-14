@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class SetDeviceInput {
-    @SerializedName("registeration_id")
+    @SerializedName("registerationId")
     public String regId;
 
-    @SerializedName("device_id")
+    @SerializedName("deviceId")
     public String deviceId;
 
     public SetDeviceInput(String regId, String deviceId) {
