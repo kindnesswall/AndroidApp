@@ -560,7 +560,31 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 
 				} else {
-					Snackbari.showS(mRequestLay, "ابتدا لاگین شوید");
+
+					MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false);
+
+					final MaterialDialog dialog = builder.build();
+					((TextView) dialog.findViewById(R.id.message_textview)).setText("برای درخواست این هدیه ابتدا باید وارد شوید. آیا مایل به ورود هستید؟");
+
+					RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+					yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+
+							startActivity(LoginActivity.createIntent());
+							dialog.dismiss();
+						}
+					});
+
+					RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+					noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+							dialog.dismiss();
+						}
+					});
+
+					dialog.show();
 				}
 
 			}

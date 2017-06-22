@@ -347,7 +347,7 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:id="@+id/divider_lay"
