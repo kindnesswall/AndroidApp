@@ -15,6 +15,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
+import ir.kindnesswall.activity.LoginActivity;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.dialogfragment.ChoosePlaceDialogFragment;
@@ -36,8 +37,8 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 	@Bind(R.id.location_tv)
 	TextView mLocationTv;
 
-	@Bind(R.id.logout_txt)
-	TextView mLogoutTxt;
+	@Bind(R.id.log_in_out_txt)
+	TextView mLog_in_out_txt;
 
 	@Bind(R.id.location_lay)
 	RelativeLayout locationLayout;
@@ -54,8 +55,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 	@Bind(R.id.my_request_lay)
 	RelativeLayout myRequestsLay;
 
-	@Bind(R.id.logout_lay)
-	RelativeLayout mLogoutLay;
+	@Bind(R.id.log_in_out_lay)
+	RelativeLayout mLog_in_out_lay;
+
 	private View rootView;
 
 	@Override
@@ -89,12 +91,64 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		super.onResume();
 
 		if (AppController.getStoredString(Constants.Authorization) != null) {
-			mLogoutLay.setVisibility(View.VISIBLE);
-			mLogoutTxt.setText(
+//			mLog_in_out_lay.setVisibility(View.VISIBLE);
+
+			mLog_in_out_lay.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					MaterialDialog.Builder builder =
+							MaterialDialogBuilder.create(getContext())
+									.customView(R.layout.dialog_simple_yes_no, false);
+
+					final MaterialDialog dialog = builder.build();
+					((TextView) dialog.findViewById(R.id.message_textview)).setText(
+							getContext().getResources().getString(R.string.dialog_exit_account)
+					);
+
+					RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+					yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+
+							apiRequest.logout();
+							mLog_in_out_lay.setVisibility(View.INVISIBLE);
+							AppController.storeString(Constants.Authorization, null);
+							AppController.storeString(Constants.TELEPHONE, null);
+
+							dialog.dismiss();
+						}
+					});
+
+					RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+					noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+							dialog.dismiss();
+						}
+					});
+
+					dialog.show();
+
+				}
+			});
+
+			mLog_in_out_txt.setText(
 					"خروج (" + AppController.getStoredString(Constants.TELEPHONE) + ")"
 			);
 		} else {
-			mLogoutLay.setVisibility(View.INVISIBLE);
+//			mLog_in_out_lay.setVisibility(View.INVISIBLE);
+
+
+			mLog_in_out_txt.setText("ورود");
+			mLog_in_out_lay.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					startActivity(LoginActivity.createIntent());
+
+				}
+			});
 		}
 
 		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("دیوار من");
@@ -103,51 +157,11 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Override
 	public void onResponse(Call call, Response response) {
-		Snackbari.showS(mLogoutLay, "شما با موفقیت از حساب خارج شدید");
+		Snackbari.showS(mLog_in_out_lay, "شما با موفقیت از حساب خارج شدید");
 	}
 
 	private void setListeners() {
-		mLogoutLay.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
 
-				MaterialDialog.Builder builder =
-						MaterialDialogBuilder.create(getContext())
-								.customView(R.layout.dialog_simple_yes_no, false);
-
-				final MaterialDialog dialog = builder.build();
-				((TextView) dialog.findViewById(R.id.message_textview)).setText(
-						getContext().getResources().getString(R.string.dialog_exit_account)
-				);
-
-				RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
-				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-					@Override
-					public void onComplete(RippleView rippleView) {
-
-						apiRequest.logout();
-						mLogoutLay.setVisibility(View.INVISIBLE);
-						AppController.storeString(Constants.Authorization, null);
-						AppController.storeString(Constants.TELEPHONE, null);
-
-						dialog.dismiss();
-					}
-				});
-
-				RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
-				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-					@Override
-					public void onComplete(RippleView rippleView) {
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-
-
-
-			}
-		});
 
 		myGiftLay.setOnClickListener(new View.OnClickListener() {
 			@Override

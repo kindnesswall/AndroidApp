@@ -333,16 +333,15 @@
 		</RelativeLayout>
 
 		<RelativeLayout
-			android:id="@+id/logout_lay"
+			android:id="@+id/log_in_out_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/about_lay"
 			android:background="?attr/selectableItemBackground"
-
 			android:clickable="true">
 
 			<TextView
-				android:id="@+id/rw_logout_txt_icon"
+				android:id="@+id/rw_log_in_out_txt_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 
@@ -355,12 +354,12 @@
 				android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
 			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-				android:id="@+id/logout_txt"
+				android:id="@+id/log_in_out_txt"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 
 				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@id/rw_logout_txt_icon"
+				android:layout_toLeftOf="@id/rw_log_in_out_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
 				android:text="خروج"
