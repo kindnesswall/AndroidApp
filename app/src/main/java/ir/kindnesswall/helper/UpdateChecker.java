@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import ir.hamed_gh.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
+import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.helper.downloader.AppInfo;
 import ir.kindnesswall.helper.downloader.DownloadService;
 
@@ -35,12 +36,11 @@ public class UpdateChecker {
 	//Todo: check needs android marshmallow permission file ?
 
 
-	public final String SHARED_PREFERENCE_LAST_VERSION = "SHARED_PREFERENCE_LAST_VERSION";
 	public UpdateDetail mUpdateDetail;
 	String fileDownloadPath;
 	Intent[] intents;
 	Context context;
-	TextView titleTextView, contentTextView, bodyTextView, positiveBtn, negtiveBtn, neverBtn, progressPer;
+	TextView titleTextView, contentTextView, bodyTextView, positiveBtn, notNowBtn, neverBtn, progressPer;
 	View cancelView;
 	File mDownloadDir;
 	DownloadManager mDownloadManager;
@@ -64,18 +64,30 @@ public class UpdateChecker {
 			PackageManager manager = context.getPackageManager();
 			PackageInfo info = manager.getPackageInfo(
 					context.getPackageName(), 0);
-			version = info.versionName;
+			version = String.valueOf(info.versionCode);
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
 		return version;
 	}
 
-	public void showUpdaterDialog(final Context context, String title, String body, ArrayList<String> textArray,String version, Intent[] intents, final boolean isForcedUpdate) {
+	public void showUpdaterDialog(
+			final Context context,
+			String title,
+			String body,
+			ArrayList<String> textArray,
+			String version,
+			Intent[] intents,
+			final boolean isForcedUpdate) {
 
 		this.isForcedUpdate = isForcedUpdate;
-		String sharePrefAnswer = AppController.getStoredString(SHARED_PREFERENCE_LAST_VERSION);
-		if (sharePrefAnswer != null && sharePrefAnswer.equals(getAppVersion(context)) && !isForcedUpdate)
+		String sharePrefAnswer = AppController.getStoredString(
+				Constants.VERSION_SKIP_UPDATE
+		);
+
+		if (sharePrefAnswer != null &&
+				(getAppVersion(context).equals(version) || sharePrefAnswer.equals(version))&&
+						!isForcedUpdate)
 			return;
 
 		this.intents = intents;
@@ -100,7 +112,7 @@ public class UpdateChecker {
 		updaterProgressbar = (ProgressBar) dialog.findViewById(R.id.update_progressbar);
 		bodyTextView = (TextView) dialog.findViewById(R.id.main_text_dialog_tv);
 		positiveBtn = (TextView) dialog.findViewById(R.id.posetive_btn_text);
-		negtiveBtn = (TextView) dialog.findViewById(R.id.negative_btn_text);
+		notNowBtn = (TextView) dialog.findViewById(R.id.not_now_btn_text);
 		neverBtn = (TextView) dialog.findViewById(R.id.never_btn_text);
 		progressPer = (TextView) dialog.findViewById(R.id.progressPercentage);
 		cancelView = dialog.findViewById(R.id.cancel_lay);
@@ -134,7 +146,7 @@ public class UpdateChecker {
 				updaterProgressbar.setVisibility(View.VISIBLE);
 				cancelView.setVisibility(View.VISIBLE);
 				progressPer.setVisibility(View.VISIBLE);
-				negtiveBtn.setVisibility(View.GONE);
+				notNowBtn.setVisibility(View.GONE);
 				positiveBtn.setVisibility(View.GONE);
 				neverBtn.setVisibility(View.GONE);
 				if (file.exists()) {
@@ -146,20 +158,28 @@ public class UpdateChecker {
 		});
 
 		if (isForcedUpdate) {
-			negtiveBtn.setVisibility(View.GONE);
+
+			notNowBtn.setVisibility(View.GONE);
 			neverBtn.setVisibility(View.GONE);
+
 		} else {
-			negtiveBtn.setOnClickListener(new View.OnClickListener() {
+
+			notNowBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
 					dialog.dismiss();
+
 				}
 			});
+
 			neverBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					AppController.storeString(SHARED_PREFERENCE_LAST_VERSION, version);
+
+					AppController.storeString(Constants.VERSION_SKIP_UPDATE, version);
 					dialog.dismiss();
+
 				}
 			});
 		}
@@ -328,7 +348,7 @@ public class UpdateChecker {
 		cancelView.setVisibility(View.GONE);
 		positiveBtn.setVisibility(View.VISIBLE);
 		if (!isForcedUpdate) {
-			negtiveBtn.setVisibility(View.VISIBLE);
+			notNowBtn.setVisibility(View.VISIBLE);
 			neverBtn.setVisibility(View.VISIBLE);
 		}
 	}

@@ -58,7 +58,7 @@
 		android:textSize="12sp"/>
 
 	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
-		android:id="@+id/negative_btn_text"
+		android:id="@+id/not_now_btn_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/main_text_dialog_tv"
@@ -77,7 +77,7 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/main_text_dialog_tv"
 		android:layout_marginLeft="16dp"
-		android:layout_toRightOf="@+id/negative_btn_text"
+		android:layout_toRightOf="@id/not_now_btn_text"
 		android:gravity="center"
 		android:padding="8dp"
 		android:text="خیر"
