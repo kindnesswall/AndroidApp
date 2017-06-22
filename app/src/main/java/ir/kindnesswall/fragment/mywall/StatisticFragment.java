@@ -13,6 +13,7 @@ import ir.hamed_gh.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.fragment.BaseFragment;
+import ir.kindnesswall.model.api.output.StatisticsOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -47,14 +48,14 @@ public class StatisticFragment extends BaseFragment {
 	public void onResponse(Call call, Response response) {
 		super.onResponse(call, response);
 
-		Map<String, String> characteristics = (Map<String, String>) response.body();
+		StatisticsOutput statisticsOutput = (StatisticsOutput) response.body();
 
 
 		int i = 0;
-		for (Map.Entry<String, String> entry : characteristics.entrySet()) {
+		for (Map.Entry<String, String> entry : statisticsOutput.statistics.entrySet()) {
 
 			i++;
-			if (i > 1) {
+			if (i > 10) {
 				break;
 			}
 			String key = entry.getKey();

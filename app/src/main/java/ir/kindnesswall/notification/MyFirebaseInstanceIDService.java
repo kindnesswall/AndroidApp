@@ -43,9 +43,11 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService imple
         apiRequest.setDevice(new SetDeviceInput(refreshedToken, deviceID));
 
         // Notify UI that registration has completed, so the progress indicator can be hidden.
+
         Intent registrationComplete = new Intent(REGISTRATION_COMPLETE);
         registrationComplete.putExtra("token", refreshedToken);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
+
     }
 
     @Override

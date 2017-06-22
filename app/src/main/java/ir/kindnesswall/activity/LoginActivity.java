@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 					return;
 				}
-				apiRequest.login(confirmationCode);
+				apiRequest.login(confirmationCode, DeviceInfo.getDeviceID(context));
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);

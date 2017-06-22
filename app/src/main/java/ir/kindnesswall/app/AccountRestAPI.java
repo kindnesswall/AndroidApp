@@ -32,6 +32,8 @@ public interface AccountRestAPI {
 	@POST("Account/Login")
 	Call<TokenOutput> login(@Field("username") String username,
 	                        @Field("password") String password,
+	                        @Field("registerationId") String registerationId,
+	                        @Field("deviceId") String deviceId,
 	                        @Field("grant_type") String grant_type);
 
 	@POST("Account/SetDevice")

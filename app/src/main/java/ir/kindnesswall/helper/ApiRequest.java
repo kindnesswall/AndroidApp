@@ -5,7 +5,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
@@ -23,6 +22,7 @@ import ir.kindnesswall.model.api.input.ReportInput;
 import ir.kindnesswall.model.api.input.RequestGiftInput;
 import ir.kindnesswall.model.api.input.SetDeviceInput;
 import ir.kindnesswall.model.api.output.RegisterOutput;
+import ir.kindnesswall.model.api.output.StatisticsOutput;
 import ir.kindnesswall.model.api.output.TokenOutput;
 import ir.kindnesswall.model.api.output.UpdateOutput;
 import okhttp3.ResponseBody;
@@ -289,11 +289,13 @@ public class ApiRequest {
 
 	}
 
-	public void login(String verificationCode) {
+	public void login(String verificationCode, String deviceId) {
 
 		Call<TokenOutput> call = AppController.accountService.login(
 				AppController.getStoredString(Constants.TELEPHONE),
 				verificationCode,
+				AppController.getStoredString(Constants.FIREBASE_REG_TOKEN),
+				deviceId,
 				"password"
 		);
 
@@ -439,19 +441,19 @@ public class ApiRequest {
 	}
 
 	public void getStatistics() {
-		Call<Map<String, String>> call = AppController.service.getStatistics(
+		Call<StatisticsOutput> call = AppController.service.getStatistics(
 				Constants.JSON_TYPE
 		);
 
-		call.enqueue(new CallbackWithRetry<Map<String, String>>(call, mContext) {
+		call.enqueue(new CallbackWithRetry<StatisticsOutput>(call, mContext) {
 			@Override
-			public void onResponse(Call<Map<String, String>> call,
-			                       Response<Map<String, String>> response) {
+			public void onResponse(Call<StatisticsOutput> call,
+			                       Response<StatisticsOutput> response) {
 				handlingOnResponse(new HandlingResponse(call, response, this));
 			}
 
 			@Override
-			public void onFailure(Call<Map<String, String>> call, Throwable t) {
+			public void onFailure(Call<StatisticsOutput> call, Throwable t) {
 				super.onFailure(call, t);
 			}
 

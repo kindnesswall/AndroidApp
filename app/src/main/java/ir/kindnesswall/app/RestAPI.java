@@ -2,7 +2,6 @@ package ir.kindnesswall.app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.model.api.Category;
@@ -12,6 +11,7 @@ import ir.kindnesswall.model.api.User;
 import ir.kindnesswall.model.api.input.BookmarkInput;
 import ir.kindnesswall.model.api.input.ReportInput;
 import ir.kindnesswall.model.api.input.RequestGiftInput;
+import ir.kindnesswall.model.api.output.StatisticsOutput;
 import ir.kindnesswall.model.api.output.UpdateOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -165,7 +165,7 @@ public interface RestAPI {
 	);
 
 	@GET("GetStatistics/")
-	Call<Map<String, String>> getStatistics(
+	Call<StatisticsOutput> getStatistics(
 			@Header(Constants.ContentType) String contentType
 	);
 
