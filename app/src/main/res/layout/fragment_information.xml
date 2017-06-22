@@ -49,7 +49,7 @@
 				android:visibility="invisible"
 			/>
 
-			<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+			<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 				android:id="@+id/search_et"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
@@ -73,7 +73,7 @@
 			android:layout_below="@id/search_textbox_lay"
 			android:layout_marginTop="4dp">
 
-			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+			<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
 				android:id="@+id/filter_ic"
 				android:layout_width="24dp"
 				android:layout_height="24dp"
@@ -83,7 +83,7 @@
 				android:text=""
 				android:textSize="22dp"/>
 
-			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 				android:id="@+id/filter_txt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
 	<!--android:layout_alignParentTop="true"-->
 	<!--android:background="@color/background_gray">-->
 
-	<!--<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons-->
+	<!--<kindnesswallstomviews.textviews.TextViewDivarIcons-->
 	<!--android:id="@+id/filter_ic"-->
 	<!--android:layout_width="24dp"-->
 	<!--android:layout_height="24dp"-->
@@ -116,7 +116,7 @@
 	<!--android:text=""-->
 	<!--android:textSize="22dp"/>-->
 
-	<!--<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular-->
+	<!--<kindnesswallstomviews.textviews.TextViewIranSansRegular-->
 	<!--android:id="@+id/filter_txt"-->
 	<!--android:layout_width="match_parent"-->
 	<!--android:layout_height="wrap_content"-->
@@ -160,7 +160,7 @@
 		app:pv_progressMode="indeterminate"
 		app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="202dp">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/filtering_basedon_tv"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
 		android:layout_marginTop="4dp"
 		android:background="@color/background_gray">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/categoryـfilter_ic"
 			android:layout_width="24dp"
 			android:layout_height="24dp"
@@ -38,7 +38,7 @@
 			android:text=""
 			android:textSize="22dp"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/categoryـfilter_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 		android:layout_marginTop="4dp"
 		android:background="@color/background_gray">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/city_filter_ic"
 			android:layout_width="24dp"
 			android:layout_height="24dp"
@@ -69,7 +69,7 @@
 			android:text=""
 			android:textSize="22dp"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/city_filter_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
 		android:background="@color/background_gray"
 		android:visibility="invisible">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarIcons
+		<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
 			android:id="@+id/region_filter_ic"
 			android:layout_width="24dp"
 			android:layout_height="24dp"
@@ -101,7 +101,7 @@
 			android:text=""
 			android:textSize="22dp"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/region_filter_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
 		android:layout_height="52dp"
 		android:layout_below="@id/divider_lay">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 			android:id="@+id/apply_filter_tv"
 			android:layout_width="80dp"
 			android:layout_height="match_parent"
@@ -136,7 +136,7 @@
 			android:textColor="@color/colorPrimary"
 			android:textSize="14dp"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 			android:id="@+id/cancel_filter_tv"
 			android:layout_width="80dp"
 			android:layout_height="match_parent"

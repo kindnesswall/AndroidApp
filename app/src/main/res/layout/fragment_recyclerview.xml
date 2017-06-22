@@ -17,7 +17,7 @@
 		app:pv_progressMode="indeterminate"
 		app:pv_progressStyle="@style/InDeterminateCircularProgressDrawableStyle"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

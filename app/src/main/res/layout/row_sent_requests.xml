@@ -5,7 +5,7 @@
                 android:layout_height="56dp"
                 android:background="@color/white">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/rw_sent_request_name_tv"
 		android:layout_width="wrap_content"
 		android:layout_height="56dp"
@@ -42,7 +42,7 @@
 				android:layout_centerVertical="true"
 				android:src="@mipmap/ic_close_grey600_36dp"/>
 
-			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 				android:id="@+id/rw_btn_txt"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

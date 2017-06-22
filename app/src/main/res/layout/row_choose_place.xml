@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/rw_choose_place_ur_here_tv"
 		android:layout_width="108dp"
 		android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
 		android:text="(شما اینجا هستید)"
 		android:visibility="invisible"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/rw_choose_place_name_tv"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

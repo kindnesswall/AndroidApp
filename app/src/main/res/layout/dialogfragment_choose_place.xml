@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/choose_place_text"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
 
 		android:src="@mipmap/ic_action_action_search_light"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+	<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 		android:id="@+id/choose_place_et"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

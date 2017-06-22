@@ -114,7 +114,7 @@
                             android:scaleType="center"
                             android:src="@mipmap/ic_back" />
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
                             android:id="@+id/toolbar_title_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="56dp"
@@ -170,7 +170,7 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
-                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                         android:id="@+id/detail_title_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                         android:textColor="@color/red_high" />
 
-                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                         android:id="@+id/detail_register_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                         android:layout_alignParentRight="true"
                         android:orientation="vertical">
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_category_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -214,7 +214,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/grey_700" />
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_place_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/grey_700" />
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_price_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -247,7 +247,7 @@
 
                         android:orientation="vertical">
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_category_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -255,7 +255,7 @@
                             android:padding="2dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_place_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                             android:padding="2dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-                        <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                             android:id="@+id/detail_price_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -284,7 +284,7 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
-                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                         android:id="@+id/detail_description_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -309,7 +309,7 @@
                         android:src="@mipmap/ic_action_content_report" />
 
 
-                    <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                         android:id="@+id/report_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -362,7 +362,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/divider_lay">
 
-                <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                     android:id="@+id/delete_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -394,7 +394,7 @@
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/divider_lay">
 
-                <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                     android:id="@+id/edit_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -430,7 +430,7 @@
             android:background="@color/colorPrimary"
             android:visibility="invisible">
 
-            <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+            <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                 android:id="@+id/request_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -463,7 +463,7 @@
             android:background="@color/colorPrimary"
             android:visibility="gone">
 
-            <ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+            <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                 android:id="@+id/contact_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

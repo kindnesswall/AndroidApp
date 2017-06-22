@@ -23,7 +23,7 @@
 			app:contentInsetStart="0dp"
 			app:theme="@style/MyToolbar"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarMehrabani
+		<ir.kindnesswall.customviews.textviews.TextViewDivarMehrabani
 			android:id="@+id/toolbar_app_icon"
 			android:layout_width="48dp"
 			android:layout_height="48dp"
@@ -35,7 +35,7 @@
 			android:textColor="@color/colorAccent"
 			android:textSize="26dp"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_new_gift_btn_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="56dp"
@@ -53,7 +53,7 @@
 			android:text="هدیه جدید"
 			android:textColor="#FFFFFF"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_title_textView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 					android:id="@+id/btn_no"
 					android:layout_width="match_parent"
 					android:layout_height="36dp"

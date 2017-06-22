@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+        <ir.kindnesswall.customviews.edit_text.EditTextIranSans
             android:id="@+id/et_show_notifs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

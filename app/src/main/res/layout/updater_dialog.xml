@@ -6,7 +6,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:id="@+id/title_dialog_tv"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
 		android:textColor="@color/light_black"
 		android:textSize="12sp"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/notes_text_dialog_tv"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 		android:textColor="@color/light_black"
 		android:textSize="10sp"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/main_text_dialog_tv"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 		android:textColor="@color/light_black"
 		android:textSize="10sp"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:id="@+id/posetive_btn_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
 		android:textColor="@color/primaryDialog"
 		android:textSize="12sp"/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:id="@+id/negative_btn_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
 		android:textSize="12sp"/>
 
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:id="@+id/never_btn_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
 		android:visibility="gone"
 		/>
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:text="%0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
 		android:layout_height="wrap_content"
 		android:visibility="gone">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"

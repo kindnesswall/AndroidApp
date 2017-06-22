@@ -16,7 +16,7 @@
 		android:layout_gravity="center"
 		android:gravity="center">
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 			android:id="@+id/txt_internet_status"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent">
 
-					<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansBold
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 						android:id="@+id/btn_try_connect_to_internet"
 						android:layout_width="match_parent"
 						android:layout_height="36dp"

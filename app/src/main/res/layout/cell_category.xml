@@ -20,7 +20,7 @@
 			android:layout_height="48dp"
 			android:layout_centerHorizontal="true"/>
 
-		<!--<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewDivarMehrabani-->
+		<!--<kindnesswallstomviews.textviews.TextViewDivarMehrabani-->
 		<!--android:id="@+id/cell_category_font_icon"-->
 		<!--android:layout_width="wrap_content"-->
 		<!--android:layout_height="wrap_content"-->
@@ -28,7 +28,7 @@
 		<!--android:textColor="@color/icon_black"-->
 		<!--android:textSize="32dp" />-->
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/cell_category_tv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/register_gift_bg">
 
-	<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/rw_category_name_tv"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"

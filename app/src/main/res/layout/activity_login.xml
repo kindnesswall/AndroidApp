@@ -37,7 +37,7 @@
 			android:padding="8dp"
 			android:src="@mipmap/ic_back"/>
 
-		<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_title_textView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -75,7 +75,7 @@
 			android:background="@color/white"
 			android:orientation="vertical">
 
-			<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 				android:id="@+id/choose_category_tv"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 				android:textColor="@color/black"
 				android:textSize="16dp"/>
 
-			<ir.hamed_gh.divaremehrabani.customviews.edit_text.EditTextIranSans
+			<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 				android:id="@+id/phone_confirimation_code_et"
 				android:layout_width="match_parent"
 				android:layout_height="42dp"
@@ -113,7 +113,7 @@
 				android:background="@drawable/button_selector"
 				android:clickable="true">
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 					android:id="@+id/login_get_verification_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
 				android:clickable="true"
 				android:visibility="visible">
 
-				<ir.hamed_gh.divaremehrabani.customviews.textviews.TextViewIranSansRegular
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 					android:id="@+id/second_btn_tv"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
