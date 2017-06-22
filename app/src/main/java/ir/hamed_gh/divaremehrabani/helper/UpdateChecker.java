@@ -288,6 +288,11 @@ public class UpdateChecker {
 		public void onFailed(DownloadException e) {
 			super.onFailed(e);
 			cancelDownload();
+			if (e.getErrorCode()==108) {
+				Toasti.showS("فایل مورد نظر موجود نیست");
+			}else {
+				Toasti.showS("مشکلی در دانلود رخ داده است.");
+			}
 			//todo : in other way you should use finished Table
 		}
 

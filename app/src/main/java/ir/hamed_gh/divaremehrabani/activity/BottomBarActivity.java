@@ -29,11 +29,14 @@ import ir.hamed_gh.divaremehrabani.fragment.mywall.StatisticFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.MyRequestsFragment;
 import ir.hamed_gh.divaremehrabani.fragment.mywall.requests.RequestsToAGiftFragment;
-import ir.hamed_gh.divaremehrabani.helper.Toasti;
+import ir.hamed_gh.divaremehrabani.helper.ApiRequest;
+import ir.hamed_gh.divaremehrabani.helper.DeviceInfo;
 import ir.hamed_gh.divaremehrabani.helper.UpdateChecker;
 import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class BottomBarActivity extends AppCompatActivity {
+public class BottomBarActivity extends AppCompatActivity implements ApiRequest.Listener {
 
 	@Bind(R.id.toolbar_title_textView)
 	public TextView mToolbarTitleTextView;
@@ -52,6 +55,7 @@ public class BottomBarActivity extends AppCompatActivity {
 	private BottomBar mBottomBar;
 	private Boolean unlock = false;
 	private String currentVersionName;
+	private Bundle savedInstanceState;
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -174,20 +178,16 @@ public class BottomBarActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.savedInstanceState = savedInstanceState;
+
 		setContentView(R.layout.activity_bottombar);
 		ButterKnife.bind(this);
 
 		context = this;
-		currentVersionName = UpdateChecker.getAppVersion(context);
-
-		homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
-		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
-		categoriesGridFragment = new CategoriesGridFragment();
-		myWallFragment = new MyWallFragment();
-
 		settingToolbar();
 
-		settingBottomBar(savedInstanceState);
+		currentVersionName = UpdateChecker.getAppVersion(context);
+
 
 		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -202,6 +202,18 @@ public class BottomBarActivity extends AppCompatActivity {
 			}
 		});
 
+		ApiRequest apiRequest = new ApiRequest(this, this);
+		apiRequest.getUpdatedVersion();
+	}
+
+	private void setContent() {
+
+		homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
+		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+		categoriesGridFragment = new CategoriesGridFragment();
+		myWallFragment = new MyWallFragment();
+
+		settingBottomBar(savedInstanceState);
 		mBottomBar.selectTabAtPosition(3, false);
 	}
 
@@ -255,7 +267,7 @@ public class BottomBarActivity extends AppCompatActivity {
 			fragmentTransaction.addToBackStack(title);
 			fragmentTransaction.commit();
 
-            fragmentManager.executePendingTransactions();
+			fragmentManager.executePendingTransactions();
 
 		} catch (Exception e) {
 			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
@@ -324,44 +336,44 @@ public class BottomBarActivity extends AppCompatActivity {
 //				Toasti.showS(mContext, getString(R.string.internal_error));
 //				break;
 //			case "1":
+		boolean isForcedUpdate;
 
-				boolean isForcedUpdate;
+		if (updateOutput.force_update != null && updateOutput.force_update.equalsIgnoreCase("true")) {
+			isForcedUpdate = true;
+		} else {
+			isForcedUpdate = false;//todo use this
+		}
 
-				if (updateOutput.force_update != null && updateOutput.force_update.equalsIgnoreCase("true")) {
-					isForcedUpdate = true;
-				} else {
-					isForcedUpdate = false;//todo use this
-				}
+		UpdateChecker updateChecker = new UpdateChecker(
+				getResources().getString(R.string.app_name),
+				updateOutput.version,
+				updateOutput.apk_url,
+				null,
+				updateOutput.changes);
 
-				UpdateChecker updateChecker = new UpdateChecker(
-						getResources().getString(R.string.app_name),
-						updateOutput.version,
-						updateOutput.apk_url,
-						null,
-						updateOutput.changes);
-
-				if (!isForcedUpdate) {
+		if (!isForcedUpdate) {
 //					callApiGetHomeByTagId();
-				}
+			setContent();
+		}
 
-				if (currentVersionName.compareToIgnoreCase(updateChecker.mUpdateDetail.latestVersion) < 0) {
-					//Notify Update
-					Intent[] intents = new Intent[1];
-					intents[0] = Intent.makeMainActivity(new ComponentName(AppController.getAppContext(),
-							BottomBarActivity.class));
-					// intents[1] = new Intent(AppController.getAppContext(), HomeActivity.class);
-					updateChecker.showUpdaterDialog(
-							context,
-							getString(R.string.update_to_new_version),
-							getString(R.string.exist_new_version),
-							updateOutput.changes,
-							updateOutput.version,
-							intents,
-							isForcedUpdate);
+		if (DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion)) {
+			//Notify Update
+			Intent[] intents = new Intent[1];
+			intents[0] = Intent.makeMainActivity(new ComponentName(AppController.getAppContext(),
+					BottomBarActivity.class));
+			// intents[1] = new Intent(AppController.getAppContext(), HomeActivity.class);
+			updateChecker.showUpdaterDialog(
+					context,
+					getString(R.string.update_to_new_version),
+					getString(R.string.exist_new_version),
+					updateOutput.changes,
+					updateOutput.version,
+					intents,
+					isForcedUpdate);
 
-					AppController.getInstance().setIsCheckedUpdate(true);
+			AppController.getInstance().setIsCheckedUpdate(true);
 
-				}
+		}
 
 //				break;
 //			default:
@@ -372,4 +384,15 @@ public class BottomBarActivity extends AppCompatActivity {
 
 	}
 
+	@Override
+	public void onResponse(Call call, Response response) {
+		if (response.body() instanceof UpdateOutput) {
+			onUpdateVersionResponse((UpdateOutput) response.body());
+		}
+	}
+
+	@Override
+	public void onFailure(Call call, Throwable t) {
+
+	}
 }

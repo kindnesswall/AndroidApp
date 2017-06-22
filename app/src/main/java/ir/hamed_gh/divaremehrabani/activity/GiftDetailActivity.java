@@ -400,7 +400,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 			}else if (tag.equals(RequestName.Bookmark)){
 
 			}else if (tag.equals(RequestName.ReportGift)){
-				Toasti.showS("گزارش ارسال گردید");
+				Snackbari.showS(mBookmarkIc,"گزارش ارسال گردید");
 			}
 		}
 	}

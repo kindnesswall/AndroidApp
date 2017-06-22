@@ -11,7 +11,6 @@ import ir.hamed_gh.divaremehrabani.model.api.User;
 import ir.hamed_gh.divaremehrabani.model.api.input.BookmarkInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.ReportInput;
 import ir.hamed_gh.divaremehrabani.model.api.input.RequestGiftInput;
-import ir.hamed_gh.divaremehrabani.model.api.input.UpdateInput;
 import ir.hamed_gh.divaremehrabani.model.api.output.UpdateOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -112,7 +111,7 @@ public interface RestAPI {
 	);
 
 
-	@POST("SendFeedback")
+	@POST("ReportGift")
 	Call<ResponseBody> reportGift(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
@@ -200,6 +199,6 @@ public interface RestAPI {
 			@Path(Constants.LastIndex) String lastIndex
 	);
 
-	@POST("get_updated_version")
-	Call<UpdateOutput> getUpdatedVersion(@Body UpdateInput updateInput);
+	@GET("GetUpdatedVersion/{" + Constants.VERSION_NAME + "}")
+	Call<UpdateOutput> getUpdatedVersion(@Path(Constants.VERSION_NAME) int versionName);
 }

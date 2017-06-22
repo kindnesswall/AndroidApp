@@ -5,6 +5,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.aspsine.multithreaddownload.DownloadConfiguration;
+import com.aspsine.multithreaddownload.DownloadManager;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -127,6 +130,11 @@ public class AppController extends Application {
 
 		mInstance = this;
 		AppController.context = getApplicationContext();
+
+		DownloadConfiguration configuration = new DownloadConfiguration();
+		configuration.setMaxThreadNum(10);
+		configuration.setThreadNum(3);
+		DownloadManager.getInstance().init(getApplicationContext(), configuration);
 
 		preferences = this.getSharedPreferences("Prefs", MODE_PRIVATE);
 		editor = preferences.edit();
