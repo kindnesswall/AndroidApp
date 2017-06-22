@@ -2,6 +2,7 @@ package ir.hamed_gh.divaremehrabani.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ir.hamed_gh.divaremehrabani.constants.Constants;
 import ir.hamed_gh.divaremehrabani.model.api.Category;
@@ -161,6 +162,11 @@ public interface RestAPI {
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.USER_ID) String userID
+	);
+
+	@GET("GetStatistics/")
+	Call<Map<String, String>> getStatistics(
+			@Header(Constants.ContentType) String contentType
 	);
 
 	@GET("RecievedRequestList/{" + Constants.GIFT_ID + "}/{" + Constants.StartIndex + "}/{" + Constants.LastIndex + "}")

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ir.hamed_gh.divaremehrabani.app.AppController;
 import ir.hamed_gh.divaremehrabani.constants.Constants;
@@ -434,6 +435,26 @@ public class ApiRequest {
 			public void onFailure(Call<User> call, Throwable t) {
 				super.onFailure(call, t);
 			}
+		});
+	}
+
+	public void getStatistics() {
+		Call<Map<String, String>> call = AppController.service.getStatistics(
+				Constants.JSON_TYPE
+		);
+
+		call.enqueue(new CallbackWithRetry<Map<String, String>>(call, mContext) {
+			@Override
+			public void onResponse(Call<Map<String, String>> call,
+			                       Response<Map<String, String>> response) {
+				handlingOnResponse(new HandlingResponse(call, response, this));
+			}
+
+			@Override
+			public void onFailure(Call<Map<String, String>> call, Throwable t) {
+				super.onFailure(call, t);
+			}
+
 		});
 	}
 
