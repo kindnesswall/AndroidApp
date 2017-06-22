@@ -305,37 +305,10 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			}
 		}
 
-//
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment fragment = fm.findFragmentByTag(HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-//
-//        if (fragment!=null){
-//            finish();
-//        }else {
-//
-//            mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
-//            replaceFragment(
-//                    homeFragment,
-//                    HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-//
-//        }
-
-//        if (fm.getBackStackEntryCount()<=0) {
-//            return;
-//        }else {
-//
-//
-//        }
-//        finish();
 	}
 
 	private void onUpdateVersionResponse(UpdateOutput updateOutput) {
 
-//		switch (updateOutput.status) {
-//			case "0":
-//				Toasti.showS(mContext, getString(R.string.internal_error));
-//				break;
-//			case "1":
 		boolean isForcedUpdate;
 
 		if (updateOutput.force_update != null && updateOutput.force_update.equalsIgnoreCase("true")) {
@@ -374,13 +347,6 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			AppController.getInstance().setIsCheckedUpdate(true);
 
 		}
-
-//				break;
-//			default:
-//				callApiGetHomeByTagId();
-//				break;
-//		}
-
 
 	}
 
