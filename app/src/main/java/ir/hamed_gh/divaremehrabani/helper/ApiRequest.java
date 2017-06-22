@@ -74,13 +74,13 @@ public class ApiRequest {
 	private void handlingOnResponse(HandlingResponse handlingResponse, String TAG) {
 
 		if (!handlingResponse.response.isSuccessful()) {
-			if(ConnectionDetector.isConnectedToInternet()) {
+			if (ConnectionDetector.isConnectedToInternet()) {
 				if ((mContext instanceof Activity) && ((Activity) mContext).hasWindowFocus()) {
 					ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
-				}else {
+				} else {
 					Toasti.showS("مشکل ارتباط با سرور");
 				}
-			}else
+			} else
 				ConnectionDetector.ShowNetwrokConnectionProblemDialog(mContext, handlingResponse.callbackWithRetry);
 			return;
 		}
@@ -94,11 +94,11 @@ public class ApiRequest {
 		} else if (adapterListener != null) {
 			adapterListener.onResponse(handlingResponse.call, handlingResponse.response,
 					handlingResponse.position);
-		}else if (tagListener != null){
+		} else if (tagListener != null) {
 			tagListener.onResponse(
 					handlingResponse.call,
-					handlingResponse.response,TAG);
-		}else if (adapterTagListener != null){
+					handlingResponse.response, TAG);
+		} else if (adapterTagListener != null) {
 			adapterTagListener.onResponse(
 					handlingResponse.call,
 					handlingResponse.response,
@@ -364,7 +364,7 @@ public class ApiRequest {
 		call.enqueue(new CallbackWithRetry<ResponseBody>(call, mContext) {
 			@Override
 			public void onResponse(Call<ResponseBody> call,
-								   Response<ResponseBody> response) {
+			                       Response<ResponseBody> response) {
 				handlingOnResponse(new HandlingResponse(call, response, this));
 			}
 
@@ -637,7 +637,7 @@ public class ApiRequest {
 		});
 	}
 
-	public void getUpdatedVersion(){//final ProgressView progressView) {
+	public void getUpdatedVersion() {//final ProgressView progressView) {
 		Call<UpdateOutput> result = AppController.service.getUpdatedVersion(
 				DeviceInfo.getAppVersionCode());
 		//TODO : add call ArrayList
@@ -715,16 +715,19 @@ public class ApiRequest {
 
 	public interface Listener {
 		void onResponse(Call call, Response response);
+
 		void onFailure(Call call, Throwable t);
 	}
 
 	public interface TagListener {
 		void onResponse(Call call, Response response, String tag);
+
 		void onFailure(Call call, Throwable t, String tag);
 	}
 
 	public interface AdapterTagListener {
 		void onResponse(Call call, Response response, int position, String tag);
+
 		void onFailure(Call call, Throwable t, String tag);
 	}
 

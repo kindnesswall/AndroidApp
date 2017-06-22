@@ -47,18 +47,6 @@ public class StatisticFragment extends BaseFragment {
 	public void onResponse(Call call, Response response) {
 		super.onResponse(call, response);
 
-//		String json = {"phonetype":"N95","cat":"WP"};
-//
-//		try {
-//
-//			JSONObject obj = new JSONObject(json);
-//
-//			Log.d("My App", obj.toString());
-//
-//		} catch (Throwable t) {
-//			Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
-//		}
-
 		Map<String, String> characteristics = (Map<String, String>) response.body();
 
 
@@ -73,13 +61,16 @@ public class StatisticFragment extends BaseFragment {
 			String value = entry.getValue();
 
 			TextView valueTxt = (TextView) rootView.findViewById(
-					AppController.getAppContext().getResources().getIdentifier("value_tv_" + i, "id", getContext().getPackageName()));
+					AppController.getAppContext().getResources().getIdentifier("value_tv_" + i, "id", getActivity().getPackageName()));
 
 			valueTxt.setText(value);
 			valueTxt.setVisibility(View.VISIBLE);
 
 			TextView keyTxt = (TextView) rootView.findViewById(
-					AppController.getAppContext().getResources().getIdentifier("key_tv_" + i, "id", getContext().getPackageName()));
+					AppController
+							.getAppContext()
+							.getResources()
+							.getIdentifier("key_tv_" + i, "id", getActivity().getPackageName()));
 
 			keyTxt.setText(key);
 			keyTxt.setVisibility(View.VISIBLE);
