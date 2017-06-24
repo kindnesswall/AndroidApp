@@ -63,6 +63,12 @@ public class RegisteredGiftsFragment extends BaseFragment {
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
 
+		if (getArguments() != null) {
+			userId = getArguments().getString(Constants.USER_ID);
+		}
+		if (userId == null)
+			userId = AppController.getStoredString(Constants.USER_ID);
+
 		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
@@ -71,12 +77,6 @@ public class RegisteredGiftsFragment extends BaseFragment {
 			}
 		});
 		getRegisteredGifts();
-
-		if (getArguments() != null) {
-			userId = getArguments().getString(Constants.USER_ID);
-		}
-		if (userId == null)
-			userId = AppController.getStoredString(Constants.USER_ID);
 
 	}
 

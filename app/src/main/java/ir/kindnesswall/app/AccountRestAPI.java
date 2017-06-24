@@ -1,6 +1,7 @@
 package ir.kindnesswall.app;
 
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.model.api.input.LogoutInput;
 import ir.kindnesswall.model.api.input.SetDeviceInput;
 import ir.kindnesswall.model.api.output.RegisterOutput;
 import ir.kindnesswall.model.api.output.TokenOutput;
@@ -21,11 +22,11 @@ public interface AccountRestAPI {
 	@POST("Account/Register/{telephone}")
 	Call<RegisterOutput> register(@Path("telephone") String telephone);
 
-	@POST("Account/Logout/{registerationId}")
+	@POST("Account/Logout")
 	Call<ResponseBody> logout(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
-			@Path("registerationId") String registerationId
+			@Body LogoutInput logoutInput
 	);
 
 	@FormUrlEncoded
