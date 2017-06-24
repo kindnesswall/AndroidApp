@@ -112,9 +112,18 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 						public void onComplete(RippleView rippleView) {
 
 							apiRequest.logout();
-							mLog_in_out_lay.setVisibility(View.INVISIBLE);
+//							mLog_in_out_lay.setVisibility(View.INVISIBLE);
 							AppController.storeString(Constants.Authorization, null);
 							AppController.storeString(Constants.TELEPHONE, null);
+							mLog_in_out_txt.setText("ورود");
+							mLog_in_out_lay.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+
+									startActivity(LoginActivity.createIntent());
+
+								}
+							});
 
 							dialog.dismiss();
 						}
