@@ -391,7 +391,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                 file,
                 this);
 
-        Call<ResponseBody> call = AppController.service.uploadFile(
+        Call<ResponseBody> call = AppController.longTimeoutService.uploadFile(
                 AppController.getStoredString(Constants.Authorization),
                 "me.jpg",
                 requestBody

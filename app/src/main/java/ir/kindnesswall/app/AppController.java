@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -41,6 +42,8 @@ public class AppController extends Application {
 
 	public static RestAPI service;
 	public static AccountRestAPI accountService;
+	public static RestAPI longTimeoutService;
+
 	private static Context context;
 	private static AppController mInstance;
 
@@ -51,6 +54,9 @@ public class AppController extends Application {
 
 	private OkHttpClient httpClient;
 	private Retrofit.Builder retrofitBuilder;
+	private Retrofit.Builder longTimeoutRetrofitBuilder;
+	private Retrofit longTimeOutRetrofit;
+	private OkHttpClient longTimeOutHttpClient;
 
 	public static NotificationManager getNotificationManager() {
 		return notificationManager;
@@ -155,6 +161,7 @@ public class AppController extends Application {
 		notificationManager = (NotificationManager) mInstance.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		retrofitInitialization();
+		longTimeoutRetrofitInitialization();
 
 //        AppController.storeString(Constants.CITY_ID,"1");
 
@@ -187,9 +194,35 @@ public class AppController extends Application {
 
 		retrofit = retrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
 		accountRetrofit = retrofitBuilder.baseUrl(URIs.BASE_URL).build();
+	}
 
+	private void longTimeoutRetrofitInitialization() {
+
+		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+		// set your desired log level
+		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+		longTimeOutHttpClient = new OkHttpClient.Builder()
+				.readTimeout(120, TimeUnit.SECONDS)
+				.connectTimeout(120, TimeUnit.SECONDS)
+				.addInterceptor(
+						new Interceptor() {
+							@Override
+							public Response intercept(Interceptor.Chain chain) throws IOException {
+								Request request = chain.request().newBuilder()
+//                                        .addHeader(Constants.ContentType,Constants.JSON_TYPE)
+										.build();
+								return chain.proceed(request);
+							}
+						})
+				.addInterceptor(logging)
+				.build();
+		longTimeoutRetrofitBuilder = new Retrofit.Builder()
+				.addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient);
+		longTimeOutRetrofit = longTimeoutRetrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
 		service = retrofit.create(RestAPI.class);
-		accountService = accountRetrofit.create(AccountRestAPI.class);
+
 	}
 
 }
