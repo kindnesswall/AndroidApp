@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		} catch (Exception e) {
 
 		}
-//        mToolbarTitleTextView.setText("دیوار مهربانی");
+		mToolbarTitleTextView.setText("ورود به دیوار مهربانی");
 	}
 
 	private void setListeners() {
