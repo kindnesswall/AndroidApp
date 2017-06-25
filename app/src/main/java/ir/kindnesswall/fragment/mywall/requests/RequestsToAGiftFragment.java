@@ -21,6 +21,7 @@ import ir.kindnesswall.adapter.RequestToAGiftAdapter;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
 import ir.kindnesswall.fragment.BaseFragment;
+import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.model.api.RequestModel;
 import ir.kindnesswall.model.api.input.RecievedRequestListInput;
 import retrofit2.Call;
@@ -77,13 +78,16 @@ public class RequestsToAGiftFragment extends BaseFragment {
 		linearLayoutManager = new LinearLayoutManager(context);
 		mRecyclerView.setLayoutManager(linearLayoutManager);
 
-		apiRequest.getRecievedRequestList(
-				new RecievedRequestListInput(
-						giftId,
-						startIndex + "",
-						startIndex + Constants.LIMIT + ""
-				)
-		);
+		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
+				if (page > 1)
+					getRecievedRequestList();
+			}
+		});
+
+		getRecievedRequestList();
 
 		mInfoLay.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -94,6 +98,20 @@ public class RequestsToAGiftFragment extends BaseFragment {
 			}
 		});
 	}
+
+	private void getRecievedRequestList() {
+
+		apiRequest.getRecievedRequestList(
+				new RecievedRequestListInput(
+						giftId,
+						startIndex + "",
+						startIndex + Constants.LIMIT + ""
+				)
+		);
+
+		startIndex += Constants.LIMIT;
+	}
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

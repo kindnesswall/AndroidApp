@@ -75,7 +75,8 @@ public class ReceivedGiftsFragment extends BaseFragment {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				getReceivedGifts();
+				if (page > 1)
+					getReceivedGifts();
 			}
 		});
 		getReceivedGifts();

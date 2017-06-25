@@ -75,7 +75,8 @@ public class DonatedGiftsFragment extends BaseFragment {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				getDonatedGifts();
+				if (page > 1)
+					getDonatedGifts();
 			}
 		});
 		getDonatedGifts();
