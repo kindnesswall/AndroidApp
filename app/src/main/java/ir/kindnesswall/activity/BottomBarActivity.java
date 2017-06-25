@@ -223,7 +223,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 		// Necessary to restore the BottomBar's state, otherwise we would
 		// lose the current tab on orientation change.
-		mBottomBar.onSaveInstanceState(outState);
+		if (mBottomBar != null)
+			mBottomBar.onSaveInstanceState(outState);
 	}
 
 	@Override
