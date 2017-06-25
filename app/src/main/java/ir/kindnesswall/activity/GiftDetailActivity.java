@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.andexert.library.RippleView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.rey.material.widget.ProgressView;
 
@@ -665,7 +668,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		public Object instantiateItem(ViewGroup container, int position) {
 			View itemView = mLayoutInflater.inflate(R.layout.vp_image, container, false);
 
-			ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+			final ImageView imageView = (ImageView) itemView.findViewById(R.id.image_display);
+			final ProgressView progressView = (ProgressView) itemView.findViewById(R.id.progressView);
 //			imageView.setImageResource(mResources[position]);
 
 			Glide
@@ -674,6 +678,20 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					.centerCrop()
 					.placeholder(R.color.background)
 					.crossFade()
+					.listener(new RequestListener<String, GlideDrawable>() {
+						@Override
+						public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+							return false;
+						}
+
+						@Override
+						public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+
+							imageView.setVisibility(View.VISIBLE);
+							progressView.setVisibility(View.INVISIBLE);
+							return false;
+						}
+					})
 					.into(imageView);
 
 			container.addView(itemView);
