@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.rey.material.widget.ProgressView;
+
 import java.util.Map;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.hamed_gh.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
@@ -23,6 +26,9 @@ import retrofit2.Response;
 public class StatisticFragment extends BaseFragment {
 
 	private View rootView;
+
+	@Bind(R.id.fragment_progressBar)
+	ProgressView progressView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +53,8 @@ public class StatisticFragment extends BaseFragment {
 	@Override
 	public void onResponse(Call call, Response response) {
 		super.onResponse(call, response);
+
+		progressView.setVisibility(View.INVISIBLE);
 
 		StatisticsOutput statisticsOutput = (StatisticsOutput) response.body();
 
