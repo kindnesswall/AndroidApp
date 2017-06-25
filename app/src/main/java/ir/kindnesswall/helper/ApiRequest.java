@@ -6,6 +6,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.kindnesswall.activity.LoginActivity;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.constants.RequestName;
@@ -75,7 +76,9 @@ public class ApiRequest {
     private void handlingOnResponse(HandlingResponse handlingResponse, String TAG) {
 
         if (!handlingResponse.response.isSuccessful()) {
-            if (ConnectionDetector.isConnectedToInternet()) {
+            if (handlingResponse.response.code()==401){
+                LoginActivity.createIntent();
+            } else if (ConnectionDetector.isConnectedToInternet()) {
                 if ((mContext instanceof Activity) && ((Activity) mContext).hasWindowFocus()) {
                     ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
                 } else {
