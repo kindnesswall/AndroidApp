@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.dialogfragment.ChooseCategoryDialogFragment;
 import ir.kindnesswall.holder.CategoryDialogHolder;
 import ir.kindnesswall.model.api.Category;

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.helper.ReadJsonFile;
 import ir.kindnesswall.interfaces.ChooseCategoryCallback;

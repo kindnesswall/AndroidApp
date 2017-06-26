@@ -18,7 +18,8 @@ import com.aspsine.multithreaddownload.util.L;
 
 import java.io.File;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
+
 
 /**
  * Created by aspsine on 15/7/28.

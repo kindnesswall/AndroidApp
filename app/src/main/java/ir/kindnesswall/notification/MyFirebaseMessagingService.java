@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.ShowNotifActivity;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.bottombar.BottomBar;

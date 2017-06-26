@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.dialogfragment.ChoosePlaceDialogFragment;
 import ir.kindnesswall.holder.ChoosePlaceHolder;
 import ir.kindnesswall.model.Place;

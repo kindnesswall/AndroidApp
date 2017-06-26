@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.bottombar.scrollsweetness.BottomNavigationBehavior;
 
 /*

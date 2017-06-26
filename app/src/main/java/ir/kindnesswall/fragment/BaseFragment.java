@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.helper.ApiRequest;
 import retrofit2.Call;
 import retrofit2.Response;

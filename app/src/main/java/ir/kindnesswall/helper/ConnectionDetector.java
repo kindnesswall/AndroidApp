@@ -8,7 +8,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.andexert.library.RippleView;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 
 

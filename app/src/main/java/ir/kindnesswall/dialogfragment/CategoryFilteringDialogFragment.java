@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.helper.ReadJsonFile;
 import ir.kindnesswall.model.Place;

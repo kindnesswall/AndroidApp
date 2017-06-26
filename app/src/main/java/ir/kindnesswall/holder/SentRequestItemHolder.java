@@ -5,7 +5,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
+
 
 /**
  * Created by HamedGh on 3/8/2016.

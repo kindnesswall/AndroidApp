@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.activity.LoginActivity;
 import ir.kindnesswall.adapter.ViewPagerAdapter;

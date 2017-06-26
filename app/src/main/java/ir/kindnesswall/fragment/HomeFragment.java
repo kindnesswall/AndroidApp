@@ -23,7 +23,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.adapter.GiftListAdapter;
 import ir.kindnesswall.app.AppController;

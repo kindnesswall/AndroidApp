@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.holder.GiftGalleryHolder;
 import ir.kindnesswall.interfaces.UpdateImageGallery;
 

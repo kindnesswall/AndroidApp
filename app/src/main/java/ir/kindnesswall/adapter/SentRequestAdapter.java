@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.holder.SentRequestItemHolder;
 import ir.kindnesswall.model.api.RequestModel;

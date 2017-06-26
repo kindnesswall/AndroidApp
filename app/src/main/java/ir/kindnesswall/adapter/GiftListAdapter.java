@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.holder.GiftHolder;
 import ir.kindnesswall.model.api.Gift;

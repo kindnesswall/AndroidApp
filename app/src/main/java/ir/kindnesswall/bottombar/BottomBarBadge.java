@@ -29,7 +29,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 
 
 /*

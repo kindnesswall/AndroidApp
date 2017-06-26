@@ -26,7 +26,7 @@ import com.rey.material.widget.ProgressView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.constants.GiftStatus;

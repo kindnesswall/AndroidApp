@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 
 
 /**

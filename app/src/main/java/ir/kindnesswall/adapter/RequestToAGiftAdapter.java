@@ -16,7 +16,7 @@ import com.rey.material.widget.ProgressView;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.UserProfileActivity;
 import ir.kindnesswall.constants.RequestName;
 import ir.kindnesswall.helper.ApiRequest;

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.dialogfragment.ChoosePlaceDialogFragment;

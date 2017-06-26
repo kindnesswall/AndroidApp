@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;

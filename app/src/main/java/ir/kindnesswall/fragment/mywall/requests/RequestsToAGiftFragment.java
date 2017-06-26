@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.adapter.RequestToAGiftAdapter;
 import ir.kindnesswall.constants.Constants;
@@ -27,7 +27,8 @@ import ir.kindnesswall.model.api.input.RecievedRequestListInput;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import static ir.hamed_gh.kindnesswall.R.id.total_requests_tv;
+import static ir.kindnesswall.R.id.total_requests_tv;
+
 
 /**
  * Created by HamedGh on 3/8/2016.

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ir.hamed_gh.kindnesswall.R;
+import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
