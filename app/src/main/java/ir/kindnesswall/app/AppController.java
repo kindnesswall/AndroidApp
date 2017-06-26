@@ -145,26 +145,10 @@ public class AppController extends Application {
 		preferences = this.getSharedPreferences("Prefs", MODE_PRIVATE);
 		editor = preferences.edit();
 
-//        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-//                .cacheInMemory(true)
-//                .cacheOnDisk(true)
-//                .displayer(new FadeInBitmapDisplayer(500, true, true, true))
-//                .build();
-//
-//        // Create global configuration and initialize ImageLoader with this config
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-//                .defaultDisplayImageOptions(defaultOptions)
-//                .build();
-//
-//        ImageLoader.getInstance().init(config);
-
 		notificationManager = (NotificationManager) mInstance.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		retrofitInitialization();
 		longTimeoutRetrofitInitialization();
-
-//        AppController.storeString(Constants.CITY_ID,"1");
-
 	}
 
 	private void retrofitInitialization() {
@@ -194,6 +178,10 @@ public class AppController extends Application {
 
 		retrofit = retrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
 		accountRetrofit = retrofitBuilder.baseUrl(URIs.BASE_URL).build();
+
+		service = retrofit.create(RestAPI.class);
+		accountService = accountRetrofit.create(AccountRestAPI.class);
+
 	}
 
 	private void longTimeoutRetrofitInitialization() {
@@ -221,8 +209,8 @@ public class AppController extends Application {
 				.addConverterFactory(GsonConverterFactory.create())
 				.client(httpClient);
 		longTimeOutRetrofit = longTimeoutRetrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
-		service = retrofit.create(RestAPI.class);
 
+		longTimeoutService = longTimeOutRetrofit.create(RestAPI.class);
 	}
 
 }
