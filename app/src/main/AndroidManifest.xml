@@ -17,7 +17,7 @@
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 
-		<activity android:name="ir.kindnesswall.activity.AppIntro"
+		<activity android:name="ir.kindnesswall.activity.SplashScreenActivity"
 			android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -40,6 +40,9 @@
 		          android:screenOrientation="portrait"/>
 
 		<activity android:name="ir.kindnesswall.activity.LoginActivity"
+		          android:screenOrientation="portrait"/>
+
+		<activity android:name="ir.kindnesswall.activity.AppIntro"
 		          android:screenOrientation="portrait"/>
 
 		<!-- ATTENTION: This was auto-generated to add Google Play services to your project for

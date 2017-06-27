@@ -1,5 +1,6 @@
 package ir.kindnesswall.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -7,8 +8,15 @@ import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.app.AppController;
+import ir.kindnesswall.constants.Constants;
 
 public class AppIntro extends IntroActivity {
+
+	public static Intent createIntent() {
+		Intent intent = new Intent(AppController.getAppContext(), AppIntro.class);
+		return intent;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,7 @@ public class AppIntro extends IntroActivity {
 /* Use next button behavior */
 //		setButtonNextFunction(BUTTON_NEXT_FUNCTION_NEXT);
 
-		setPageScrollDuration(1000);
+		setPageScrollDuration(2500);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setPageScrollInterpolator(android.R.interpolator.fast_out_slow_in);
         }
@@ -71,8 +79,8 @@ public class AppIntro extends IntroActivity {
                 .build());
 
 //		setPageScrollDuration(500);
-		autoplay(1000, 1);
+//		autoplay(2500, INFINITE);
 
-
+		AppController.storeBoolean(Constants.SHOW_INTRO_BEFOR,true);
 	}
 }
