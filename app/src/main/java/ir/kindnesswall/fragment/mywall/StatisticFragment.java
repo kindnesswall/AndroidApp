@@ -84,6 +84,14 @@ public class StatisticFragment extends BaseFragment {
 			keyTxt.setText(key);
 			keyTxt.setVisibility(View.VISIBLE);
 
+
+			View divider = rootView.findViewById(
+					AppController
+							.getAppContext()
+							.getResources()
+							.getIdentifier("divider_lay_" + i, "id", getActivity().getPackageName()));
+
+			divider.setVisibility(View.VISIBLE);
 		}
 	}
 }
