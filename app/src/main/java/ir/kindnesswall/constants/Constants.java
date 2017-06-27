@@ -33,6 +33,7 @@ public class Constants {
 //    public static final String MY_GIFT_IMAGE_3 = "MY_GIFT_IMAGE_3";
 //    public static final String MY_GIFT_IMAGE_4 = "MY_GIFT_IMAGE_4";
 
+	public static final String SHOW_INTRO_BEFOR = "SHOW_INTRO_BEFOR";
 	public static final String MY_LOCATION_ID = "MY_LOCATION_ID";
 	public static final String MY_LOCATION_NAME = "MY_LOCATION_NAME";
 
