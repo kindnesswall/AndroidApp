@@ -36,6 +36,8 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 	 */
 
 	Context context;
+	private int REQUEST_CODE_INTRO = 321;
+	private ApiRequest apiRequest;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -43,32 +45,28 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 		setContentView(R.layout.activity_splash);
 
 		context = this;
+		apiRequest = new ApiRequest(this, this);
 
-        /* New Handler to start the Menu-Activity
-         * and close this Splash-Screen after some seconds.*/
-		if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
+		if (AppController.getStoredBoolean(Constants.SHOW_INTRO_BEFOR, false)){
 
-			ApiRequest apiRequest = new ApiRequest(this, this);
 			apiRequest.getUpdatedVersion();
 
-//			new Handler().postDelayed(new Runnable() {
-//				@Override
-//				public void run() {
-//	            /* Create an Intent that will start the Menu-Activity. */
-//
-//				}
-//			}, SPLASH_DISPLAY_LENGTH);
+		}else {
+			startActivityForResult(AppIntro.createIntent(), REQUEST_CODE_INTRO);
+		}
 
-		} else {
+	}
 
-//			Bundle bundle = new Bundle();
-//			bundle.putString(Constants.FROM_ACTIVITY, SplashScreenActivity.class.getName());
-
-			FragmentManager fm = getSupportFragmentManager();
-			ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
-//			choosePlaceDialogFragment.setArguments(bundle);
-
-			choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_CODE_INTRO) {
+			if (resultCode == RESULT_OK) {
+				// Finished the intro
+			} else {
+				// Cancelled the intro. You can then e.g. finish this activity too.
+			}
+			apiRequest.getUpdatedVersion();
 		}
 	}
 
@@ -108,9 +106,18 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 		if (!isForcedUpdate) {
 //					callApiGetHomeByTagId();
 
-			Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
-			SplashScreenActivity.this.startActivity(mainIntent);
-			SplashScreenActivity.this.finish();
+			if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
+
+				Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
+				SplashScreenActivity.this.startActivity(mainIntent);
+				SplashScreenActivity.this.finish();
+
+			} else {
+
+				FragmentManager fm = getSupportFragmentManager();
+				ChoosePlaceDialogFragment.newInstance()
+						.show(fm, ChoosePlaceDialogFragment.class.getName());
+			}
 
 		}
 

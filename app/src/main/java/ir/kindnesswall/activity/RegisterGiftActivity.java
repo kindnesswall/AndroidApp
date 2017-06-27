@@ -409,7 +409,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                 mChooseImageTxt.setVisibility(View.VISIBLE);
 
                 if (!response.isSuccessful()) {
-                    Toasti.showS("خطا در سرور");
+                    Toasti.showS("خطا در سرور" + response.code());
 
                     mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
                     mChooseImageTxt.setVisibility(View.VISIBLE);
@@ -452,7 +452,7 @@ public class RegisterGiftActivity extends AppCompatActivity
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Upload error:", t.getMessage());
-                Toasti.showS("آپلود عکس با مشکل مواجه شد.");
+                Toasti.showL("Msg: " + t.getMessage() + " | Cause: " + t.getCause());
 
                 mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
                 mChooseImageTxt.setVisibility(View.VISIBLE);

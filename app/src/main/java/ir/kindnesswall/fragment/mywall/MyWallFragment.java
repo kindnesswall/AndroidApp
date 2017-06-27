@@ -14,6 +14,7 @@ import com.andexert.library.RippleView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.AppIntro;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.activity.LoginActivity;
 import ir.kindnesswall.app.AppController;
@@ -57,6 +58,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Bind(R.id.log_in_out_lay)
 	RelativeLayout mLog_in_out_lay;
+
+	@Bind(R.id.about_lay)
+	RelativeLayout mAboutLay;
 
 	private View rootView;
 
@@ -171,6 +175,12 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	private void setListeners() {
 
+		mAboutLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(AppIntro.createIntent());
+			}
+		});
 
 		myGiftLay.setOnClickListener(new View.OnClickListener() {
 			@Override

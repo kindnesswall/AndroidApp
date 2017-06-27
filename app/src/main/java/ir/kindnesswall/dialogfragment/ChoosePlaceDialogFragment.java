@@ -62,6 +62,11 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 		return f;
 	}
 
+	public static ChoosePlaceDialogFragment newInstance() {
+		ChoosePlaceDialogFragment f = new ChoosePlaceDialogFragment();
+		return f;
+	}
+
 	private void readLevel2FromJson() {
 		String json = ReadJsonFile.loadJSONFromAsset(getContext());
 

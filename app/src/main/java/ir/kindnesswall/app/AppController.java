@@ -158,6 +158,8 @@ public class AppController extends Application {
 		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
 		httpClient = new OkHttpClient.Builder()
+				.readTimeout(40, TimeUnit.SECONDS)
+				.connectTimeout(40, TimeUnit.SECONDS)
 				.addInterceptor(
 						new Interceptor() {
 							@Override
@@ -207,7 +209,7 @@ public class AppController extends Application {
 				.build();
 		longTimeoutRetrofitBuilder = new Retrofit.Builder()
 				.addConverterFactory(GsonConverterFactory.create())
-				.client(httpClient);
+				.client(longTimeOutHttpClient);
 		longTimeOutRetrofit = longTimeoutRetrofitBuilder.baseUrl(URIs.BASE_URL + URIs.API_VERSION).build();
 
 		longTimeoutService = longTimeOutRetrofit.create(RestAPI.class);
