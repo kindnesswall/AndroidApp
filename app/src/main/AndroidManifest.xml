@@ -10,6 +10,8 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+
 	<application
 		android:name="ir.kindnesswall.app.AppController"
 		android:allowBackup="true"
@@ -40,7 +42,13 @@
 		          android:screenOrientation="portrait"/>
 
 		<activity android:name="ir.kindnesswall.activity.LoginActivity"
-		          android:screenOrientation="portrait"/>
+		          android:screenOrientation="portrait">
+
+			<intent-filter>
+				<action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+			</intent-filter>
+
+			</activity>
 
 		<activity android:name="ir.kindnesswall.activity.AppIntro"
 		          android:screenOrientation="portrait"/>
