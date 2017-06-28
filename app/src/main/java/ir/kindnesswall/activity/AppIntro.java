@@ -31,7 +31,7 @@ public class AppIntro extends IntroActivity {
 //		setButtonBackFunction(BUTTON_BACK_FUNCTION_BACK);
 
 		/* Show/hide button */
-		setButtonNextVisible(false);
+		setButtonNextVisible(true);
 /* Use next and finish button behavior */
 		setButtonNextFunction(BUTTON_NEXT_FUNCTION_NEXT_FINISH);
 /* Use next button behavior */
@@ -47,7 +47,7 @@ public class AppIntro extends IntroActivity {
 				.description("نیاز داری، بردار. نیاز نداری، بگذار :)")
 				.image(R.drawable.kindnesswall)
 				.background(R.color.colorPrimary)
-				.backgroundDark(R.color.colorAccent)
+				.backgroundDark(R.color.colorPrimary)
 				.layout(R.layout.activity_app_into)
 				.build());
 
@@ -56,7 +56,7 @@ public class AppIntro extends IntroActivity {
 				.description("به دلیل تعداد زیاد کاربران برنامه دیوار، برای راحتی کاربرها ظاهر این برنامه مشابه برنامه دیوار طراحی شده است.")
 				.image(R.drawable.divar)
 				.background(R.color.colorPrimary)
-				.backgroundDark(R.color.colorAccent)
+				.backgroundDark(R.color.colorPrimary)
 				.layout(R.layout.activity_app_into)
 				.build());
 
@@ -65,7 +65,7 @@ public class AppIntro extends IntroActivity {
 				.description("برنامه دیوار مهربانی برای همیشه رایگان خواهد ماند. بدون هر گونه تبلیغات.")
 				.image(R.drawable.gift)
 				.background(R.color.colorPrimary)
-				.backgroundDark(R.color.colorAccent)
+				.backgroundDark(R.color.colorPrimary)
 				.layout(R.layout.activity_app_into)
 				.build());
 
@@ -74,7 +74,7 @@ public class AppIntro extends IntroActivity {
                 .description("کدهای برنامه همیشه در دسترس برنامه نویسان خواهد بود.")
                 .image(R.drawable.osi)
                 .background(R.color.colorPrimary)
-                .backgroundDark(R.color.colorAccent)
+                .backgroundDark(R.color.colorPrimary)
                 .layout(R.layout.activity_app_into)
                 .build());
 
