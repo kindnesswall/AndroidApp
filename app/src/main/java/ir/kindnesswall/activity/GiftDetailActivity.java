@@ -531,11 +531,17 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 			@Override
 			public void onClick(View v) {
 //				startActivity(new Intent(mContext, RegisterGiftActivity.class));
-				startActivity(
-						RegisterGiftActivity.createIntent(
-								gift
-						)
-				);
+				if (AppController.getStoredString(Constants.Authorization)!=null) {
+					startActivity(
+							RegisterGiftActivity.createIntent(
+									gift
+							)
+					);
+				}else {
+					startActivity(
+							LoginActivity.createIntent()
+					);
+				}
 			}
 		});
 	}
