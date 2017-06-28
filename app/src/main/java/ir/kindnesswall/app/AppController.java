@@ -219,6 +219,7 @@ public class AppController extends Application {
 	public static void clearInfo() {
 
 		AppController.storeString(Constants.Authorization, null);
+		AppController.storeString(Constants.USER_ID, null);
 		AppController.storeString(Constants.TELEPHONE, null);
 		deleteSavedGift();
 
