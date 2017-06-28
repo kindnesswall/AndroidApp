@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 		phoneConfirimationCodeEt.setText(confirmationCode);
 		if (!confirmationCode.trim().matches(regexStr)) {
+			closeKeyboard();
 			Snackbari.showS(
 					mBackBtn,
 					"کد وارد شده صحیح نمی‌باشد"
@@ -135,6 +136,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
 
 				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
+
+					closeKeyboard();
 					Snackbari.showS(
 							mBackBtn,
 							"شماره تلفن وارد شده صحیح نمی‌باشد"
@@ -171,6 +174,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
 
 				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
+
+					closeKeyboard();
+
 					Snackbari.showS(
 							mBackBtn,
 							"شماره تلفن وارد شده صحیح نمی‌باشد"
@@ -283,12 +289,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			String remainingSeconds = ((RegisterOutput)response.body()).remainingSeconds;
 
 			if (remainingSeconds!=null && !remainingSeconds.equals("") ){
-				// Check if no view has focus:
-				View view = this.getCurrentFocus();
-				if (view != null) {
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-				}
+				closeKeyboard();
 
 				Snackbari.showS(mToolbarTitleTextView,
 						"لطفا "+
@@ -301,20 +302,24 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		}
 	}
 
+	private void closeKeyboard() {
+		View view = this.getCurrentFocus();
+		if (view != null) {
+			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+		}
+
+		getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+		);
+	}
+
 	@Override
 	public void onFailure(Call call, Throwable t) {
 
 		if (t.getMessage().equals("incorrect_user_pass")){
 //			.showS("کد تایید اشتباه است");
-			View view = this.getCurrentFocus();
-			if (view != null) {
-				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-			}
-
-			getWindow().setSoftInputMode(
-					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-			);
+			closeKeyboard();
 
 			Snackbari.showL(mToolbar, "کد تایید اشتباه است");
 		}
