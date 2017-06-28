@@ -100,7 +100,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
 		this.gifts.addAll(gifts);
 		adapter.notifyDataSetChanged();
 
-		if (gifts.size() > 0) {
+		if (this.gifts.size() > 0) {
 			mRecyclerView.setVisibility(View.VISIBLE);
 			mMessageTv.setVisibility(View.INVISIBLE);
 		} else {
