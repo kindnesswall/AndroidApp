@@ -65,16 +65,19 @@ public class BookmarkFragment extends BaseFragment {
 
 		adapter = new GiftListAdapter(context, gifts);
 		mRecyclerView.setAdapter(adapter);
+		linearLayoutManager = new LinearLayoutManager(context);
+		mRecyclerView.setLayoutManager(linearLayoutManager);
+
 		mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				getBookmarks();
+				if (page > 1)
+					getBookmarks();
 			}
 		});
 
-		linearLayoutManager = new LinearLayoutManager(context);
-		mRecyclerView.setLayoutManager(linearLayoutManager);
+		getBookmarks();
 
 	}
 
@@ -90,6 +93,11 @@ public class BookmarkFragment extends BaseFragment {
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -98,7 +106,7 @@ public class BookmarkFragment extends BaseFragment {
 			mBookmarkTopLay.setVisibility(View.GONE);
 			mBookmarkMainLay.setVisibility(View.VISIBLE);
 
-			if (gifts.size()<=0){
+			if (gifts.size() <= 0) {
 				getBookmarks();
 			}
 
@@ -131,7 +139,7 @@ public class BookmarkFragment extends BaseFragment {
 //							startIndex + Constants.LIMIT + ""
 //					)
 //			);
-		}else {
+		} else {
 
 			mLoginBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -156,7 +164,7 @@ public class BookmarkFragment extends BaseFragment {
 //        }
 		adapter.notifyDataSetChanged();
 
-		if (gifts.size() > 0) {
+		if (this.gifts.size() > 0) {
 			mRecyclerView.setVisibility(View.VISIBLE);
 			mMessageTv.setVisibility(View.INVISIBLE);
 		} else {

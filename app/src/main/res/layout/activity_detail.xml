@@ -479,7 +479,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
                 android:layout_below="@id/contact_text"
                 android:visibility="visible">
 
@@ -495,7 +495,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     android:src="@mipmap/ic_phone_white_36dp" />
 
                 <ImageView
@@ -503,7 +503,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     android:src="@mipmap/ic_message_white_36dp" />
 
             </LinearLayout>

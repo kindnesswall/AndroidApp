@@ -220,9 +220,34 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					mBookmarkIc.setOnClickListener(removeFromWishList);
 					apiRequest.bookmark(giftId);
 				} else {
-					Snackbari.showS(
-							mBookmarkIc,
-							"برای افزودن به علاقه‌مندی باید وارد شوید.");
+					MaterialDialog.Builder builder = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false);
+
+					final MaterialDialog dialog = builder.build();
+					((TextView) dialog.findViewById(R.id.message_textview)).setText("برای افزودن به علاقه‌مندی باید وارد شوید. آیا مایل به ورود هستید؟");
+
+					RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+					yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+
+							startActivity(LoginActivity.createIntent());
+							dialog.dismiss();
+						}
+					});
+
+					RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+					noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+						@Override
+						public void onComplete(RippleView rippleView) {
+							dialog.dismiss();
+						}
+					});
+
+					dialog.show();
+
+//					Snackbari.showS(
+//							mBookmarkIc,
+//							"برای افزودن به علاقه‌مندی باید وارد شوید.");
 				}
 			}
 		};
@@ -442,7 +467,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 			@Override
 			public void onClick(View view) {
 
-				String uri = "tel:" + "00000000000";
+				String uri = "tel:" + gift.user;//"00000000000";
 				Intent intent = new Intent(Intent.ACTION_DIAL);
 				intent.setData(Uri.parse(uri));
 				mContext.startActivity(intent);
@@ -456,7 +481,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				mContext.startActivity(
 						new Intent(
 								Intent.ACTION_VIEW,
-								Uri.fromParts("sms", "00000000000", null)
+								Uri.fromParts("sms", gift.user, null)
 						)
 				);
 			}

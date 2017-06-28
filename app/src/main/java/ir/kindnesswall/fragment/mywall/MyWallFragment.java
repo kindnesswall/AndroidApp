@@ -1,10 +1,12 @@
 package ir.kindnesswall.fragment.mywall;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -76,6 +78,14 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		rootView = inflater.inflate(R.layout.fragment_my_wall, container, false);
 
 		ButterKnife.bind(this, rootView);
+
+		String token = AppController.getStoredString(Constants.Authorization);
+		if (token != null) {
+			((EditText) rootView.findViewById(R.id.token_et)).setText(token);
+		}else {
+
+		}
+
 		init();
 
 		setListeners();
@@ -117,8 +127,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 							apiRequest.logout();
 //							mLog_in_out_lay.setVisibility(View.INVISIBLE);
-							AppController.storeString(Constants.Authorization, null);
-							AppController.storeString(Constants.TELEPHONE, null);
+							AppController.clearInfo();
 							mLog_in_out_txt.setText("ورود");
 							mLog_in_out_lay.setOnClickListener(new View.OnClickListener() {
 								@Override
@@ -239,6 +248,10 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 		mLocationTv.setText(city.name);
 
+		Intent i = context.getPackageManager()
+						.getLaunchIntentForPackage( context.getPackageName() );
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(i);
 	}
 
 	@Override

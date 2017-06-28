@@ -10,19 +10,34 @@
         android:layout_margin="6dp"
         android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/profile_iv"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:paddingBottom="18dp"
+            android:paddingTop="16dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="6dp"
+
+            android:src="@mipmap/ic_action_contact" />
+
         <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
             android:id="@+id/rw_phone_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
 
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/profile_iv"
             android:gravity="center"
 
             android:text="09353703108"
             android:textColor="@color/black"
 
             android:textSize="22dp" />
+
+
 
         <RelativeLayout
             android:id="@+id/sms_lay"

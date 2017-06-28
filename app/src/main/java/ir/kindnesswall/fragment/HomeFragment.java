@@ -8,10 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ import ir.kindnesswall.customviews.textviews.TextViewDivarIcons;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
 import ir.kindnesswall.dialogfragment.HomeFilteringDialogFragment;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
+import ir.kindnesswall.helper.Toasti;
 import ir.kindnesswall.interfaces.HomeFilteringCallback;
 import ir.kindnesswall.model.GetGiftPathQuery;
 import ir.kindnesswall.model.Place;
@@ -241,6 +244,18 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 				} else {
 					mSearchBackspaceBtn.setVisibility(View.INVISIBLE);
 				}
+			}
+		});
+
+		mSearchET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					Toasti.showS("search");
+					searchText();
+					return true;
+				}
+				return false;
 			}
 		});
 

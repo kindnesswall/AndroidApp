@@ -3,6 +3,9 @@ package ir.kindnesswall.helper;
 import android.app.Activity;
 import android.content.Context;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.constants.RequestName;
 import ir.kindnesswall.model.GetGiftPathQuery;
 import ir.kindnesswall.model.api.Category;
+import ir.kindnesswall.model.api.ErrorOutput;
 import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.RequestModel;
 import ir.kindnesswall.model.api.StartLastIndex;
@@ -76,9 +80,27 @@ public class ApiRequest {
     private void handlingOnResponse(HandlingResponse handlingResponse, String TAG) {
 
         if (!handlingResponse.response.isSuccessful()) {
+            ErrorOutput errorOutput = null;
+            if (handlingResponse.response.errorBody()!=null){
+
+                try {
+                    errorOutput = (new Gson()).fromJson(
+                            handlingResponse.response.errorBody().string(), ErrorOutput.class
+                    );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             if (handlingResponse.response.code()==401){
-                LoginActivity.createIntent();
-            } else if (ConnectionDetector.isConnectedToInternet()) {
+                AppController.clearInfo();
+                mContext.startActivity(LoginActivity.createIntent());
+            } else if (handlingResponse.response.code()==400
+                    && errorOutput!=null
+                    && errorOutput.description.equals("incorrect_user_pass")){
+
+                listener.onFailure(handlingResponse.call, new Throwable("incorrect_user_pass"));
+
+            }else if(ConnectionDetector.isConnectedToInternet()) {
                 if ((mContext instanceof Activity) && ((Activity) mContext).hasWindowFocus()) {
                     ConnectionDetector.ShowServerProblemDialog(mContext, handlingResponse.callbackWithRetry);
                 } else {

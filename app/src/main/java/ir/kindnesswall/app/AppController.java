@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import ir.kindnesswall.constants.Constants;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -215,4 +216,36 @@ public class AppController extends Application {
 		longTimeoutService = longTimeOutRetrofit.create(RestAPI.class);
 	}
 
+	public static void clearInfo() {
+
+		AppController.storeString(Constants.Authorization, null);
+		AppController.storeString(Constants.TELEPHONE, null);
+		deleteSavedGift();
+
+	}
+
+	public static void deleteSavedGift() {
+		AppController.storeBoolean(Constants.MY_GIFT_SAVED, false);
+
+		AppController.storeString(Constants.MY_GIFT_TITLE, null);
+		AppController.storeString(Constants.MY_GIFT_PRICE, null);
+		AppController.storeString(Constants.MY_GIFT_ADDRESS, null);
+		AppController.storeString(Constants.MY_GIFT_DESCRIPTION, null);
+		AppController.storeString(Constants.MY_GIFT_PRICE, null);
+
+		AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, null);
+		AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, null);
+
+		AppController.storeString(Constants.MY_GIFT_LOCATION_ID, null);
+		AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, null);
+
+		AppController.storeString(Constants.MY_GIFT_REGION_ID, null);
+		AppController.storeString(Constants.MY_GIFT_REGION_NAME, null);
+
+		int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
+		for (int i = 0; i < numberOfMyImages; i++) {
+			AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, null);
+		}
+		AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, 0);
+	}
 }

@@ -18,9 +18,10 @@ import com.squareup.picasso.Picasso;
 import java.util.Map;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.activity.ShowNotifActivity;
+import ir.kindnesswall.activity.SplashScreenActivity;
 import ir.kindnesswall.app.AppController;
-import ir.kindnesswall.bottombar.BottomBar;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.model.NotificationData;
 import ir.kindnesswall.model.PushSampleModel;
@@ -120,7 +121,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         contentView.setTextViewText(R.id.message_tv, notificationData.message);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_profile)
+                .setSmallIcon(R.mipmap.ic_gift_grey600_18dp)
                 .setContent(contentView);
 
         Notification notification = mBuilder.build();
@@ -128,13 +129,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notification.defaults |= Notification.DEFAULT_SOUND;
         notification.defaults |= Notification.DEFAULT_VIBRATE;
 
+        Intent notificationIntent;
         if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
-
-            Intent notificationIntent = new Intent(this, BottomBar.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-            notification.contentIntent = contentIntent;
+            notificationIntent = new Intent(this, BottomBarActivity.class);
+        }else {
+            notificationIntent = new Intent(this, SplashScreenActivity.class);
         }
 
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        notification.contentIntent = contentIntent;
 
         mNotificationManager.notify(2, notification);
 

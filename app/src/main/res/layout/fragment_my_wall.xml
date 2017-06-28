@@ -8,10 +8,19 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="match_parent">
 
+
+		<EditText
+			android:id="@+id/token_et"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+
+
 		<RelativeLayout
 			android:id="@+id/my_gift_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/token_et"
 			android:background="?attr/selectableItemBackground"
 			android:clickable="true">
 

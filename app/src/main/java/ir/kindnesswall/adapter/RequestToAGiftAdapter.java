@@ -17,6 +17,7 @@ import com.rey.material.widget.ProgressView;
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.activity.UserProfileActivity;
 import ir.kindnesswall.constants.RequestName;
 import ir.kindnesswall.helper.ApiRequest;
@@ -96,6 +97,9 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                     }
                 });
 
+                yesProgressView.setVisibility(View.INVISIBLE);
+                yesTextView.setText("بله");
+
                 yesNoDialog.show();
             }
         });
@@ -126,6 +130,9 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                         yesNoDialog.dismiss();
                     }
                 });
+
+                yesProgressView.setVisibility(View.INVISIBLE);
+                yesTextView.setText("بله");
 
                 yesNoDialog.show();
             }
@@ -174,7 +181,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
     }
 
     @Override
-    public void onResponse(Call call, Response response, int position, String tag) {
+    public void onResponse(Call call, Response response,final int position, String tag) {
 
         if (response.body() instanceof ResponseBody) {
             if (tag.equals(RequestName.DenyRequest)) {
@@ -196,7 +203,12 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                 callIV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toasti.showS("callIV");
+
+                        String uri = "tel:" + requestModels.get(position).fromUser;//"00000000000";
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse(uri));
+                        mContext.startActivity(intent);
+
                     }
                 });
 
@@ -204,7 +216,14 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                 smsIV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toasti.showS("smsIV");
+//                        Toasti.showS("smsIV");
+
+                        mContext.startActivity(
+                                new Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.fromParts("sms", requestModels.get(position).fromUser, null)
+                                )
+                        );
                     }
                 });
 
@@ -212,7 +231,11 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                 profileIV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toasti.showS("profileIV");
+//                        Toasti.showS("profileIV");
+
+                        mContext.startActivity(UserProfileActivity.createIntent(
+                                requestModels.get(position).fromUserId
+                        ));
                     }
                 });
 
@@ -220,7 +243,11 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                 giftPageRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                     @Override
                     public void onComplete(RippleView rippleView) {
-                        Toasti.showS("giftPageRv");
+//                        Toasti.showS("giftPageRv");
+
+                        mContext.startActivity(GiftDetailActivity.createIntent(
+                                requestModels.get(position).giftId)
+                        );
                     }
                 });
 

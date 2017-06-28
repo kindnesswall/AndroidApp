@@ -70,6 +70,7 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/user_telephone_tv"
 		android:layout_centerHorizontal="true"
+		android:visibility="gone"
 		android:layout_marginTop="32dp">
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansBold

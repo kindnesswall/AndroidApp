@@ -231,7 +231,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                     (new ApiRequest(context, RegisterGiftActivity.this)).registerGift(
                             tempGift
                     );
-                    deleteSavedGift();
+                    AppController.deleteSavedGift();
                 }
                 mToolbarSendBtnTv.setVisibility(View.INVISIBLE);
                 mSendProgressView.setVisibility(View.VISIBLE);
@@ -261,7 +261,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteSavedGift();
+                AppController.deleteSavedGift();
                 finish();
             }
         });
@@ -409,7 +409,11 @@ public class RegisterGiftActivity extends AppCompatActivity
                 mChooseImageTxt.setVisibility(View.VISIBLE);
 
                 if (!response.isSuccessful()) {
-                    Toasti.showS("خطا در سرور" + response.code());
+
+                    if (response.code()==401){
+                        AppController.clearInfo();
+                        startActivity(LoginActivity.createIntent());
+                    }
 
                     mUploadImgCircularProgress.setVisibility(View.INVISIBLE);
                     mChooseImageTxt.setVisibility(View.VISIBLE);
@@ -432,7 +436,6 @@ public class RegisterGiftActivity extends AppCompatActivity
                     giftGalleryAdapter.notifyDataSetChanged();
                     onUpdateGallery();
 
-//					ImageLoader.getInstance().displayImage(uploadFileOutput.imageSrc, giftImageview);
                 }
 
 //                switch (uploadAvatarOutput.status) {
@@ -516,29 +519,7 @@ public class RegisterGiftActivity extends AppCompatActivity
         AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, myGift.giftImages.size());
     }
 
-    private void deleteSavedGift() {
-        AppController.storeBoolean(Constants.MY_GIFT_SAVED, false);
 
-        AppController.storeString(Constants.MY_GIFT_TITLE, null);
-        AppController.storeString(Constants.MY_GIFT_PRICE, null);
-        AppController.storeString(Constants.MY_GIFT_ADDRESS, null);
-        AppController.storeString(Constants.MY_GIFT_DESCRIPTION, null);
-        AppController.storeString(Constants.MY_GIFT_PRICE, null);
-
-        AppController.storeString(Constants.MY_GIFT_CATEGORY_ID, null);
-        AppController.storeString(Constants.MY_GIFT_CATEGORY_NAME, null);
-
-        AppController.storeString(Constants.MY_GIFT_LOCATION_ID, null);
-        AppController.storeString(Constants.MY_GIFT_LOCATION_NAME, null);
-
-        AppController.storeString(Constants.MY_GIFT_REGION_ID, null);
-        AppController.storeString(Constants.MY_GIFT_REGION_NAME, null);
-
-        for (int i = 0; i < myGift.giftImages.size(); i++) {
-            AppController.storeString(Constants.MY_GIFT_IMAGE + "_" + i, null);
-        }
-        AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, 0);
-    }
 
     private void setInfo() {
 
