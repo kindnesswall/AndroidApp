@@ -3,6 +3,7 @@ package ir.kindnesswall.adapter;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.holder.SentRequestItemHolder;
 import ir.kindnesswall.model.api.RequestModel;
@@ -66,6 +68,13 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 				apiRequest.deleteMyRequest(requestModels.get(i).giftId, i);
 			}
 		});
+		myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Log.d("Test", "onClick: ");
+				mContext.startActivity(GiftDetailActivity.createIntent(requestModels.get(i).giftId));
+			}
+		});
 
 	}
 
@@ -77,7 +86,9 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 	@Override
 	public void onResponse(Call call, Response response, int position, String tag) {
 		requestModels.remove(position);
-		notifyDataSetChanged();
+		notifyItemRemoved(position);
+		notifyItemRangeRemoved(position, getItemCount());
+//		notifyDataSetChanged();
 	}
 
 	@Override
