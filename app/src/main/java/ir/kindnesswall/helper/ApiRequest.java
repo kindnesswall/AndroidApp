@@ -96,7 +96,10 @@ public class ApiRequest {
                 mContext.startActivity(LoginActivity.createIntent());
             } else if (handlingResponse.response.code()==400
                     && errorOutput!=null
-                    && errorOutput.description.equals("incorrect_user_pass")){
+		            && errorOutput.description != null
+                    && errorOutput.description.equals(
+                    		"incorrect_user_pass"
+            )){
 
                 listener.onFailure(handlingResponse.call, new Throwable("incorrect_user_pass"));
 
