@@ -361,4 +361,11 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 		}
 	};
+
+	@Override
+	protected void onStop()
+	{
+		unregisterReceiver(receiver);
+		super.onStop();
+	}
 }
