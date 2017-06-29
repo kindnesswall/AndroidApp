@@ -77,8 +77,6 @@ public class BookmarkFragment extends BaseFragment {
 			}
 		});
 
-		getBookmarks();
-
 	}
 
 	private void getBookmarks() {
@@ -106,7 +104,7 @@ public class BookmarkFragment extends BaseFragment {
 			mBookmarkTopLay.setVisibility(View.GONE);
 			mBookmarkMainLay.setVisibility(View.VISIBLE);
 
-			if (gifts.size() <= 0) {
+			if (gifts.size() <= 0 && startIndex==0) {
 				getBookmarks();
 			}
 
@@ -133,12 +131,7 @@ public class BookmarkFragment extends BaseFragment {
 
 		gifts.clear();
 		if (AppController.getStoredString(Constants.Authorization) != null) {
-//			apiRequest.getBookmarks(
-//					new StartLastIndex(
-//							startIndex + "",
-//							startIndex + Constants.LIMIT + ""
-//					)
-//			);
+			getBookmarks();
 		} else {
 
 			mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +152,7 @@ public class BookmarkFragment extends BaseFragment {
 		progressView.setVisibility(View.INVISIBLE);
 
 		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-//        for (int i = 0; i < gifts.size(); i++) {
 		this.gifts.addAll(gifts);
-//        }
 		adapter.notifyDataSetChanged();
 
 		if (this.gifts.size() > 0) {
