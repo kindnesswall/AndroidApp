@@ -373,7 +373,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 			switch (gift.status) {
 				case GiftStatus.REJECTED_BY_ADMIN:
 					showRejectedDialog();
-					mDetailTitleTv.setText(" (هدیه شما پذیرفته نشد)" + gift.title);
+					setDisableBtn("(هدیه شما پذیرفته نشد)");
+
+//					mDetailTitleTv.setText(" (هدیه شما پذیرفته نشد)" + gift.title);
 
 					break;
 
@@ -388,8 +390,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					break;
 
 				case GiftStatus.DONATED_TO_SOMEONE_ELSE:
-					hideAllBottomBtns();
-					mDetailTitleTv.setText(" (این هدیه اهدا شده است)" + gift.title);
+//					hideAllBottomBtns();
+					setDisableBtn("(این هدیه اهدا شده است)");
+//					mDetailTitleTv.setText(" (این هدیه اهدا شده است)" + gift.title);
 
 					break;
 
@@ -398,8 +401,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					break;
 
 				case GiftStatus.MY_REQUEST_REJECTED:
-					hideAllBottomBtns();
-					mDetailTitleTv.setText(" (درخواست شما رد شد)" + gift.title);
+//					hideAllBottomBtns();
+					setDisableBtn("(درخواست شما رد شد)");
+//					mDetailTitleTv.setText(" (درخواست شما رد شد)" + gift.title);
 
 					break;
 			}
@@ -483,6 +487,19 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				);
 			}
 		});
+	}
+
+	private void setDisableBtn(String text){
+		mRequestLay.setVisibility(View.VISIBLE);
+		mEditDeleteLay.setVisibility(View.GONE);
+		mContactLay.setVisibility(View.GONE);
+
+		mRequestProgressView.setVisibility(View.INVISIBLE);
+		mRequestTv.setText(text);
+
+		mRequestLay.setBackgroundColor(getResources().getColor(R.color.text_primary_disabled));
+
+		mRequestLay.setOnClickListener(null);
 	}
 
 	private void setEditDeleteBtn() {
