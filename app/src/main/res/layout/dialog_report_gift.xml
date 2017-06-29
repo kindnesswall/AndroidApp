@@ -3,7 +3,11 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp">
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp">
 
 	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/message_textview"
@@ -12,12 +16,13 @@
 		android:layout_alignParentRight="true"
 		android:layout_centerHorizontal="true"
 		android:layout_marginTop="18dp"
+		android:textSize="18dp"
 		android:text="لطفا علت گزارش را بنویسید:"/>
 
 	<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 		android:id="@+id/message_et"
 		android:layout_width="match_parent"
-		android:layout_height="150dp"
+		android:layout_height="200dp"
 
 		android:layout_below="@id/message_textview"
 		android:layout_centerHorizontal="true"
@@ -26,89 +31,104 @@
 		android:gravity="right"
 		android:inputType="textMultiLine"/>
 
-	<com.andexert.library.RippleView
-		android:id="@+id/yes_ripple_btn_cardview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_below="@id/message_et"
-		android:layout_marginRight="8dp"
-		android:layout_marginTop="10dp"
-		app:rv_color="@color/white"
-		app:rv_rippleDuration="@integer/rv_rippleDuration">
+	<!--<com.andexert.library.RippleView-->
+		<!--android:id="@+id/yes_ripple_btn_cardview"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_alignParentRight="true"-->
+		<!--android:layout_below="@id/message_et"-->
+		<!--android:layout_marginRight="8dp"-->
+		<!--android:layout_marginTop="10dp"-->
+		<!--app:rv_color="@color/white"-->
+		<!--app:rv_rippleDuration="@integer/rv_rippleDuration">-->
 
-		<android.support.v7.widget.CardView
-			android:id="@+id/yes_btn_cardview"
-			android:layout_width="136dp"
-			android:layout_height="36dp"
-			android:layout_gravity="right"
-			app:cardBackgroundColor="@color/colorPrimary">
+		<!--<android.support.v7.widget.CardView-->
+			<!--android:id="@+id/yes_btn_cardview"-->
+			<!--android:layout_width="136dp"-->
+			<!--android:layout_height="36dp"-->
+			<!--android:layout_gravity="right"-->
+			<!--app:cardBackgroundColor="@color/colorPrimary">-->
 
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+			<!--<RelativeLayout-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="match_parent">-->
 
-				<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
-					android:id="@+id/btn_yes"
-					android:layout_width="match_parent"
-					android:layout_height="36dp"
-					android:layout_centerInParent="true"
-					android:layout_marginLeft="6dp"
-					android:layout_marginRight="6dp"
-					android:gravity="center"
-					android:text="ارسال"
-					android:textColor="@color/white"
-					android:textSize="12sp"/>
+				<!---->
 
-			</RelativeLayout>
+			<!--</RelativeLayout>-->
 
-		</android.support.v7.widget.CardView>
+		<!--</android.support.v7.widget.CardView>-->
 
-	</com.andexert.library.RippleView>
+	<!--</com.andexert.library.RippleView>-->
 
-	<com.andexert.library.RippleView
-		android:id="@+id/no_ripple_btn_cardview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/btn_no"
+		android:layout_width="136dp"
+		android:layout_height="36dp"
+
 		android:layout_alignParentLeft="true"
 
 		android:layout_below="@id/message_et"
 		android:layout_marginLeft="8dp"
 
 		android:layout_marginTop="10dp"
-		app:rv_color="@color/white"
-		app:rv_rippleDuration="@integer/rv_rippleDuration">
 
-		<android.support.v7.widget.CardView
-			android:id="@+id/no_btn_cardview"
-			android:layout_width="136dp"
-			android:layout_height="36dp"
-			android:layout_gravity="right"
-			app:cardBackgroundColor="@color/colorPrimary">
+		android:gravity="center"
+		android:text="صرف‌نظر"
+		android:textColor="@color/colorPrimary"
+		android:textSize="16sp"/>
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/btn_yes"
+		android:layout_width="136dp"
+		android:layout_height="36dp"
+
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/message_et"
+		android:layout_marginRight="8dp"
+
+		android:text="ارسال"
+
+		android:layout_marginTop="10dp"
+
+		android:gravity="center"
+		android:textColor="@color/colorPrimary"
+		android:textSize="16sp"
+	/>
+
+	<!--<com.andexert.library.RippleView-->
+		<!--android:id="@+id/no_ripple_btn_cardview"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_alignParentLeft="true"-->
+
+		<!--android:layout_below="@id/message_et"-->
+		<!--android:layout_marginLeft="8dp"-->
+
+		<!--android:layout_marginTop="10dp"-->
+		<!--app:rv_color="@color/white"-->
+		<!--app:rv_rippleDuration="@integer/rv_rippleDuration">-->
+
+		<!--<android.support.v7.widget.CardView-->
+			<!--android:id="@+id/no_btn_cardview"-->
+			<!--android:layout_width="136dp"-->
+			<!--android:layout_height="36dp"-->
+			<!--android:layout_gravity="right"-->
+			<!--app:cardBackgroundColor="@color/colorPrimary">-->
 
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+			<!--<RelativeLayout-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="match_parent">-->
 
-				<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
-					android:id="@+id/btn_no"
-					android:layout_width="match_parent"
-					android:layout_height="36dp"
-					android:layout_alignParentRight="true"
-					android:layout_centerInParent="true"
-					android:layout_marginLeft="6dp"
-					android:layout_marginRight="6dp"
-					android:gravity="center"
-					android:text="صرف‌نظر"
-					android:textColor="@color/white"
-					android:textSize="12sp"/>
+				<!---->
 
-			</RelativeLayout>
+			<!--</RelativeLayout>-->
 
-		</android.support.v7.widget.CardView>
+		<!--</android.support.v7.widget.CardView>-->
 
-	</com.andexert.library.RippleView>
+	<!--</com.andexert.library.RippleView>-->
 
 </RelativeLayout>

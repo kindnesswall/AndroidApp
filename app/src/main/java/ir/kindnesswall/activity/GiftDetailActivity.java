@@ -33,6 +33,7 @@ import ir.kindnesswall.constants.GiftStatus;
 import ir.kindnesswall.constants.RequestName;
 import ir.kindnesswall.customviews.customindicator.MyPageIndicator;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
+import ir.kindnesswall.customviews.textviews.TextViewIranSansBold;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.ReadJsonFile;
@@ -279,11 +280,10 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				final MaterialDialog dialog = builder
 						.customView(R.layout.dialog_report_gift, false).show();
 
-				RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
-				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+				TextViewIranSansBold yesBtn = (TextViewIranSansBold) dialog.findViewById(R.id.btn_yes);
+				yesBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
-					public void onComplete(RippleView rippleView) {
-
+					public void onClick(View view) {
 						String message = ((EditTextIranSans)dialog.findViewById(R.id.message_et)).getText().toString();
 						if (message!=null && !message.equals("")) {
 							ReportInput reportInput = new ReportInput();
@@ -297,14 +297,11 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					}
 				});
 
-				RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
-				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+				TextViewIranSansBold noBtn = (TextViewIranSansBold) dialog.findViewById(R.id.btn_no);
+				noBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
-					public void onComplete(RippleView rippleView) {
-
-//						Toasti.showS("no");
+					public void onClick(View view) {
 						dialog.dismiss();
-
 					}
 				});
 
