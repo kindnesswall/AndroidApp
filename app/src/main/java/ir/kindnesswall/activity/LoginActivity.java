@@ -70,10 +70,45 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	View.OnClickListener enterPhoneNumber;
 	View.OnClickListener enterVerificationCodeListener;
 	String regexStr = "^[0-9]*$";
+	IntentFilter filter;
 	private Context context;
 	private ApiRequest apiRequest;
 	private View.OnClickListener notRecievedCode;
 	private View.OnClickListener enterVerificationCodeState;
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+//			Toast.makeText(getApplicationContext(), "received", Toast.LENGTH_SHORT).show();
+
+			if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
+				Bundle bundle = intent.getExtras();           //---get the SMS message passed in---
+				SmsMessage[] msgs = null;
+				String msg_from;
+				if (bundle != null) {
+					//---retrieve the SMS message received---
+					try {
+						Object[] pdus = (Object[]) bundle.get("pdus");
+						msgs = new SmsMessage[pdus.length];
+						for (int i = 0; i < msgs.length; i++) {
+							msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+							msg_from = msgs[i].getOriginatingAddress();
+							String msgBody = msgs[i].getMessageBody();
+							Log.d("", "onReceive: " + msg_from);
+							Log.d("", "onReceive: " + msgBody);
+
+							if (msg_from.equals("+9810002785626587")) {
+								Log.d("", "onReceive: " + msgBody);
+								loginWithCode(msgBody);
+							}
+						}
+					} catch (Exception e) {
+//                            Log.d("Exception caught",e.getMessage());
+					}
+				}
+			}
+
+		}
+	};
 
 	public static Intent createIntent() {
 		Intent intent = new Intent(AppController.getAppContext(), LoginActivity.class);
@@ -91,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		mToolbarTitleTextView.setText("ورود به دیوار مهربانی");
 	}
 
-	private void loginWithCode(String confirmationCode){
+	private void loginWithCode(String confirmationCode) {
 
 		phoneConfirimationCodeEt.setText(confirmationCode);
 		if (!confirmationCode.trim().matches(regexStr)) {
@@ -110,6 +145,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 		secondBtnLay.setOnClickListener(notRecievedCode);
 	}
+
 	private void setListeners() {
 		mBackBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -203,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private void init() {
 		context = this;
 		apiRequest = new ApiRequest(context, this);
-		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false)){
+		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false)) {
 			String deviceID = DeviceInfo.getDeviceID(this);
 			Log.d("deviceID", deviceID);
 			apiRequest.setDevice(
@@ -227,11 +263,15 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 		setListeners();
 
-		IntentFilter filter = new IntentFilter();
+		filter = new IntentFilter();
 		filter.addAction("android.provider.Telephony.SMS_RECEIVED");
-		registerReceiver(receiver, filter);
 	}
 
+	@Override
+	protected void onResume() {
+		registerReceiver(receiver, filter);
+		super.onResume();
+	}
 
 	public void enterTelephoneNumber() {
 		AppController.storeString(Constants.TELEPHONE, null);
@@ -285,18 +325,18 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			);
 
 			finish();
-		} else if (response.body() instanceof RegisterOutput){
-			String remainingSeconds = ((RegisterOutput)response.body()).remainingSeconds;
+		} else if (response.body() instanceof RegisterOutput) {
+			String remainingSeconds = ((RegisterOutput) response.body()).remainingSeconds;
 
-			if (remainingSeconds!=null && !remainingSeconds.equals("") ){
+			if (remainingSeconds != null && !remainingSeconds.equals("")) {
 				closeKeyboard();
 
 				Snackbari.showS(mToolbarTitleTextView,
-						"لطفا "+
+						"لطفا " +
 								remainingSeconds
-								+" ثانیه دیگر امتحان کنید"
-						);
-			}else {
+								+ " ثانیه دیگر امتحان کنید"
+				);
+			} else {
 				enterVerificationCode();
 			}
 		}
@@ -305,7 +345,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private void closeKeyboard() {
 		View view = this.getCurrentFocus();
 		if (view != null) {
-			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 		}
 
@@ -317,7 +357,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	@Override
 	public void onFailure(Call call, Throwable t) {
 
-		if (t.getMessage().equals("incorrect_user_pass")){
+		if (t.getMessage().equals("incorrect_user_pass")) {
 //			.showS("کد تایید اشتباه است");
 			closeKeyboard();
 
@@ -327,45 +367,10 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		login_get_verification_tv.setVisibility(View.VISIBLE);
 	}
 
-	private BroadcastReceiver receiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-//			Toast.makeText(getApplicationContext(), "received", Toast.LENGTH_SHORT).show();
-
-			if(intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
-				Bundle bundle = intent.getExtras();           //---get the SMS message passed in---
-				SmsMessage[] msgs = null;
-				String msg_from;
-				if (bundle != null){
-					//---retrieve the SMS message received---
-					try{
-						Object[] pdus = (Object[]) bundle.get("pdus");
-						msgs = new SmsMessage[pdus.length];
-						for(int i=0; i<msgs.length; i++){
-							msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
-							msg_from = msgs[i].getOriginatingAddress();
-							String msgBody = msgs[i].getMessageBody();
-							Log.d("", "onReceive: " + msg_from);
-							Log.d("", "onReceive: " + msgBody);
-
-							if (msg_from.equals("+9810002785626587")){
-								Log.d("", "onReceive: " + msgBody);
-								loginWithCode(msgBody);
-							}
-						}
-					}catch(Exception e){
-//                            Log.d("Exception caught",e.getMessage());
-					}
-				}
-			}
-
-		}
-	};
-
 	@Override
-	protected void onStop()
-	{
+	protected void onStop() {
 		unregisterReceiver(receiver);
 		super.onStop();
 	}
+
 }
