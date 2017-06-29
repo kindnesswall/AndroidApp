@@ -33,6 +33,7 @@ import ir.kindnesswall.helper.Snackbari;
 import ir.kindnesswall.model.api.input.SetDeviceInput;
 import ir.kindnesswall.model.api.output.RegisterOutput;
 import ir.kindnesswall.model.api.output.TokenOutput;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -138,6 +139,35 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 			return;
 		}
+		if (AppController.getStoredString(Constants.FIREBASE_REG_TOKEN)==null){
+			closeKeyboard();
+			Snackbari.showL(
+					mBackBtn,
+					"امکان لاگین وجود ندارد. لطفا با ما تماس بگیرید"
+			);
+
+			return;
+		}
+
+		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false)) {
+
+			String deviceID = DeviceInfo.getDeviceID(this);
+			Log.d("deviceID", deviceID);
+			apiRequest.setDevice(
+					new SetDeviceInput(
+							AppController.getStoredString(Constants.FIREBASE_REG_TOKEN),
+							deviceID
+					)
+			);
+
+			closeKeyboard();
+			Snackbari.showL(
+					mBackBtn,
+					"امکان لاگین وجود ندارد. لطفا چند دقیقه بعد مجدد تلاش کنید."
+			);
+			return;
+		}
+
 		apiRequest.login(confirmationCode, DeviceInfo.getDeviceID(context));
 
 		progressView.setVisibility(View.VISIBLE);
@@ -239,7 +269,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	private void init() {
 		context = this;
 		apiRequest = new ApiRequest(context, this);
-		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false)) {
+		if (!AppController.getStoredBoolean(Constants.CALLED_SETDEVICE_BEFORE, false) &&
+				AppController.getStoredString(Constants.FIREBASE_REG_TOKEN) != null) {
+
 			String deviceID = DeviceInfo.getDeviceID(this);
 			Log.d("deviceID", deviceID);
 			apiRequest.setDevice(
@@ -248,6 +280,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 							deviceID
 					)
 			);
+
 		}
 		phoneConfirimationCodeEt.setRawInputType(Configuration.KEYBOARD_QWERTY);
 		settingToolbar();
@@ -339,6 +372,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			} else {
 				enterVerificationCode();
 			}
+
+		}else if (response.body() instanceof ResponseBody){
+			AppController.storeBoolean(Constants.CALLED_SETDEVICE_BEFORE, true);
 		}
 	}
 
