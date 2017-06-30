@@ -13,7 +13,7 @@ import ir.kindnesswall.R;
  */
 public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 
-	public TextView mItemTitleTv, mUnseenMsgTv;
+	public TextView mItemTitleTv,mItemStatusTv, mUnseenMsgTv;
 
 	public View itemView;
 
@@ -29,6 +29,7 @@ public class SentRequestItemHolder extends RecyclerView.ViewHolder {
 		btnLay = (RelativeLayout) itemView.findViewById(R.id.btn_lay);
 
 		mItemTitleTv = (TextView) itemView.findViewById(R.id.rw_sent_request_name_tv);
+		mItemStatusTv = (TextView) itemView.findViewById(R.id.rw_sent_request_status_tv);
 
 	}
 }
