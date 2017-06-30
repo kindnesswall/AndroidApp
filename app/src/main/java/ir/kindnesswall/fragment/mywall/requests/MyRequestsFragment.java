@@ -39,6 +39,8 @@ public class MyRequestsFragment extends BaseFragment {
 	@Bind(R.id.main_vp)
 	ViewPager mainVp;
 	private View rootView;
+	private ViewPagerAdapter adapter;
+	private boolean hasNotAuthorityFirstTime;
 
 	@Override
 	protected void init() {
@@ -69,6 +71,7 @@ public class MyRequestsFragment extends BaseFragment {
 
 		} else {
 
+			hasNotAuthorityFirstTime = true;
 			myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -81,7 +84,7 @@ public class MyRequestsFragment extends BaseFragment {
 	}
 
 	private void setupViewPager(ViewPager viewPager) {
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+		adapter = new ViewPagerAdapter(getChildFragmentManager());
 
 		SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
 		ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
@@ -101,6 +104,13 @@ public class MyRequestsFragment extends BaseFragment {
 
 			myGiftTopLay.setVisibility(View.GONE);
 			myGiftBottomLay.setVisibility(View.VISIBLE);
+
+			if (hasNotAuthorityFirstTime){
+				setupViewPager(mainVp);
+				mainTabs.setupWithViewPager(mainVp);
+				mainVp.setCurrentItem(1, false);
+			}
+
 		} else {
 			myGiftTopLay.setVisibility(View.VISIBLE);
 			myGiftBottomLay.setVisibility(View.INVISIBLE);
