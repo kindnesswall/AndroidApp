@@ -1,6 +1,7 @@
 package ir.kindnesswall.fragment.mywall.mygifts;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +39,10 @@ public class RegisteredGiftsFragment extends BaseFragment {
 
 	@Bind(R.id.message_textview)
 	TextView mMessageTv;
+
+	@Bind(R.id.swipeRefreshLayout)
+	SwipeRefreshLayout mSwipeRefreshLayout;
+
 	View rootView;
 	private ArrayList<Gift> gifts = new ArrayList<>();
 	private GiftListAdapter adapter;
@@ -79,6 +84,14 @@ public class RegisteredGiftsFragment extends BaseFragment {
 		});
 		getRegisteredGifts();
 
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// Refresh gifts
+				refreshItems();
+			}
+		});
+
 	}
 
 	private void getRegisteredGifts() {
@@ -91,6 +104,26 @@ public class RegisteredGiftsFragment extends BaseFragment {
 		);
 
 		startIndex += Constants.LIMIT;
+	}
+
+	void refreshItems() {
+		// Load gifts
+		// ...
+
+		gifts.clear();
+		startIndex = 0;
+
+		getRegisteredGifts();
+
+		// Load complete
+		onItemsLoadComplete();
+	}
+	void onItemsLoadComplete() {
+		// Update the adapter and notify data set changed
+		// ...
+
+		// Stop refresh animation
+		mSwipeRefreshLayout.setRefreshing(false);
 	}
 
 	@Override
