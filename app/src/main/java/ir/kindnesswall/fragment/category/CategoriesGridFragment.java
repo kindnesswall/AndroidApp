@@ -1,6 +1,7 @@
 package ir.kindnesswall.fragment.category;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +32,10 @@ public class CategoriesGridFragment extends BaseFragment {
 
 	@Bind(R.id.fragment_progressBar)
 	ProgressView mProgressView;
+
+	@Bind(R.id.swipeRefreshLayout)
+	SwipeRefreshLayout mSwipeRefreshLayout;
+
 	ArrayList<Category> categories = new ArrayList<>();
 	String TAG = CategoriesGridFragment.class.getName();
 	private GridCategoriesAdapter adapter;
@@ -48,6 +53,7 @@ public class CategoriesGridFragment extends BaseFragment {
 		rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
 		ButterKnife.bind(this, rootView);
+		mSwipeRefreshLayout.setEnabled(false);
 		init();
 
 //		foo.things(ImmutableMap.of("foo", "bar", "kit", "kat")
