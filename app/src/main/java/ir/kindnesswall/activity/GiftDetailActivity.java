@@ -171,7 +171,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		mDetailPriceTv.setText(gift.price);
 
 		String place = findPlaceRecursion(gift.locationId);
-		mDetailPlaceTv.setText(place);
+		String region = findPlaceRecursion(gift.regionId);
+		mDetailPlaceTv.setText(place + " " + region);
 
 		mDetailCategoryTv.setText(gift.category);
 
