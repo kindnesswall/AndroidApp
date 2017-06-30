@@ -16,7 +16,7 @@ import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.UpdateChecker;
 import ir.kindnesswall.interfaces.ChoosePlaceCallback;
 import ir.kindnesswall.model.Place;
-import ir.kindnesswall.model.api.output.UpdateOutput;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -49,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 		if (AppController.getStoredBoolean(Constants.SHOW_INTRO_BEFOR, false)){
 
-			apiRequest.getUpdatedVersion();
+			apiRequest.getAppInfo();
 
 		}else {
 			startActivityForResult(AppIntro.createIntent(), REQUEST_CODE_INTRO);
@@ -66,7 +66,7 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 			} else {
 				// Cancelled the intro. You can then e.g. finish this activity too.
 			}
-			apiRequest.getUpdatedVersion();
+			apiRequest.getAppInfo();
 		}
 	}
 
@@ -86,11 +86,12 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 	}
 
-	private void onUpdateVersionResponse(UpdateOutput updateOutput) {
+	private void onUpdateVersionResponse(AppInfoOutput appInfoOutput) {
 
+		AppController.storeString(Constants.SMS_CENTER, appInfoOutput.smsCenter);
 		boolean isForcedUpdate;
 
-		if (updateOutput.force_update != null && updateOutput.force_update.equalsIgnoreCase("true")) {
+		if (appInfoOutput.updateInfo.force_update != null && appInfoOutput.updateInfo.force_update.equalsIgnoreCase("true")) {
 			isForcedUpdate = true;
 		} else {
 			isForcedUpdate = false;//todo use this
@@ -98,10 +99,10 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 		UpdateChecker updateChecker = new UpdateChecker(
 				getResources().getString(R.string.app_name),
-				updateOutput.version,
-				updateOutput.apk_url,
+				appInfoOutput.updateInfo.version,
+				appInfoOutput.updateInfo.apk_url,
 				null,
-				updateOutput.changes);
+				appInfoOutput.updateInfo.changes);
 
 		if (!isForcedUpdate) {
 //					callApiGetHomeByTagId();
@@ -131,8 +132,8 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 					context,
 					getString(R.string.update_to_new_version),
 					getString(R.string.exist_new_version),
-					updateOutput.changes,
-					updateOutput.version,
+					appInfoOutput.updateInfo.changes,
+					appInfoOutput.updateInfo.version,
 					intents,
 					isForcedUpdate);
 
@@ -144,8 +145,8 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
 
 	@Override
 	public void onResponse(Call call, Response response) {
-		if (response.body() instanceof UpdateOutput) {
-			onUpdateVersionResponse((UpdateOutput) response.body());
+		if (response.body() instanceof AppInfoOutput) {
+			onUpdateVersionResponse((AppInfoOutput) response.body());
 		}
 	}
 

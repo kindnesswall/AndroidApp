@@ -30,7 +30,7 @@ import ir.kindnesswall.model.api.input.SetDeviceInput;
 import ir.kindnesswall.model.api.output.RegisterOutput;
 import ir.kindnesswall.model.api.output.StatisticsOutput;
 import ir.kindnesswall.model.api.output.TokenOutput;
-import ir.kindnesswall.model.api.output.UpdateOutput;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -668,14 +668,14 @@ public class ApiRequest {
         });
     }
 
-    public void getUpdatedVersion() {//final ProgressView progressView) {
-        Call<UpdateOutput> result = AppController.service.getUpdatedVersion(
+    public void getAppInfo() {//final ProgressView progressView) {
+        Call<AppInfoOutput> result = AppController.service.getAppInfo(
                 DeviceInfo.getAppVersionCode());
         //TODO : add call ArrayList
         //callArrayList.add(result);
-        result.enqueue(new CallbackWithRetry<UpdateOutput>(result, mContext) {
+        result.enqueue(new CallbackWithRetry<AppInfoOutput>(result, mContext) {
             @Override
-            public void onResponse(Call<UpdateOutput> call, Response<UpdateOutput> response) {
+            public void onResponse(Call<AppInfoOutput> call, Response<AppInfoOutput> response) {
                 handlingOnResponse(new HandlingResponse(call, response, this));
             }
 
@@ -689,7 +689,7 @@ public class ApiRequest {
             }
 
             @Override
-            public void onFailure(Call<UpdateOutput> call, Throwable t) {
+            public void onFailure(Call<AppInfoOutput> call, Throwable t) {
                 super.onFailure(call, t);
 
 //				if (t instanceof IOException) {//network problem

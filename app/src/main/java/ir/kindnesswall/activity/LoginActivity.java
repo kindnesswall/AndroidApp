@@ -97,10 +97,13 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 							Log.d("", "onReceive: " + msg_from);
 							Log.d("", "onReceive: " + msgBody);
 
-							if (msg_from.equals("+9810002785626587")) {
-								Log.d("", "onReceive: " + msgBody);
-								loginWithCode(msgBody);
+							if (AppController.getStoredString(Constants.SMS_CENTER)!=null){
+								if (msg_from.equals(AppController.getStoredString(Constants.SMS_CENTER))) {
+									Log.d("", "onReceive: " + msgBody);
+									loginWithCode(msgBody);
+								}
 							}
+
 						}
 					} catch (Exception e) {
 //                            Log.d("Exception caught",e.getMessage());

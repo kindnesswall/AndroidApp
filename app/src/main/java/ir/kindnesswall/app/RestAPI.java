@@ -12,7 +12,7 @@ import ir.kindnesswall.model.api.input.BookmarkInput;
 import ir.kindnesswall.model.api.input.ReportInput;
 import ir.kindnesswall.model.api.input.RequestGiftInput;
 import ir.kindnesswall.model.api.output.StatisticsOutput;
-import ir.kindnesswall.model.api.output.UpdateOutput;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -205,6 +205,6 @@ public interface RestAPI {
 			@Path(Constants.LastIndex) String lastIndex
 	);
 
-	@GET("GetUpdatedVersion/{" + Constants.VERSION_NAME + "}")
-	Call<UpdateOutput> getUpdatedVersion(@Path(Constants.VERSION_NAME) int versionName);
+	@GET("GetAppInfo/{" + Constants.VERSION_NAME + "}")
+	Call<AppInfoOutput> getAppInfo(@Path(Constants.VERSION_NAME) int versionName);
 }
