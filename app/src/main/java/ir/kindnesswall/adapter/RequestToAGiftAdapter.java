@@ -17,6 +17,7 @@ import com.rey.material.widget.ProgressView;
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.activity.UserProfileActivity;
 import ir.kindnesswall.constants.RequestName;
@@ -47,6 +48,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
     public RequestToAGiftAdapter(Context context, ArrayList<RequestModel> requestModels) {
         this.requestModels = requestModels;
         this.mContext = context;
+
         apiRequest = new ApiRequest(mContext, this);
 
         yesNoDialog = MaterialDialogBuilder.create(mContext).customView(R.layout.dialog_simple_yes_no, false).build();
@@ -188,81 +190,89 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
                 requestModels.remove(position);
                 notifyDataSetChanged();
             } else if (tag.equals(RequestName.AcceptRequest)) {
-                afterAcceptDialog =
-                        MaterialDialogBuilder
-                                .create(mContext)
-                                .customView(R.layout.dialog_after_accept_request, false)
-                                .build();
-
-                TextView message = (TextView) afterAcceptDialog.findViewById(R.id.message_textview);
-                message.setText(
-                        "هدیه شما به " + requestModels.get(position).fromUser  +  " اهدا شد."
-                );
-
-                ImageView callIV = (ImageView) afterAcceptDialog.findViewById(R.id.call_iv);
-                callIV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String uri = "tel:" + requestModels.get(position).fromUser;//"00000000000";
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse(uri));
-                        mContext.startActivity(intent);
-
-                    }
-                });
-
-                ImageView smsIV = (ImageView) afterAcceptDialog.findViewById(R.id.sms_iv);
-                smsIV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        Toasti.showS("smsIV");
-
-                        mContext.startActivity(
-                                new Intent(
-                                        Intent.ACTION_VIEW,
-                                        Uri.fromParts("sms", requestModels.get(position).fromUser, null)
-                                )
-                        );
-                    }
-                });
-
-                ImageView profileIV = (ImageView) afterAcceptDialog.findViewById(R.id.profile_iv);
-                profileIV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        Toasti.showS("profileIV");
-
-                        mContext.startActivity(UserProfileActivity.createIntent(
-                                requestModels.get(position).fromUserId
-                        ));
-                    }
-                });
-
-                RippleView giftPageRv = (RippleView) afterAcceptDialog.findViewById(R.id.gift_page_ripple_btn);
-                giftPageRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-                    @Override
-                    public void onComplete(RippleView rippleView) {
-//                        Toasti.showS("giftPageRv");
-
-                        mContext.startActivity(GiftDetailActivity.createIntent(
-                                requestModels.get(position).giftId)
-                        );
-                    }
-                });
-
-                RippleView okRv = (RippleView) afterAcceptDialog.findViewById(R.id.ok_ripple_btn);
-                okRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-                    @Override
-                    public void onComplete(RippleView rippleView) {
-                        Toasti.showS("ok");
-                    }
-                });
-
-                afterAcceptDialog.show();
+                showAfterAcceptDialog(position);
             }
             yesNoDialog.dismiss();
         }
+
+    }
+
+    private void showAfterAcceptDialog(final int position) {
+
+        afterAcceptDialog =
+                MaterialDialogBuilder
+                        .create(mContext)
+                        .customView(R.layout.dialog_after_accept_request, false)
+                        .build();
+
+        TextView message = (TextView) afterAcceptDialog.findViewById(R.id.message_textview);
+        message.setText(
+                "هدیه شما به " + requestModels.get(position).fromUser  +  " اهدا شد."
+        );
+
+        ImageView callIV = (ImageView) afterAcceptDialog.findViewById(R.id.call_iv);
+        callIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String uri = "tel:" + requestModels.get(position).fromUser;//"00000000000";
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(uri));
+                mContext.startActivity(intent);
+
+            }
+        });
+
+        ImageView smsIV = (ImageView) afterAcceptDialog.findViewById(R.id.sms_iv);
+        smsIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                        Toasti.showS("smsIV");
+
+                mContext.startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.fromParts("sms", requestModels.get(position).fromUser, null)
+                        )
+                );
+            }
+        });
+
+        ImageView profileIV = (ImageView) afterAcceptDialog.findViewById(R.id.profile_iv);
+        profileIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                        Toasti.showS("profileIV");
+
+                mContext.startActivity(UserProfileActivity.createIntent(
+                        requestModels.get(position).fromUserId
+                ));
+            }
+        });
+
+        RippleView giftPageRv = (RippleView) afterAcceptDialog.findViewById(R.id.gift_page_ripple_btn);
+        giftPageRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            @Override
+            public void onComplete(RippleView rippleView) {
+//                        Toasti.showS("giftPageRv");
+
+                mContext.startActivity(GiftDetailActivity.createIntent(
+                        requestModels.get(position).giftId)
+                );
+            }
+        });
+
+        RippleView okRv = (RippleView) afterAcceptDialog.findViewById(R.id.ok_ripple_btn);
+        okRv.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            @Override
+            public void onComplete(RippleView rippleView) {
+                Toasti.showS("ok");
+                afterAcceptDialog.dismiss();
+                ((BottomBarActivity) mContext).onBackPressed();
+            }
+        });
+
+        afterAcceptDialog.show();
 
     }
 
