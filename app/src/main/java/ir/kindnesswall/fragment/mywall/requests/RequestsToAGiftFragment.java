@@ -1,6 +1,7 @@
 package ir.kindnesswall.fragment.mywall.requests;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,6 +53,10 @@ public class RequestsToAGiftFragment extends BaseFragment {
 
 	@Bind(R.id.info_lay)
 	RelativeLayout mInfoLay;
+
+	@Bind(R.id.swipeRefreshLayout)
+	SwipeRefreshLayout mSwipeRefreshLayout;
+
 	View rootView;
 	private ArrayList<RequestModel> requestModels = new ArrayList<>();
 	private RequestToAGiftAdapter adapter;
@@ -98,6 +103,35 @@ public class RequestsToAGiftFragment extends BaseFragment {
 				);
 			}
 		});
+
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// Refresh gifts
+				refreshItems();
+			}
+		});
+	}
+
+	void refreshItems() {
+		// Load gifts
+		// ...
+
+		requestModels.clear();
+
+		startIndex = 0;
+
+		getRecievedRequestList();
+
+		// Load complete
+		onItemsLoadComplete();
+	}
+	void onItemsLoadComplete() {
+		// Update the adapter and notify data set changed
+		// ...
+
+		// Stop refresh animation
+		mSwipeRefreshLayout.setRefreshing(false);
 	}
 
 	private void getRecievedRequestList() {

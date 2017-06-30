@@ -25,11 +25,18 @@
 		android:layout_centerInParent="true"
 		android:visibility="invisible"/>
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipeRefreshLayout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@color/grey_200"
-		android:visibility="invisible"/>
+		android:layout_height="match_parent">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/grey_200"
+			android:visibility="invisible"/>
+
+	</android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
