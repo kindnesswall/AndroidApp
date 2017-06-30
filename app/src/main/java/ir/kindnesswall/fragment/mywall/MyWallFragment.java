@@ -1,6 +1,7 @@
 package ir.kindnesswall.fragment.mywall;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -63,6 +64,12 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Bind(R.id.about_lay)
 	RelativeLayout mAboutLay;
+
+	@Bind(R.id.rules_lay)
+	RelativeLayout mRulesLay;
+
+	@Bind(R.id.contact_us_lay)
+	RelativeLayout mContactUsLay;
 
 	private View rootView;
 
@@ -183,6 +190,14 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 	}
 
 	private void setListeners() {
+
+		mContactUsLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Hamed_Ghadirian"));
+				startActivity(telegram);
+			}
+		});
 
 		mAboutLay.setOnClickListener(new View.OnClickListener() {
 			@Override
