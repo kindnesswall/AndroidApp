@@ -58,16 +58,16 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 
 	@Override
 	public void onBindViewHolder(SentRequestItemHolder myHolder, final int i) {
-		
+
 
 		int status = getItemViewType(i);
 		if (status == SentRequestStatus.ACCEPTED){
 
-			myHolder.mItemStatusTv.setText("(درخواست شما پذیرفته شد.)");
+			myHolder.mItemStatusTv.setText("(درخواست شما پذیرفته شد)");
 			myHolder.mItemStatusTv.setTextColor(mContext.getResources().getColor(R.color.green_700));
 		}else if (status == SentRequestStatus.DONATED_TO_SOMEONE_ELSE){
 
-			myHolder.mItemStatusTv.setText("(به فرد دیگری اهدا شد.)");
+			myHolder.mItemStatusTv.setText("(به فرد دیگری اهدا شد)");
 			myHolder.mItemStatusTv.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
 
 		}else if (status == SentRequestStatus.PENDING){
@@ -81,7 +81,7 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 
 		}else if (status == SentRequestStatus.REJECTED) {
 
-			myHolder.mItemStatusTv.setText("(درخواست شما رد شد.)");
+			myHolder.mItemStatusTv.setText("(درخواست شما رد شد)");
 			myHolder.mItemStatusTv.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
 
 		}
