@@ -10,7 +10,7 @@
 		android:layout_height="match_parent"
 		android:contentDescription="description"
 		android:visibility="invisible"
-		android:scaleType="centerCrop"/>
+		android:scaleType="fitCenter"/>
 
 
 	<com.rey.material.widget.ProgressView
