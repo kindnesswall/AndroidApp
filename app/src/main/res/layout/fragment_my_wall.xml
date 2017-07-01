@@ -12,7 +12,8 @@
 		<EditText
 			android:id="@+id/token_et"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:visibility="gone"/>
 
 
 
