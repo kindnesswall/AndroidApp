@@ -1,4 +1,4 @@
-package ir.fam.core.customview;
+package ir.kindnesswall.customviews;
 
 
 import android.content.Context;
@@ -14,12 +14,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * Created by 5 on 6/25/2016.
  */
-public class RoundedImageView extends ImageView {
+public class RoundedImageView extends android.support.v7.widget.AppCompatImageView {
 
     public RoundedImageView(Context context) {
         super(context);

@@ -68,8 +68,11 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 	@Bind(R.id.rules_lay)
 	RelativeLayout mRulesLay;
 
-	@Bind(R.id.contact_us_lay)
+	@Bind(R.id.report_bug_lay)
 	RelativeLayout mContactUsLay;
+
+	@Bind(R.id.our_team_lay)
+	RelativeLayout mOurTeamLay;
 
 	private View rootView;
 
@@ -191,10 +194,17 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	private void setListeners() {
 
+		mOurTeamLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+			}
+		});
+
 		mContactUsLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Hamed_Ghadirian"));
+				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/@Kindness_Wall_Admin"));
 				startActivity(telegram);
 			}
 		});
