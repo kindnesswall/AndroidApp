@@ -320,6 +320,13 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
+
+                <FrameLayout
+                    android:id="@+id/requests_to_gift_fragment"
+                    android:layout_width="match_parent"
+                             android:layout_height="wrap_content">
+
+                </FrameLayout>
                 <!--</android.support.v7.widget.CardView>-->
 
                 <!--</FrameLayout>-->
@@ -341,35 +348,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/edit_delete_lay"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
-            android:visibility="invisible">
+            android:visibility="visible">
 
-            <RelativeLayout
-                android:id="@+id/divider_lay"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:background="@color/divider" />
+
 
             <RelativeLayout
                 android:id="@+id/delete_lay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/divider_lay">
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
 
                 <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                     android:id="@+id/delete_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
                     android:text="@string/delete_gift"
+                    android:gravity="center"
                     android:textColor="@color/white"
-                    android:layout_centerInParent="true"
                     android:textSize="16dp" />
 
                 <com.rey.material.widget.ProgressView
@@ -390,9 +393,16 @@
 
             <RelativeLayout
                 android:id="@+id/edit_lay"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/divider_lay">
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:background="@color/divider" />
 
                 <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                     android:id="@+id/edit_tv"
@@ -420,7 +430,31 @@
 
             </RelativeLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/requests_to_this_gift_lay"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@color/divider" />
+
+                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+
+                    android:text="درخواست‌ها"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/request_lay"

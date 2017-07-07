@@ -24,21 +24,6 @@
 
             android:src="@mipmap/ic_action_contact" />
 
-        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/rw_phone_number_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-
-            android:layout_toRightOf="@id/profile_iv"
-            android:gravity="center"
-
-            android:text="09353703108"
-            android:textColor="@color/black"
-
-            android:textSize="22dp" />
-
-
-
         <RelativeLayout
             android:id="@+id/sms_lay"
             android:layout_width="wrap_content"
@@ -98,6 +83,22 @@
                 <!--android:text="پذیرش درخواست" />-->
 
         </RelativeLayout>
+
+        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+            android:id="@+id/rw_phone_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+
+            android:layout_toRightOf="@id/profile_iv"
+            android:layout_toLeftOf="@id/call_lay"
+            android:gravity="left|center_vertical"
+
+            android:lines="1"
+            android:ellipsize="end"
+
+            android:text="09353703108"
+
+            android:textSize="18dp" />
 
         <RelativeLayout
             android:id="@+id/divider3_lay"
