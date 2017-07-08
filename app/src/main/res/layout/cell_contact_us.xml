@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="84dp"
+                android:layout_height="84dp">
+
+	<ImageView
+		android:id="@+id/contact_iv"
+		android:layout_width="78dp"
+		android:layout_height="78dp"
+		android:padding="3dp"/>
+
+</RelativeLayout>

@@ -84,7 +84,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.detail_category_tv)
 	TextView mDetailCategoryTv;
 
-	@Bind(R.id.request_tv)
+	@Bind(R.id.btn_tv)
 	TextView mRequestTv;
 
 	@Bind(R.id.detail_description_tv)

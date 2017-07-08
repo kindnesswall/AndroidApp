@@ -6,7 +6,7 @@
                 android:background="@color/grey_200">
 
 	<RelativeLayout
-		android:id="@+id/join_us_lay"
+		android:id="@+id/btn_lay"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:layout_alignParentTop="true"
@@ -14,7 +14,7 @@
 		android:background="@color/colorPrimary">
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-			android:id="@+id/request_tv"
+			android:id="@+id/btn_tv"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"
@@ -29,7 +29,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 
-		android:layout_below="@id/join_us_lay"
+		android:layout_below="@id/btn_lay"
 
 		android:layout_marginLeft="2dp"
 		android:layout_marginRight="2dp"
