@@ -79,7 +79,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 	private View mBackgroundView;
 	private View mBackgroundOverlay;
 	private View mShadowView;
-	private View mTabletRightBorder;
+//	private View mTabletRightBorder;
 	private View mPendingUserContentView;
 
 	private Integer mPrimaryColor;
@@ -1133,13 +1133,14 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 	}
 
 	private void initializeViews() {
-		mIsTabletMode = !mIgnoreTabletLayout &&
-				mContext.getResources().getBoolean(R.bool.bb_bottom_bar_is_tablet_mode);
+		mIsTabletMode = false;
+//		!mIgnoreTabletLayout &&
+//				mContext.getResources().getBoolean(R.bool.bb_bottom_bar_is_tablet_mode);
 		ViewCompat.setElevation(this, MiscUtils.dpToPixel(mContext, 8));
 		View rootView = inflate(mContext, mIsTabletMode ?
 						R.layout.bb_bottom_bar_item_container_tablet : R.layout.bb_bottom_bar_item_container,
 				this);
-		mTabletRightBorder = rootView.findViewById(R.id.bb_tablet_right_border);
+//		mTabletRightBorder = rootView.findViewById(R.id.bb_tablet_right_border);
 
 		mUserContentContainer = (ViewGroup) rootView.findViewById(R.id.bb_user_content_container);
 
@@ -1535,7 +1536,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 			mBackgroundView.setBackgroundColor(mDarkBackgroundColor);
 		} else {
 			mItemContainer.setBackgroundColor(mDarkBackgroundColor);
-			mTabletRightBorder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.bb_tabletRightBorderDark));
+//			mTabletRightBorder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.bb_tabletRightBorderDark));
 		}
 	}
 
