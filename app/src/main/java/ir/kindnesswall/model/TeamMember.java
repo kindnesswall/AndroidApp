@@ -6,6 +6,7 @@ package ir.kindnesswall.model;
 
 public class TeamMember {
 
-	public String name, about;
+	public String name, about, telegramUrl,linkdinUrl;
+	public int drawableResId;
 
 }

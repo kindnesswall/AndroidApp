@@ -7,29 +7,62 @@
 		android:id="@+id/member_iv"
 		android:layout_width="72dp"
 		android:layout_height="72dp"
+
 		android:layout_alignParentRight="true"
+
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="6dp"
+
 		android:layout_marginBottom="4dp"
 		android:layout_marginTop="4dp"
 		android:src="@drawable/hamed"/>
 
+	<ImageView
+		android:id="@+id/telegram_iv"
+		android:layout_width="36dp"
+		android:layout_height="80dp"
+
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+
+		android:src="@mipmap/ic_telegram_grey600_36dp"/>
+
 	<RelativeLayout
 		android:id="@+id/divider1_lay"
 		android:layout_width="1dp"
-		android:layout_height="56dp"
-		android:layout_below="@id/divider_below_lay"
-		android:layout_centerHorizontal="true"
-		android:background="#F1F1F1" />
+		android:layout_height="60dp"
+		android:layout_centerVertical="true"
+		android:layout_toRightOf="@id/telegram_iv"
+		android:background="@color/divider" />
+
+	<ImageView
+		android:id="@+id/linkdin_iv"
+		android:layout_width="36dp"
+		android:layout_height="80dp"
+		android:layout_centerVertical="true"
+		android:layout_toRightOf="@id/divider1_lay"
+		android:src="@mipmap/ic_linkedin_box_grey600_36dp"/>
+
+	<RelativeLayout
+		android:id="@+id/divider2_lay"
+		android:layout_width="1dp"
+		android:layout_height="60dp"
+		android:layout_centerVertical="true"
+		android:layout_toRightOf="@id/linkdin_iv"
+		android:background="@color/divider" />
 
 	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 		android:id="@+id/member_name_tv"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+
 		android:layout_alignTop="@id/member_iv"
 		android:layout_marginTop="6dp"
+
 		android:layout_marginLeft="6dp"
 		android:layout_toLeftOf="@id/member_iv"
+
+		android:layout_toRightOf="@id/divider2_lay"
 		android:text="حامد قدیریان"/>
 
 	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
@@ -39,9 +72,12 @@
 
 		android:layout_alignBottom="@id/member_iv"
 		android:layout_below="@id/member_name_tv"
+
 		android:layout_marginTop="6dp"
 		android:layout_marginLeft="6dp"
+
 		android:layout_toLeftOf="@id/member_iv"
+		android:layout_toRightOf="@id/divider2_lay"
 		android:text="بنیان گذار - توسعه دهنده اندروید و آی او اس"/>
 
 	<RelativeLayout

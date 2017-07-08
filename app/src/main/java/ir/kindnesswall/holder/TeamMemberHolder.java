@@ -13,6 +13,8 @@ import ir.kindnesswall.R;
  */
 public class TeamMemberHolder extends RecyclerView.ViewHolder {
 
+	public final ImageView mTelegramIv;
+	public final ImageView mLinkdinIv;
 	public TextView mNameTv, mAboutTv;
 	public ImageView mAvatarIv;
 	public View itemView;
@@ -25,6 +27,8 @@ public class TeamMemberHolder extends RecyclerView.ViewHolder {
 		mNameTv = (TextView) itemView.findViewById(R.id.member_name_tv);
 		mAboutTv = (TextView) itemView.findViewById(R.id.memeber_about_tv);
 		mAvatarIv = (ImageView) itemView.findViewById(R.id.member_iv);
+		mTelegramIv = (ImageView) itemView.findViewById(R.id.telegram_iv);
+		mLinkdinIv = (ImageView) itemView.findViewById(R.id.linkdin_iv);
 	}
 
 }

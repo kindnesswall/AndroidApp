@@ -1,7 +1,8 @@
 package ir.kindnesswall.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 
 	private ArrayList<TeamMember> members;
 	private Context mContext;
-	private FragmentActivity activity;
 
 	public TeamMemberListAdapter(Context context, ArrayList<TeamMember> members) {
 		this.members = members;
@@ -37,34 +37,41 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 	}
 
 	@Override
-	public void onBindViewHolder(TeamMemberHolder myHolder, final int i) {
+	public void onBindViewHolder(TeamMemberHolder teamMemberHolder, final int position) {
 
-//	    myHolder.mTitleTv.setText(members.get(i).getGalleryId());
+		teamMemberHolder.mNameTv.setText(members.get(position).name);
+		teamMemberHolder.mAboutTv.setText(members.get(position).about);
+		teamMemberHolder.mAvatarIv.setImageDrawable(
+				mContext.getResources().getDrawable(members.get(position).drawableResId)
+		);
+		teamMemberHolder.mTelegramIv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent telegram = new Intent(
+						Intent.ACTION_VIEW ,
+						Uri.parse(members.get(position).telegramUrl)
+				);
 
-		//TODO load image of item
-//		String image_url;
-//		if (members.get(i).giftImages != null && members.get(i).giftImages.size() > 0) {
-//			image_url = members.get(i).giftImages.get(0);
-//		} else {
-//			image_url = "";
-//		}
-//
-//		Glide
-//				.with(mContext)
-//				.load(image_url)
-//				.centerCrop()
-//				.placeholder(R.color.background)
-//				.crossFade()
-//				.into(myHolder.getmItemIv());
+				mContext.startActivity(telegram);
+			}
+		});
 
-//		myHolder.getGiftTitleTv().setText(members.get(i).title);
-//		myHolder.getGiftLocationTv().setText(members.get(i).address);
-//		myHolder.getGiftCreatedTimeTv().setText(members.get(i).createDateTime);
+		teamMemberHolder.mLinkdinIv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent browserIntent =
+						new Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse(members.get(position).linkdinUrl)
+						);
 
+				mContext.startActivity(browserIntent);
+			}
+		});
 	}
 
 	@Override
 	public int getItemCount() {
-		return 20;//(null != members ? members.size() : 0);
+		return (null != members ? members.size() : 0);
 	}
 }
