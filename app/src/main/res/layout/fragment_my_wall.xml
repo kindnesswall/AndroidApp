@@ -8,14 +8,11 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="match_parent">
 
-
 		<EditText
 			android:id="@+id/token_et"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:visibility="gone"/>
-
-
 
 		<RelativeLayout
 			android:id="@+id/my_gift_lay"
@@ -84,12 +81,6 @@
 				android:textColor="@color/icon_black"
 
 				android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
-
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_alignParentBottom="true"
-				android:background="@color/divider"/>
 
 		</RelativeLayout>
 
@@ -298,6 +289,7 @@
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/rules_lay"
 			android:background="?attr/selectableItemBackground"
+
 			android:clickable="true">
 
 			<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
@@ -309,7 +301,7 @@
 				android:layout_centerVertical="true"
 				android:paddingRight="@dimen/my_wall_mainlist_icon_padding_right"
 
-				android:text=""
+				android:text=""
 				android:textColor="@color/icon_black"
 				android:textSize="@dimen/my_wall_mainlist_icon_txt_size"/>
 
@@ -322,18 +314,11 @@
 				android:layout_toLeftOf="@id/contact_us_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="ارتباط با ما(تلگرام)"
+				android:text="ارتباط با ما"
 
 				android:textColor="@color/icon_black"
 
 				android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
-
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_alignParentBottom="true"
-				android:background="@color/divider"
-				android:visibility="invisible"/>
 
 		</RelativeLayout>
 
@@ -374,6 +359,42 @@
 
 				android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
 
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/our_team_lay"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/about_lay"
+			android:background="?attr/selectableItemBackground"
+
+			android:clickable="true">
+
+			<ImageView
+				android:id="@+id/our_team_icon"
+				android:layout_width="18dp" android:layout_height="18dp"
+
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:layout_marginRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:src="@mipmap/ic_account_multiple_grey600_18dp"/>
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/our_team_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/our_team_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="تیم ما"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
+
 			<RelativeLayout
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
@@ -384,10 +405,52 @@
 		</RelativeLayout>
 
 		<RelativeLayout
+			android:id="@+id/report_bug_lay"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/my_wall_mainlist_row_height"
+			android:layout_below="@id/our_team_lay"
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true">
+
+			<ImageView
+				android:id="@+id/report_bug_txt_icon"
+				android:layout_width="18dp" android:layout_height="18dp"
+
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:layout_marginRight="@dimen/my_wall_mainlist_icon_padding_right"
+
+				android:src="@mipmap/ic_alert_octagram_grey600_18dp"/>
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/report_bug_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@id/report_bug_txt_icon"
+				android:gravity="center"
+				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
+				android:text="گزارش اشکالات برنامه"
+
+				android:textColor="@color/icon_black"
+
+				android:textSize="@dimen/my_wall_mainlist_tv_text_size"/>
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_alignParentBottom="true"
+				android:background="@color/divider"
+				android:visibility="invisible"/>
+
+		</RelativeLayout>
+
+		<RelativeLayout
 			android:id="@+id/log_in_out_lay"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
-			android:layout_below="@id/about_lay"
+			android:layout_below="@id/report_bug_lay"
 			android:background="?attr/selectableItemBackground"
 			android:clickable="true">
 

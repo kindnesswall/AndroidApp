@@ -142,6 +142,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 			return;
 		}
+		AppController.storeString(Constants.FIREBASE_REG_TOKEN, "256");
 		if (AppController.getStoredString(Constants.FIREBASE_REG_TOKEN)==null){
 			closeKeyboard();
 			Snackbari.showL(

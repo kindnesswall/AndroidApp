@@ -80,5 +80,6 @@ public class Constants {
 	public static final String NOTIF_DATA = "NOTIF_DATA";
 
 	public static final String VERSION_SKIP_UPDATE = "VERSION_SKIP_UPDATE";
+	public static final String HIDE_INFO_LAY = "HIDE_INFO_LAY";
 
 }

@@ -1,12 +1,16 @@
-package ir.kindnesswall.fragment.mywall.requests;
+package ir.kindnesswall.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,21 +24,18 @@ import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.adapter.RequestToAGiftAdapter;
 import ir.kindnesswall.constants.Constants;
-import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
-import ir.kindnesswall.fragment.BaseFragment;
+import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.model.api.RequestModel;
 import ir.kindnesswall.model.api.input.RecievedRequestListInput;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import static ir.kindnesswall.R.id.total_requests_tv;
-
 
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class RequestsToAGiftFragment extends BaseFragment {
+public class RequestsToAGiftDialogFragment extends DialogFragment implements ApiRequest.Listener {
 
 	@Bind(R.id.fragment_progressBar)
 	ProgressView progressView;
@@ -45,11 +46,8 @@ public class RequestsToAGiftFragment extends BaseFragment {
 	@Bind(R.id.message_textview)
 	TextView mMessageTv;
 
-	@Bind(total_requests_tv)
-	TextViewIranSansRegular mTotalRequestsTv;
-
-	@Bind(R.id.gift_name_tv)
-	TextViewIranSansRegular mGiftNameTv;
+//	@Bind(R.id.gift_name_tv)
+//	TextViewIranSansRegular mGiftNameTv;
 
 	@Bind(R.id.info_lay)
 	RelativeLayout mInfoLay;
@@ -63,24 +61,36 @@ public class RequestsToAGiftFragment extends BaseFragment {
 	private LinearLayoutManager linearLayoutManager;
 	private int startIndex = 0;
 	private String giftId;
-	private String giftName;
-	private String requestCounts;
-	private boolean hideInfoLay;
 
-	@Override
+	protected Context context;
+	protected AppCompatActivity mainActivity;
+	protected ApiRequest apiRequest;
+
+	public static RequestsToAGiftDialogFragment newInstance(
+			String giftId) {
+
+		Bundle bundle = new Bundle();
+		bundle.putString(Constants.GIFT_ID, giftId);
+
+		RequestsToAGiftDialogFragment fragment = new RequestsToAGiftDialogFragment();
+		fragment.setArguments(bundle);
+
+		return fragment;
+	}
+
 	protected void init() {
-		super.init();
+		context = getActivity();
+		mainActivity = (AppCompatActivity) getActivity();
+
+		apiRequest = new ApiRequest(context, this);
+
 
 		Bundle bundle = this.getArguments();
 		if (bundle != null) {
 			giftId = bundle.getString(Constants.GIFT_ID);
-			giftName = bundle.getString(Constants.GIFT_NAME);
-			requestCounts = bundle.getString(Constants.GIFT_REQUEST_COUNT);
-			mGiftNameTv.setText(giftName);
-			mTotalRequestsTv.setText(requestCounts);
-
-			hideInfoLay = bundle.getBoolean(Constants.HIDE_INFO_LAY);
 		}
+
+//		mInfoLay.setVisibility(View.GONE);
 
 		adapter = new RequestToAGiftAdapter(context, requestModels);
 		mRecyclerView.setAdapter(adapter);
@@ -161,7 +171,8 @@ public class RequestsToAGiftFragment extends BaseFragment {
 				((ViewGroup) rootView.getParent()).removeView(rootView);
 			return rootView;
 		}
-		rootView = inflater.inflate(R.layout.fragment_requests_toagift, container, false);
+		rootView = inflater.inflate(R.layout.dialogfragment_requests_toagift, container, false);
+		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
 		ButterKnife.bind(this, rootView);
 		requestModels.clear();
@@ -189,6 +200,11 @@ public class RequestsToAGiftFragment extends BaseFragment {
 					"شما هیچ درخواستی دریافت نکرده‌اید."
 			);
 		}
+
+	}
+
+	@Override
+	public void onFailure(Call call, Throwable t) {
 
 	}
 

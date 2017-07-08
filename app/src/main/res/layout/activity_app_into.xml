@@ -49,7 +49,7 @@
 			tools:ignore="ContentDescription"
 			tools:src="@android:drawable/sym_action_call" />
 
-		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewMitraBold
 			android:id="@id/mi_title"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -59,9 +59,10 @@
 			android:textAppearance="@style/TextAppearance.AppCompat.Headline"
 			android:fontFamily="sans-serif-medium"
 			tools:ignore="UnusedAttribute"
+			android:textSize="30sp"
 			tools:text="Lorem ipsum" />
 
-		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+		<ir.kindnesswall.customviews.textviews.TextViewMitra
 			android:id="@id/mi_description"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
 			app:layout_parallaxFactor="0.4"
 			android:gravity="center"
 			android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-			android:textSize="15sp"
+			android:textSize="24sp"
 			android:fontFamily="sans-serif-medium"
 			tools:ignore="UnusedAttribute"
 			tools:text="Lorem ipsum dolor sit amet, consectetur, adipisci velit, …" />

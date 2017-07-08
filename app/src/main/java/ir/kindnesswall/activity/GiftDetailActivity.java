@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +35,8 @@ import ir.kindnesswall.constants.RequestName;
 import ir.kindnesswall.customviews.customindicator.MyPageIndicator;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansBold;
+import ir.kindnesswall.dialogfragment.RequestsToAGiftDialogFragment;
+import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.ReadJsonFile;
@@ -105,8 +108,14 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.contact_lay)
 	RelativeLayout mContactLay;
 
+	@Bind(R.id.requests_to_gift_fragment)
+	FrameLayout mRequestsToGiftFragment;
+
 	@Bind(R.id.edit_delete_lay)
-	RelativeLayout mEditDeleteLay;
+	LinearLayout mEditDeleteLay;
+
+	@Bind(R.id.requests_to_this_gift_lay)
+	RelativeLayout mRequestsToThisGiftLay;
 
 	@Bind(R.id.edit_lay)
 	RelativeLayout mEditLay;
@@ -369,6 +378,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 			if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))) {
 				setEditDeleteBtn();
+				mReportLay.setVisibility(View.GONE);
 			}
 
 			switch (gift.status) {
@@ -557,6 +567,18 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 							LoginActivity.createIntent()
 					);
 				}
+			}
+		});
+
+		mRequestsToThisGiftLay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				RequestsToAGiftDialogFragment fragment = RequestsToAGiftDialogFragment.newInstance(
+						giftId
+				);
+
+				fragment.show(getSupportFragmentManager(),
+						HomeFragment.class.getName());
 			}
 		});
 	}
