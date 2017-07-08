@@ -22,6 +22,7 @@ import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.fragment.mywall.BookmarkFragment;
+import ir.kindnesswall.fragment.mywall.ContactUsFragment;
 import ir.kindnesswall.fragment.mywall.MyWallFragment;
 import ir.kindnesswall.fragment.mywall.OurTeamFragment;
 import ir.kindnesswall.fragment.mywall.StatisticFragment;
@@ -287,9 +288,12 @@ public class BottomBarActivity extends AppCompatActivity{
 							tag.equals(RequestsToAGiftFragment.class.getName()) ||
 							tag.equals(MyGiftsFragment.class.getName()) ||
 							tag.equals(OurTeamFragment.class.getName()) ||
+							tag.equals(ContactUsFragment.class.getName()) ||
 							tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
 					) {
+
 				super.onBackPressed();
+
 			} else {
 
 				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
