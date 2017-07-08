@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
@@ -45,20 +43,20 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 //	    myHolder.mTitleTv.setText(members.get(i).getGalleryId());
 
 		//TODO load image of item
-		String image_url;
-		if (members.get(i).giftImages != null && members.get(i).giftImages.size() > 0) {
-			image_url = members.get(i).giftImages.get(0);
-		} else {
-			image_url = "";
-		}
-
-		Glide
-				.with(mContext)
-				.load(image_url)
-				.centerCrop()
-				.placeholder(R.color.background)
-				.crossFade()
-				.into(myHolder.getmItemIv());
+//		String image_url;
+//		if (members.get(i).giftImages != null && members.get(i).giftImages.size() > 0) {
+//			image_url = members.get(i).giftImages.get(0);
+//		} else {
+//			image_url = "";
+//		}
+//
+//		Glide
+//				.with(mContext)
+//				.load(image_url)
+//				.centerCrop()
+//				.placeholder(R.color.background)
+//				.crossFade()
+//				.into(myHolder.getmItemIv());
 
 //		myHolder.getGiftTitleTv().setText(members.get(i).title);
 //		myHolder.getGiftLocationTv().setText(members.get(i).address);
