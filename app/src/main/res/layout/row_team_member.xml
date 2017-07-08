@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+	<ir.kindnesswall.customviews.RoundedImageView
+		android:id="@+id/member_iv"
+		android:layout_width="72dp"
+		android:layout_height="72dp"
+		android:layout_alignParentRight="true"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="6dp"
+		android:layout_marginBottom="4dp"
+		android:layout_marginTop="4dp"
+		android:src="@drawable/hamed"/>
+
+	<ImageView
+		android:id="@+id/telegram_iv"
+		android:layout_width="36dp"
+		android:layout_height="match_parent"
+		android:layout_alignParentRight="true"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="6dp"
+		android:layout_marginBottom="4dp"
+		android:layout_marginTop="4dp"
+		android:src="@drawable/hamed"/>
+
+	<RelativeLayout
+		android:id="@+id/divider1_lay"
+		android:layout_width="1dp"
+		android:layout_height="56dp"
+		android:layout_below="@id/divider_below_lay"
+		android:layout_centerHorizontal="true"
+		android:background="#F1F1F1" />
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/member_name_tv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@id/member_iv"
+		android:layout_marginTop="6dp"
+		android:layout_marginLeft="6dp"
+		android:layout_toLeftOf="@id/member_iv"
+		android:text="حامد قدیریان"/>
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/memeber_about_tv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_alignBottom="@id/member_iv"
+		android:layout_below="@id/member_name_tv"
+		android:layout_marginTop="6dp"
+		android:layout_marginLeft="6dp"
+		android:layout_toLeftOf="@id/member_iv"
+		android:text="بنیان گذار - توسعه دهنده اندروید و آی او اس"/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@id/member_iv"
+		android:background="@color/divider"/>
+
+</RelativeLayout>
