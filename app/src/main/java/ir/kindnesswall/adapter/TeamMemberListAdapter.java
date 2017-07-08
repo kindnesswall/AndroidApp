@@ -18,7 +18,6 @@ import ir.kindnesswall.model.TeamMember;
  */
 public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder> {
 
-	String schoolId, childID;
 	private ArrayList<TeamMember> members;
 	private Context mContext;
 	private FragmentActivity activity;
@@ -66,6 +65,6 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 
 	@Override
 	public int getItemCount() {
-		return (null != members ? members.size() : 0);
+		return 20;//(null != members ? members.size() : 0);
 	}
 }

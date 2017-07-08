@@ -197,7 +197,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		mOurTeamLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				((BottomBarActivity) getActivity()).replaceFragment(
+						new OurTeamFragment(), OurTeamFragment.class.getName()
+				);
 			}
 		});
 
