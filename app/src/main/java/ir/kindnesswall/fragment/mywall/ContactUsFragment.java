@@ -75,7 +75,7 @@ public class ContactUsFragment extends BaseFragment {
 			public void onClick(View view) {
 				Intent telegram = new Intent(
 						Intent.ACTION_VIEW ,
-						Uri.parse("https://telegram.me/@Kindness_Wall_Admin")
+						Uri.parse("https://telegram.me/Kindness_Wall_Admin")
 				);
 				startActivity(telegram);
 			}

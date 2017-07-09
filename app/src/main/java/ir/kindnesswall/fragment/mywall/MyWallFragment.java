@@ -209,7 +209,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		mReportBugLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/@Kindness_Wall_Admin"));
+				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Kindness_Wall_Admin"));
 				startActivity(telegram);
 			}
 		});

@@ -56,7 +56,7 @@ public class OurTeamFragment  extends BaseFragment {
 		TeamMember teamMember1 = new TeamMember();
 		teamMember1.name = "حامد قدیریان";
 		teamMember1.about = "بنیان‌گذار، توسعه دهنده اندروید، IOS";
-		teamMember1.telegramUrl = "https://telegram.me/@Hamed_Ghadirian";
+		teamMember1.telegramUrl = "https://telegram.me/Hamed_Ghadirian";
 		teamMember1.linkdinUrl = "https://www.linkedin.com/in/hamedghadirian";
 		teamMember1.drawableResId = R.drawable.hamed;
 
@@ -65,7 +65,7 @@ public class OurTeamFragment  extends BaseFragment {
 		TeamMember teamMember2 = new TeamMember();
 		teamMember2.name = "علی دهقان";
 		teamMember2.about = "بنیان‌گذار، توسعه دهنده Net.";
-		teamMember2.telegramUrl = "https://telegram.me/@ali1d1";
+		teamMember2.telegramUrl = "https://telegram.me/ali1d1";
 		teamMember2.linkdinUrl = "https://www.linkedin.com/in/ali-dehqan-b69b2056/";
 		teamMember2.drawableResId = R.drawable.ali;
 
@@ -74,7 +74,7 @@ public class OurTeamFragment  extends BaseFragment {
 		TeamMember teamMember3 = new TeamMember();
 		teamMember3.name = "امیرحسین زکی‌زاده";
 		teamMember3.about = "توسعه‌دهنده IOS";
-		teamMember3.telegramUrl = "https://telegram.me/@amirhz72";
+		teamMember3.telegramUrl = "https://telegram.me/amirhz72";
 		teamMember3.linkdinUrl = "";
 		teamMember3.drawableResId = R.drawable.amirhossein;
 
@@ -83,7 +83,7 @@ public class OurTeamFragment  extends BaseFragment {
 		TeamMember teamMember4 = new TeamMember();
 		teamMember4.name = "مهرشاد نجار";
 		teamMember4.about = "گرافیست";
-		teamMember4.telegramUrl = "https://telegram.me/@Mehrshad_na";
+		teamMember4.telegramUrl = "https://telegram.me/Mehrshad_na";
 		teamMember4.linkdinUrl = "https://www.linkedin.com/in/mehrshad-najar";
 		teamMember4.drawableResId = R.drawable.mehrshad;
 
