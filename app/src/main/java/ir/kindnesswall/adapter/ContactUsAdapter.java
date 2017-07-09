@@ -29,9 +29,9 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsHolder> {
 	private ArrayList<String> urls  = new ArrayList<String>() {{
 		add("https://github.com/kindnesswall");
 		add("https://www.facebook.com/profile.php?id=100018883545560");
-		add("kindnesswall.ir@gmail.com");
-		add("https://telegram.me/@Kindness_Wall_Admin");
-		add("https://telegram.me/@Kindness_Wall_Admin");
+		add("info@kindnesswall.ir");
+		add("https://www.instagram.com/kindness_wall");
+		add("https://telegram.me/Kindness_Wall_Admin");
 	}};
 
 	private Context mContext;
