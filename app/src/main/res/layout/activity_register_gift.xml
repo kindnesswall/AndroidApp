@@ -319,7 +319,7 @@
 
 						android:layout_alignParentRight="true"
 
-						android:text="ارزش تقریبی به تومان( صرفا جهت اطلاع)"
+						android:text="ارزش تقریبی به تومان (صرفا جهت برآورد و نمایش در قسمت آمار است و برای دیگران نمایش داده نمیشود):"
 						android:textColor="@color/text_primary"
 						android:textSize="16dp"/>
 
