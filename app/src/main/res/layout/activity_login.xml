@@ -96,7 +96,7 @@
 				android:layout_marginTop="28dp"
 
 				android:background="@android:color/transparent"
-
+				android:lines="1"
 				android:gravity="center_vertical"
 				android:hint="@string/hint_telephone_field"
 				android:text="09353703108"

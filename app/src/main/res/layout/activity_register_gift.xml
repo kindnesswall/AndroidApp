@@ -319,7 +319,7 @@
 
 						android:layout_alignParentRight="true"
 
-						android:text="قیمت تقریبی(تومان)"
+						android:text="ارزش تقریبی به تومان( صرفا جهت اطلاع)"
 						android:textColor="@color/text_primary"
 						android:textSize="16dp"/>
 

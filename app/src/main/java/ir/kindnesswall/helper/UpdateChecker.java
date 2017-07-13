@@ -26,12 +26,14 @@ import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.helper.downloader.AppInfo;
 import ir.kindnesswall.helper.downloader.DownloadService;
+import ir.kindnesswall.interfaces.UpdateCheckerInterface;
 
 
 /**
  * Created by lms-3 on 28/08/2016.
  */
 public class UpdateChecker {
+	private final UpdateCheckerInterface updateCheckerInterface;
 	//Todo needs write and read permission ?? i nmanfest?
 	//Todo: check needs android marshmallow permission file ?
 
@@ -51,7 +53,10 @@ public class UpdateChecker {
 	boolean isForcedUpdate;
 
 
-	public UpdateChecker(String appName, String latestVersion, String latestDownloadLink, String imageLink, ArrayList<String> releaseNotes) {
+	public UpdateChecker(UpdateCheckerInterface updateCheckerInterface, String appName, String latestVersion, String latestDownloadLink, String imageLink, ArrayList<String> releaseNotes) {
+
+		this.updateCheckerInterface = updateCheckerInterface;
+
 		if (imageLink != null && imageLink != "")
 			mUpdateDetail = new UpdateDetail(appName, latestVersion, latestDownloadLink, imageLink, releaseNotes);
 		else
@@ -87,8 +92,10 @@ public class UpdateChecker {
 
 		if (sharePrefAnswer != null &&
 				(getAppVersion(context).equals(version) || sharePrefAnswer.equals(version))&&
-						!isForcedUpdate)
+						!isForcedUpdate) {
+			updateCheckerInterface.onNotNowBtnClicked();
 			return;
+		}
 
 		this.intents = intents;
 		this.context = context;
@@ -99,7 +106,7 @@ public class UpdateChecker {
 		fileDownloadPath = mDownloadDir.getPath() + File.separator + mUpdateDetail.updateApk.getName() + ".apk";
 		builder = MaterialDialogBuilder.create(context);
 		dialog = builder.customView(R.layout.updater_dialog, false).show();
-		dialog.setCancelable(!isForcedUpdate);
+		dialog.setCancelable(false);
 
 		findViews();
 		init(title, body, textArray, version);
@@ -168,6 +175,7 @@ public class UpdateChecker {
 				@Override
 				public void onClick(View v) {
 
+					updateCheckerInterface.onNotNowBtnClicked();
 					dialog.dismiss();
 
 				}
@@ -177,6 +185,7 @@ public class UpdateChecker {
 				@Override
 				public void onClick(View v) {
 
+					updateCheckerInterface.onNeverBtnClicked();
 					AppController.storeString(Constants.VERSION_SKIP_UPDATE, version);
 					dialog.dismiss();
 

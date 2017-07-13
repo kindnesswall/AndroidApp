@@ -1,5 +1,6 @@
 package ir.kindnesswall.fragment.mywall;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,17 +27,21 @@ import ir.kindnesswall.dialogfragment.ChoosePlaceDialogFragment;
 import ir.kindnesswall.fragment.BaseFragment;
 import ir.kindnesswall.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.kindnesswall.fragment.mywall.requests.MyRequestsFragment;
+import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.Snackbari;
+import ir.kindnesswall.helper.UpdateChecker;
 import ir.kindnesswall.interfaces.ChoosePlaceCallback;
+import ir.kindnesswall.interfaces.UpdateCheckerInterface;
 import ir.kindnesswall.model.Place;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback {
+public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback, UpdateCheckerInterface {
 
 	@Bind(R.id.location_tv)
 	TextView mLocationTv;
@@ -70,6 +75,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Bind(R.id.contact_us_lay)
 	RelativeLayout mContactUsLay;
+
+    @Bind(R.id.update_lay)
+	RelativeLayout mUpdateLay;
 
 	@Bind(R.id.report_bug_lay)
 	RelativeLayout mReportBugLay;
@@ -192,10 +200,68 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Override
 	public void onResponse(Call call, Response response) {
-		Snackbari.showS(mLog_in_out_lay, "شما با موفقیت از حساب خارج شدید");
+		if (response.body() instanceof AppInfoOutput) {
+			onUpdateVersionResponse((AppInfoOutput) response.body());
+		}else {
+			Snackbari.showS(mLog_in_out_lay, "شما با موفقیت از حساب خارج شدید");
+		}
+	}
+
+	private void onUpdateVersionResponse(AppInfoOutput appInfoOutput) {
+
+		AppController.storeString(Constants.SMS_CENTER, appInfoOutput.smsCenter);
+		boolean isForcedUpdate;
+
+		if (appInfoOutput.updateInfo.force_update != null && appInfoOutput.updateInfo.force_update.equalsIgnoreCase("true")) {
+			isForcedUpdate = true;
+		} else {
+			isForcedUpdate = false;//todo use this
+		}
+
+		UpdateChecker updateChecker = new UpdateChecker(
+				this,
+				getResources().getString(R.string.app_name),
+				appInfoOutput.updateInfo.version,
+				appInfoOutput.updateInfo.apk_url,
+				null,
+				appInfoOutput.updateInfo.changes);
+
+		if (isForcedUpdate ||
+				DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion)) {
+
+			//Notify Update
+			Intent[] intents = new Intent[1];
+			intents[0] = Intent.makeMainActivity(new ComponentName(AppController.getAppContext(),
+					BottomBarActivity.class));
+			// intents[1] = new Intent(AppController.getAppContext(), HomeActivity.class);
+			updateChecker.showUpdaterDialog(
+					context,
+					getString(R.string.update_to_new_version),
+					getString(R.string.exist_new_version),
+					appInfoOutput.updateInfo.changes,
+					appInfoOutput.updateInfo.version,
+					intents,
+					isForcedUpdate);
+
+			AppController.getInstance().setIsCheckedUpdate(true);
+
+		} else {
+
+			Snackbari.showS(mLog_in_out_lay, "برنامه شما به روز است.");
+
+		}
+
 	}
 
 	private void setListeners() {
+
+        mUpdateLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+				AppController.storeString(Constants.VERSION_SKIP_UPDATE, null);
+				apiRequest.getAppInfo();
+            }
+        });
 
 		mOurTeamLay.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -251,10 +317,11 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 		locationLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				FragmentManager fm = getActivity().getSupportFragmentManager();
-				ChoosePlaceDialogFragment choosePlaceDialogFragment = new ChoosePlaceDialogFragment();
+				ChoosePlaceDialogFragment choosePlaceDialogFragment = ChoosePlaceDialogFragment.newInstance(true);
 				choosePlaceDialogFragment.setTargetFragment(MyWallFragment.this, 0);
-				choosePlaceDialogFragment.show(fm, "fragment_name");
+				choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
 			}
 		});
 
@@ -295,6 +362,16 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback 
 
 	@Override
 	public void onRegionSelected(Place region) {
+
+	}
+
+	@Override
+	public void onNotNowBtnClicked() {
+
+	}
+
+	@Override
+	public void onNeverBtnClicked() {
 
 	}
 }

@@ -44,9 +44,13 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 		teamMemberHolder.mAvatarIv.setImageDrawable(
 				mContext.getResources().getDrawable(members.get(position).drawableResId)
 		);
+
+//		if (members.get(position).telegramUrl!=null)
 		teamMemberHolder.mTelegramIv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if(members.get(position).telegramUrl==null || members.get(position).telegramUrl.equals("")) return;
+
 				Intent telegram = new Intent(
 						Intent.ACTION_VIEW ,
 						Uri.parse(members.get(position).telegramUrl)
@@ -59,6 +63,8 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 		teamMemberHolder.mLinkdinIv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if(members.get(position).linkdinUrl==null || members.get(position).linkdinUrl.equals("")) return;
+
 				Intent browserIntent =
 						new Intent(
 								Intent.ACTION_VIEW,

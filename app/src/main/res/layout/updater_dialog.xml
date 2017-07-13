@@ -115,7 +115,7 @@
 	<RelativeLayout
 		android:id="@+id/cancel_lay"
 		android:layout_below="@id/update_progressbar"
-		android:background="@color/primaryDialog"
+		android:background="@color/white"
 		android:layout_centerHorizontal="true"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 			android:layout_centerInParent="true"
 			android:gravity="center"
 			android:text="@string/cancel"
-			android:textColor="@color/white"
+			android:textColor="@color/primaryDialog"
 			android:paddingLeft="20dp"
 			android:paddingRight="20dp"
 			android:textSize="12sp" />

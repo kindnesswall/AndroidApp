@@ -82,7 +82,7 @@ public class OurTeamFragment  extends BaseFragment {
 
 		TeamMember teamMember4 = new TeamMember();
 		teamMember4.name = "مهرشاد نجار";
-		teamMember4.about = "گرافیست";
+		teamMember4.about = "طراح رابط کاربری";
 		teamMember4.telegramUrl = "https://telegram.me/Mehrshad_na";
 		teamMember4.linkdinUrl = "https://www.linkedin.com/in/mehrshad-najar";
 		teamMember4.drawableResId = R.drawable.mehrshad;
@@ -110,7 +110,7 @@ public class OurTeamFragment  extends BaseFragment {
 		joinUsLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/@Kindness_Wall_Admin"));
+				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Kindness_Wall_Admin"));
 				startActivity(telegram);
 			}
 		});

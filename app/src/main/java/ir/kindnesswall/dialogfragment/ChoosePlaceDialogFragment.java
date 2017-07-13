@@ -50,6 +50,7 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
 	private Places level4Original;
 	private Places level4;
+	private boolean cancelable;
 
 	public static ChoosePlaceDialogFragment newInstance(String locationId) {
 		ChoosePlaceDialogFragment f = new ChoosePlaceDialogFragment();
@@ -57,13 +58,19 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 		// Supply num input as an argument.
 		Bundle args = new Bundle();
 		args.putString(Constants.CITY_ID, locationId);
+		args.putBoolean(Constants.CANCELABLE, true);
 		f.setArguments(args);
 
 		return f;
 	}
 
-	public static ChoosePlaceDialogFragment newInstance() {
+	public static ChoosePlaceDialogFragment newInstance(boolean cancelable) {
 		ChoosePlaceDialogFragment f = new ChoosePlaceDialogFragment();
+
+		Bundle args = new Bundle();
+		args.putBoolean(Constants.CANCELABLE, cancelable);
+		f.setArguments(args);
+
 		return f;
 	}
 
@@ -134,6 +141,10 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 	private void init() {
 //		fromActivity = getArguments().getString(Constants.FROM_ACTIVITY);
 		Bundle bundle = getArguments();
+		if (bundle!=null){
+			cancelable = getArguments().getBoolean(Constants.CANCELABLE);
+			setCancelable(cancelable);
+		}
 		if (bundle != null && getArguments().getString(Constants.CITY_ID) != null) {
 			locationId = getArguments().getString(Constants.CITY_ID);
 			readLevel4FromJson();

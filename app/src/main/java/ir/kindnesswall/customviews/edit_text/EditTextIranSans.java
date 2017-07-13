@@ -24,7 +24,6 @@ public class EditTextIranSans extends EditText {
 	public EditTextIranSans(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		if (!isInEditMode())
-
 			setFont();
 	}
 

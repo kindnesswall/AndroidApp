@@ -15,7 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,8 +31,11 @@ import com.rey.material.widget.ProgressView;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -186,6 +191,41 @@ public class RegisterGiftActivity extends AppCompatActivity
     }
 
     void setListeners() {
+
+        mPriceEt.addTextChangedListener( new TextWatcher() {
+            boolean isEdiging;
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+             @Override
+             public void afterTextChanged(Editable s) {
+                 mPriceEt.removeTextChangedListener(this);
+
+                 try {
+                     String originalString = s.toString();
+
+                     Long longval;
+                     if (originalString.contains(",")) {
+                         originalString = originalString.replaceAll(",", "");
+                     }
+                     longval = Long.parseLong(originalString);
+
+                     DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                     formatter.applyPattern("#,###,###,###");
+                     String formattedString = formatter.format(longval);
+
+                     //setting text after format to EditText
+                     mPriceEt.setText(formattedString);
+                     mPriceEt.setSelection(mPriceEt.getText().length());
+                 } catch (NumberFormatException nfe) {
+                     nfe.printStackTrace();
+                 }
+
+                 mPriceEt.addTextChangedListener(this);
+             }
+        });
+
+
         mToolbarSendBtnTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,7 +255,7 @@ public class RegisterGiftActivity extends AppCompatActivity
                         mDescriptionEt.getText().toString(),
                         region != null ? (getPlaceNameById(city.id) + ", " + getPlaceNameById(region.id)) : getPlaceNameById(city.id),
                         mTitleEt.getText().toString(),
-                        mPriceEt.getText().toString(),
+                        mPriceEt.getText().toString().replace(",",""),
                         category.categoryId,
                         city.id,
                         (region == null ? "0" : region.id),

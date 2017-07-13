@@ -40,6 +40,7 @@ public class Constants {
 	public static final String CATEGORY_ID = "categoryId";
 //    public static final String CATEGORY_NAME = "CATEGORY_NAME";
 
+	public static final String CANCELABLE = "CANCELABLE";
 	public static final String CITY_ID = "CITY_ID";
 	public static final String REGION_ID = "REGION_ID";
 //    public static final String LOCATION_NAME = "LCATOION_NAME";
