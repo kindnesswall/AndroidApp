@@ -361,7 +361,7 @@
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
-            android:visibility="visible">
+            android:visibility="invisible">
 
 
 

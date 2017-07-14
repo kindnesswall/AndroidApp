@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+
+	android:paddingLeft="10dp"
+	android:paddingRight="10dp"
+	android:paddingTop="10dp">
+
+	<LinearLayout
+		android:id="@+id/text_lay"
+		android:layout_width="match_parent"
+	              android:layout_height="wrap_content"
+	              android:orientation="horizontal">
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/value_tv"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+
+			android:gravity="left"
+
+			android:text="100000"
+			android:textSize="@dimen/statistic_text_size"
+			android:visibility="visible"/>
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/key_tv"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="3"
+
+			android:gravity="right"
+
+			android:text="تعداد یوزرها:"
+			android:textSize="@dimen/statistic_text_size"
+			android:visibility="visible"/>
+
+	</LinearLayout>
+
+
+	<View android:id="@+id/divider_lay_1"
+	      android:layout_width="match_parent"
+	      android:layout_height="1dp"
+	      android:layout_below="@id/text_lay"
+
+	      android:layout_marginTop="6dp"
+	      android:background="@color/divider"
+	      android:visibility="visible"/>
+
+
+</RelativeLayout>

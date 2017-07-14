@@ -2,7 +2,7 @@ package ir.kindnesswall.model.api.output;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Hamed on 6/23/17.
@@ -11,6 +11,6 @@ import java.util.Map;
 public class StatisticsOutput {
 
 	@SerializedName("statistics")
-	public Map<String, String> statistics;
+	public LinkedHashMap<String, String> statistics;
 
 }

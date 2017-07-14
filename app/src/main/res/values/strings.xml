@@ -890,7 +890,7 @@
 	<string name="you_have_signed_in">وارد شدید</string>
 	<string name="no_gift_found">هیچ هدیه ای یافت نشد.</string>
 	<string name="searching">در حال جستجو</string>
-	<string name="place_equal">محل:</string>
+	<string name="place_equal">شهر:</string>
 	<string name="region_equal">منطقه:</string>
 	<string name="category_equal">دسته‌بندی:</string>
 	<string name="remove_filter">حذف فیلتر</string>

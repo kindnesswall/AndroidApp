@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -338,6 +339,29 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		if (giftId != null) {
 			apiRequest.getGift(giftId);
 		}
+
+		ViewTreeObserver viewTreeObserver = viewPager.getViewTreeObserver();
+		viewTreeObserver
+				.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+					@Override
+					public void onGlobalLayout() {
+
+						RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+								LinearLayout.LayoutParams.WRAP_CONTENT,
+								LinearLayout.LayoutParams.WRAP_CONTENT);
+
+						int viewPagerWidth = viewPager.getWidth();
+						float viewPagerHeight = (float) (viewPagerWidth * 1);
+
+						layoutParams.width = viewPagerWidth;
+						layoutParams.height = (int) viewPagerHeight;
+
+						viewPager.setLayoutParams(layoutParams);
+						viewPager.getViewTreeObserver()
+								.removeGlobalOnLayoutListener(this);
+					}
+				});
 	}
 
 	@Override
@@ -346,6 +370,8 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		setContentView(R.layout.activity_detail);
 
 		init();
+
+
 	}
 
 	private void shareIt() {

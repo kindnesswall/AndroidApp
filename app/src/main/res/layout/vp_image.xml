@@ -9,8 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:contentDescription="description"
-		android:visibility="invisible"
-		android:scaleType="fitCenter"/>
+		android:visibility="invisible"/>
 
 
 	<com.rey.material.widget.ProgressView
