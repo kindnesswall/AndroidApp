@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-crash'
+
+buildscript {
+	repositories {
+//		maven { url 'https://maven.fabric.io/public' }
+	}
+
+//	dependencies {
+//		classpath 'io.fabric.tools:gradle:1.+'
+//	}
+}
+
+repositories {
+	maven { url 'https://maven.fabric.io/public' }
+}
+
+android {
+	compileSdkVersion 25
+	buildToolsVersion "25.0.2"
+
+	defaultConfig {
+		applicationId "ir.kindnesswall"
+		minSdkVersion 16
+		targetSdkVersion 22
+		versionCode 1
+		versionName "1.0.0"
+	}
+
+	signingConfigs {
+		release {
+			storeFile file("key.jks")
+			storePassword ""
+			keyAlias ""
+			keyPassword ""
+		}
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+			signingConfig signingConfigs.release
+		}
+	}
+
+	dataBinding {
+		enabled = true
+	}
+}
+
+// run ./gradlew :app:firebaseUploadReleaseProguardMapping from project directory that has gradlew.bat
+setProperty("FirebaseServiceAccountFilePath", rootProject.rootDir.absolutePath + FirebaseServiceAccountFilePath)
+
+dependencies {
+	compile 'com.android.support:appcompat-v7:25.3.1'
+	compile 'com.android.support:design:25.3.1'
+
+	compile('com.github.afollestad.material-dialogs:core:0.8.5.6@aar') {
+		transitive = true
+	}
+
+//	compile('com.mikepenz:materialdrawer:5.0.8@aar') {
+//		transitive = true
+//	}
+	compile 'com.github.traex.rippleeffect:library:1.3'
+
+	compile 'com.jakewharton:butterknife:7.0.1'
+
+	compile 'com.squareup.okhttp3:okhttp:3.2.0'
+	compile 'com.squareup.retrofit2:retrofit:2.0.2'
+
+	compile 'com.github.rey5137:material:1.2.1'
+
+	compile 'com.google.code.gson:gson:2.8.0'
+	compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+//	compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+//	compile 'com.roughike:bottom-bar:1.4.0.1'
+
+	compile 'com.github.bumptech.glide:glide:3.7.0'
+	compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
+
+	compile 'com.google.firebase:firebase-core:11.0.0'
+//	compile 'com.google.firebase:firebase-messaging:10.2.6'
+	compile 'com.google.firebase:firebase-messaging:11.0.0'
+	compile 'com.google.firebase:firebase-crash:11.0.0'
+
+	compile 'com.github.Aspsine:MultiThreadDownload:920fd6f670'
+
+	compile 'com.squareup.picasso:picasso:2.5.2'
+
+	compile 'com.heinrichreimersoftware:material-intro:1.6.2'
+
+}
+
+apply plugin: 'com.google.gms.google-services'
