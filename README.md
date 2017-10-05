@@ -7,8 +7,7 @@ The kindness wall (Dewar e meherbani) is a charity work phenomenon and a kind of
 [Read more about kindness wall in Wikipedia](https://en.wikipedia.org/wiki/Wall_of_kindness)
 
 <p align="center">
-  <img src="img1.jpg" width="100"/>
+  <img src="img1.jpg" width="400"/>
+  <img src="img2.jpg" width="400"/>
+  <img src="img3.jpg" width="400"/>
 </p>
-
-![banner2](img2.jpg)
-![banner3](img3.jpg)
