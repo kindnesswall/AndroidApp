@@ -1,5 +1,13 @@
 <resources>
 
+	<style name="AppTheme.Button.Borderless" parent="Widget.AppCompat.Button.Borderless">
+		<item name="android:background">?attr/selectableItemBackground</item>
+		<item name="android:textColor">@color/textColorPrimary</item>
+		<item name="android:minHeight">@dimen/button_height</item>
+		<item name="android:textSize">@dimen/text_size_s</item>
+		<item name="android:gravity">center_vertical|center_horizontal</item>
+	</style>
+
 	<style name="MyMaterialTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 		<item name="windowNoTitle">true</item>
 		<item name="windowActionBar">false</item>

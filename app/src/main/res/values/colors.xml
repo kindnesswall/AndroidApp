@@ -5,6 +5,13 @@
 
 	<color name="primaryDialog">@color/colorPrimary</color>
 
+	<!-- color from cropImageView -->
+
+	<color name="windowBackground">#1C1C1C</color>
+	<color name="overlay">#AA1C1C1C</color>
+
+	<color name="textColorPrimary">#FFFFFB</color>
+
 	<!-- colors from divar -->
 
 	<color name="action_bar_splitter">#ffdddddd</color>

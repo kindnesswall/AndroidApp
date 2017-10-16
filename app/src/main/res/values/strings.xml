@@ -1,5 +1,9 @@
 <resources>
 	<string name="app_name">Divar Mehrabani</string>
+
+	<string name="button_allow">Allow</string>
+	<string name="button_deny">Deny</string>
+
 	<string name="action_menu">منو</string>
 
 	<string name="update_to_new_version">به روزرسانی به نسخه جدید</string>
@@ -65,6 +69,11 @@
 		laoreet ligula quam, ac lacinia nisl elementum in. Aenean velit arcu, euismod a venenatis
 		non, pulvinar pulvinar massa.
 	</string>
+
+	<!-- from crop imageview -->
+
+	<string name="permission_pick_rationale">READ_EXTERNAL_STORAGE permission is needed to pick image.</string>
+	<string name="permission_crop_rationale">WRITE_EXTERNAL_STORAGE permission is needed to save cropped image.</string>
 
 	<!-- from divar -->
 

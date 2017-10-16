@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+
+	xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -129,7 +131,34 @@
 
 	</RelativeLayout>
 
+	<com.isseiaoki.simplecropview.CropImageView
+		android:layout_below="@id/toolbar_layout"
+		android:id="@+id/cropImageView"
+		android:visibility="gone"
+		xmlns:custom="http://schemas.android.com/apk/res-auto"
+
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		custom:scv_crop_mode="square"
+
+		custom:scv_background_color="@color/transparent"
+		custom:scv_overlay_color="@color/transparent"
+
+		custom:scv_handle_color="@color/colorAccent"
+		custom:scv_guide_color="@color/colorAccent"
+		custom:scv_frame_color="@color/colorAccent"
+
+		custom:scv_handle_size="14dp"
+		custom:scv_touch_padding="8dp"
+		custom:scv_handle_show_mode="show_always"
+		custom:scv_guide_show_mode="show_always"
+		custom:scv_min_frame_size="50dp"
+		custom:scv_frame_stroke_weight="1dp"
+		custom:scv_guide_stroke_weight="1dp"/>
+
+
 	<ScrollView
+		android:id="@+id/scrollView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/toolbar_layout"

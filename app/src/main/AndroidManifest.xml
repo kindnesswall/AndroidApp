@@ -32,6 +32,9 @@
 		<activity android:name="ir.kindnesswall.activity.BottomBarActivity"
 			android:screenOrientation="portrait"/>
 
+		<activity android:name="ir.kindnesswall.activity.BasicActivity"
+			android:screenOrientation="portrait"/>
+
 		<activity android:name="ir.kindnesswall.activity.UserProfileActivity"
 			android:screenOrientation="portrait"/>
 

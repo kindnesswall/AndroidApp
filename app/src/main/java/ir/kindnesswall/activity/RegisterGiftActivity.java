@@ -24,9 +24,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.isseiaoki.simplecropview.CropImageView;
 import com.rey.material.widget.ProgressView;
 
 import java.io.File;
@@ -139,6 +141,12 @@ public class RegisterGiftActivity extends AppCompatActivity
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @Bind(R.id.cropImageView)
+    CropImageView cropImageView;
+
+    @Bind(R.id.scrollView)
+    ScrollView scrollView;
+
     private Context context;
     private Uri imageUri;
     private Gift myGift = new Gift();
@@ -147,6 +155,7 @@ public class RegisterGiftActivity extends AppCompatActivity
     private Category category;
     private Place region;
     private boolean editVersion;
+    private int CROP_ACTIVITY = 2;
 
     private boolean extractDataFromBundle() {
         Bundle bundle = getIntent().getExtras();
@@ -518,15 +527,22 @@ public class RegisterGiftActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-            imageUri = getPickImageResultUri(data);
 
-            String path = FileUtils.getPath(this, imageUri);
-            if (path != null) {
-                uploadFile(path);
-            } else {
-                Toasti.showS(getString(R.string.could_not_find_path));
+            if (requestCode == CROP_ACTIVITY){
+
+                Uri u = data.getParcelableExtra(Constants.URI);
+                String path = FileUtils.getPath(this, u);
+                if (path != null) {
+                    uploadFile(path);
+                } else {
+                    Toasti.showS(getString(R.string.could_not_find_path));
+                }
+
+            }else {
+                imageUri = getPickImageResultUri(data);
+
+                startActivityForResult(BasicActivity.createIntent(imageUri), CROP_ACTIVITY);
             }
-
         }
 
     }
@@ -558,8 +574,6 @@ public class RegisterGiftActivity extends AppCompatActivity
         }
         AppController.storeInt(Constants.MY_GIFT_IMAGE_NUMBER, myGift.giftImages.size());
     }
-
-
 
     private void setInfo() {
 
