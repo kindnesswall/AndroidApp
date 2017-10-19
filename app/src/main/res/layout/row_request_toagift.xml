@@ -2,13 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_lay"
     android:layout_width="match_parent"
-    android:layout_height="124dp">
+    android:layout_height="180dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="6dp"
         android:background="@color/white">
+
+        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+            android:id="@+id/rw_phone_number_tv"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+
+            android:layout_alignParentTop="true"
+
+            android:gravity="center"
+
+            android:lines="1"
+            android:ellipsize="end"
+
+            android:text="09353703108"
+
+            android:textSize="22dp" />
+
+        <RelativeLayout
+            android:id="@+id/divider_below_telephone_lay"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/rw_phone_number_tv"
+            android:background="#F1F1F1" />
 
         <ImageView
             android:id="@+id/profile_iv"
@@ -19,6 +42,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
 
+            android:layout_below="@id/divider_below_telephone_lay"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="6dp"
 
@@ -28,6 +52,8 @@
             android:id="@+id/sms_lay"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
+            android:layout_below="@id/divider_below_telephone_lay"
+
             android:layout_alignParentRight="true">
 
             <ImageView
@@ -40,19 +66,12 @@
                 android:paddingLeft="10dp"
                 android:src="@mipmap/ic_message_grey600_36dp" />
 
-            <!--<kindnesswallstomviews.textviews.TextViewIranSansRegular-->
-                <!--android:id="@+id/deny_txt"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="4dp"-->
-                <!--android:text="رد درخواست"-->
-                <!--android:textColor="@color/white" />-->
-
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/divider1_lay"
+            android:layout_below="@id/divider_below_telephone_lay"
+
             android:layout_width="1dp"
             android:layout_height="56dp"
             android:layout_toLeftOf="@id/sms_lay"
@@ -60,6 +79,8 @@
 
         <RelativeLayout
             android:id="@+id/call_lay"
+            android:layout_below="@id/divider_below_telephone_lay"
+
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_toLeftOf="@id/divider1_lay"
@@ -85,7 +106,9 @@
         </RelativeLayout>
 
         <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-            android:id="@+id/rw_phone_number_tv"
+            android:id="@+id/rw_profile_tv"
+            android:layout_below="@id/divider_below_telephone_lay"
+
             android:layout_width="wrap_content"
             android:layout_height="56dp"
 
@@ -96,12 +119,14 @@
             android:lines="1"
             android:ellipsize="end"
 
-            android:text="09353703108"
+            android:text="پروفایل"
 
             android:textSize="18dp" />
 
         <RelativeLayout
             android:id="@+id/divider3_lay"
+            android:layout_below="@id/divider_below_telephone_lay"
+
             android:layout_width="1dp"
             android:layout_height="56dp"
             android:layout_toLeftOf="@id/call_lay"
@@ -111,7 +136,7 @@
             android:id="@+id/divider_below_lay"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/rw_phone_number_tv"
+            android:layout_below="@id/rw_profile_tv"
             android:layout_marginBottom="-1dp"
             android:background="#F1F1F1" />
 

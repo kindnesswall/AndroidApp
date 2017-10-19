@@ -70,7 +70,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
     @Override
     public void onBindViewHolder(RequestToAGiftHolder myHolder, final int i) {
 
-        myHolder.mPhoneTv.setText("پروفایل");
+        myHolder.mPhoneTv.setText(requestModels.get(i).fromUser);
 
         myHolder.rejectLay.setOnClickListener(new View.OnClickListener() {
             @Override
