@@ -65,7 +65,7 @@ public class OurTeamFragment  extends BaseFragment {
 		TeamMember teamMember2 = new TeamMember();
 		teamMember2.name = "علی دهقان";
 		teamMember2.about = "بنیان‌گذار، توسعه دهنده Net.";
-		teamMember2.telegramUrl = "https://telegram.me/ali1d1";
+		teamMember2.telegramUrl = "https://telegram.me/adehqan";
 		teamMember2.linkdinUrl = "https://www.linkedin.com/in/ali-dehqan-b69b2056/";
 		teamMember2.drawableResId = R.drawable.ali;
 

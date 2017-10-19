@@ -17,8 +17,8 @@ repositories {
 }
 
 android {
-	compileSdkVersion 25
-	buildToolsVersion "25.0.2"
+	compileSdkVersion 26
+	buildToolsVersion "26.0.2"
 
 	defaultConfig {
 		applicationId "ir.kindnesswall"
@@ -61,8 +61,8 @@ android {
 setProperty("FirebaseServiceAccountFilePath", rootProject.rootDir.absolutePath + FirebaseServiceAccountFilePath)
 
 dependencies {
-	compile 'com.android.support:appcompat-v7:25.3.1'
-	compile 'com.android.support:design:25.3.1'
+	compile 'com.android.support:appcompat-v7:26.1.0'
+	compile 'com.android.support:design:26.1.0'
 
 	compile('com.github.afollestad.material-dialogs:core:0.8.5.6@aar') {
 		transitive = true
@@ -75,7 +75,7 @@ dependencies {
 
 	compile 'com.jakewharton:butterknife:7.0.1'
 
-	compile 'com.squareup.okhttp3:okhttp:3.2.0'
+	compile 'com.squareup.okhttp3:okhttp:3.4.1'
 	compile 'com.squareup.retrofit2:retrofit:2.0.2'
 
 	compile 'com.github.rey5137:material:1.2.1'
@@ -88,7 +88,7 @@ dependencies {
 //	compile 'com.roughike:bottom-bar:1.4.0.1'
 
 	compile 'com.github.bumptech.glide:glide:3.7.0'
-	compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+	compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
 
 	compile 'com.google.firebase:firebase-core:11.0.0'
@@ -102,13 +102,7 @@ dependencies {
 
 	compile 'com.heinrichreimersoftware:material-intro:1.6.2'
 
-	compile 'com.isseiaoki:simplecropview:1.1.6'
-
-	compile("com.github.hotchemi:permissionsdispatcher:3.0.1") {
-		// if you don't use android.app.Fragment you can exclude support for them
-		exclude module: "support-v13"
-	}
-	annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
+	compile 'com.github.yalantis:ucrop:2.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
