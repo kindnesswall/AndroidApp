@@ -6,21 +6,28 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsMessage;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rey.material.widget.ProgressView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import info.hoang8f.android.segmented.SegmentedGroup;
 import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
@@ -67,11 +74,16 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 	@Bind(R.id.progressView)
 	ProgressView progressView;
-
 	View.OnClickListener enterPhoneNumber;
 	View.OnClickListener enterVerificationCodeListener;
 	String regexStr = "^[0-9]*$";
 	IntentFilter filter;
+
+	Boolean phoneSelected = true;
+	String tempPhone = AppController.getStoredString(Constants.TELEPHONE);
+	String tempEmail = AppController.getStoredString(Constants.EMAIL);
+
+	private SegmentedGroup segmentedGroup;
 	private Context context;
 	private ApiRequest apiRequest;
 	private View.OnClickListener notRecievedCode;
@@ -97,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 							Log.d("", "onReceive: " + msg_from);
 							Log.d("", "onReceive: " + msgBody);
 
-							if (AppController.getStoredString(Constants.SMS_CENTER)!=null){
+							if (AppController.getStoredString(Constants.SMS_CENTER) != null) {
 								if (msg_from.equals(AppController.getStoredString(Constants.SMS_CENTER))) {
 									Log.d("", "onReceive: " + msgBody);
 									loginWithCode(msgBody);
@@ -117,6 +129,14 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	public static Intent createIntent() {
 		Intent intent = new Intent(AppController.getAppContext(), LoginActivity.class);
 		return intent;
+	}
+
+	public final static boolean isValidEmail(CharSequence target) {
+		if (target == null) {
+			return false;
+		} else {
+			return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+		}
 	}
 
 	private void settingToolbar() {
@@ -143,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			return;
 		}
 //		AppController.storeString(Constants.FIREBASE_REG_TOKEN, "256");
-		if (AppController.getStoredString(Constants.FIREBASE_REG_TOKEN)==null){
+		if (AppController.getStoredString(Constants.FIREBASE_REG_TOKEN) == null) {
 			closeKeyboard();
 			Snackbari.showL(
 					mBackBtn,
@@ -203,20 +223,9 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			@Override
 			public void onClick(View v) {
 
-				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
+				if(!isPhoneOrEmailValid()) return;
 
-				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
-
-					closeKeyboard();
-					Snackbari.showS(
-							mBackBtn,
-							"شماره تلفن وارد شده صحیح نمی‌باشد"
-					);
-
-					return;
-				}
-
-				apiRequest.register(phoneNumber);
+				apiRequest.register(phoneConfirimationCodeEt.getText().toString());
 
 				progressView.setVisibility(View.VISIBLE);
 				login_get_verification_tv.setVisibility(View.INVISIBLE);
@@ -241,33 +250,131 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 		enterVerificationCodeState = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
 
-				if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
-
-					closeKeyboard();
-
-					Snackbari.showS(
-							mBackBtn,
-							"شماره تلفن وارد شده صحیح نمی‌باشد"
-					);
-
-					return;
-				}
-
-				AppController.storeString(
-						Constants.TELEPHONE, phoneNumber
-				);
-
-				enterVerificationCode();
+				if(isPhoneOrEmailValid())
+					enterVerificationCode();
 			}
 		};
+
+
+
+
+		segmentedGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
+				switch (checkedId) {
+					case R.id.email_rb:
+						Toast.makeText(LoginActivity.this, "email", Toast.LENGTH_SHORT).show();
+						closeKeyboard();
+
+						phoneSelected = false;
+
+						phoneConfirimationCodeEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+						phoneConfirimationCodeEt.setRawInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+						phoneConfirimationCodeEt.setHint("myemail@email.com");
+						if (tempEmail!=null) {
+							phoneConfirimationCodeEt.setText(tempEmail);
+							phoneConfirimationCodeEt.setSelection(phoneConfirimationCodeEt.getText().length());
+						}else {
+							phoneConfirimationCodeEt.setText("");
+						}
+
+						break;
+					case R.id.phone_rb:
+						Toast.makeText(LoginActivity.this, "phone", Toast.LENGTH_SHORT).show();
+						closeKeyboard();
+
+						phoneSelected = true;
+
+						phoneConfirimationCodeEt.setInputType(Configuration.KEYBOARD_QWERTY);
+						phoneConfirimationCodeEt.setRawInputType(Configuration.KEYBOARD_QWERTY);
+
+						phoneConfirimationCodeEt.setHint("۰۹۱۲۳۴۵۶۷۸۹");
+						if (tempPhone!=null) {
+							phoneConfirimationCodeEt.setText(tempPhone);
+							phoneConfirimationCodeEt.setSelection(phoneConfirimationCodeEt.getText().length());
+						}else {
+							phoneConfirimationCodeEt.setText("");
+						}
+						break;
+				}
+			}
+		});
+
+		phoneConfirimationCodeEt.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+				if (phoneSelected){
+					tempPhone = charSequence.toString();
+				}else {
+					tempEmail = charSequence.toString();
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable editable) {
+
+			}
+		});
 
 		if (AppController.getStoredString(Constants.TELEPHONE) == null) {
 			enterTelephoneNumber();
 		} else {
 			enterVerificationCode();
 		}
+	}
+
+	private boolean isPhoneOrEmailValid() {
+
+		if (phoneSelected) {
+
+			String phoneNumber = NumberTranslator.toEnglish(phoneConfirimationCodeEt.getText().toString());
+
+			if (phoneNumber.length() != 11 || !phoneNumber.startsWith("09") || !phoneNumber.trim().matches(regexStr)) {
+
+				closeKeyboard();
+
+				Snackbari.showS(
+						mBackBtn,
+						"شماره تلفن وارد شده صحیح نمی‌باشد"
+				);
+
+				return false;
+			}
+
+			AppController.storeString(
+					Constants.TELEPHONE, phoneNumber
+			);
+
+		} else {
+
+			String email = phoneConfirimationCodeEt.getText().toString();
+
+			if (!isValidEmail(email)){
+				closeKeyboard();
+
+				Snackbari.showS(
+						mBackBtn,
+						"ایمیل وارد شده صحیح نمی‌باشد"
+				);
+
+				return false;
+			}
+
+			AppController.storeString(
+					Constants.EMAIL, email
+			);
+
+		}
+
+		return true;
+
 	}
 
 	private void init() {
@@ -286,7 +393,23 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 			);
 
 		}
+
+		if (AppController.getStoredString(Constants.TELEPHONE)!=null){
+			phoneSelected = true;
+			phoneConfirimationCodeEt.setText(AppController.getStoredString(Constants.TELEPHONE));
+		}else if (AppController.getStoredString(Constants.EMAIL)!=null){
+			phoneSelected = false;
+			phoneConfirimationCodeEt.setText(AppController.getStoredString(Constants.EMAIL));
+		}
+
+		phoneConfirimationCodeEt.setInputType(Configuration.KEYBOARD_QWERTY);
 		phoneConfirimationCodeEt.setRawInputType(Configuration.KEYBOARD_QWERTY);
+
+		segmentedGroup = (SegmentedGroup) findViewById(R.id.segmented_group);
+		segmentedGroup.setTintColor(
+				getResources().getColor(R.color.colorPrimary),
+				getResources().getColor(R.color.white));
+
 		settingToolbar();
 	}
 
@@ -311,8 +434,15 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	}
 
 	public void enterTelephoneNumber() {
+		segmentedGroup.setVisibility(View.VISIBLE);
+		if (phoneSelected){
+			phoneConfirimationCodeEt.setHint("۰۹۱۲۳۴۵۶۷۸۹");
+		}else {
+			phoneConfirimationCodeEt.setHint("myemail@email.com");
+		}
+
 		AppController.storeString(Constants.TELEPHONE, null);
-		phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
+//		phoneConfirimationCodeEt.setHint(getString(R.string.hint_telephone_field));
 		phoneConfirimationCodeEt.setText("");
 
 		login_get_verification_tv.setText(getString(R.string.sign_up));
@@ -324,6 +454,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 	}
 
 	public void enterVerificationCode() {
+		segmentedGroup.setVisibility(View.GONE);
 		phoneConfirimationCodeEt.setHint(getString(R.string.field_hint_verification_code));
 		phoneConfirimationCodeEt.setText("");
 
@@ -377,7 +508,7 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 				enterVerificationCode();
 			}
 
-		}else if (response.body() instanceof ResponseBody){
+		} else if (response.body() instanceof ResponseBody) {
 			AppController.storeBoolean(Constants.CALLED_SETDEVICE_BEFORE, true);
 		}
 	}

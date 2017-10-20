@@ -103,6 +103,8 @@ dependencies {
 	compile 'com.heinrichreimersoftware:material-intro:1.6.2'
 
 	compile 'com.github.yalantis:ucrop:2.2.1'
+	compile 'info.hoang8f:android-segmented:1.0.6'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

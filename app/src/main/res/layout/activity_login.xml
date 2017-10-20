@@ -88,6 +88,43 @@
 				android:textColor="@color/black"
 				android:textSize="16dp"/>
 
+
+			<info.hoang8f.android.segmented.SegmentedGroup
+				xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+				android:id="@+id/segmented_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+
+				android:layout_marginTop="24dp"
+
+				android:orientation="horizontal"
+
+				segmentedgroup:sc_border_width="2dp"
+				segmentedgroup:sc_corner_radius="0dp"
+
+				segmentedgroup:sc_tint_color="@color/colorPrimary"
+				segmentedgroup:sc_unchecked_tint_color="@color/white"
+				segmentedgroup:sc_checked_text_color="@color/colorPrimary">
+
+				<RadioButton
+					android:id="@+id/email_rb"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="ایمیل"
+					style="@style/RadioButton" />
+
+				<RadioButton
+					android:id="@+id/phone_rb"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="شماره تلفن"
+					android:checked="true"
+					style="@style/RadioButton" />
+
+			</info.hoang8f.android.segmented.SegmentedGroup>
+
 			<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 				android:id="@+id/phone_confirimation_code_et"
 				android:layout_width="match_parent"
@@ -98,8 +135,8 @@
 				android:background="@android:color/transparent"
 				android:lines="1"
 				android:gravity="center_vertical"
-				android:hint="@string/hint_telephone_field"
-				android:text="09353703108"
+				android:hint="۰۹۱۲۳۴۵۶۷۸۹"
+				android:text=""
 				android:textSize="14dp"/>
 			<!--android:hint="@string/field_hint_verification_code"-->
 

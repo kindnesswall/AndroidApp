@@ -46,6 +46,8 @@ public class Constants {
 //    public static final String LOCATION_NAME = "LCATOION_NAME";
 
 	public static final String TELEPHONE = "TELEPHONE";
+	public static final String EMAIL = "TELEPHONE";
+
 	public static final String GIFT = "gift";
 	public static final String USER_ID = "USER_ID";
 	public static final String VERSION_NAME = "VERSION_NAME";

@@ -221,6 +221,7 @@ public class AppController extends Application {
 		AppController.storeString(Constants.Authorization, null);
 		AppController.storeString(Constants.USER_ID, null);
 		AppController.storeString(Constants.TELEPHONE, null);
+		AppController.storeString(Constants.EMAIL, null);
 		deleteSavedGift();
 
 	}
