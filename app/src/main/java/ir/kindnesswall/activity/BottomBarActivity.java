@@ -211,13 +211,15 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 		setContent();
 
-		ApiRequest apiRequest = new ApiRequest(this, this);
-		apiRequest.getRequestsToMyGifts(
-				new StartLastIndex(
-						"0",
-						Constants.LIMIT + ""
-				)
-		);
+		if (AppController.getStoredString(Constants.Authorization)!=null) {
+			ApiRequest apiRequest = new ApiRequest(this, this);
+			apiRequest.getRequestsToMyGifts(
+					new StartLastIndex(
+							"0",
+							Constants.LIMIT + ""
+					)
+			);
+		}
 	}
 
 	private void setContent() {
@@ -348,7 +350,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 					replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
 					mToolbarTitleTextView.setText("درخواستهای دریافتی");
-					
+
 					dialog.dismiss();
 				}
 			});
