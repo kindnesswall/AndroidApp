@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.andexert.library.RippleView;
+
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
@@ -28,10 +33,17 @@ import ir.kindnesswall.fragment.mywall.OurTeamFragment;
 import ir.kindnesswall.fragment.mywall.StatisticFragment;
 import ir.kindnesswall.fragment.mywall.mygifts.MyGiftsFragment;
 import ir.kindnesswall.fragment.mywall.requests.MyRequestsFragment;
+import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
 import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
+import ir.kindnesswall.helper.ApiRequest;
+import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.UpdateChecker;
+import ir.kindnesswall.model.api.Gift;
+import ir.kindnesswall.model.api.StartLastIndex;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class BottomBarActivity extends AppCompatActivity{
+public class BottomBarActivity extends AppCompatActivity implements ApiRequest.Listener {
 
 	@Bind(R.id.toolbar_title_textView)
 	public TextView mToolbarTitleTextView;
@@ -198,6 +210,14 @@ public class BottomBarActivity extends AppCompatActivity{
 		});
 
 		setContent();
+
+		ApiRequest apiRequest = new ApiRequest(this, this);
+		apiRequest.getRequestsToMyGifts(
+				new StartLastIndex(
+						"0",
+						Constants.LIMIT + ""
+				)
+		);
 	}
 
 	private void setContent() {
@@ -303,6 +323,50 @@ public class BottomBarActivity extends AppCompatActivity{
 
 			}
 		}
+
+	}
+
+	@Override
+	public void onResponse(Call call, Response response) {
+		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+		if (gifts.size() > 0){
+			MaterialDialog.Builder builder =
+					MaterialDialogBuilder.create(this)
+							.customView(R.layout.dialog_simple_yes_no, false);
+
+			final MaterialDialog dialog = builder.build();
+			((TextView) dialog.findViewById(R.id.message_textview)).setText(
+					"افرادی مایل به دریافت هدیه‌های شما هستند، آیا میخواهید درخواستها را مشاهده کنید؟"
+			);
+
+			RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+			yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+				@Override
+				public void onComplete(RippleView rippleView) {
+
+					ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
+
+					replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
+					mToolbarTitleTextView.setText("درخواستهای دریافتی");
+					
+					dialog.dismiss();
+				}
+			});
+
+			RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+			noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+				@Override
+				public void onComplete(RippleView rippleView) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+		}
+	}
+
+	@Override
+	public void onFailure(Call call, Throwable t) {
 
 	}
 }
