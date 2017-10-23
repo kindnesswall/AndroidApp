@@ -68,9 +68,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.R.attr.maxHeight;
-import static android.R.attr.maxWidth;
-
 public class RegisterGiftActivity extends AppCompatActivity
 		implements ProgressRequestBody.UploadCallbacks, ApiRequest.Listener, ChooseCategoryCallback, UpdateImageGallery, ChoosePlaceCallback {
 
@@ -524,10 +521,15 @@ public class RegisterGiftActivity extends AppCompatActivity
 		} else if (resultCode == RESULT_OK) {
 			imageUri = getPickImageResultUri(data);
 
+			UCrop.Options options = new UCrop.Options();
+			options.setToolbarTitle("ویرایش تصویر");
+			options.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+
 			String destinationFileName = "temp.jpg";
 			UCrop.of(imageUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)))
 					.withAspectRatio(1, 1)
-					.withMaxResultSize(maxWidth, maxHeight)
+					.withOptions(options)
+					.withMaxResultSize(500, 500)
 					.start(RegisterGiftActivity.this);
 		}
 
