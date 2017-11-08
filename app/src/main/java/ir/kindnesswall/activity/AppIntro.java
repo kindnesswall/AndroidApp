@@ -51,14 +51,14 @@ public class AppIntro extends IntroActivity {
 				.layout(R.layout.activity_app_into)
 				.build());
 
-		addSlide(new SimpleSlide.Builder()
-				.title("مشابه برنامه دیوار")
-				.description("به دلیل تعداد زیاد کاربران برنامه دیوار، برای راحتی کاربرها ظاهر این برنامه مشابه برنامه دیوار طراحی شده است.")
-				.image(R.drawable.intro_img_3)
-				.background(R.color.colorPrimary)
-				.backgroundDark(R.color.colorPrimary)
-				.layout(R.layout.activity_app_into)
-				.build());
+//		addSlide(new SimpleSlide.Builder()
+//				.title("مشابه برنامه دیوار")
+//				.description("به دلیل تعداد زیاد کاربران برنامه دیوار، برای راحتی کاربرها ظاهر این برنامه مشابه برنامه دیوار طراحی شده است.")
+//				.image(R.drawable.intro_img_3)
+//				.background(R.color.colorPrimary)
+//				.backgroundDark(R.color.colorPrimary)
+//				.layout(R.layout.activity_app_into)
+//				.build());
 
 		addSlide(new SimpleSlide.Builder()
 				.title("همیشه رایگان")
