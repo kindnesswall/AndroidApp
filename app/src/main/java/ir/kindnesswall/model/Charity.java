@@ -4,9 +4,9 @@ package ir.kindnesswall.model;
  * Created by Hamed on 7/7/17.
  */
 
-public class TeamMember {
+public class Charity {
 
-	public String name, about, telegramUrl,linkdinUrl;
+	public String name, about, telegramUrl,telephone,website;
 	public int drawableResId;
 
 }

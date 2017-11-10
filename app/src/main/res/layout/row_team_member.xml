@@ -15,7 +15,7 @@
 
 		android:layout_marginBottom="4dp"
 		android:layout_marginTop="4dp"
-		android:src="@drawable/hamed"/>
+		android:src="@drawable/charity_mehregan"/>
 
 	<ImageView
 		android:id="@+id/telegram_iv"

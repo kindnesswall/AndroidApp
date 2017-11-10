@@ -20,6 +20,7 @@ import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.RequestModel;
 import ir.kindnesswall.model.api.StartLastIndex;
 import ir.kindnesswall.model.api.StatusOutput;
+import ir.kindnesswall.model.api.TeamMember;
 import ir.kindnesswall.model.api.User;
 import ir.kindnesswall.model.api.input.BookmarkInput;
 import ir.kindnesswall.model.api.input.LogoutInput;
@@ -27,10 +28,10 @@ import ir.kindnesswall.model.api.input.RecievedRequestListInput;
 import ir.kindnesswall.model.api.input.ReportInput;
 import ir.kindnesswall.model.api.input.RequestGiftInput;
 import ir.kindnesswall.model.api.input.SetDeviceInput;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import ir.kindnesswall.model.api.output.RegisterOutput;
 import ir.kindnesswall.model.api.output.StatisticsOutput;
 import ir.kindnesswall.model.api.output.TokenOutput;
-import ir.kindnesswall.model.api.output.AppInfoOutput;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -663,6 +664,23 @@ public class ApiRequest {
 
             @Override
             public void onFailure(Call<ArrayList<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getTeamMembers() {
+        Call<ArrayList<TeamMember>> call = AppController.service.getTeamMembers();
+
+        call.enqueue(new CallbackWithRetry<ArrayList<TeamMember>>(call, mContext) {
+            @Override
+            public void onResponse(Call<ArrayList<TeamMember>> call,
+                                   Response<ArrayList<TeamMember>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TeamMember>> call, Throwable t) {
                 super.onFailure(call, t);
             }
         });

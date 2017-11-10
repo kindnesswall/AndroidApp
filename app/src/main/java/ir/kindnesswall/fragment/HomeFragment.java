@@ -270,6 +270,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	void searchText() {
 		startIndex = 0;
 		gifts.clear();
+		adapter.notifyDataSetChanged();
 		searchTxt = mSearchET.getText().toString();
 		getGifts();
 	}

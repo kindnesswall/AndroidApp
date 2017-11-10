@@ -44,7 +44,7 @@ public class AppIntro extends IntroActivity {
 
 		addSlide(new SimpleSlide.Builder()
 				.title("فرهنگ دیوار مهربانی")
-				.description("نیاز داری، بردار. نیاز نداری، بگذار :)")
+				.description("نیاز داری، بردار. نیاز نداری، بذار :)")
 				.image(R.drawable.intro_img_1)
 				.background(R.color.colorPrimary)
 				.backgroundDark(R.color.colorPrimary)
@@ -62,7 +62,7 @@ public class AppIntro extends IntroActivity {
 
 		addSlide(new SimpleSlide.Builder()
 				.title("همیشه رایگان")
-				.description("برنامه دیوار مهربانی برای همیشه رایگان خواهد ماند. بدون هر گونه تبلیغات.")
+				.description("برنامه دیوار مهربانی برای همیشه رایگان خواهد ماند؛ بدون هر گونه تبلیغات.")
 				.image(R.drawable.intro_img_4)
 				.background(R.color.colorPrimary)
 				.backgroundDark(R.color.colorPrimary)

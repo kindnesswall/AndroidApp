@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
 import ir.kindnesswall.holder.TeamMemberHolder;
-import ir.kindnesswall.model.TeamMember;
+import ir.kindnesswall.model.api.TeamMember;
 
 /**
  * Created by HamedGh on 3/8/2016.
@@ -41,19 +43,32 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 
 		teamMemberHolder.mNameTv.setText(members.get(position).name);
 		teamMemberHolder.mAboutTv.setText(members.get(position).about);
-		teamMemberHolder.mAvatarIv.setImageDrawable(
-				mContext.getResources().getDrawable(members.get(position).drawableResId)
-		);
+
+		String image_url;
+		if (members.get(position).imageUrl != null) {
+			image_url = members.get(position).imageUrl;
+		} else {
+			image_url = "";
+		}
+
+		Glide
+				.with(mContext)
+				.load(image_url)
+				.centerCrop()
+				.placeholder(R.color.background)
+				.crossFade()
+				.into(teamMemberHolder.mAvatarIv);
+
 
 //		if (members.get(position).telegramUrl!=null)
 		teamMemberHolder.mTelegramIv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if(members.get(position).telegramUrl==null || members.get(position).telegramUrl.equals("")) return;
+				if(members.get(position).telegram==null || members.get(position).telegram.equals("")) return;
 
 				Intent telegram = new Intent(
 						Intent.ACTION_VIEW ,
-						Uri.parse(members.get(position).telegramUrl)
+						Uri.parse(members.get(position).telegram)
 				);
 
 				mContext.startActivity(telegram);
@@ -63,12 +78,12 @@ public class TeamMemberListAdapter extends RecyclerView.Adapter<TeamMemberHolder
 		teamMemberHolder.mLinkdinIv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if(members.get(position).linkdinUrl==null || members.get(position).linkdinUrl.equals("")) return;
+				if(members.get(position).linkedin==null || members.get(position).linkedin.equals("")) return;
 
 				Intent browserIntent =
 						new Intent(
 								Intent.ACTION_VIEW,
-								Uri.parse(members.get(position).linkdinUrl)
+								Uri.parse(members.get(position).linkedin)
 						);
 
 				mContext.startActivity(browserIntent);

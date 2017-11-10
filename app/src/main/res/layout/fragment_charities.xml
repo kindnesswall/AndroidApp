@@ -19,20 +19,21 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"
-			android:text="+ به تیم ما بپیوندید!"
+			android:text="+ ثبت خیریه‌ جدید"
 			android:textColor="@color/white"
 			android:textSize="16dp"/>
 
 	</RelativeLayout>
 
 	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:id="@+id/search_bottom_lay"
 		android:layout_below="@id/btn_lay"
-		android:background="@color/grey_200">
+
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
 		<com.rey.material.widget.ProgressView
-			android:id="@+id/fragment_progressBar"
+			android:id="@+id/search_progressBar"
 
 			android:layout_width="36dp"
 			android:layout_height="36dp"
@@ -45,22 +46,27 @@
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/message_textview"
+
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 
-			android:layout_centerInParent="true"
-			android:visibility="invisible"/>
+			android:layout_below="@id/search_progressBar"
+			android:layout_centerHorizontal="true"
+			android:padding="5dp"
+			android:text="@string/searching"
+			android:textColor="@color/dark_white"
+
+			android:textSize="14sp"/>
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/recycler_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+
 			android:layout_marginLeft="2dp"
-
 			android:layout_marginRight="2dp"
-			android:background="@color/grey_200"
 
-			android:visibility="invisible"/>
+			android:background="@color/grey_200"/>
 
 	</RelativeLayout>
 

@@ -7,8 +7,8 @@
 
 	<item
 		android:id="@+id/bottomBarSearch"
-		android:icon="@mipmap/ic_search_white_24dp"
-		android:title="جستجو"/>
+		android:icon="@mipmap/ic_charity"
+		android:title="خیریه‌ها"/>
 
 	<item
 		android:id="@+id/bottomBarCategories"

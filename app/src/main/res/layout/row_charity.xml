@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="127dp">
+
+	<ir.kindnesswall.customviews.RoundedImageView
+		android:id="@+id/member_iv"
+		android:layout_width="72dp"
+		android:layout_height="72dp"
+
+		android:layout_alignParentRight="true"
+
+		android:layout_marginBottom="4dp"
+		android:layout_marginLeft="10dp"
+
+		android:layout_marginRight="6dp"
+		android:layout_marginTop="4dp"
+		android:src="@drawable/charity_mehregan"/>
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+		android:id="@+id/member_name_tv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_alignTop="@id/member_iv"
+		android:layout_marginLeft="6dp"
+
+		android:layout_marginTop="6dp"
+		android:layout_toLeftOf="@id/member_iv"
+		android:ellipsize="end"
+		android:text="بنياد خيريه مهرگان"/>
+
+	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+		android:id="@+id/memeber_about_tv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@id/member_name_tv"
+
+		android:layout_marginLeft="6dp"
+		android:layout_marginTop="6dp"
+
+		android:layout_toLeftOf="@id/member_iv"
+		android:text="بنیان گذار - توسعه دهنده اندروید و آی او اس"/>
+
+
+	<LinearLayout
+		android:id="@+id/links_lay"
+		android:layout_below="@id/memeber_about_tv"
+		android:layout_width="match_parent"
+		android:layout_height="36dp"
+		android:orientation="horizontal">
+
+		<ImageView
+			android:id="@+id/telegram_iv"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="match_parent"
+
+			android:layout_centerVertical="true"
+
+			android:src="@mipmap/ic_telegram_grey600_36dp"/>
+
+		<RelativeLayout
+			android:id="@+id/divider1_lay"
+			android:layout_width="0dp"
+			android:layout_weight="0.01"
+			android:layout_height="40dp"
+			android:layout_gravity="center"
+			android:background="@color/divider"/>
+
+		<ImageView
+			android:id="@+id/telephone_iv"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="match_parent"
+			android:src="@mipmap/ic_phone_grey600_36dp"/>
+
+		<RelativeLayout
+			android:id="@+id/divider2_lay"
+			android:layout_width="0dp"
+			android:layout_weight="0.01"
+			android:layout_height="40dp"
+			android:layout_gravity="center"
+			android:background="@color/divider"/>
+
+		<ImageView
+			android:id="@+id/website_iv"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="match_parent"
+			android:src="@mipmap/ic_internet_explorer_grey600_36dp"/>
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:id="@+id/divider0_lay"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@id/links_lay"
+		android:background="@color/divider"/>
+
+</RelativeLayout>

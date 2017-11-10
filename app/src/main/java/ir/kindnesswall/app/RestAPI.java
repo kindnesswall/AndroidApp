@@ -7,6 +7,7 @@ import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.model.api.Category;
 import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.RequestModel;
+import ir.kindnesswall.model.api.TeamMember;
 import ir.kindnesswall.model.api.User;
 import ir.kindnesswall.model.api.input.BookmarkInput;
 import ir.kindnesswall.model.api.input.ReportInput;
@@ -45,14 +46,14 @@ public interface RestAPI {
 			@Query(Constants.SEARCH_TEXT) String searchText
 	);
 
-	@DELETE("Gift/{" + Constants.GIFT_ID + "}")
-	Call<ResponseBody> deleteGift(
+	@GET("Gift/{" + Constants.GIFT_ID + "}")
+	Call<Gift> getGift(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.GIFT_ID) String giftId);
 
-	@GET("Gift/{" + Constants.GIFT_ID + "}")
-	Call<Gift> getGift(
+	@DELETE("Gift/{" + Constants.GIFT_ID + "}")
+	Call<ResponseBody> deleteGift(
 			@Header(Constants.ContentType) String contentType,
 			@Header(Constants.Authorization) String authorization,
 			@Path(Constants.GIFT_ID) String giftId);
@@ -207,4 +208,7 @@ public interface RestAPI {
 
 	@GET("GetAppInfo/{" + Constants.VERSION_NAME + "}")
 	Call<AppInfoOutput> getAppInfo(@Path(Constants.VERSION_NAME) int versionName);
+
+	@GET("GetTeamMembers")
+	Call<ArrayList<TeamMember>> getTeamMembers();
 }

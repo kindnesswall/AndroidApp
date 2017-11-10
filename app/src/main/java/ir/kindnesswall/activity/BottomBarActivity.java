@@ -24,6 +24,7 @@ import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.bottombar.BottomBar;
 import ir.kindnesswall.bottombar.OnMenuTabClickListener;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.fragment.CharitiesFragment;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.fragment.mywall.BookmarkFragment;
@@ -54,7 +55,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	int menuItemIdSelected = -1;
 
 	HomeFragment homeFragment;
-	HomeFragment searchFragment;
+//	HomeFragment searchFragment;
+	CharitiesFragment charitiesFragment;
 	CategoriesGridFragment categoriesGridFragment;
 	MyWallFragment myWallFragment;
 
@@ -114,8 +116,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				unlock = true;
 				mToolbarTitleTextView.setText(R.string.search);
 				replaceFragment(
-						searchFragment,
-						HomeFragment.class.getName() + Constants.SEARCH_PAGETYPE
+						charitiesFragment,
+						CharitiesFragment.class.getName()
 				);
 			}
 			menuItemIdSelected = menuItemId;
@@ -224,8 +226,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 	private void setContent() {
 
-		homeFragment = HomeFragment.newInstance(Constants.HOME_PAGETYPE, null);
-		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+		homeFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+//		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+		charitiesFragment = CharitiesFragment.newInstance();
 		categoriesGridFragment = new CategoriesGridFragment();
 		myWallFragment = new MyWallFragment();
 
