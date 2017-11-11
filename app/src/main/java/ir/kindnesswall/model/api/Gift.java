@@ -68,6 +68,12 @@ public class Gift implements Parcelable {
 	@SerializedName("createTime")
 	public String createTime = "";
 
+	@SerializedName("isNew")
+	boolean isNew;
+
+	@SerializedName("justForCharity")
+	boolean justForCharity;
+
 	public Gift() {
 
 	}
