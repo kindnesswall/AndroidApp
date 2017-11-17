@@ -85,7 +85,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				clearStack();
 
 				unlock = true;
-				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+//				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+				mToolbarTitleTextView.setText("همه هدیه‌ها");
 				replaceFragment(
 						homeFragment,
 						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
@@ -321,7 +322,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 			} else {
 
-				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+//				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
+				mToolbarTitleTextView.setText("همه هدیه‌ها");
 				replaceFragment(
 						homeFragment,
 						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);

@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.adapter.GiftListAdapter;
-import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewDivarIcons;
@@ -294,7 +293,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 		apiRequest.getGifts(
 				new GetGiftPathQuery(
 
-						(place == null ? AppController.getStoredString(Constants.MY_LOCATION_ID) : place.id),
+//						(place == null ? AppController.getStoredString(Constants.MY_LOCATION_ID) : place.id),
+						(place == null ? "0" : place.id),
 						(region == null ? "0" : region.id),
 						(category == null ? "0" : category.categoryId),
 						startIndex + "",
@@ -366,6 +366,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 				((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("همه هدیه‌های " + place.name);
 			}
 			filterText += "فیلتر شده بر اساس محل";
+		}else {
+			((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("همه هدیه‌ها");
 		}
 		if (category != null) {
 			if (filterText.equals("")) {
@@ -373,16 +375,10 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 			} else {
 				filterText += " / دسته‌بندی";
 			}
-		}
-
-		if (place == null && category == null) {
+		}else {
 			setFilteringBtnColor(R.color.text_secondary);
 
 			filterText = "فیلتر کردن";
-			((BottomBarActivity) getActivity()).
-					mToolbarTitleTextView.setText("همه هدیه‌های " +
-					AppController.getStoredString(Constants.MY_LOCATION_NAME));
-
 		}
 
 		filterTxt.setText(filterText);
