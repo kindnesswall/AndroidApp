@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rey.material.widget.ProgressView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
@@ -29,6 +31,9 @@ public class ContactUsFragment extends BaseFragment {
 
 	@Bind(R.id.recycler_view)
 	RecyclerView mRecyclerView;
+
+	@Bind(R.id.fragment_progressBar)
+	ProgressView fragmentProgressBar;
 
 	@Bind(R.id.btn_lay)
 	RelativeLayout BtnLay;
@@ -50,6 +55,9 @@ public class ContactUsFragment extends BaseFragment {
 		GridLayoutManager layoutManager =
 				new RtlGridAutofitLayoutManager(AppController.getAppContext(), (int) MetricConverter.dp2px(context,80));
 		mRecyclerView.setLayoutManager(layoutManager);
+
+		mRecyclerView.setVisibility(View.VISIBLE);
+		fragmentProgressBar.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
