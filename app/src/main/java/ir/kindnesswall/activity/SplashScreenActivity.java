@@ -4,19 +4,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import ir.kindnesswall.R;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
-import ir.kindnesswall.dialogfragment.ChoosePlaceDialogFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.UpdateChecker;
-import ir.kindnesswall.interfaces.ChoosePlaceCallback;
 import ir.kindnesswall.interfaces.UpdateCheckerInterface;
-import ir.kindnesswall.model.Place;
 import ir.kindnesswall.model.api.output.AppInfoOutput;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -25,7 +21,7 @@ import retrofit2.Response;
  * Created by HamedGh on 3/8/2016.
  */
 
-public class SplashScreenActivity extends AppCompatActivity implements ChoosePlaceCallback, ApiRequest.Listener, UpdateCheckerInterface {
+public class SplashScreenActivity extends AppCompatActivity implements ApiRequest.Listener, UpdateCheckerInterface{ //,ChoosePlaceCallback {
 
     /**
      * Duration of wait
@@ -70,21 +66,21 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
         }
     }
 
-    @Override
-    public void onCitySelected(Place city) {
-        AppController.storeString(Constants.MY_LOCATION_ID, city.id);
-        AppController.storeString(Constants.MY_LOCATION_NAME, city.name);
+//    @Override
+//    public void onCitySelected(Place city) {
+//        AppController.storeString(Constants.MY_LOCATION_ID, city.id);
+//        AppController.storeString(Constants.MY_LOCATION_NAME, city.name);
+//
+//        Intent mainIntent = new Intent(this, BottomBarActivity.class);
+//        startActivity(mainIntent);
+//
+//        finish();
+//    }
 
-        Intent mainIntent = new Intent(this, BottomBarActivity.class);
-        startActivity(mainIntent);
-
-        finish();
-    }
-
-    @Override
-    public void onRegionSelected(Place region) {
-
-    }
+//    @Override
+//    public void onRegionSelected(Place region) {
+//
+//    }
 
     private void onUpdateVersionResponse(AppInfoOutput appInfoOutput) {
 
@@ -155,17 +151,17 @@ public class SplashScreenActivity extends AppCompatActivity implements ChoosePla
     }
 
     private void afterAll(){
-        if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
+//        if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
 
             Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
             SplashScreenActivity.this.startActivity(mainIntent);
             SplashScreenActivity.this.finish();
 
-        } else {
-
-            FragmentManager fm = getSupportFragmentManager();
-            ChoosePlaceDialogFragment.newInstance(false)
-                    .show(fm, ChoosePlaceDialogFragment.class.getName());
-        }
+//        } else {
+//
+//            FragmentManager fm = getSupportFragmentManager();
+//            ChoosePlaceDialogFragment.newInstance(false)
+//                    .show(fm, ChoosePlaceDialogFragment.class.getName());
+//        }
     }
 }

@@ -31,9 +31,7 @@ import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.Snackbari;
 import ir.kindnesswall.helper.UpdateChecker;
-import ir.kindnesswall.interfaces.ChoosePlaceCallback;
 import ir.kindnesswall.interfaces.UpdateCheckerInterface;
-import ir.kindnesswall.model.Place;
 import ir.kindnesswall.model.api.output.AppInfoOutput;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -41,7 +39,7 @@ import retrofit2.Response;
 /**
  * Created by HamedGh on 3/8/2016.
  */
-public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback, UpdateCheckerInterface {
+public class MyWallFragment extends BaseFragment implements UpdateCheckerInterface { //,ChoosePlaceCallback
 
 	@Bind(R.id.location_tv)
 	TextView mLocationTv;
@@ -86,6 +84,7 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 	RelativeLayout mOurTeamLay;
 
 	private View rootView;
+	private boolean executeOnCreate;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +93,8 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 		if (rootView != null) {
 			if (rootView.getParent() != null)
 				((ViewGroup) rootView.getParent()).removeView(rootView);
+
+			onResume();
 			return rootView;
 		}
 		rootView = inflater.inflate(R.layout.fragment_my_wall, container, false);
@@ -111,6 +112,9 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 
 		setListeners();
 
+//		myOnResume();
+//		executeOnCreate = true;
+
 		return rootView;
 	}
 
@@ -118,13 +122,23 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 	protected void init() {
 		super.init();
 
-		mLocationTv.setText(AppController.getStoredString(Constants.MY_LOCATION_NAME));
+//		mLocationTv.setText(AppController.getStoredString(Constants.MY_LOCATION_NAME));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
+//		if (executeOnCreate){
+//			executeOnCreate = false;
+//			return;
+//		}
+
+		myOnResume();
+
+	}
+
+	private void myOnResume() {
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 //			mLog_in_out_lay.setVisibility(View.VISIBLE);
 
@@ -195,8 +209,8 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 		}
 
 		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("دیوار من");
-
 	}
+
 
 	@Override
 	public void onResponse(Call call, Response response) {
@@ -346,24 +360,24 @@ public class MyWallFragment extends BaseFragment implements ChoosePlaceCallback,
 		});
 	}
 
-	@Override
-	public void onCitySelected(Place city) {
+//	@Override
+//	public void onCitySelected(Place city) {
+//
+//		AppController.storeString(Constants.MY_LOCATION_ID, city.id);
+//		AppController.storeString(Constants.MY_LOCATION_NAME, city.name);
+//
+//		mLocationTv.setText(city.name);
+//
+//		Intent i = context.getPackageManager()
+//						.getLaunchIntentForPackage( context.getPackageName() );
+//		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//		startActivity(i);
+//	}
 
-		AppController.storeString(Constants.MY_LOCATION_ID, city.id);
-		AppController.storeString(Constants.MY_LOCATION_NAME, city.name);
-
-		mLocationTv.setText(city.name);
-
-		Intent i = context.getPackageManager()
-						.getLaunchIntentForPackage( context.getPackageName() );
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(i);
-	}
-
-	@Override
-	public void onRegionSelected(Place region) {
-
-	}
+//	@Override
+//	public void onRegionSelected(Place region) {
+//
+//	}
 
 	@Override
 	public void onNotNowBtnClicked() {

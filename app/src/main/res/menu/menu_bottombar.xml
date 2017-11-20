@@ -5,15 +5,20 @@
 		android:icon="@mipmap/ic_person_white_24dp"
 		android:title="دیوار من"/>
 
-	<item
-		android:id="@+id/bottomBarSearch"
-		android:icon="@mipmap/ic_charity"
-		android:title="خیریه‌ها"/>
+	<!--<item-->
+		<!--android:id="@+id/bottomBarSearch"-->
+		<!--android:icon="@mipmap/ic_charity"-->
+		<!--android:title="خیریه‌ها"/>-->
+
+	<!--<item-->
+		<!--android:id="@+id/bottomBarCategories"-->
+		<!--android:icon="@mipmap/ic_list_white_24dp"-->
+		<!--android:title="دسته بندی ها"/>-->
 
 	<item
-		android:id="@+id/bottomBarCategories"
-		android:icon="@mipmap/ic_list_white_24dp"
-		android:title="دسته بندی ها"/>
+		android:id="@+id/bottomBarMyGifts"
+		android:icon="@mipmap/ic_gift_grey600_18dp"
+		android:title="هدیه‌های من"/>
 
 	<item
 		android:id="@+id/bottomBarHome"

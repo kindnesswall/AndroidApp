@@ -24,7 +24,6 @@ import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.bottombar.BottomBar;
 import ir.kindnesswall.bottombar.OnMenuTabClickListener;
 import ir.kindnesswall.constants.Constants;
-import ir.kindnesswall.fragment.CharitiesFragment;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.fragment.mywall.BookmarkFragment;
@@ -53,11 +52,14 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	@Bind(R.id.toolbar_new_gift_btn_tv)
 	TextView mToolbarNewGiftBtnTv;
 	int menuItemIdSelected = -1;
+	int menuItemIdReSelected = -1;
 
 	HomeFragment homeFragment;
 //	HomeFragment searchFragment;
-	CharitiesFragment charitiesFragment;
-	CategoriesGridFragment categoriesGridFragment;
+//	CharitiesFragment charitiesFragment;
+//	CategoriesGridFragment categoriesGridFragment;
+	MyGiftsFragment myGiftsFragment;
+
 	MyWallFragment myWallFragment;
 
 	private Context context;
@@ -94,37 +96,40 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			menuItemIdSelected = menuItemId;
 
 			// The user reselected item number one, scroll your content to top.
-		} else if (menuItemId == R.id.bottomBarCategories) {
+		}
+		else if (menuItemId == R.id.bottomBarMyGifts) {
 
 			if (menuItemId != menuItemIdSelected) {
 				clearStack();
 
 				unlock = true;
-				mToolbarTitleTextView.setText(R.string.categories);
+				mToolbarTitleTextView.setText(R.string.mygifts);
 				replaceFragment(
-						categoriesGridFragment,
-						CategoriesGridFragment.class.getName()
+						myGiftsFragment,
+						MyGiftsFragment.class.getName()
 				);
 			}
 			menuItemIdSelected = menuItemId;
 
 			// The user selected item number one.
-		} else if (menuItemId == R.id.bottomBarSearch) {
-
-			if (menuItemId != menuItemIdSelected) {
-				clearStack();
-
-				unlock = true;
-				mToolbarTitleTextView.setText(R.string.search);
-				replaceFragment(
-						charitiesFragment,
-						CharitiesFragment.class.getName()
-				);
-			}
-			menuItemIdSelected = menuItemId;
+		}
+//		else if (menuItemId == R.id.bottomBarSearch) {
+//
+//			if (menuItemId != menuItemIdSelected) {
+//				clearStack();
+//
+//				unlock = true;
+//				mToolbarTitleTextView.setText(R.string.search);
+//				replaceFragment(
+//						charitiesFragment,
+//						CharitiesFragment.class.getName()
+//				);
+//			}
+//			menuItemIdSelected = menuItemId;
 
 			// The user selected item number one.
-		} else if (menuItemId == R.id.bottomBarMyWall && unlock) {
+//		}
+		else if (menuItemId == R.id.bottomBarMyWall && unlock) {
 
 			if (menuItemId != menuItemIdSelected) {
 				clearStack();
@@ -174,13 +179,42 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //				} else if (menuItemId == R.id.bottomBarCategories) {
 //					Toasti.showS("Catagories reselected");
 //					// The user selected item number one.
-//				} else if (menuItemId == R.id.bottomBarSearch) {
+//				} else
+              if (menuItemId == R.id.bottomBarMyGifts) {
+
+//	              int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+//	              FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+//	              String tag = backEntry.getName();
+//
+//	              if (!tag.equals(MyGiftsFragment.class.getName())){
+//		              onBackPressed();
+//	              }
+
+//              	onBackPressed();
 //					Toasti.showS("Search reselected");
-//					// The user selected item number one.
-//				} else if (menuItemId == R.id.bottomBarMyWall) {
+					// The user selected item number one.
+              } else if (menuItemId == R.id.bottomBarMyWall) {
+
+//              	if (menuItemId != menuItemIdReSelected){
+//                }
+
+	              int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+	              FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+	              String tag = backEntry.getName();
+
+	              if (!tag.equals(MyWallFragment.class.getName())){ // && !tag.contains(HomeFragment.class.getName())){
+		              onBackPressed();
+	              }
+
+//	              clearStack();
+//	              mToolbarTitleTextView.setText(R.string.my_wall);
+//	              replaceFragment(myWallFragment, MyWallFragment.class.getName());
+//              	onBackPressed();
 //					Toasti.showS("MyWall reselected");
-//					// The user selected item number one.
-//				}
+					// The user selected item number one.
+				}
+//				menuItemIdReSelected = menuItemId;
+
 			}
 		});
 	}
@@ -229,12 +263,13 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 		homeFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
 //		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
-		charitiesFragment = CharitiesFragment.newInstance();
-		categoriesGridFragment = new CategoriesGridFragment();
+//		charitiesFragment = CharitiesFragment.newInstance();
+//		categoriesGridFragment = new CategoriesGridFragment();
 		myWallFragment = new MyWallFragment();
+		myGiftsFragment = new MyGiftsFragment();
 
 		settingBottomBar(savedInstanceState);
-		mBottomBar.selectTabAtPosition(3, false);
+		mBottomBar.selectTabAtPosition(2, false);
 	}
 
 	@Override
@@ -312,7 +347,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 							tag.equals(StatisticFragment.class.getName()) ||
 							tag.equals(MyRequestsFragment.class.getName()) ||
 							tag.equals(RequestsToAGiftFragment.class.getName()) ||
-							tag.equals(MyGiftsFragment.class.getName()) ||
+//							tag.equals(MyGiftsFragment.class.getName()) ||
 							tag.equals(OurTeamFragment.class.getName()) ||
 							tag.equals(ContactUsFragment.class.getName()) ||
 							tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
@@ -321,13 +356,14 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				super.onBackPressed();
 
 			} else {
+				clearStack();
 
 //				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
 				mToolbarTitleTextView.setText("همه هدیه‌ها");
 				replaceFragment(
 						homeFragment,
 						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
-
+				menuItemIdSelected = R.id.bottomBarHome;
 			}
 		}
 

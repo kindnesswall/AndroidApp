@@ -19,7 +19,7 @@
 			android:layout_marginRight="4dp"
 			android:layout_marginTop="2dp"
 			android:background="@color/white"
-			android:visibility="gone">
+			android:visibility="visible">
 
 			<ImageView
 				android:id="@+id/search_btn"
@@ -49,6 +49,36 @@
 				android:visibility="invisible"
 			/>
 
+			<RelativeLayout
+				android:id="@+id/filter_lay"
+				android:layout_width="52dp"
+				android:layout_height="match_parent"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true">
+
+				<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
+					android:id="@+id/filter_ic"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+
+					android:layout_alignParentRight="true"
+					android:layout_centerVertical="true"
+					android:text=""
+					android:textSize="22dp"/>
+
+				<!--<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular-->
+				<!--android:id="@+id/filter_txt"-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="wrap_content"-->
+				<!--android:layout_centerVertical="true"-->
+
+				<!--android:layout_toLeftOf="@id/filter_ic"-->
+				<!--android:paddingRight="8dp"-->
+				<!--android:text="فیلتر کردن"-->
+				<!--android:textSize="16dp"/>-->
+
+			</RelativeLayout>
+
 			<ir.kindnesswall.customviews.edit_text.EditTextIranSans
 				android:id="@+id/search_et"
 				android:layout_width="match_parent"
@@ -56,6 +86,8 @@
 				android:layout_alignParentTop="true"
 
 				android:layout_toRightOf="@id/search_backspace_btn"
+				android:layout_toLeftOf="@id/filter_lay"
+
 				android:background="@android:color/transparent"
 				android:hint="@string/search_hint"
 				android:paddingLeft="8dp"
@@ -64,37 +96,10 @@
 
 				android:textSize="15dp"/>
 
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:id="@+id/filter_lay"
-			android:layout_width="match_parent"
-			android:layout_height="52dp"
-			android:layout_below="@id/search_textbox_lay"
-			android:layout_marginTop="4dp">
-
-			<ir.kindnesswall.customviews.textviews.TextViewDivarIcons
-				android:id="@+id/filter_ic"
-				android:layout_width="24dp"
-				android:layout_height="24dp"
-
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
-				android:text=""
-				android:textSize="22dp"/>
-
-			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-				android:id="@+id/filter_txt"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-
-				android:layout_toLeftOf="@id/filter_ic"
-				android:paddingRight="8dp"
-				android:text="فیلتر کردن"
-				android:textSize="16dp"/>
 
 		</RelativeLayout>
+
+
 
 	</RelativeLayout>
 

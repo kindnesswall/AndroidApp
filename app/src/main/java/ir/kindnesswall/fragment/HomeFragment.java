@@ -31,7 +31,6 @@ import ir.kindnesswall.adapter.GiftListAdapter;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewDivarIcons;
-import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
 import ir.kindnesswall.dialogfragment.HomeFilteringDialogFragment;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.helper.Toasti;
@@ -66,8 +65,8 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	@Bind(R.id.filter_ic)
 	TextViewDivarIcons filterIc;
 
-	@Bind(R.id.filter_txt)
-	TextViewIranSansRegular filterTxt;
+//	@Bind(R.id.filter_txt)
+//	TextViewIranSansRegular filterTxt;
 
 	@Bind(R.id.search_btn)
 	ImageView mSearchBtn;
@@ -114,7 +113,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 				case Constants.CATEGORY_PAGETYPE:
 					category = bundle.getParcelable(Constants.CATEGORY_PARCELABLE);
 					if (category != null) {
-						filterTxt.setText("فیلتر شده بر اساس دسته‌بندی");
+//						filterTxt.setText("فیلتر شده بر اساس دسته‌بندی");
 						setFilteringBtnColor(R.color.colorPrimary);
 					}
 					break;
@@ -173,11 +172,11 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					filterIc.setAlpha(0.5f);
-					filterTxt.setAlpha(0.5f);
+//					filterTxt.setAlpha(0.5f);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					filterIc.setAlpha(1f);
-					filterTxt.setAlpha(1f);
+//					filterTxt.setAlpha(1f);
 				}
 				return false;
 			}
@@ -344,7 +343,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 
 	private void setFilteringBtnColor(int colorId) {
 		filterIc.setTextColor(getContext().getResources().getColor(colorId));
-		filterTxt.setTextColor(getContext().getResources().getColor(colorId));
+//		filterTxt.setTextColor(getContext().getResources().getColor(colorId));
 	}
 
 	@Override
@@ -381,7 +380,7 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 			filterText = "فیلتر کردن";
 		}
 
-		filterTxt.setText(filterText);
+//		filterTxt.setText(filterText);
 
 		gifts.clear();
 		startIndex = 0;

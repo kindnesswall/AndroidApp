@@ -20,6 +20,7 @@
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/token_et"
 			android:background="?attr/selectableItemBackground"
+			android:visibility="gone"
 			android:clickable="true">
 
 			<ImageView
@@ -137,6 +138,7 @@
 			android:layout_height="@dimen/my_wall_mainlist_row_height"
 			android:layout_below="@id/bookmark_lay"
 			android:background="?attr/selectableItemBackground"
+			android:visibility="gone"
 			android:clickable="true">
 
 			<ir.kindnesswall.customviews.textviews.TextViewDivarIcons

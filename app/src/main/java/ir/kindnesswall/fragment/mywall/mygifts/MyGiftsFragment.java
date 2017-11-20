@@ -40,6 +40,7 @@ public class MyGiftsFragment extends BaseFragment {
 	ViewPager mainVp;
 	private View rootView;
 	private boolean hasNotAuthorityFirstTime;
+	private boolean executeOnCreate;
 
 	@Override
 	protected void init() {
@@ -53,11 +54,11 @@ public class MyGiftsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (rootView != null) {
-			if (rootView.getParent() != null)
-				((ViewGroup) rootView.getParent()).removeView(rootView);
-			return rootView;
-		}
+//		if (rootView != null) {
+//			if (rootView.getParent() != null)
+//				((ViewGroup) rootView.getParent()).removeView(rootView);
+//			return rootView;
+//		}
 		rootView = inflater.inflate(R.layout.fragment_my_gifts, container, false);
 
 		ButterKnife.bind(this, rootView);
@@ -79,6 +80,23 @@ public class MyGiftsFragment extends BaseFragment {
 			});
 		}
 
+		if (AppController.getStoredString(Constants.Authorization) != null) {
+
+			myGiftTopLay.setVisibility(View.GONE);
+			myGiftBottomLay.setVisibility(View.VISIBLE);
+
+			if (hasNotAuthorityFirstTime){
+				setupViewPager(mainVp);
+				mainTabs.setupWithViewPager(mainVp);
+				mainVp.setCurrentItem(2, false);
+			}
+
+		} else {
+			myGiftTopLay.setVisibility(View.VISIBLE);
+			myGiftBottomLay.setVisibility(View.INVISIBLE);
+		}
+		executeOnCreate = true;
+
 		return rootView;
 	}
 
@@ -89,9 +107,9 @@ public class MyGiftsFragment extends BaseFragment {
 		DonatedGiftsFragment donatedGiftsFragment = new DonatedGiftsFragment();
 		ReceivedGiftsFragment receivedGiftsFragment = new ReceivedGiftsFragment();
 
-		adapter.addFrag(registeredGiftsFragment, "ثبت شده");
-		adapter.addFrag(donatedGiftsFragment, "اهدایی");
 		adapter.addFrag(receivedGiftsFragment, "دریافتی");
+		adapter.addFrag(donatedGiftsFragment, "اهدایی");
+		adapter.addFrag(registeredGiftsFragment, "ثبت شده");
 
 		viewPager.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
@@ -101,6 +119,10 @@ public class MyGiftsFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 
+		if (executeOnCreate){
+			executeOnCreate = false;
+			return;
+		}
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 
 			myGiftTopLay.setVisibility(View.GONE);
