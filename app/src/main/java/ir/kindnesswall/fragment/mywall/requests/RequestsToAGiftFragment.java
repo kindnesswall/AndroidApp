@@ -91,7 +91,7 @@ public class RequestsToAGiftFragment extends BaseFragment {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				// Toasti.showS("need more data, page: " + page + ", totalItemsCount: " + totalItemsCount);
-				if (page > 1)
+//				if (page > 1)
 					getRecievedRequestList();
 			}
 		});

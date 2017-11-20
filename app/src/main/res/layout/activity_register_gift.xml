@@ -3,10 +3,10 @@
 <RelativeLayout
 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/register_gift_bg">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/register_gift_bg">
 
 	<RelativeLayout
 		android:id="@+id/toolbar_layout"
@@ -204,7 +204,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_below="@id/choose_category_lay"
-				android:visibility="invisible">
+				android:visibility="visible">
 
 				<RelativeLayout
 					android:id="@+id/upload_image_lay"
@@ -296,10 +296,169 @@
 				</RelativeLayout>
 
 				<RelativeLayout
-					android:id="@+id/price_lay"
+					android:id="@+id/new_ornot_lay"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/title_lay"
+					android:layout_marginTop="4dp"
+					android:background="@color/white"
+					android:padding="8dp">
+
+					<RadioGroup
+						android:id="@+id/old_new_radiogr"
+						android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:gravity="right"
+					            android:orientation="horizontal">
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/old_txt"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+
+							android:gravity="right|center_vertical"
+							android:text="دسته‌دو"
+							android:textColor="@color/text_primary"
+							android:textSize="16dp"/>
+
+						<RadioButton android:id="@+id/old_radiobtn"
+						             android:layout_width="wrap_content"
+						             android:layout_height="wrap_content"
+						             android:layout_gravity="center"
+						             android:checked="true"
+						             android:gravity="right"
+						             android:text=""/>
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/new_txt"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+
+							android:gravity="center_vertical|right"
+							android:text="نو"
+							android:textColor="@color/text_primary"
+							android:textSize="16dp"/>
+
+						<RadioButton android:id="@+id/new_radiobtn"
+						             android:layout_width="wrap_content"
+						             android:layout_height="wrap_content"
+
+						             android:layout_gravity="center_horizontal"
+						             android:checked="false"
+						             android:text=""/>
+
+					</RadioGroup>
+
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/for_whichgroup_lay"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/new_ornot_lay"
+					android:layout_marginTop="4dp"
+					android:background="@color/white"
+					android:padding="8dp">
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/donate_to_txt"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_alignParentRight="true"
+
+						android:text="اهدا شود به:"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+					<com.rey.material.widget.CheckBox
+						android:id="@+id/charities_checkbox"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:gravity="center_vertical|right"
+
+						android:layout_marginTop="8dp"
+
+						android:layout_below="@id/donate_to_txt"/>
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/charities_txt"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_toLeftOf="@id/charities_checkbox"
+						android:layout_alignTop="@id/charities_checkbox"
+						android:layout_alignBottom="@id/charities_checkbox"
+
+						android:gravity="center_vertical"
+
+						android:text="خیریه‌ها"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+
+					<com.rey.material.widget.CheckBox
+						android:id="@+id/benefactors_checkbox"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:gravity="center_vertical|right"
+
+						android:layout_marginTop="4dp"
+
+						android:layout_below="@id/charities_checkbox"/>
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/benefactors_txt"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_toLeftOf="@id/benefactors_checkbox"
+						android:layout_alignTop="@id/benefactors_checkbox"
+						android:layout_alignBottom="@id/benefactors_checkbox"
+
+						android:gravity="center_vertical"
+
+						android:text="خیرین(افراد خیر)"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+					<com.rey.material.widget.CheckBox
+						android:id="@+id/users_checkbox"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:gravity="center_vertical|right"
+
+						android:layout_marginTop="4dp"
+
+						android:layout_below="@id/benefactors_checkbox"/>
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/users_txt"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						android:layout_toLeftOf="@id/users_checkbox"
+						android:layout_alignTop="@id/users_checkbox"
+						android:layout_alignBottom="@id/users_checkbox"
+
+						android:gravity="center_vertical"
+
+						android:text="تمامی کاربران"
+						android:textColor="@color/text_primary"
+						android:textSize="16dp"/>
+
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/price_lay"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/for_whichgroup_lay"
 					android:layout_marginTop="4dp"
 					android:background="@color/white"
 					android:padding="8dp">

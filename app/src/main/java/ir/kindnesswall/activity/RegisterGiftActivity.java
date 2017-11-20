@@ -21,7 +21,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -139,6 +142,33 @@ public class RegisterGiftActivity extends AppCompatActivity
 
 	@Bind(R.id.recycler_view)
 	RecyclerView mRecyclerView;
+
+	@Bind(R.id.old_new_radiogr)
+	RadioGroup mOldNewRadiogr;
+
+	@Bind(R.id.old_txt)
+	TextView mOldTxt;
+
+	@Bind(R.id.new_txt)
+	TextView mNewTxt;
+
+	@Bind(R.id.old_radiobtn)
+	RadioButton mOldRadiobtn;
+
+	@Bind(R.id.new_radiobtn)
+	RadioButton mNewRadiobtn;
+
+	@Bind(R.id.charities_txt)
+	TextView mCharitiesTxt;
+
+	@Bind(R.id.benefactors_txt)
+	TextView mBenefactorsTxt;
+
+	@Bind(R.id.users_checkbox)
+	CheckBox mUsersCheckbox;
+
+	@Bind(R.id.benefactors_checkbox)
+	CheckBox mBenefactorsCheckbox;
 
 //    @Bind(R.id.cropImageView)
 //    CropImageView cropImageView;

@@ -24,6 +24,7 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsHolder> {
 		add(R.drawable.gmail);
 		add(R.drawable.instagram);
 		add(R.drawable.telegram);
+		add(R.drawable.website);
 	}};
 
 	private ArrayList<String> urls  = new ArrayList<String>() {{
@@ -32,6 +33,7 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsHolder> {
 		add("info@kindnesswall.ir");
 		add("https://www.instagram.com/kindness_wall");
 		add("https://telegram.me/Kindness_Wall_Admin");
+		add("http://www.kindnesswall.ir");
 	}};
 
 	private Context mContext;
