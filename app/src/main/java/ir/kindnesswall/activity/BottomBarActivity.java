@@ -24,6 +24,7 @@ import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.bottombar.BottomBar;
 import ir.kindnesswall.bottombar.OnMenuTabClickListener;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.fragment.HomeCategoryFragment;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.fragment.mywall.BookmarkFragment;
@@ -54,7 +55,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	int menuItemIdSelected = -1;
 	int menuItemIdReSelected = -1;
 
-	HomeFragment homeFragment;
+//	HomeFragment homeFragment;
+	HomeCategoryFragment homeCategoryFragment;
 //	HomeFragment searchFragment;
 //	CharitiesFragment charitiesFragment;
 //	CategoriesGridFragment categoriesGridFragment;
@@ -89,9 +91,13 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				unlock = true;
 //				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
 				mToolbarTitleTextView.setText("همه هدیه‌ها");
+//				replaceFragment(
+//						homeFragment,
+//						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+
 				replaceFragment(
-						homeFragment,
-						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+						homeCategoryFragment,
+						HomeCategoryFragment.class.getName());
 			}
 			menuItemIdSelected = menuItemId;
 
@@ -261,7 +267,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 	private void setContent() {
 
-		homeFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+//		homeFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
+		homeCategoryFragment = HomeCategoryFragment.newInstance();
+
 //		searchFragment = HomeFragment.newInstance(Constants.SEARCH_PAGETYPE, null);
 //		charitiesFragment = CharitiesFragment.newInstance();
 //		categoriesGridFragment = new CategoriesGridFragment();
@@ -339,7 +347,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
 			String tag = backEntry.getName();
 
-			if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
+//			if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
+			if (tag.equals(HomeCategoryFragment.class.getName() + Constants.HOME_PAGETYPE)
 					) {
 				finish();
 			} else if (
@@ -361,8 +370,11 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //				mToolbarTitleTextView.setText("همه هدیه‌های " + AppController.getStoredString(Constants.MY_LOCATION_NAME));
 				mToolbarTitleTextView.setText("همه هدیه‌ها");
 				replaceFragment(
-						homeFragment,
-						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
+						homeCategoryFragment,
+						HomeCategoryFragment.class.getName());
+//				replaceFragment(
+//						homeFragment,
+//						HomeFragment.class.getName() + Constants.HOME_PAGETYPE);
 				menuItemIdSelected = R.id.bottomBarHome;
 			}
 		}

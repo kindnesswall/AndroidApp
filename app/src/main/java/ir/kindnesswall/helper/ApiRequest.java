@@ -162,6 +162,30 @@ public class ApiRequest {
 
     }
 
+    public void getGifts(final GetGiftPathQuery getGiftPathQuery, final int position) {
+
+        Call<List<Gift>> call = AppController.service.getGifts(
+                getGiftPathQuery.cityId,
+                getGiftPathQuery.regionId,
+                getGiftPathQuery.categoryId,
+                getGiftPathQuery.startIndex,
+                getGiftPathQuery.lastIndex,
+                getGiftPathQuery.searchText);
+
+        call.enqueue(new CallbackWithRetry<List<Gift>>(call, mContext) {
+            @Override
+            public void onResponse(Call<List<Gift>> call, Response<List<Gift>> response) {
+                handlingOnResponse(new HandlingResponse(call, response, this,position));
+            }
+
+            @Override
+            public void onFailure(Call<List<Gift>> call, Throwable t) {
+                super.onFailure(call, t);
+            }
+        });
+
+    }
+
     public void acceptRequest(String giftId, String fromUserId) {
 
         Call<ResponseBody> call = AppController.service.acceptRequest(

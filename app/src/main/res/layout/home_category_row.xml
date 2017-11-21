@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/more_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp">
+
+            <com.andexert.library.RippleView
+                android:id="@+id/ripple_btn_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                app:rv_centered="true"
+                app:rv_color="@color/light_blue_300"
+                app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/more_background"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/more_ic"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="0dp"
+                        android:src="@mipmap/ic_chevron_left_grey600_24dp" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-2dp"
+                        android:background="@color/divider" />
+
+                    <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+                        android:id="@+id/more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:maxLines="1"
+                        android:text="بیشتر"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_primary"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </com.andexert.library.RippleView>
+
+            <ImageView
+                android:id="@+id/category_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:padding="13dp"
+
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"/>
+
+            <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+
+                android:layout_toLeftOf="@id/category_img"
+
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="جدیدترین ها"
+                android:textAlignment="center"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_collection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:paddingLeft="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/divider" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
