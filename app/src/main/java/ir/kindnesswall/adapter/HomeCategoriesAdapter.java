@@ -23,7 +23,6 @@ import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.helper.ApiRequest;
-import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.model.GetGiftPathQuery;
 import ir.kindnesswall.model.GiftListModel;
 import ir.kindnesswall.model.Place;
@@ -112,14 +111,14 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 		//TODO LinearSnapHelper sometimes cause crash, plz check why and fix it
 //                (new LinearSnapHelper()).attachToRecyclerView(categoryRow.mHorizontalRecycleView);
 
-		showcaseMoreInfoHolder.mHorizontalRecycleView.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
-			@Override
-			public void onLoadMore(int page, int totalItemsCount) {
-				getGifts(
-						position,
-						mGiftPositionMap.get(position).start_index);
-			}
-		});
+//		showcaseMoreInfoHolder.mHorizontalRecycleView.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+//			@Override
+//			public void onLoadMore(int page, int totalItemsCount) {
+//				getGifts(
+//						position,
+//						mGiftPositionMap.get(position).start_index);
+//			}
+//		});
 
 	}
 
