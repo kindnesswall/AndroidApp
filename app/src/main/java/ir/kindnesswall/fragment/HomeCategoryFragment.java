@@ -103,6 +103,13 @@ public class HomeCategoryFragment extends BaseFragment {
 
 		ArrayList<Category> categories = (ArrayList<Category>) response.body();
 		this.categories.clear();
+		int i = 0;
+		for (;i < categories.size(); i++) {
+			if (categories.get(i).title.equals("کتاب"))
+				break;
+		}
+		categories.remove(i);
+
 		this.categories.addAll(categories);
 
 		homeCategoriesAdapter = new HomeCategoriesAdapter(context, this.categories);

@@ -22,7 +22,7 @@
 
 	<item
 		android:id="@+id/bottomBarHome"
-		android:icon="@mipmap/ic_home_white_24dp"
-		android:title="صفحه اصلی"/>
+		android:icon="@drawable/inside_logo"
+		android:title="دیوار مهربانی"/>
 
 </menu>
