@@ -13,7 +13,7 @@ public class GiftListModel {
 
 	public ArrayList<Gift> gifts = new ArrayList<>();
 
-	public int start_index = 1;
+	public int start_index = 0;
 	public ShowcaseMoreInfoAdapter showcaseMoreInfoAdapter;// = new ShowcaseMoreInfoAdapter(films);
 
 }

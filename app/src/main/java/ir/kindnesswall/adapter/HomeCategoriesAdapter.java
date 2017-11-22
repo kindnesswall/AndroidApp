@@ -123,25 +123,6 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 
 	}
 
-//	private void callApiGetList(
-//			final int position,
-//			int startIndex) {
-//
-//		apiRequest.getVODFilmList(
-//				new GetListInput(
-//						new Tag(
-//								getPageOutput.results.get(position).type,
-//								getPageOutput.results.get(position).tag_id
-//						),
-//						startIndex + "",
-//						startIndex + Constants.LIMIT + ""
-//				),
-//				position
-//		);
-//		mVodFilmPositionMap.get(position).start_index += Constants.LIMIT;
-//
-//	}
-
 	private void getGifts(final int position,
 	                      int startIndex) {
 
@@ -179,6 +160,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 		mGiftPositionMap.get(position).gifts.addAll(gifts);
 
 		mGiftPositionMap.get(position).showcaseMoreInfoAdapter.notifyDataSetChanged();
+
 	}
 
 	@Override

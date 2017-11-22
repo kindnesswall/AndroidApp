@@ -62,7 +62,7 @@ public class GiftListAdapter extends RecyclerView.Adapter<GiftHolder> {
 
 		myHolder.getGiftTitleTv().setText(gifts.get(i).title);
 		myHolder.getGiftLocationTv().setText(gifts.get(i).address);
-		myHolder.getGiftCreatedTimeTv().setText(gifts.get(i).createDateTime);
+		myHolder.getGiftCreatedTimeTv().setText(gifts.get(i).description);
 		myHolder.itemView.setOnClickListener(
 
 				new View.OnClickListener() {

@@ -16,7 +16,7 @@
 			android:id="@+id/row_imageview"
 			android:layout_width="118dp"
 			android:layout_height="118dp"
-			android:layout_alignParentLeft="true"/>
+			android:layout_alignParentRight="true"/>
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/row_title_textview"
@@ -26,13 +26,12 @@
 			android:layout_marginLeft="12dp"
 			android:layout_marginRight="8dp"
 			android:layout_marginTop="4dp"
-			android:layout_toRightOf="@id/row_imageview"
+			android:layout_toLeftOf="@id/row_imageview"
 
 			android:ellipsize="end"
 			android:gravity="right"
-			android:lines="2"
 
-			android:text=""
+			android:text="یک عنوان بسیار طولانی که چند خط بشه داریم تست میکنیم"
 			android:textColor="@color/black"
 			android:textSize="14sp"/>
 
@@ -57,7 +56,6 @@
 			android:layout_marginRight="4dp"
 
 			android:layout_toLeftOf="@id/row_ad_gift_location_icon"
-			android:layout_toRightOf="@id/row_imageview"
 
 			android:ellipsize="end"
 			android:gravity="right"
@@ -74,12 +72,12 @@
 
 			android:layout_alignRight="@id/row_ad_gift_location_icon"
 			android:layout_below="@id/row_ad_gift_location_icon"
+			android:layout_alignBottom="@id/row_imageview"
 
 			android:layout_marginLeft="4dp"
 			android:layout_marginRight="12dp"
 
 			android:layout_marginTop="4dp"
-			android:layout_toRightOf="@id/row_imageview"
 
 			android:ellipsize="end"
 			android:gravity="right"

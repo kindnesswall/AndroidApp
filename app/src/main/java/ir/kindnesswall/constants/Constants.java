@@ -5,7 +5,7 @@ package ir.kindnesswall.constants;
  */
 public class Constants {
 
-	public static final int LIMIT = 10;
+	public static final int LIMIT = 20;
 
 	public static final String BEARER = "bearer";
 

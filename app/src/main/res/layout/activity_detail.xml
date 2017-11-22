@@ -178,7 +178,7 @@
                         android:layout_marginRight="@dimen/spacing_large"
                         android:layout_marginTop="4dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textColor="@color/red_high" />
+                        android:textColor="@color/colorAccent" />
 
                     <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
                         android:id="@+id/detail_register_time_tv"

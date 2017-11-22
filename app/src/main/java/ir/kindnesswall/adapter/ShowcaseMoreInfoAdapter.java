@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -70,18 +69,26 @@ public class ShowcaseMoreInfoAdapter extends RecyclerView.Adapter<ShowcaseMoreIn
 
         holder.mShowcaseMoreInfoCategoryTv.setText(gifts.get(i).address);
 
-        holder.mRippleCardview.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleMoviePic) {
+//        holder.mRippleCardview.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+//            @Override
+//            public void onComplete(RippleView rippleMoviePic) {
+//
+//                mContext.startActivity(
+//                        GiftDetailActivity.createIntent(gifts.get(i))
+//                );
+//
+//            }
+//
+//        });
 
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mContext.startActivity(
                         GiftDetailActivity.createIntent(gifts.get(i))
                 );
-
             }
-
         });
-
     }
 
     @Override
@@ -93,15 +100,17 @@ public class ShowcaseMoreInfoAdapter extends RecyclerView.Adapter<ShowcaseMoreIn
     class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView coverImageView;
         public TextView mCellNameMovieTv, mCellPriceMovieTv, mShowcaseMoreInfoCategoryTv;
-        public RippleView mRippleCardview;
+//        public RippleView mRippleCardview;
+        public View view;
 
         public ViewHolder(View view) {
             super(view);
+            this.view = view;
             coverImageView = (ImageView) view.findViewById(R.id.cell_movie_iv);
             mCellNameMovieTv = (TextView) view.findViewById(R.id.cell_name_movie_tv);
             mCellPriceMovieTv = (TextView) view.findViewById(R.id.cell_price_movie_tv);
             mShowcaseMoreInfoCategoryTv = (TextView) view.findViewById(R.id.showcase_more_info_category_tv);
-            mRippleCardview = (RippleView) view.findViewById(R.id.ripple_cell_showcase);
+//            mRippleCardview = (RippleView) view.findViewById(R.id.ripple_cell_showcase);
 
 //            view.setOnClickListener(this);
         }
