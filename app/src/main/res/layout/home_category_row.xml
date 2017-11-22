@@ -18,47 +18,50 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp">
 
-            <com.andexert.library.RippleView
-                android:id="@+id/ripple_btn_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                app:rv_centered="true"
-                app:rv_color="@color/light_blue_300"
-                app:rv_rippleDuration="@integer/rv_rippleDuration">
+            <!--<com.andexert.library.RippleView-->
+                <!--android:id="@+id/ripple_btn_more"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--app:rv_centered="true"-->
+                <!--app:rv_color="@color/light_blue_300"-->
+                <!--app:rv_rippleDuration="@integer/rv_rippleDuration">-->
 
-                <LinearLayout
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/more_background"
-                    android:orientation="horizontal"
-                    android:padding="2dp">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="60dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:background="@drawable/more_background"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:padding="2dp">-->
 
-                    <ImageView
-                        android:id="@+id/more_ic"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="0dp"
-                        android:src="@mipmap/ic_chevron_left_grey600_24dp" />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/more_ic"-->
+                        <!--android:layout_width="20dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginBottom="0dp"-->
+                        <!--android:src="@mipmap/ic_chevron_left_grey600_24dp" />-->
 
 
                     <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
-                        android:id="@+id/more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/more_tv"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+
                         android:layout_gravity="center"
+                        android:gravity="center"
+
                         android:layout_marginLeft="4dp"
                         android:maxLines="1"
                         android:text="بیشتر"
                         android:textAlignment="center"
-                        android:textColor="@color/text_primary"
-                        android:textSize="10sp" />
-                </LinearLayout>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp" />
+                <!--</LinearLayout>-->
 
-            </com.andexert.library.RippleView>
+            <!--</com.andexert.library.RippleView>-->
 
             <ImageView
                 android:id="@+id/category_img"
@@ -68,8 +71,7 @@
                 android:padding="13dp"
 
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"/>
+                android:layout_centerVertical="true"/>
 
             <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
                 android:id="@+id/description"

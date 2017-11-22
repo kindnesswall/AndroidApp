@@ -1,6 +1,7 @@
 package ir.kindnesswall.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,6 +35,9 @@ public class HomeCategoryFragment extends BaseFragment {
 
 	@Bind(R.id.fragment_progressBar)
 	ProgressView mProgressView;
+
+	@Bind(R.id.swipeRefreshLayout)
+	SwipeRefreshLayout mSwipeRefreshLayout;
 
 	private View rootView;
 	ArrayList<Category> categories = new ArrayList<>();
@@ -79,6 +83,13 @@ public class HomeCategoryFragment extends BaseFragment {
 	private void setListeners() {
 
 
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// Refresh gifts
+				apiRequest.getCategories();
+			}
+		});
 	}
 
 
@@ -88,6 +99,7 @@ public class HomeCategoryFragment extends BaseFragment {
 		mRecyclerView.setVisibility(View.VISIBLE);
 		mProgressView.setVisibility(View.INVISIBLE);
 		messageTextview.setVisibility(View.INVISIBLE);
+		mSwipeRefreshLayout.setRefreshing(false);
 
 		ArrayList<Category> categories = (ArrayList<Category>) response.body();
 		this.categories.clear();

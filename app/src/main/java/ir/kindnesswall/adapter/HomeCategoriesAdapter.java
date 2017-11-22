@@ -76,16 +76,25 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 				.crossFade()
 				.into(showcaseMoreInfoHolder.categoryImg);
 
-		showcaseMoreInfoHolder.mRippleBtnMore.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+//		showcaseMoreInfoHolder.mRippleBtnMore.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+//			@Override
+//			public void onComplete(RippleView rippleView) {
+//				((BottomBarActivity) mContext).replaceFragment(
+//						HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, categories.get(position)),
+//						HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
+//				);
+//			}
+//		});
+
+		showcaseMoreInfoHolder.more.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onComplete(RippleView rippleView) {
+			public void onClick(View view) {
 				((BottomBarActivity) mContext).replaceFragment(
 						HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, categories.get(position)),
 						HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
 				);
 			}
 		});
-
 
 
 		mLayoutManager = new LinearLayoutManager(mContext);
@@ -191,11 +200,11 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 		}
 
 		void findViews(View view) {
-			more = (TextView) view.findViewById(R.id.more);
+			more = (TextView) view.findViewById(R.id.more_tv);
 			mMoreLayout = (RelativeLayout) view.findViewById(R.id.more_layout);
 			description = (TextView) view.findViewById(R.id.description);
 			mHorizontalRecycleView = (RecyclerView) view.findViewById(R.id.recycler_view_collection);
-			mRippleBtnMore = (RippleView) view.findViewById(R.id.ripple_btn_more);
+//			mRippleBtnMore = (RippleView) view.findViewById(R.id.ripple_btn_more);
 			categoryImg = (ImageView) view.findViewById(R.id.category_img);
 		}
 
