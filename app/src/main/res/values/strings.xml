@@ -89,4 +89,5 @@
 	<string name="report_bugs">گزارش اشکالات برنامه</string>
 	<string name="update_app">به‌روز رسانی برنامه</string>
 	<string name="exit">خروج</string>
+	<string name="login">ورود</string>
 </resources>

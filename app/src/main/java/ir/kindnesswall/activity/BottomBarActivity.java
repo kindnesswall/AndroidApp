@@ -26,6 +26,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +50,7 @@ import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
 import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
+import ir.kindnesswall.helper.Toasti;
 import ir.kindnesswall.helper.UpdateChecker;
 import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.StartLastIndex;
@@ -93,6 +96,51 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	private PrimaryDrawerItem reportBugsDrawerItem;
 	private PrimaryDrawerItem updateAppDrawerItem;
 	private PrimaryDrawerItem logoutDrawerItem;
+	private PrimaryDrawerItem loginDrawerItem;
+	private AccountHeaderBuilder accountHeaderBuilder;
+	private DrawerBuilder drawerBuilder;
+	private AccountHeader accountHeader;
+	private HashMap<Type, PrimaryDrawerItem> drawerItemHashMap;
+
+	public enum Type {
+		myRequests,
+		bookmarks,
+		statistics,
+		contactUs,
+		aboutKindnessWall,
+		ourTeam,
+		reportBugs,
+		updateApp,
+		logout,
+		login,
+		divider
+	}
+
+	private ArrayList<Type> userDrawerList =
+			new ArrayList<Type>(Arrays.asList(
+					Type.myRequests,
+					Type.bookmarks,
+					Type.logout,
+					Type.divider,
+					Type.statistics,
+					Type.updateApp,
+					Type.contactUs,
+					Type.aboutKindnessWall,
+					Type.ourTeam,
+					Type.reportBugs
+			));
+
+	private ArrayList<Type> guestDrawerList =
+			new ArrayList<Type>(Arrays.asList(
+					Type.login,
+					Type.divider,
+					Type.statistics,
+					Type.updateApp,
+					Type.contactUs,
+					Type.aboutKindnessWall,
+					Type.ourTeam,
+					Type.reportBugs
+			));
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -284,6 +332,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 		setContent();
 
 		if (AppController.getStoredString(Constants.Authorization) != null) {
+			setUserDrawer();
+
 			ApiRequest apiRequest = new ApiRequest(this, this);
 			apiRequest.getRequestsToMyGifts(
 					new StartLastIndex(
@@ -291,62 +341,141 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 							Constants.LIMIT + ""
 					)
 			);
+		}else{
+			setGuestDrawer();
 		}
 
-		setDrawer();
 	}
 
-	private void setDrawer() {
-//		new DrawerBuilder().withActivity(this).build();
+	private void hideDrawerAccountSwitcher() {
+		ImageView switcher = accountHeader.getView().findViewById(R.id.material_drawer_account_header_text_switcher);
+		switcher.setVisibility(View.GONE);
+	}
 
+	private void setGuestDrawer() {
+		setBaseDrawer();
+		accountHeader.addProfiles(
+				new ProfileDrawerItem().withName("")
+						.withEmail("")
+						.withIcon(getResources().getDrawable(R.drawable.app_icon))
+		);
+		hideDrawerAccountSwitcher();
+
+		for (Type t : guestDrawerList) {
+			PrimaryDrawerItem primaryDrawerItem =  drawerItemHashMap.get(t);
+			if (primaryDrawerItem!=null){
+				drawerBuilder.addDrawerItems(primaryDrawerItem);
+			}else {
+				drawerBuilder.addDrawerItems(new DividerDrawerItem());
+			}
+		}
+
+		drawerBuilder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+			@Override
+			public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+				drawerItemClickListener(guestDrawerList.get(position-1));
+				return true;
+			}
+		});
+
+		drawer = drawerBuilder.build();
+	}
+
+	private void setUserDrawer() {
+		setBaseDrawer();
+
+		accountHeader.addProfiles(
+				new ProfileDrawerItem().withName("")
+						.withEmail(
+								AppController.getStoredString(Constants.TELEPHONE)
+						)
+						.withIcon(getResources().getDrawable(R.drawable.app_icon))
+		);
+		hideDrawerAccountSwitcher();
+
+		for (Type t : userDrawerList) {
+			PrimaryDrawerItem primaryDrawerItem =  drawerItemHashMap.get(t);
+			if (primaryDrawerItem!=null){
+				drawerBuilder.addDrawerItems(primaryDrawerItem);
+			}else {
+				drawerBuilder.addDrawerItems(new DividerDrawerItem());
+			}
+		}
+
+		drawerBuilder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+			@Override
+			public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+				drawerItemClickListener(userDrawerList.get(position-1));
+				return true;
+			}
+		});
+
+		drawer = drawerBuilder.build();
+	}
+
+	private void drawerItemClickListener(Type type) {
+		switch (type){
+
+			case myRequests:
+				Toasti.showS("myRequests");
+				break;
+			case bookmarks:
+				Toasti.showS("bookmarks");
+				break;
+			case statistics:
+				Toasti.showS("statistics");
+				break;
+			case contactUs:
+				Toasti.showS("contactUs");
+				break;
+			case aboutKindnessWall:
+				Toasti.showS("aboutKindnessWall");
+				break;
+			case ourTeam:
+				Toasti.showS("ourTeam");
+				break;
+			case reportBugs:
+				Toasti.showS("reportBugs");
+				break;
+			case updateApp:
+				Toasti.showS("updateApp");
+				break;
+			case logout:
+				Toasti.showS("logout");
+				break;
+			case login:
+				Toasti.showS("login");
+				break;
+			case divider:
+				Toasti.showS("divider");
+				break;
+
+		}
+	}
+
+	private void setBaseDrawer() {
 		createDrawerItems();
 
 		// Create the AccountHeader
-		AccountHeader headerResult = new AccountHeaderBuilder()
+		accountHeaderBuilder = new AccountHeaderBuilder()
 				.withCompactStyle(true)
 				.withActivity(this)
 				.withHeaderBackground(R.color.colorPrimary)
-				.addProfiles(
-						new ProfileDrawerItem().withName("Mike Penz")
-								.withEmail("mikepenz@gmail.com")
-								.withIcon(getResources().getDrawable(R.drawable.app_icon))
-				)
 				.withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 					@Override
 					public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
 						return false;
 					}
-				})
-				.build();
+				});
 
-		ImageView switcher = headerResult.getView().findViewById(R.id.material_drawer_account_header_text_switcher);
-		switcher.setVisibility(View.GONE);
+		accountHeader = accountHeaderBuilder.build();
 
-		drawer = new DrawerBuilder()
+		drawerBuilder = new DrawerBuilder()
 				.withDrawerGravity(Gravity.RIGHT)
-				.withAccountHeader(headerResult)
+				.withAccountHeader(accountHeader)
 				.withSelectedItem(-1)
-				.withActivity(this)
-				.addDrawerItems(
-						myRequestsDrawerItem,
-						bookmarksDrawerItem,
-						logoutDrawerItem,
-						new DividerDrawerItem(),
-						statisticsDrawerItem,
-						updateAppDrawerItem,
-						contactUsDrawerItem,
-						aboutKindnessWallDrawerItem,
-						ourTeamDrawerItem,
-						reportBugsDrawerItem
-				)
-				.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-					@Override
-					public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-						// do something with the clicked item :D
-						return true;
-					}
-				})
-				.build();
+				.withActivity(this);
+
 	}
 
 	private void createDrawerItems() {
@@ -368,6 +497,12 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 		logoutDrawerItem = new PrimaryDrawerItem()
 				.withName(getString(R.string.exit))
 				.withIcon(R.mipmap.ic_logout_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		loginDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.login))
+				.withIcon(R.mipmap.ic_login_grey600_18dp).withIconTintingEnabled(false)
 				.withTextColor(lightBlackResColor)
 				.withIconColor(darkWhiteResColor);
 
@@ -406,6 +541,22 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				.withIcon(R.mipmap.ic_update_grey600_18dp).withIconTintingEnabled(false)
 				.withTextColor(lightBlackResColor)
 				.withIconColor(darkWhiteResColor);
+
+
+		drawerItemHashMap = new HashMap<Type , PrimaryDrawerItem>();
+
+		drawerItemHashMap.put(Type.myRequests, myRequestsDrawerItem);
+		drawerItemHashMap.put(Type.bookmarks, bookmarksDrawerItem);
+		drawerItemHashMap.put(Type.logout, logoutDrawerItem);
+		drawerItemHashMap.put(Type.login, loginDrawerItem);
+
+		drawerItemHashMap.put(Type.statistics, statisticsDrawerItem);
+		drawerItemHashMap.put(Type.updateApp, updateAppDrawerItem);
+		drawerItemHashMap.put(Type.contactUs, contactUsDrawerItem);
+		drawerItemHashMap.put(Type.aboutKindnessWall, aboutKindnessWallDrawerItem);
+		drawerItemHashMap.put(Type.ourTeam, ourTeamDrawerItem);
+		drawerItemHashMap.put(Type.reportBugs, reportBugsDrawerItem);
+
 	}
 
 	private void setContent() {
