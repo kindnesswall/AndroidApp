@@ -36,14 +36,14 @@
 			<!--android:textSize="26dp"/>-->
 
 		<ImageView
-			android:id="@+id/toolbar_app_icon"
+			android:id="@+id/toolbar_right_icon"
 			android:layout_width="48dp"
 			android:layout_height="48dp"
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
 
 			android:gravity="center"
-		    android:src="@drawable/inside_logo"
+		    android:src="@mipmap/ic_menu_white"
 
 		    android:padding="8dp"
 		/>
@@ -71,7 +71,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 
-			android:layout_toLeftOf="@id/toolbar_app_icon"
+			android:layout_toLeftOf="@id/toolbar_right_icon"
 			android:layout_toRightOf="@+id/toolbar_new_gift_btn_tv"
 
 			android:ellipsize="end"

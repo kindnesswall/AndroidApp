@@ -1,5 +1,9 @@
 <resources>
 
+	<dimen name="material_drawer_item_profile">48dp</dimen>
+	<dimen name="drawer_header_text_margin_top">4dp</dimen>
+	<dimen name="material_drawer_account_header_height">98dp</dimen>
+
 	<dimen name="text_size_m">20sp</dimen>
 	<dimen name="text_size_s">16sp</dimen>
 	<!--<dimen name="button_height">48dp</dimen>-->

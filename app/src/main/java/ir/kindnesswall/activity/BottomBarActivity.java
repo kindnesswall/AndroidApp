@@ -8,12 +8,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.andexert.library.RippleView;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.ArrayList;
 
@@ -52,12 +62,16 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	Toolbar mToolbar;
 	@Bind(R.id.toolbar_new_gift_btn_tv)
 	TextView mToolbarNewGiftBtnTv;
+
+	@Bind(R.id.toolbar_right_icon)
+	ImageView toolbarRightIcon;
+
 	int menuItemIdSelected = -1;
 	int menuItemIdReSelected = -1;
 
-//	HomeFragment homeFragment;
+	//	HomeFragment homeFragment;
 	HomeCategoryFragment homeCategoryFragment;
-//	HomeFragment searchFragment;
+	//	HomeFragment searchFragment;
 //	CharitiesFragment charitiesFragment;
 //	CategoriesGridFragment categoriesGridFragment;
 	MyGiftsFragment myGiftsFragment;
@@ -69,6 +83,16 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	private Boolean unlock = false;
 	private String currentVersionName;
 	private Bundle savedInstanceState;
+	private Drawer drawer;
+	private PrimaryDrawerItem myRequestsDrawerItem;
+	private PrimaryDrawerItem bookmarksDrawerItem;
+	private PrimaryDrawerItem statisticsDrawerItem;
+	private PrimaryDrawerItem contactUsDrawerItem;
+	private PrimaryDrawerItem aboutKindnessWallDrawerItem;
+	private PrimaryDrawerItem ourTeamDrawerItem;
+	private PrimaryDrawerItem reportBugsDrawerItem;
+	private PrimaryDrawerItem updateAppDrawerItem;
+	private PrimaryDrawerItem logoutDrawerItem;
 
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -102,8 +126,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			menuItemIdSelected = menuItemId;
 
 			// The user reselected item number one, scroll your content to top.
-		}
-		else if (menuItemId == R.id.bottomBarMyGifts) {
+		} else if (menuItemId == R.id.bottomBarMyGifts) {
 
 			if (menuItemId != menuItemIdSelected) {
 				clearStack();
@@ -133,7 +156,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //			}
 //			menuItemIdSelected = menuItemId;
 
-			// The user selected item number one.
+		// The user selected item number one.
 //		}
 		else if (menuItemId == R.id.bottomBarMyWall && unlock) {
 
@@ -186,7 +209,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //					Toasti.showS("Catagories reselected");
 //					// The user selected item number one.
 //				} else
-              if (menuItemId == R.id.bottomBarMyGifts) {
+				if (menuItemId == R.id.bottomBarMyGifts) {
 
 //	              int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
 //	              FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
@@ -199,18 +222,18 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //              	onBackPressed();
 //					Toasti.showS("Search reselected");
 					// The user selected item number one.
-              } else if (menuItemId == R.id.bottomBarMyWall) {
+				} else if (menuItemId == R.id.bottomBarMyWall) {
 
 //              	if (menuItemId != menuItemIdReSelected){
 //                }
 
-	              int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
-	              FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-	              String tag = backEntry.getName();
+					int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+					FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+					String tag = backEntry.getName();
 
-	              if (!tag.equals(MyWallFragment.class.getName())){ // && !tag.contains(HomeFragment.class.getName())){
-		              onBackPressed();
-	              }
+					if (!tag.equals(MyWallFragment.class.getName())) { // && !tag.contains(HomeFragment.class.getName())){
+						onBackPressed();
+					}
 
 //	              clearStack();
 //	              mToolbarTitleTextView.setText(R.string.my_wall);
@@ -238,6 +261,12 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 		currentVersionName = UpdateChecker.getAppVersion(context);
 
+		toolbarRightIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				drawer.openDrawer();
+			}
+		});
 
 		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -254,7 +283,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 		setContent();
 
-		if (AppController.getStoredString(Constants.Authorization)!=null) {
+		if (AppController.getStoredString(Constants.Authorization) != null) {
 			ApiRequest apiRequest = new ApiRequest(this, this);
 			apiRequest.getRequestsToMyGifts(
 					new StartLastIndex(
@@ -263,6 +292,120 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 					)
 			);
 		}
+
+		setDrawer();
+	}
+
+	private void setDrawer() {
+//		new DrawerBuilder().withActivity(this).build();
+
+		createDrawerItems();
+
+		// Create the AccountHeader
+		AccountHeader headerResult = new AccountHeaderBuilder()
+				.withCompactStyle(true)
+				.withActivity(this)
+				.withHeaderBackground(R.color.colorPrimary)
+				.addProfiles(
+						new ProfileDrawerItem().withName("Mike Penz")
+								.withEmail("mikepenz@gmail.com")
+								.withIcon(getResources().getDrawable(R.drawable.app_icon))
+				)
+				.withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+					@Override
+					public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+						return false;
+					}
+				})
+				.build();
+
+		ImageView switcher = headerResult.getView().findViewById(R.id.material_drawer_account_header_text_switcher);
+		switcher.setVisibility(View.GONE);
+
+		drawer = new DrawerBuilder()
+				.withDrawerGravity(Gravity.RIGHT)
+				.withAccountHeader(headerResult)
+				.withSelectedItem(-1)
+				.withActivity(this)
+				.addDrawerItems(
+						myRequestsDrawerItem,
+						bookmarksDrawerItem,
+						logoutDrawerItem,
+						new DividerDrawerItem(),
+						statisticsDrawerItem,
+						updateAppDrawerItem,
+						contactUsDrawerItem,
+						aboutKindnessWallDrawerItem,
+						ourTeamDrawerItem,
+						reportBugsDrawerItem
+				)
+				.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+					@Override
+					public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+						// do something with the clicked item :D
+						return true;
+					}
+				})
+				.build();
+	}
+
+	private void createDrawerItems() {
+		int lightBlackResColor = getResources().getColor(R.color.light_black);
+		int darkWhiteResColor = getResources().getColor(R.color.dark_white);
+
+		myRequestsDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.my_requests))
+				.withIcon(R.mipmap.ic_human_handsup_grey600_18dp).withIconTintingEnabled(true)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		bookmarksDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.bookmarks))
+				.withIcon(R.mipmap.ic_bookmark_white_24dp).withIconTintingEnabled(true)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		logoutDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.exit))
+				.withIcon(R.mipmap.ic_logout_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		statisticsDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.statistics))
+				.withIcon(R.mipmap.ic_chart_bar_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		contactUsDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.contact_us))
+				.withIcon(R.mipmap.ic_contact_mail_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		aboutKindnessWallDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.about_kindnesswall))
+				.withIcon(R.mipmap.ic_kindness_logo).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		ourTeamDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.our_team))
+				.withIcon(R.mipmap.ic_account_multiple_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		reportBugsDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.report_bugs))
+				.withIcon(R.mipmap.ic_alert_octagram_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
+
+		updateAppDrawerItem = new PrimaryDrawerItem()
+				.withName(getString(R.string.update_app))
+				.withIcon(R.mipmap.ic_update_grey600_18dp).withIconTintingEnabled(false)
+				.withTextColor(lightBlackResColor)
+				.withIconColor(darkWhiteResColor);
 	}
 
 	private void setContent() {
@@ -384,7 +527,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	@Override
 	public void onResponse(Call call, Response response) {
 		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-		if (gifts.size() > 0){
+		if (gifts.size() > 0) {
 			MaterialDialog.Builder builder =
 					MaterialDialogBuilder.create(this)
 							.customView(R.layout.dialog_simple_yes_no, false);

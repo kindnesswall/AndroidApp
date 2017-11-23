@@ -80,4 +80,13 @@
 		laoreet ligula quam, ac lacinia nisl elementum in. Aenean velit arcu, euismod a venenatis
 		non, pulvinar pulvinar massa.
 	</string>
+	<string name="my_requests">درخواست‌های من</string>
+	<string name="bookmarks">نشان‌شده‌ها</string>
+	<string name="statistics">آمار</string>
+	<string name="contact_us">ارتباط با ما</string>
+	<string name="about_kindnesswall">درباره دیوار مهربانی</string>
+	<string name="our_team">تیم ما</string>
+	<string name="report_bugs">گزارش اشکالات برنامه</string>
+	<string name="update_app">به‌روز رسانی برنامه</string>
+	<string name="exit">خروج</string>
 </resources>

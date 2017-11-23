@@ -5,12 +5,21 @@
 
 	<color name="primaryDialog">@color/colorPrimary</color>
 
+	<color name="silver">#999EA9</color>
+
 	<!-- color from cropImageView -->
 
 	<color name="windowBackground">#1C1C1C</color>
 	<color name="overlay">#AA1C1C1C</color>
 
 	<color name="textColorPrimary">#FFFFFB</color>
+
+	<!-- Material DEFAULT colors -->
+	<color name="material_drawer_primary">@color/primary</color>
+	<color name="material_drawer_primary_dark">#1976D2</color>
+	<color name="material_drawer_primary_light">#BBDEFB</color>
+	<color name="material_drawer_accent">@color/colorAccent</color>
+
 
 	<!-- colors from divar -->
 

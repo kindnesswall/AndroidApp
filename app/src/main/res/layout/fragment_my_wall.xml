@@ -77,7 +77,7 @@
 				android:layout_toLeftOf="@id/my_request_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="درخواست‌های من"
+				android:text="@string/my_requests"
 
 				android:textColor="@color/icon_black"
 
@@ -117,7 +117,7 @@
 				android:layout_toLeftOf="@id/bookmark_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="نشان‌شده‌ها"
+				android:text="@string/bookmarks"
 
 				android:textColor="@color/icon_black"
 
@@ -223,7 +223,7 @@
 				android:layout_toLeftOf="@id/statistic_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="آمار"
+				android:text="@string/statistics"
 
 				android:textColor="@color/icon_black"
 
@@ -316,7 +316,7 @@
 				android:layout_toLeftOf="@id/contact_us_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="ارتباط با ما"
+				android:text="@string/contact_us"
 
 				android:textColor="@color/icon_black"
 
@@ -352,7 +352,7 @@
 				android:layout_toLeftOf="@id/rw_mywall_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="درباره دیوار مهربانی"
+				android:text="@string/about_kindnesswall"
 
 				android:textColor="@color/icon_black"
 
@@ -388,7 +388,7 @@
 				android:layout_toLeftOf="@id/our_team_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="تیم ما"
+				android:text="@string/our_team"
 
 				android:textColor="@color/icon_black"
 
@@ -430,7 +430,7 @@
 				android:layout_toLeftOf="@id/report_bug_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="گزارش اشکالات برنامه"
+				android:text="@string/report_bugs"
 
 				android:textColor="@color/icon_black"
 
@@ -472,7 +472,7 @@
 				android:layout_toLeftOf="@id/update_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="به‌روز رسانی برنامه"
+				android:text="@string/update_app"
 
 				android:textColor="@color/icon_black"
 
@@ -517,7 +517,7 @@
 				android:layout_toLeftOf="@id/rw_log_in_out_txt_icon"
 				android:gravity="center"
 				android:paddingRight="@dimen/my_wall_mainlist_tv_padding_right"
-				android:text="خروج"
+				android:text="@string/exit"
 
 				android:textColor="@color/icon_black"
 
