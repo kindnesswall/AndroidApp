@@ -3,6 +3,7 @@ package ir.kindnesswall.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -68,6 +69,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 	@Bind(R.id.toolbar_right_icon)
 	ImageView toolbarRightIcon;
+
+	@Bind(R.id.fab)
+	FloatingActionButton fab;
 
 	int menuItemIdSelected = -1;
 	int menuItemIdReSelected = -1;
@@ -316,7 +320,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			}
 		});
 
-		mToolbarNewGiftBtnTv.setOnClickListener(new View.OnClickListener() {
+		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
@@ -418,6 +422,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 			case myRequests:
 				Toasti.showS("myRequests");
+
+				startActivity(MyRequestsActivity.createIntent());
+
 				break;
 			case bookmarks:
 				Toasti.showS("bookmarks");

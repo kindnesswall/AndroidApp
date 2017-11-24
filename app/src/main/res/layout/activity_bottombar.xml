@@ -64,7 +64,16 @@
 			android:paddingRight="14dp"
 
 			android:text="هدیه جدید"
-			android:textColor="#FFFFFF"/>
+			android:textColor="#FFFFFF"
+			android:visibility="gone"/>
+
+		<ImageView
+			android:id="@+id/search_imageview"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			android:layout_alignParentLeft="true"
+			android:padding="16dp"
+			android:src="@mipmap/ic_search_white_24dp"/>
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/toolbar_title_textView"
@@ -93,5 +102,14 @@
 	             android:layout_below="@id/toolbar_layout"
 	             android:background="@color/transparent"/>
 
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_margin="@dimen/fab_margin"
+		android:tooltipText="هدیه‌جدید"
+		app:srcCompat="@mipmap/ic_gift_white_36dp"/>
 
 </RelativeLayout>

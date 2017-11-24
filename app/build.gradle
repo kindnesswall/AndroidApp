@@ -55,8 +55,6 @@ android {
 	}
 }
 
-
-
 // run ./gradlew :app:firebaseUploadReleaseProguardMapping from project directory that has gradlew.bat
 setProperty("FirebaseServiceAccountFilePath", rootProject.rootDir.absolutePath + FirebaseServiceAccountFilePath)
 
@@ -111,6 +109,7 @@ dependencies {
 	compile 'com.heinrichreimersoftware:material-intro:1.6.2'
 
 	compile 'com.github.yalantis:ucrop:2.2.1'
+	compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -21,7 +21,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.rey.material.widget.CheckBox;
 import com.rey.material.widget.ProgressView;
 import com.yalantis.ucrop.UCrop;
 

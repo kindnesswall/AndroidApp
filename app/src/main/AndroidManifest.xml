@@ -2,23 +2,21 @@
 <manifest package="ir.kindnesswall"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
 	<application
-		android:name="ir.kindnesswall.app.AppController"
+		android:name=".app.AppController"
 		android:allowBackup="true"
 		android:icon="@drawable/app_icon"
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
-
-		<activity android:name="ir.kindnesswall.activity.SplashScreenActivity"
+		<activity
+			android:name=".activity.SplashScreenActivity"
 			android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -26,51 +24,52 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-
 		<activity
 			android:name="com.yalantis.ucrop.UCropActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
-		<activity android:name="ir.kindnesswall.activity.BottomBarActivity"
+		<activity
+			android:name=".activity.BottomBarActivity"
 			android:screenOrientation="portrait"/>
-
-		<activity android:name="ir.kindnesswall.activity.UserProfileActivity"
+		<activity
+			android:name=".activity.MyRequestsActivity"
 			android:screenOrientation="portrait"/>
-
-		<activity android:name="ir.kindnesswall.activity.RegisterGiftActivity"
+		<activity
+			android:name=".activity.UserProfileActivity"
 			android:screenOrientation="portrait"/>
-
-		<activity android:name="ir.kindnesswall.activity.GiftDetailActivity"
-		          android:screenOrientation="portrait"/>
-
-		<activity android:name="ir.kindnesswall.activity.LoginActivity"
-		          android:screenOrientation="portrait">
-
+		<activity
+			android:name=".activity.RegisterGiftActivity"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".activity.GiftDetailActivity"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".activity.LoginActivity"
+			android:screenOrientation="portrait">
 			<intent-filter>
-				<action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+				<action android:name="android.provider.Telephony.SMS_RECEIVED"/>
 			</intent-filter>
 		</activity>
+		<activity
+			android:name=".activity.AppIntro"
+			android:screenOrientation="portrait"/>
 
-		<activity android:name="ir.kindnesswall.activity.AppIntro"
-		          android:screenOrientation="portrait"/>
+		<!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
 
-		<!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
 
-		<!--<meta-data-->
-			<!--android:name="com.google.android.gms.version"-->
-			<!--android:value="@integer/google_play_services_version" />-->
+		<!-- <meta-data -->
+		<!-- android:name="com.google.android.gms.version" -->
+		<!-- android:value="@integer/google_play_services_version" /> -->
 
-		<service
-			android:name="ir.kindnesswall.notification.MyFirebaseMessagingService">
+		<service android:name=".notification.MyFirebaseMessagingService">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT"/>
 			</intent-filter>
 		</service>
-
-		<service
-			android:name="ir.kindnesswall.notification.MyFirebaseInstanceIDService">
+		<service android:name=".notification.MyFirebaseInstanceIDService">
 			<intent-filter>
 				<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
 			</intent-filter>
@@ -78,8 +77,24 @@
 
 		<meta-data
 			android:name="io.fabric.ApiKey"
-			android:value="3551a701e9188c43d642d6786ad8fa6bca9559f6" />
+			android:value="3551a701e9188c43d642d6786ad8fa6bca9559f6"/>
 
+		<!-- <activity -->
+		<!-- android:name=".activity.MyRequestsActivity" -->
+		<!-- android:label="@string/title_activity_my_requests" -->
+		<!-- android:theme="@style/AppTheme"> -->
+		<!-- </activity> -->
+		<activity
+			android:name=".activity.BookmarkActivity"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".activity.SearchActivity"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".activity.BaseActivity"
+			android:label="@string/title_activity_base"
+			android:theme="@style/AppTheme">
+		</activity>
 	</application>
 
 </manifest>

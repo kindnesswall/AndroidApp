@@ -39,7 +39,8 @@
 	<string name="charities">خیریه‌ها</string>
 	<string name="dialog_exit_account">می‌خواهید از حساب کاربری خود خارج شوید؟</string>
 	<string name="update_to_new_version">به روزرسانی به نسخه جدید</string>
-	<string name="exist_new_version">نسخه جدید برنامه موجود می باشد ، آیا به روز رسانی می نمایید؟</string>
+	<string name="exist_new_version">نسخه جدید برنامه موجود می باشد ، آیا به روز رسانی می نمایید؟
+	</string>
 	<string name="field_hint_verification_code">کد تایید</string>
 	<string name="gift_info_saved">اطلاعات هدیه ذخیره شد</string>
 	<string name="could_not_find_path">Couldn\'t not find your file, try other apps!</string>
@@ -90,4 +91,8 @@
 	<string name="update_app">به‌روز رسانی برنامه</string>
 	<string name="exit">خروج</string>
 	<string name="login">ورود</string>
+	<string name="title_activity_my_requests">MyRequestsActivity</string>
+	<string name="title_activity_bookmark">BookmarkActivity</string>
+	<string name="title_activity_search">SearchActivity</string>
+	<string name="title_activity_base">BaseActivity</string>
 </resources>
