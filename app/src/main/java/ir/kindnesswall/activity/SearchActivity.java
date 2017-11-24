@@ -209,7 +209,7 @@ public class SearchActivity extends AppCompatActivity implements HomeFilteringCa
 						region
 				);
 
-//				fragment.setTargetFragment(HomeFragment.this, 0);
+//				fragment.setTargetFragment(SearchActivity.this, 0);
 				fragment.show(getSupportFragmentManager(),
 						HomeFragment.class.getName());
 
@@ -333,6 +333,8 @@ public class SearchActivity extends AppCompatActivity implements HomeFilteringCa
 
 		gifts.clear();
 		startIndex = 0;
+		getGifts();
+
 	}
 
 //	@Override

@@ -1,5 +1,6 @@
 package ir.kindnesswall.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -60,6 +61,21 @@ public class HomeFilteringDialogFragment
 	Category choosenCategory;
 	Place choosenPlace;
 	Place choosenRegion;
+	HomeFilteringCallback homeFilteringCallback;
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		// Verify that the host activity implements the callback interface
+		try {
+			// Instantiate the EditNameDialogListener so we can send events to the host
+			homeFilteringCallback = (HomeFilteringCallback) context;
+		} catch (ClassCastException e) {
+			// The activity doesn't implement the interface, throw exception
+			throw new ClassCastException(context.toString()
+					+ " must implement EditNameDialogListener");
+		}
+	}
 
 	public static HomeFilteringDialogFragment ShowME(
 			Category category,
@@ -222,8 +238,8 @@ public class HomeFilteringDialogFragment
 			@Override
 			public void onClick(View v) {
 
-				((HomeFilteringCallback) getTargetFragment())
-						.onApplyFiltering(choosenPlace, choosenRegion, choosenCategory);
+//				((HomeFilteringCallback) getTargetFragment())
+				homeFilteringCallback.onApplyFiltering(choosenPlace, choosenRegion, choosenCategory);
 				dismiss();
 
 			}
@@ -232,8 +248,8 @@ public class HomeFilteringDialogFragment
 		cancelFilterTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((HomeFilteringCallback) getTargetFragment())
-						.onApplyFiltering(null, null, null);
+//				((HomeFilteringCallback) getTargetFragment())
+				homeFilteringCallback.onApplyFiltering(null, null, null);
 				dismiss();
 			}
 		});
