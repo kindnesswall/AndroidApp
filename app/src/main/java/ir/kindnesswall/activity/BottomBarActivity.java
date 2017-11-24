@@ -73,6 +73,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	@Bind(R.id.fab)
 	FloatingActionButton fab;
 
+	@Bind(R.id.search_imageview)
+	ImageView searchIV;
+
 	int menuItemIdSelected = -1;
 	int menuItemIdReSelected = -1;
 
@@ -330,6 +333,13 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 					startActivity(LoginActivity.createIntent());
 				}
 
+			}
+		});
+
+		searchIV.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(SearchActivity.createIntent());
 			}
 		});
 
