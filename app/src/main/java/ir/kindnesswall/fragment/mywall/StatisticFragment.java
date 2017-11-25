@@ -12,7 +12,6 @@ import com.rey.material.widget.ProgressView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
-import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.adapter.StatisticAdapter;
 import ir.kindnesswall.fragment.BaseFragment;
 import ir.kindnesswall.model.api.output.StatisticsOutput;
@@ -49,7 +48,7 @@ public class StatisticFragment extends BaseFragment {
 		ButterKnife.bind(this, rootView);
 		init();
 
-		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
+//		((StatisticActivity) getActivity()).mToolbarTitleTextView.setText("آمار و ارقام");
 
 
 

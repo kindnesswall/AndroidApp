@@ -5,30 +5,123 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context="ir.kindnesswall.activity.BaseActivity">
+	tools:context="ir.kindnesswall.activity.MyRequestsActivity">
 
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="56dp"
 		android:theme="@style/AppTheme.AppBarOverlay">
 
-		<android.support.v7.widget.Toolbar
-			android:id="@+id/toolbar"
+		<RelativeLayout
+			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
-			android:layout_height="?attr/actionBarSize"
-			android:background="?attr/colorPrimary"
-			app:popupTheme="@style/AppTheme.PopupOverlay"/>
+			android:layout_height="56dp">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/main_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_alignParentTop="true"
+				android:background="@color/colorPrimary"
+				android:clipToPadding="false"
+				app:contentInsetEnd="0dp"
+				app:contentInsetLeft="0dp"
+				app:contentInsetRight="0dp"
+				app:contentInsetStart="0dp"
+				app:theme="@style/MyToolbar"/>
+
+			<!--<ir.kindnesswall.customviews.textviews.TextViewDivarMehrabani-->
+			<!--android:id="@+id/toolbar_app_icon"-->
+			<!--android:layout_width="48dp"-->
+			<!--android:layout_height="48dp"-->
+			<!--android:layout_alignParentRight="true"-->
+			<!--android:layout_centerVertical="true"-->
+
+			<!--android:gravity="center"-->
+			<!--android:text=""-->
+			<!--android:textColor="@color/colorAccent"-->
+			<!--android:textSize="26dp"/>-->
+
+			<ImageView
+				android:id="@+id/toolbar_right_icon"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+
+				android:gravity="center"
+				android:src="@mipmap/ic_back"
+
+				android:padding="8dp"
+				android:visibility="visible"
+			/>
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/toolbar_new_gift_btn_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="56dp"
+
+				android:layout_alignParentLeft="true"
+				android:background="?attr/selectableItemBackground"
+				android:clickable="true"
+				android:drawableRight="@mipmap/ic_add_white_24dp"
+
+				android:gravity="center_vertical"
+
+				android:paddingLeft="14dp"
+				android:paddingRight="14dp"
+
+				android:text="هدیه جدید"
+				android:textColor="#FFFFFF"
+
+				android:visibility="gone"/>
+
+			<ImageView
+				android:id="@+id/search_imageview"
+				android:layout_width="56dp"
+				android:layout_height="56dp"
+				android:layout_alignParentLeft="true"
+				android:padding="16dp"
+				android:src="@mipmap/ic_search_white_24dp"/>
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/toolbar_title_textView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+
+				android:layout_toLeftOf="@id/toolbar_right_icon"
+				android:layout_toRightOf="@+id/toolbar_new_gift_btn_tv"
+
+				android:ellipsize="end"
+				android:gravity="center_vertical|right"
+
+				android:maxLines="1"
+
+				android:text=""
+				android:textColor="#FFFFFF"
+				android:textSize="16sp"
+				android:visibility="visible"/>
+
+		</RelativeLayout>
 
 	</android.support.design.widget.AppBarLayout>
 
-	<include layout="@layout/content_base"/>
+	<!--<include layout="@layout/content_my_requests"/>-->
+	<FrameLayout android:id="@+id/container_body"
+	             xmlns:android="http://schemas.android.com/apk/res/android"
+	             android:layout_width="match_parent"
+	             android:layout_height="match_parent"
+	             android:layout_marginTop="56dp"
+	             android:layout_below="@id/app_bar_layout"
+	             android:background="@color/transparent"/>
 
 	<android.support.design.widget.FloatingActionButton
 		android:id="@+id/fab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|end"
+		android:layout_gravity="bottom|left"
 		android:layout_margin="@dimen/fab_margin"
-		app:srcCompat="@android:drawable/ic_dialog_email"/>
+		app:srcCompat="@mipmap/ic_gift_white_36dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

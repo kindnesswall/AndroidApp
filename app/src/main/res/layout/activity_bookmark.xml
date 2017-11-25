@@ -8,6 +8,7 @@
 	tools:context="ir.kindnesswall.activity.BookmarkActivity">
 
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:theme="@style/AppTheme.AppBarOverlay">
@@ -21,7 +22,14 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<include layout="@layout/content_bookmark"/>
+	<!--<include layout="@layout/content_bookmark"/>-->
+
+	<FrameLayout android:id="@+id/container_body"
+	             android:layout_width="match_parent"
+	             android:layout_height="match_parent"
+	             android:layout_marginTop="56dp"
+	             android:layout_below="@id/app_bar_layout"
+	             android:background="@color/transparent"/>
 
 	<android.support.design.widget.FloatingActionButton
 		android:id="@+id/fab"

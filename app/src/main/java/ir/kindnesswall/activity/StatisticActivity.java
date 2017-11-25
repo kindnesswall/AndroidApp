@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import ir.kindnesswall.app.AppController;
-import ir.kindnesswall.fragment.mywall.BookmarkFragment;
+import ir.kindnesswall.fragment.mywall.StatisticFragment;
 
-public class BookmarkActivity extends BaseActivity {
+public class StatisticActivity extends BaseActivity {
 
 	public static Intent createIntent() {
-		Intent intent = new Intent(AppController.getAppContext(), BookmarkActivity.class);
+		Intent intent = new Intent(AppController.getAppContext(), StatisticActivity.class);
 		return intent;
 	}
 
@@ -18,10 +18,11 @@ public class BookmarkActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		replaceFragment(
-				new BookmarkFragment(), BookmarkFragment.class.getName()
+				new StatisticFragment(), StatisticFragment.class.getName()
 		);
 
-		mToolbarTitleTextView.setText("نشان شده‌ها");
+		mToolbarTitleTextView.setText("آمار و ارقام");
+
 	}
 
 }

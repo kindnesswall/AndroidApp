@@ -438,9 +438,15 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				break;
 			case bookmarks:
 				Toasti.showS("bookmarks");
+
+				startActivity(BookmarkActivity.createIntent());
+
 				break;
 			case statistics:
 				Toasti.showS("statistics");
+
+				startActivity(StatisticActivity.createIntent());
+
 				break;
 			case contactUs:
 				Toasti.showS("contactUs");

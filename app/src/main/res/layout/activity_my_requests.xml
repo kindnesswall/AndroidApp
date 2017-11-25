@@ -98,7 +98,7 @@
 
 				android:maxLines="1"
 
-				android:text="درخواست‌های من"
+				android:text=""
 				android:textColor="#FFFFFF"
 				android:textSize="16sp"
 				android:visibility="visible"/>
