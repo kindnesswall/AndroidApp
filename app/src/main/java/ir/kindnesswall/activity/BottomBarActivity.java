@@ -50,7 +50,6 @@ import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
 import ir.kindnesswall.helper.Snackbari;
-import ir.kindnesswall.helper.Toasti;
 import ir.kindnesswall.helper.UpdateChecker;
 import ir.kindnesswall.interfaces.UpdateCheckerInterface;
 import ir.kindnesswall.model.api.Category;
@@ -472,51 +471,51 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 		switch (type){
 
 			case myRequests:
-				Toasti.showS("myRequests");
+//				Toasti.showS("myRequests");
 				startActivity(MyRequestsActivity.createIntent());
 
 				break;
 			case bookmarks:
-				Toasti.showS("bookmarks");
+//				Toasti.showS("bookmarks");
 				startActivity(BookmarkActivity.createIntent());
 
 				break;
 			case statistics:
-				Toasti.showS("statistics");
+//				Toasti.showS("statistics");
 				startActivity(StatisticActivity.createIntent());
 
 				break;
 			case contactUs:
-				Toasti.showS("contactUs");
+//				Toasti.showS("contactUs");
 				startActivity(ContactUsActivity.createIntent());
 
 				break;
 			case aboutKindnessWall:
-				Toasti.showS("aboutKindnessWall");
+//				Toasti.showS("aboutKindnessWall");
 				startActivity(AppIntro.createIntent());
 
 				break;
 			case ourTeam:
-				Toasti.showS("ourTeam");
+//				Toasti.showS("ourTeam");
 				startActivity(OurTeamActivity.createIntent());
 
 				break;
 			case reportBugs:
-				Toasti.showS("reportBugs");
+//				Toasti.showS("reportBugs");
 
 				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Kindness_Wall_Admin"));
 				startActivity(telegram);
 
 				break;
 			case updateApp:
-				Toasti.showS("updateApp");
+//				Toasti.showS("updateApp");
 
 				AppController.storeString(Constants.VERSION_SKIP_UPDATE, null);
 				apiRequest.getAppInfo();
 
 				break;
 			case logout:
-				Toasti.showS("logout");
+//				Toasti.showS("logout");
 
 				AppController.clearInfo();
 				startActivity(BottomBarActivity.createIntent());
@@ -524,14 +523,14 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 				break;
 			case login:
-				Toasti.showS("login");
+//				Toasti.showS("login");
 
 				startActivity(LoginActivity.createIntent());
 
 
 				break;
 			case divider:
-				Toasti.showS("divider");
+//				Toasti.showS("divider");
 				break;
 
 		}
