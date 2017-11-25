@@ -43,15 +43,9 @@ import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.HomeCategoryFragment;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
-import ir.kindnesswall.fragment.mywall.BookmarkFragment;
-import ir.kindnesswall.fragment.mywall.ContactUsFragment;
 import ir.kindnesswall.fragment.mywall.MyWallFragment;
-import ir.kindnesswall.fragment.mywall.OurTeamFragment;
-import ir.kindnesswall.fragment.mywall.StatisticFragment;
 import ir.kindnesswall.fragment.mywall.mygifts.MyGiftsFragment;
-import ir.kindnesswall.fragment.mywall.requests.MyRequestsFragment;
 import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
-import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
@@ -293,14 +287,23 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			@Override
 			public void onMenuTabReSelected(@IdRes int menuItemId) {
 				TabSelected(menuItemId);
-//				if (menuItemId == R.id.bottomBarHome) {
+				if (menuItemId == R.id.bottomBarHome) {
 //					Toasti.showS("Home reselected");
 //					// The user reselected item number one, scroll your content to top.
 //				} else if (menuItemId == R.id.bottomBarCategories) {
 //					Toasti.showS("Catagories reselected");
 //					// The user selected item number one.
-//				} else
-				if (menuItemId == R.id.bottomBarMyGifts) {
+
+//					int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+//					FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+//					String tag = backEntry.getName();
+//
+					if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+						onBackPressed();
+					}
+
+
+				} else if (menuItemId == R.id.bottomBarMyGifts) {
 
 //	              int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
 //	              FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
@@ -323,7 +326,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //					String tag = backEntry.getName();
 //
 //					if (!tag.equals(MyWallFragment.class.getName())) { // && !tag.contains(HomeFragment.class.getName())){
-						onBackPressed();
+//						onBackPressed();
 //					}
 
 //	              clearStack();
@@ -726,17 +729,17 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			String tag = backEntry.getName();
 
 //			if (tag.equals(HomeFragment.class.getName() + Constants.HOME_PAGETYPE)
-			if (tag.equals(HomeCategoryFragment.class.getName() + Constants.HOME_PAGETYPE)
+			if (tag.equals(HomeCategoryFragment.class.getName())
 					) {
 				finish();
 			} else if (
-					tag.equals(BookmarkFragment.class.getName()) ||
-							tag.equals(StatisticFragment.class.getName()) ||
-							tag.equals(MyRequestsFragment.class.getName()) ||
-							tag.equals(RequestsToAGiftFragment.class.getName()) ||
-//							tag.equals(MyGiftsFragment.class.getName()) ||
-							tag.equals(OurTeamFragment.class.getName()) ||
-							tag.equals(ContactUsFragment.class.getName()) ||
+//					tag.equals(BookmarkFragment.class.getName()) ||
+//							tag.equals(StatisticFragment.class.getName()) ||
+//							tag.equals(MyRequestsFragment.class.getName()) ||
+//							tag.equals(RequestsToAGiftFragment.class.getName()) ||
+////							tag.equals(MyGiftsFragment.class.getName()) ||
+//							tag.equals(OurTeamFragment.class.getName()) ||
+//							tag.equals(ContactUsFragment.class.getName()) ||
 							tag.equals(HomeFragment.class.getName() + CategoriesGridFragment.class.getName())
 					) {
 
