@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
+import ir.kindnesswall.activity.MyRequestsActivity;
 import ir.kindnesswall.adapter.RequestToAGiftAdapter;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
@@ -192,4 +193,9 @@ public class RequestsToAGiftFragment extends BaseFragment {
 
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		((MyRequestsActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌ها به هدیه");
+	}
 }

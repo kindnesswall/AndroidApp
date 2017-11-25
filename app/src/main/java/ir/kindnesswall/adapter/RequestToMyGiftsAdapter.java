@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
-import ir.kindnesswall.activity.BottomBarActivity;
+import ir.kindnesswall.activity.MyRequestsActivity;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.kindnesswall.holder.ReceiveGiftsRequestHolder;
@@ -69,7 +69,7 @@ public class RequestToMyGiftsAdapter extends RecyclerView.Adapter<ReceiveGiftsRe
 
 				requestsToAGiftFragment.setArguments(bundle);
 
-				((BottomBarActivity) mContext).replaceFragment(
+				((MyRequestsActivity) mContext).replaceFragment(
 						requestsToAGiftFragment, RequestsToAGiftFragment.class.getName()
 				);
 			}

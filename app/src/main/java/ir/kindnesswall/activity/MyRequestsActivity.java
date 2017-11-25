@@ -4,47 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
-import ir.kindnesswall.adapter.ViewPagerAdapter;
 import ir.kindnesswall.app.AppController;
-import ir.kindnesswall.constants.Constants;
-import ir.kindnesswall.customviews.CustomTabLayout;
-import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
-import ir.kindnesswall.fragment.mywall.requests.SentRequestsFragment;
+import ir.kindnesswall.fragment.mywall.requests.MyRequestsFragment;
 
 public class MyRequestsActivity extends AppCompatActivity {
-
-	@Bind(R.id.my_gift_login_btn)
-	RelativeLayout myGiftLoginBtn;
-
-	@Bind(R.id.my_gift_top_lay)
-	RelativeLayout myGiftTopLay;
-
-	@Bind(R.id.my_gift_bottom_lay)
-	RelativeLayout myGiftBottomLay;
-
-	@Bind(R.id.main_tabs)
-	CustomTabLayout mainTabs;
-
-	@Bind(R.id.main_vp)
-	ViewPager mainVp;
 
 	@Bind(R.id.search_imageview)
 	ImageView searchIV;
 
-	private View rootView;
-	private ViewPagerAdapter adapter;
-	private boolean hasNotAuthorityFirstTime;
+	@Bind(R.id.toolbar_right_icon)
+	ImageView backIV;
 
+	@Bind(R.id.toolbar_title_textView)
+	public TextView mToolbarTitleTextView;
 
 	public static Intent createIntent() {
 		Intent intent = new Intent(AppController.getAppContext(), MyRequestsActivity.class);
@@ -57,9 +40,6 @@ public class MyRequestsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_requests);
 		ButterKnife.bind(this);
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
@@ -76,57 +56,42 @@ public class MyRequestsActivity extends AppCompatActivity {
 				startActivity(SearchActivity.createIntent());
 			}
 		});
+		backIV.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onBackPressed();
+			}
+		});
 
-		if (AppController.getStoredString(Constants.Authorization) != null) {
-			setupViewPager(mainVp);
-			mainTabs.setupWithViewPager(mainVp);
-			mainVp.setCurrentItem(1, false);
+		replaceFragment(
+				new MyRequestsFragment(), MyRequestsFragment.class.getName()
+		);
+	}
 
-		} else {
+	public void replaceFragment(Fragment fragment, String title) {
+		try {
 
-			hasNotAuthorityFirstTime = true;
-			myGiftLoginBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					startActivity(new Intent(MyRequestsActivity.this, LoginActivity.class));
-				}
-			});
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+			fragmentTransaction.replace(R.id.container_body, fragment, title);
+			fragmentTransaction.addToBackStack(title);
+			fragmentTransaction.commit();
+			fragmentManager.executePendingTransactions();
+
+		} catch (Exception e) {
+			//Todo : when app is finishing and homefragment request is not cancled or other requests exists:
+			// java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
 		}
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-
-		if (AppController.getStoredString(Constants.Authorization) != null) {
-
-			myGiftTopLay.setVisibility(View.GONE);
-			myGiftBottomLay.setVisibility(View.VISIBLE);
-
-			if (hasNotAuthorityFirstTime){
-				setupViewPager(mainVp);
-				mainTabs.setupWithViewPager(mainVp);
-				mainVp.setCurrentItem(1, false);
-			}
-
-		} else {
-			myGiftTopLay.setVisibility(View.VISIBLE);
-			myGiftBottomLay.setVisibility(View.INVISIBLE);
-
+	public void onBackPressed() {
+		FragmentManager fm = getSupportFragmentManager();
+		if (fm.getBackStackEntryCount() <= 1) {
+			finish();
+		}else {
+			super.onBackPressed();
 		}
 	}
-
-	private void setupViewPager(ViewPager viewPager) {
-		adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-		SentRequestsFragment sentRequestsFragment = new SentRequestsFragment();
-		ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
-
-		adapter.addFrag(sentRequestsFragment, "ارسالی");
-		adapter.addFrag(receivedRequestsFragment, "دریافتی");
-
-		viewPager.setAdapter(adapter);
-		adapter.notifyDataSetChanged();
-	}
-
 }

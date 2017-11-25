@@ -8,8 +8,9 @@
 	tools:context="ir.kindnesswall.activity.MyRequestsActivity">
 
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="56dp"
 		android:theme="@style/AppTheme.AppBarOverlay">
 
 		<RelativeLayout
@@ -50,10 +51,10 @@
 				android:layout_centerVertical="true"
 
 				android:gravity="center"
-				android:src="@mipmap/ic_menu_white"
+				android:src="@mipmap/ic_back"
 
 				android:padding="8dp"
-			    android:visibility="gone"
+			    android:visibility="visible"
 			/>
 
 			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
@@ -97,7 +98,7 @@
 
 				android:maxLines="1"
 
-				android:text="Toolbar Title"
+				android:text="درخواست‌های من"
 				android:textColor="#FFFFFF"
 				android:textSize="16sp"
 				android:visibility="visible"/>
@@ -106,7 +107,14 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<include layout="@layout/content_my_requests"/>
+	<!--<include layout="@layout/content_my_requests"/>-->
+	<FrameLayout android:id="@+id/container_body"
+	             xmlns:android="http://schemas.android.com/apk/res/android"
+	             android:layout_width="match_parent"
+	             android:layout_height="match_parent"
+	             android:layout_marginTop="56dp"
+	             android:layout_below="@id/app_bar_layout"
+	             android:background="@color/transparent"/>
 
 	<android.support.design.widget.FloatingActionButton
 		android:id="@+id/fab"

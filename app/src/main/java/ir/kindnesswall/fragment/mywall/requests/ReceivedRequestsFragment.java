@@ -73,6 +73,7 @@ public class ReceivedRequestsFragment extends BaseFragment {
 				refreshItems();
 			}
 		});
+
 	}
 
 	void refreshItems() {

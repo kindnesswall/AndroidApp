@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
-import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.activity.LoginActivity;
+import ir.kindnesswall.activity.MyRequestsActivity;
 import ir.kindnesswall.adapter.ViewPagerAdapter;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
@@ -45,10 +45,9 @@ public class MyRequestsFragment extends BaseFragment {
 	@Override
 	protected void init() {
 		super.init();
-
-		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
-
 	}
+
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,6 +99,8 @@ public class MyRequestsFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 
+		((MyRequestsActivity) getActivity()).mToolbarTitleTextView.setText("درخواست‌های من");
+
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 
 			myGiftTopLay.setVisibility(View.GONE);
@@ -114,7 +115,6 @@ public class MyRequestsFragment extends BaseFragment {
 		} else {
 			myGiftTopLay.setVisibility(View.VISIBLE);
 			myGiftBottomLay.setVisibility(View.INVISIBLE);
-
 		}
 	}
 }
