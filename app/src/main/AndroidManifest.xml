@@ -100,6 +100,14 @@
 			android:label="@string/title_activity_statistic"
 			android:screenOrientation="portrait"/>
 
+		<activity
+			android:name=".activity.ContactUsActivity"
+			android:screenOrientation="portrait"/>
+
+		<activity
+			android:name=".activity.OurTeamActivity"
+			android:screenOrientation="portrait"/>
+
 	</application>
 
 </manifest>

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
-import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.adapter.TeamMemberListAdapter;
 import ir.kindnesswall.fragment.BaseFragment;
 import ir.kindnesswall.model.api.TeamMember;
@@ -50,9 +49,7 @@ public class OurTeamFragment  extends BaseFragment {
 	@Override
 	protected void init() {
 		super.init();
-
-		((BottomBarActivity) getActivity()).mToolbarTitleTextView.setText("تیم ما");
-
+		
 		apiRequest.getTeamMembers();
 
 		adapter = new TeamMemberListAdapter(context, teamMembers);

@@ -1,6 +1,9 @@
 package ir.kindnesswall.activity;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
@@ -50,20 +53,26 @@ import ir.kindnesswall.fragment.mywall.requests.MyRequestsFragment;
 import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
 import ir.kindnesswall.fragment.mywall.requests.RequestsToAGiftFragment;
 import ir.kindnesswall.helper.ApiRequest;
+import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
+import ir.kindnesswall.helper.Snackbari;
 import ir.kindnesswall.helper.Toasti;
 import ir.kindnesswall.helper.UpdateChecker;
+import ir.kindnesswall.interfaces.UpdateCheckerInterface;
 import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.StartLastIndex;
+import ir.kindnesswall.model.api.output.AppInfoOutput;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class BottomBarActivity extends AppCompatActivity implements ApiRequest.Listener {
+public class BottomBarActivity extends AppCompatActivity implements ApiRequest.Listener , UpdateCheckerInterface {
 
 	@Bind(R.id.toolbar_title_textView)
 	public TextView mToolbarTitleTextView;
+
 	@Bind(R.id.main_toolbar)
 	Toolbar mToolbar;
+
 	@Bind(R.id.toolbar_new_gift_btn_tv)
 	TextView mToolbarNewGiftBtnTv;
 
@@ -108,6 +117,17 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 	private DrawerBuilder drawerBuilder;
 	private AccountHeader accountHeader;
 	private HashMap<Type, PrimaryDrawerItem> drawerItemHashMap;
+	private ApiRequest apiRequest;
+
+	@Override
+	public void onNotNowBtnClicked() {
+
+	}
+
+	@Override
+	public void onNeverBtnClicked() {
+
+	}
 
 	public enum Type {
 		myRequests,
@@ -312,6 +332,9 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 		ButterKnife.bind(this);
 
 		context = this;
+		apiRequest = new ApiRequest(this, this);
+
+
 		settingToolbar();
 
 		currentVersionName = UpdateChecker.getAppVersion(context);
@@ -348,7 +371,6 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 		if (AppController.getStoredString(Constants.Authorization) != null) {
 			setUserDrawer();
 
-			ApiRequest apiRequest = new ApiRequest(this, this);
 			apiRequest.getRequestsToMyGifts(
 					new StartLastIndex(
 							"0",
@@ -432,48 +454,64 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 			case myRequests:
 				Toasti.showS("myRequests");
-
 				startActivity(MyRequestsActivity.createIntent());
 
 				break;
 			case bookmarks:
 				Toasti.showS("bookmarks");
-
 				startActivity(BookmarkActivity.createIntent());
 
 				break;
 			case statistics:
 				Toasti.showS("statistics");
-
 				startActivity(StatisticActivity.createIntent());
 
 				break;
 			case contactUs:
 				Toasti.showS("contactUs");
+				startActivity(ContactUsActivity.createIntent());
+
 				break;
 			case aboutKindnessWall:
 				Toasti.showS("aboutKindnessWall");
+				startActivity(AppIntro.createIntent());
+
 				break;
 			case ourTeam:
 				Toasti.showS("ourTeam");
+				startActivity(OurTeamActivity.createIntent());
+
 				break;
 			case reportBugs:
 				Toasti.showS("reportBugs");
+
+				Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/Kindness_Wall_Admin"));
+				startActivity(telegram);
+
 				break;
 			case updateApp:
 				Toasti.showS("updateApp");
+
+				AppController.storeString(Constants.VERSION_SKIP_UPDATE, null);
+				apiRequest.getAppInfo();
+
 				break;
 			case logout:
 				Toasti.showS("logout");
 				break;
 			case login:
 				Toasti.showS("login");
+				startActivity(LoginActivity.createIntent());
+
 				break;
 			case divider:
 				Toasti.showS("divider");
 				break;
 
 		}
+
+		drawer.closeDrawer();
+
 	}
 
 	private void setBaseDrawer() {
@@ -700,42 +738,99 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 	@Override
 	public void onResponse(Call call, Response response) {
-		ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
-		if (gifts.size() > 0) {
-			MaterialDialog.Builder builder =
-					MaterialDialogBuilder.create(this)
-							.customView(R.layout.dialog_simple_yes_no, false);
+		if (response.body() instanceof AppInfoOutput) {
 
-			final MaterialDialog dialog = builder.build();
-			((TextView) dialog.findViewById(R.id.message_textview)).setText(
-					"افرادی مایل به دریافت هدیه‌های شما هستند، آیا میخواهید درخواستها را مشاهده کنید؟"
-			);
+			onUpdateVersionResponse((AppInfoOutput) response.body());
 
-			RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
-			yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-				@Override
-				public void onComplete(RippleView rippleView) {
+		}else if (response.body() instanceof ArrayList) {
 
-					ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
+			ArrayList<Gift> gifts = (ArrayList<Gift>) response.body();
+			if (gifts.size() > 0) {
+				MaterialDialog.Builder builder =
+						MaterialDialogBuilder.create(this)
+								.customView(R.layout.dialog_simple_yes_no, false);
 
-					replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
-					mToolbarTitleTextView.setText("درخواستهای دریافتی");
+				final MaterialDialog dialog = builder.build();
+				((TextView) dialog.findViewById(R.id.message_textview)).setText(
+						"افرادی مایل به دریافت هدیه‌های شما هستند، آیا میخواهید درخواستها را مشاهده کنید؟"
+				);
 
-					dialog.dismiss();
-				}
-			});
+				RippleView yesBtnRipple = (RippleView) dialog.findViewById(R.id.yes_ripple_btn_cardview);
+				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
 
-			RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
-			noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-				@Override
-				public void onComplete(RippleView rippleView) {
-					dialog.dismiss();
-				}
-			});
+						ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
 
-			dialog.show();
+						replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
+						mToolbarTitleTextView.setText("درخواستهای دریافتی");
+
+						dialog.dismiss();
+					}
+				});
+
+				RippleView noBtnRipple = (RippleView) dialog.findViewById(R.id.no_ripple_btn_cardview);
+				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						dialog.dismiss();
+					}
+				});
+
+				dialog.show();
+			}
+
+		}else {
+			Snackbari.showS(mToolbarTitleTextView, "شما با موفقیت از حساب خارج شدید");
 		}
 	}
+
+	private void onUpdateVersionResponse(AppInfoOutput appInfoOutput) {
+
+		AppController.storeString(Constants.SMS_CENTER, appInfoOutput.smsCenter);
+		boolean isForcedUpdate;
+
+		if (appInfoOutput.updateInfo.force_update != null && appInfoOutput.updateInfo.force_update.equalsIgnoreCase("true")) {
+			isForcedUpdate = true;
+		} else {
+			isForcedUpdate = false;//todo use this
+		}
+
+		UpdateChecker updateChecker = new UpdateChecker(
+				this,
+				getResources().getString(R.string.app_name),
+				appInfoOutput.updateInfo.version,
+				appInfoOutput.updateInfo.apk_url,
+				null,
+				appInfoOutput.updateInfo.changes);
+
+		if (isForcedUpdate ||
+				DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion)) {
+
+			//Notify Update
+			Intent[] intents = new Intent[1];
+			intents[0] = Intent.makeMainActivity(new ComponentName(AppController.getAppContext(),
+					BottomBarActivity.class));
+			// intents[1] = new Intent(AppController.getAppContext(), HomeActivity.class);
+			updateChecker.showUpdaterDialog(
+					context,
+					getString(R.string.update_to_new_version),
+					getString(R.string.exist_new_version),
+					appInfoOutput.updateInfo.changes,
+					appInfoOutput.updateInfo.version,
+					intents,
+					isForcedUpdate);
+
+			AppController.getInstance().setIsCheckedUpdate(true);
+
+		} else {
+
+			Snackbari.showS(mToolbarTitleTextView, "برنامه شما به روز است.");
+
+		}
+
+	}
+
 
 	@Override
 	public void onFailure(Call call, Throwable t) {
