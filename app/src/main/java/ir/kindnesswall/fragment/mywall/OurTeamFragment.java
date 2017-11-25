@@ -49,7 +49,7 @@ public class OurTeamFragment  extends BaseFragment {
 	@Override
 	protected void init() {
 		super.init();
-		
+
 		apiRequest.getTeamMembers();
 
 		adapter = new TeamMemberListAdapter(context, teamMembers);

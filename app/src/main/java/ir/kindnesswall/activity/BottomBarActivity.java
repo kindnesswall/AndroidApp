@@ -59,6 +59,7 @@ import ir.kindnesswall.helper.Snackbari;
 import ir.kindnesswall.helper.Toasti;
 import ir.kindnesswall.helper.UpdateChecker;
 import ir.kindnesswall.interfaces.UpdateCheckerInterface;
+import ir.kindnesswall.model.api.Category;
 import ir.kindnesswall.model.api.Gift;
 import ir.kindnesswall.model.api.StartLastIndex;
 import ir.kindnesswall.model.api.output.AppInfoOutput;
@@ -238,8 +239,18 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			if (menuItemId != menuItemIdSelected) {
 				clearStack();
 
-				mToolbarTitleTextView.setText(R.string.my_wall);
-				replaceFragment(myWallFragment, MyWallFragment.class.getName());
+//				mToolbarTitleTextView.setText(R.string.my_wall);
+//				replaceFragment(myWallFragment, MyWallFragment.class.getName());
+
+				mToolbarTitleTextView.setText(R.string.bookshelf);
+				Category category = new Category();
+				category.categoryId = "4";
+				category.title = "کتاب";
+
+				replaceFragment(
+						HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, category),
+						HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
+				);
 			}
 			menuItemIdSelected = menuItemId;
 
@@ -302,13 +313,13 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //              	if (menuItemId != menuItemIdReSelected){
 //                }
 
-					int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
-					FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-					String tag = backEntry.getName();
-
-					if (!tag.equals(MyWallFragment.class.getName())) { // && !tag.contains(HomeFragment.class.getName())){
+//					int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+//					FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+//					String tag = backEntry.getName();
+//
+//					if (!tag.equals(MyWallFragment.class.getName())) { // && !tag.contains(HomeFragment.class.getName())){
 						onBackPressed();
-					}
+//					}
 
 //	              clearStack();
 //	              mToolbarTitleTextView.setText(R.string.my_wall);

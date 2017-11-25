@@ -3,7 +3,7 @@
 	<item
 		android:id="@+id/bottomBarMyWall"
 		android:icon="@mipmap/ic_library_white_24dp"
-		android:title="قفسه کتاب"/>
+		android:title="@string/bookshelf"/>
 
 	<!--<item-->
 		<!--android:id="@+id/bottomBarSearch"-->
