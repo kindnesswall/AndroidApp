@@ -170,6 +170,11 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 					Type.reportBugs
 			));
 
+	public static Intent createIntent() {
+		Intent intent = new Intent(AppController.getAppContext(), BottomBarActivity.class);
+		return intent;
+	}
+
 	private void settingToolbar() {
 		mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 		setSupportActionBar(mToolbar);
@@ -509,10 +514,17 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 				break;
 			case logout:
 				Toasti.showS("logout");
+
+				AppController.clearInfo();
+				startActivity(BottomBarActivity.createIntent());
+				finish();
+
 				break;
 			case login:
 				Toasti.showS("login");
+
 				startActivity(LoginActivity.createIntent());
+
 
 				break;
 			case divider:

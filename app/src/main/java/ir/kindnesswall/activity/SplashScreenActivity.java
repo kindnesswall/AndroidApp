@@ -153,9 +153,8 @@ public class SplashScreenActivity extends AppCompatActivity implements ApiReques
     private void afterAll(){
 //        if (AppController.getStoredString(Constants.MY_LOCATION_ID) != null) {
 
-            Intent mainIntent = new Intent(SplashScreenActivity.this, BottomBarActivity.class);
-            SplashScreenActivity.this.startActivity(mainIntent);
-            SplashScreenActivity.this.finish();
+            startActivity(BottomBarActivity.createIntent());
+            finish();
 
 //        } else {
 //
