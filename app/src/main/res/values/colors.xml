@@ -39,7 +39,7 @@
 	<color name="default_circle_indicator_fill_color">#ffffffff</color>
 	<color name="default_circle_indicator_page_color">#00000000</color>
 	<color name="default_circle_indicator_stroke_color">#ffdddddd</color>
-	<color name="default_progress_bar_color">@color/red_high</color>
+	<!--<color name="default_progress_bar_color">@color/red_high</color>-->
 	<color name="dialog_btn_separator">#ffdedede</color>
 	<color name="divar_button">#ffcfcfcf</color>
 	<color name="divar_button_disabled">#ffe8e8e8</color>
@@ -61,22 +61,22 @@
 	<color name="list_divider">#ffeeeeee</color>
 	<color name="list_item_focused">#55f1f1f1</color>
 	<color name="list_item_pressed">#55f1f1f1</color>
-	<color name="main_button">#ffa62626</color>
-	<color name="main_button_disabled">#77a62626</color>
-	<color name="main_button_focused">#dda62626</color>
-	<color name="main_button_pressed">#aaa62626</color>
+	<!--<color name="main_button">#ffa62626</color>-->
+	<!--<color name="main_button_disabled">#77a62626</color>-->
+	<!--<color name="main_button_focused">#dda62626</color>-->
+	<!--<color name="main_button_pressed">#aaa62626</color>-->
 	<color name="new_post_view_bg">#ffefefef</color>
 	<color name="notification_name_color">@android:color/white</color>
 	<color name="post_item_separator">#ffdddddd</color>
 	<color name="post_list_bg">#ffe5e5e5</color>
 	<color name="post_page_bg">#ff555555</color>
-	<color name="quick_return_bar_bg">#eeff6161</color>
-	<color name="red_high">#ffa62626</color>
-	<color name="red_high_dark">#ff8d2626</color>
-	<color name="red_high_transparent">#44ff6161</color>
+	<!--<color name="quick_return_bar_bg">#eeff6161</color>-->
+	<!--<color name="red_high">#ffa62626</color>-->
+	<!--<color name="red_high_dark">#ff8d2626</color>-->
+	<!--<color name="red_high_transparent">#44ff6161</color>-->
 	<color name="side_menu_gray">#ffd4d4d4</color>
 	<color name="smooth_text_color">#ff222222</color>
-	<color name="text_color_draft">#ffff0000</color>
+	<!--<color name="text_color_draft">#ffff0000</color>-->
 	<color name="text_grey_shadow">#ffeeeeee</color>
 	<color name="text_primary">#ff24292b</color>
 	<color name="text_primary_disabled">#ff868b8d</color>
@@ -102,7 +102,7 @@
 	<color name="vpi__bright_foreground_inverse_holo_light">
 		@color/vpi__bright_foreground_holo_dark
 	</color>
-	<color name="warning_bar_background_fatal">#ffdd1812</color>
+	<!--<color name="warning_bar_background_fatal">#ffdd1812</color>-->
 	<color name="warning_bar_background_info">#ff009738</color>
 	<color name="warning_bar_background_warning">#ffffc107</color>
 
@@ -112,7 +112,7 @@
 	<color name="colorPrimary">#7a50cc</color>
 	<color name="colorPrimaryAlphaDecrease">#573993</color>
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
-	<color name="colorAccent">#613fa3</color>
+	<color name="colorAccent">#5d3c9c</color>
 
 	<color name="register_gift_warning_background">#FBC3C6</color>
 	<color name="register_gift_warning_text">#F40000</color>

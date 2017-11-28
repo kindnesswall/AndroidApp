@@ -82,7 +82,7 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 		}else if (status == SentRequestStatus.REJECTED) {
 
 			myHolder.mItemStatusTv.setText("(درخواست شما رد شد)");
-			myHolder.mItemStatusTv.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+			myHolder.mItemStatusTv.setTextColor(mContext.getResources().getColor(R.color.register_gift_warning_text));
 
 		}
 
