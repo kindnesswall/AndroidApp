@@ -110,7 +110,7 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             @Override
             public void onClick(View view) {
 
-                ((TextView) yesNoDialog.findViewById(R.id.message_textview)).setText("آیا از تایید این درخواست مطمئن هستید؟");
+                ((TextView) yesNoDialog.findViewById(R.id.message_textview)).setText("لطفا تنها پس از هماهنگی و اهدا هدیه، تیک تحویل را بزنید. این کار غیرقابل بازگشت است.پس از تایید شماره تلفن شما برای این کاربر نمایش داده میشود. آیا از اهدای هدیه اطمینان دارید؟");
 
                 yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                     @Override
