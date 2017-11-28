@@ -112,6 +112,7 @@
 	<color name="colorPrimary">#7a50cc</color>
 	<color name="colorPrimaryAlphaDecrease">#573993</color>
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
+	<color name="colorAccent">#613fa3</color>
 
 	<color name="register_gift_warning_background">#FBC3C6</color>
 	<color name="register_gift_warning_text">#F40000</color>
@@ -121,7 +122,6 @@
 
 	<!-- colors from divar -->
 
-	<color name="colorAccent">#3c2766</color>
 
 	<color name="black">#FF000000</color>
 	<color name="light_black">#414141</color>

@@ -45,7 +45,6 @@ import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.fragment.mywall.MyWallFragment;
 import ir.kindnesswall.fragment.mywall.mygifts.MyGiftsFragment;
-import ir.kindnesswall.fragment.mywall.requests.ReceivedRequestsFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.DeviceInfo;
 import ir.kindnesswall.helper.MaterialDialogBuilder;
@@ -785,10 +784,12 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 					@Override
 					public void onComplete(RippleView rippleView) {
 
-						ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
+//						ReceivedRequestsFragment receivedRequestsFragment = new ReceivedRequestsFragment();
+//
+//						replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
+//						mToolbarTitleTextView.setText("درخواستهای دریافتی");
 
-						replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
-						mToolbarTitleTextView.setText("درخواستهای دریافتی");
+						startActivity(MyRequestsActivity.createIntent());
 
 						dialog.dismiss();
 					}
