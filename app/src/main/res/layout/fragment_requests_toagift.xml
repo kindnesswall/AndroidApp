@@ -40,7 +40,7 @@
 				android:id="@+id/divider_top_lay"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="@color/pink_700"
+				android:background="@color/colorAccent"
 				android:layout_alignParentTop="true" />
 
 			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
