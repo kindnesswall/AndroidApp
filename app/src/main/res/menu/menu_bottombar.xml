@@ -1,9 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item
-		android:id="@+id/bottomBarMyWall"
-		android:icon="@mipmap/ic_library_white_24dp"
-		android:title="@string/bookshelf"/>
+
 
 	<!--<item-->
 		<!--android:id="@+id/bottomBarSearch"-->
@@ -19,6 +16,11 @@
 		android:id="@+id/bottomBarMyGifts"
 		android:icon="@mipmap/ic_gift_grey600_18dp"
 		android:title="هدیه‌های من"/>
+
+	<item
+		android:id="@+id/bottomBarMyWall"
+		android:icon="@mipmap/ic_library_white_24dp"
+		android:title="@string/bookshelf"/>
 
 	<item
 		android:id="@+id/bottomBarHome"
