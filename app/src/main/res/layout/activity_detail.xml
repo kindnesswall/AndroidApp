@@ -120,6 +120,7 @@
                             android:layout_height="56dp"
                             android:layout_marginRight="4dp"
                             android:layout_toLeftOf="@id/first_right_icon_ic"
+                            android:layout_toRightOf="@id/bookmark_ic"
                             android:gravity="center"
                             android:text="عنوان"
                             android:textColor="@color/white"
