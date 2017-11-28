@@ -516,9 +516,34 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			case logout:
 //				Toasti.showS("logout");
 
-				AppController.clearInfo();
-				startActivity(BottomBarActivity.createIntent());
-				finish();
+				final MaterialDialog yesNoDialog = MaterialDialogBuilder.create(this).customView(R.layout.dialog_simple_yes_no, false).build();
+				((TextView) yesNoDialog.findViewById(R.id.message_textview)).setText(
+						getResources().getString(R.string.dialog_exit_account)
+				);
+
+				RippleView yesBtnRipple = (RippleView) yesNoDialog.findViewById(R.id.yes_ripple_btn_cardview);
+				RippleView noBtnRipple = (RippleView) yesNoDialog.findViewById(R.id.no_ripple_btn_cardview);
+
+				yesBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						apiRequest.logout();
+
+						AppController.clearInfo();
+						startActivity(BottomBarActivity.createIntent());
+						finish();
+
+					}
+				});
+
+				noBtnRipple.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+					@Override
+					public void onComplete(RippleView rippleView) {
+						yesNoDialog.dismiss();
+					}
+				});
+
+				yesNoDialog.show();
 
 				break;
 			case login:
