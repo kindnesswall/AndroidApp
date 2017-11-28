@@ -30,10 +30,29 @@
 	<RelativeLayout android:layout_width="match_parent"
 	                android:layout_height="match_parent">
 
+
+		<RelativeLayout
+			android:id="@+id/warning_lay"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/register_gift_warning_background"
+			android:padding="10dp">
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+				android:id="@+id/choose_category_tv"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+
+				android:text="برای جلوگیری از ایجاد مزاحمت برای شما، هیچ یک از افراد درخواست دهنده به شماره شما دسترسی ندارند. لطفا قبل از تایید یکی از افراد، هماهنگی‌های لازم را با وی انجام داده و تنها پس از تحویل هدیه، تیک تایید را بزنید."
+				android:textColor="@color/register_gift_warning_text"/>
+
+		</RelativeLayout>
+
 		<RelativeLayout
 			android:id="@+id/info_lay"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
+			android:layout_below="@id/warning_lay"
 			android:background="@color/colorPrimary">
 
 			<RelativeLayout

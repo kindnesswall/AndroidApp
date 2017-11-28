@@ -10,12 +10,28 @@
         android:layout_margin="6dp"
         android:background="@color/white">
 
+        <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+            android:id="@+id/rw_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+
+            android:lines="1"
+            android:ellipsize="end"
+
+            android:text=""
+            android:layout_marginRight="8dp"
+            android:textSize="22dp" />
+
         <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
             android:id="@+id/rw_phone_number_tv"
             android:layout_width="match_parent"
             android:layout_height="56dp"
 
-            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/rw_number_tv"
 
             android:gravity="center"
 

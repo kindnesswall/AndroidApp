@@ -342,9 +342,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mChooseRegionBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				FragmentManager fm = getSupportFragmentManager();
-				ChoosePlaceDialogFragment choosePlaceDialogFragment = ChoosePlaceDialogFragment.newInstance(city.id);
-				choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
+				chooseRegion();
 			}
 		});
 
@@ -797,8 +795,8 @@ public class RegisterGiftActivity extends AppCompatActivity
 	}
 
 	private void changeUIAfterCategorySelect() {
-		mChooseCategoryLay.setBackgroundColor(getResources().getColor(R.color.white));
-		mChooseCategoryTv.setVisibility(View.GONE);
+//		mChooseCategoryLay.setBackgroundColor(getResources().getColor(R.color.white));
+//		mChooseCategoryTv.setVisibility(View.GONE);
 		if (!category.title.equals("")) {
 			mChooseCategoryBtnTxt.setText(category.title);
 		}
@@ -813,6 +811,17 @@ public class RegisterGiftActivity extends AppCompatActivity
 		myGift.locationId = city.id;
 		mChooseRegionBtnTxt.setText("انتخاب منطقه");
 		findCityRegion();
+		switch (mChooseRegionBtn.getVisibility()){
+			case View.VISIBLE:
+				chooseRegion();
+				break;
+		}
+	}
+
+	private void chooseRegion() {
+		FragmentManager fm = getSupportFragmentManager();
+		ChoosePlaceDialogFragment choosePlaceDialogFragment = ChoosePlaceDialogFragment.newInstance(city.id);
+		choosePlaceDialogFragment.show(fm, ChoosePlaceDialogFragment.class.getName());
 	}
 
 	@Override

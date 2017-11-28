@@ -15,7 +15,7 @@
 	<string name="conneciton_internet_failed_message">ظاهرا در ارتباط شما با اینترنت مشکلی وجود
 		دارد
 	</string>
-	<string name="select_ur_gift_categorty">لطفا دسته‌بندی هدیه خود را انتخاب کنید.</string>
+	<string name="select_ur_gift_categorty">لطفا تمام اطلاعات را کامل وارد کنید.</string>
 	<string name="gift_category">دسته‌بندی هدیه</string>
 	<string name="field_label_select_category">انتخاب</string>
 	<string name="activity_post_button_add_photo">افزودن عکس</string>

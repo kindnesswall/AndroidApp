@@ -145,23 +145,30 @@
 			android:layout_height="wrap_content">
 
 			<RelativeLayout
-				android:id="@+id/choose_category_lay"
+				android:id="@+id/info_lay"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="4dp"
 				android:background="@color/register_gift_warning_background"
-				android:padding="8dp">
+				android:padding="10dp">
 
 				<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
 					android:id="@+id/choose_category_tv"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 
-					android:layout_alignParentRight="true"
-					android:layout_alignParentTop="true"
-
-					android:text="@string/select_ur_gift_categorty"
+					android:text="برای جلوگیری از ایجاد مزاحمت برای شما، پس از ثبت هدیه کاربران تنها درون اپلیکیشن میتوانند به شما درخواست دهند، شما میتوانید با درخواست دهنده تماس گرفته و در صورتی که مایل بودید هدیه را به ایشان تحویل دهید."
 					android:textColor="@color/register_gift_warning_text"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:id="@+id/choose_category_lay"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/info_lay"
+				android:layout_marginTop="4dp"
+				android:background="@color/white"
+				android:padding="8dp">
 
 				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 					android:id="@+id/gift_category_txt"
@@ -169,7 +176,6 @@
 					android:layout_height="wrap_content"
 
 					android:layout_alignParentRight="true"
-					android:layout_below="@id/choose_category_tv"
 
 					android:text="@string/gift_category"
 					android:textSize="18dp"/>
@@ -307,9 +313,9 @@
 					<RadioGroup
 						android:id="@+id/old_new_radiogr"
 						android:layout_width="match_parent"
-					            android:layout_height="wrap_content"
-					            android:gravity="right"
-					            android:orientation="horizontal">
+						android:layout_height="wrap_content"
+						android:gravity="right"
+						android:orientation="horizontal">
 
 						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 							android:id="@+id/old_txt"
@@ -360,8 +366,8 @@
 					android:layout_below="@id/new_ornot_lay"
 					android:layout_marginTop="4dp"
 					android:background="@color/white"
-					android:visibility="gone"
-					android:padding="8dp">
+					android:padding="8dp"
+					android:visibility="gone">
 
 					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 						android:id="@+id/donate_to_txt"
@@ -379,20 +385,20 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_alignParentRight="true"
-						android:gravity="center_vertical|right"
+						android:layout_below="@id/donate_to_txt"
 
 						android:layout_marginTop="8dp"
 
-						android:layout_below="@id/donate_to_txt"/>
+						android:gravity="center_vertical|right"/>
 
 					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 						android:id="@+id/charities_txt"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 
-						android:layout_toLeftOf="@id/charities_checkbox"
-						android:layout_alignTop="@id/charities_checkbox"
 						android:layout_alignBottom="@id/charities_checkbox"
+						android:layout_alignTop="@id/charities_checkbox"
+						android:layout_toLeftOf="@id/charities_checkbox"
 
 						android:gravity="center_vertical"
 
@@ -406,20 +412,20 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_alignParentRight="true"
-						android:gravity="center_vertical|right"
+						android:layout_below="@id/charities_checkbox"
 
 						android:layout_marginTop="4dp"
 
-						android:layout_below="@id/charities_checkbox"/>
+						android:gravity="center_vertical|right"/>
 
 					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 						android:id="@+id/benefactors_txt"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 
-						android:layout_toLeftOf="@id/benefactors_checkbox"
-						android:layout_alignTop="@id/benefactors_checkbox"
 						android:layout_alignBottom="@id/benefactors_checkbox"
+						android:layout_alignTop="@id/benefactors_checkbox"
+						android:layout_toLeftOf="@id/benefactors_checkbox"
 
 						android:gravity="center_vertical"
 
@@ -432,20 +438,20 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_alignParentRight="true"
-						android:gravity="center_vertical|right"
+						android:layout_below="@id/benefactors_checkbox"
 
 						android:layout_marginTop="4dp"
 
-						android:layout_below="@id/benefactors_checkbox"/>
+						android:gravity="center_vertical|right"/>
 
 					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 						android:id="@+id/users_txt"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 
-						android:layout_toLeftOf="@id/users_checkbox"
-						android:layout_alignTop="@id/users_checkbox"
 						android:layout_alignBottom="@id/users_checkbox"
+						android:layout_alignTop="@id/users_checkbox"
+						android:layout_toLeftOf="@id/users_checkbox"
 
 						android:gravity="center_vertical"
 

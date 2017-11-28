@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,9 @@ import ir.kindnesswall.model.Places;
 public class ChoosePlaceDialogFragment extends DialogFragment {
 
 //    private String fromActivity;
+
+	@Bind(R.id.choose_place_text)
+	TextView choosePlaceText;
 
 	@Bind(R.id.choose_place_recyclerview)
 	RecyclerView recyclerView;
@@ -157,6 +161,7 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 		if (bundle != null && getArguments().getString(Constants.CITY_ID) != null) {
 			locationId = getArguments().getString(Constants.CITY_ID);
 			readLevel4FromJson();
+			choosePlaceText.setText("انتخاب منطقه");
 			choosePlaceAdapter = new ChoosePlaceAdapter(this, getContext(), level4.getPlaces());
 		} else {
 			readLevel2FromJson();

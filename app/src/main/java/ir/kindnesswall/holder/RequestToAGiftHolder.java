@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import ir.kindnesswall.R;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
@@ -17,6 +18,7 @@ public class RequestToAGiftHolder extends RecyclerView.ViewHolder {
 
 	public RelativeLayout rootLay, callLay, smsLay, acceptLay, rejectLay;
 	public TextViewIranSansRegular mPhoneTv;
+	public TextView mNumberTv;
 	public ImageView mCallIconIv, mSmsIconIv;
 
 	public RequestToAGiftHolder(View itemView) {
@@ -31,6 +33,7 @@ public class RequestToAGiftHolder extends RecyclerView.ViewHolder {
 		rejectLay = (RelativeLayout) itemView.findViewById(R.id.deny_lay);
 
 		mPhoneTv = (TextViewIranSansRegular) itemView.findViewById(R.id.rw_phone_number_tv);
+		mNumberTv = itemView.findViewById(R.id.rw_number_tv);
 
 //		mDenyIconIv = (ImageView) itemView.findViewById(R.id.rw_deny_icon_iv);
 //		mAcceptIconIv = (ImageView) itemView.findViewById(R.id.rw_accept_icon_iv);
