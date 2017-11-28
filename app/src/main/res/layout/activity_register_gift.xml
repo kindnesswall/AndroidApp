@@ -360,6 +360,7 @@
 					android:layout_below="@id/new_ornot_lay"
 					android:layout_marginTop="4dp"
 					android:background="@color/white"
+					android:visibility="gone"
 					android:padding="8dp">
 
 					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular

@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.rey.material.widget.ProgressView;
+import com.rey.material.widget.RadioButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -139,6 +140,12 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.delete_progressView)
 	ProgressView mDeleteProgressView;
 
+	@Bind(R.id.old_radiobtn)
+	RadioButton old_radiobtn;
+
+	@Bind(R.id.new_radiobtn)
+	RadioButton new_radiobtn;
+
 	View.OnClickListener addToWishList;
 	View.OnClickListener removeFromWishList;
 	Context mContext;
@@ -179,6 +186,11 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 		mDetailTitleTv.setText(gift.title);
 		mDetailRegisterTimeTv.setText(gift.createDateTime);
 		mDetailPriceTv.setText(gift.price);
+		if (gift.isNew){
+			new_radiobtn.setChecked(true);
+		}else {
+			old_radiobtn.setChecked(true);
+		}
 
 		String place = findPlaceRecursion(gift.locationId);
 		String region = findPlaceRecursion(gift.regionId);

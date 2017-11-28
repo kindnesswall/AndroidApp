@@ -14,543 +14,602 @@
   ~ limitations under the License.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
-
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:layout_collapseMode="parallax">
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/viewpager"
-                        android:layout_width="match_parent"
-                        android:layout_height="400dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:layout_alignTop="@id/viewpager"
-                        android:background="@drawable/forground_color_black_top" />
-
-                    <LinearLayout
-                        android:id="@+id/pagesContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-
-                        android:layout_below="@id/viewpager"
-
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="8dp"
-                        android:background="#ffff"
-                        android:gravity="center"
-
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:layout_collapseMode="pin">
-
-                    <RelativeLayout
-                        android:id="@+id/toolbar_lay"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/share_ic"
-                            android:layout_width="48dp"
-                            android:layout_height="56dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:scaleType="center"
-                            android:src="@mipmap/ic_action_social_share"
-                            android:visibility="gone" />
-
-                        <ImageView
-                            android:id="@+id/bookmark_ic"
-                            android:layout_width="48dp"
-                            android:layout_height="56dp"
-                            android:layout_centerVertical="true"
-
-                            android:layout_toRightOf="@id/share_ic"
-                            android:scaleType="center"
-                            android:src="@mipmap/ic_action_action_bookmark_outline"
-                            android:visibility="invisible" />
-
-                        <ImageView
-                            android:id="@+id/first_right_icon_ic"
-                            android:layout_width="48dp"
-                            android:layout_height="56dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:scaleType="center"
-                            android:src="@mipmap/ic_back" />
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
-                            android:id="@+id/toolbar_title_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="56dp"
-                            android:layout_marginRight="4dp"
-                            android:layout_toLeftOf="@id/first_right_icon_ic"
-                            android:layout_toRightOf="@id/bookmark_ic"
-                            android:gravity="center"
-                            android:text="عنوان"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-                    </RelativeLayout>
-                </android.support.v7.widget.Toolbar>
-                <!--<com.antonioleiva.materializeyourapp.widgets.SquareImageView-->
-                <!--android:id="@+id/image"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:scaleType="centerCrop"-->
-                <!---->
-                <!--app:layout_collapseMode="parallax"/>-->
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey_300"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/grey_300"
-                android:orientation="vertical">
-
-                <!--<FrameLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="24dp"-->
-                <!--app:cardElevation="@dimen/spacing_medium"-->
-                <!--app:cardUseCompatPadding="true">-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                        android:id="@+id/detail_title_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginTop="4dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textColor="@color/colorAccent" />
-
-                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                        android:id="@+id/detail_register_time_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/white">
-
-                    <LinearLayout
-                        android:id="@+id/detail_txt_lay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="vertical">
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_category_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:padding="2dp"
-                            android:gravity="right"
-                            android:text="دسته‌بندی"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/grey_700" />
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_place_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:padding="2dp"
-                            android:text="محل"
-                            android:gravity="right"
-
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/grey_700" />
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_price_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:padding="2dp"
-                            android:text="قیمت تقریبی(تومان)"
-                            android:gravity="right"
-                            android:visibility="gone"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/grey_700" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/detail_tv_lay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@id/detail_txt_lay"
-
-                        android:orientation="vertical">
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_category_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:padding="2dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_place_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:padding="2dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                            android:id="@+id/detail_price_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:visibility="gone"
-                            android:padding="2dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                        android:id="@+id/detail_description_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:text="@string/lorem_ipsum"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/report_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
-
-                    <ImageView
-                        android:id="@+id/report_iv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="8dp"
-                        android:src="@mipmap/ic_action_content_report" />
-
-
-                    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                        android:id="@+id/report_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="6dp"
-                        android:layout_toLeftOf="@id/report_iv"
-                        android:text="گزارش تخلف"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                </RelativeLayout>
-
-                <FrameLayout
-                    android:id="@+id/requests_to_gift_fragment"
-                    android:layout_width="match_parent"
-                             android:layout_height="wrap_content">
-
-                </FrameLayout>
-                <!--</android.support.v7.widget.CardView>-->
-
-                <!--</FrameLayout>-->
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--style="@style/FabStyle"-->
-        <!--app:layout_anchor="@id/scroll"-->
-        <!--app:layout_anchorGravity="bottom"/>-->
-
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    <RelativeLayout
-        android:id="@+id/bottomLay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <LinearLayout
-            android:id="@+id/edit_delete_lay"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent"
-            android:visibility="invisible">
-
-
-
-            <RelativeLayout
-                android:id="@+id/delete_lay"
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent">
 
-                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                    android:id="@+id/delete_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+	<android.support.design.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="visible">
 
-                    android:text="@string/delete_gift"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/app_bar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-                <com.rey.material.widget.ProgressView
-                    android:id="@+id/delete_progressView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerInParent="true"
+			<android.support.design.widget.CollapsingToolbarLayout
+				android:id="@+id/collapsing_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:contentScrim="?attr/colorPrimary"
+				app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    android:visibility="invisible"
-                    app:cpd_strokeSize="2dp"
-                    app:pv_autostart="true"
-                    app:pv_circular="true"
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/white"
+					app:layout_collapseMode="parallax">
 
-                    app:pv_progressMode="indeterminate"
-                    app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle" />
+					<android.support.v4.view.ViewPager
+						android:id="@+id/viewpager"
+						android:layout_width="match_parent"
+						android:layout_height="400dp"/>
 
-            </RelativeLayout>
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="56dp"
+						android:layout_alignTop="@id/viewpager"
+						android:background="@drawable/forground_color_black_top"/>
 
-            <RelativeLayout
-                android:id="@+id/edit_lay"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true">
+					<LinearLayout
+						android:id="@+id/pagesContainer"
+						android:layout_width="match_parent"
+						android:layout_height="20dp"
 
-                <RelativeLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:background="@color/divider" />
+						android:layout_below="@id/viewpager"
 
-                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                    android:id="@+id/edit_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+						android:layout_gravity="bottom"
+						android:layout_marginBottom="8dp"
+						android:background="#ffff"
+						android:gravity="center"
 
-                    android:text="@string/edit_gift"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
+						android:orientation="horizontal">
 
-                <com.rey.material.widget.ProgressView
-                    android:id="@+id/edit_progressView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerInParent="true"
+					</LinearLayout>
 
-                    android:visibility="invisible"
-                    app:cpd_strokeSize="2dp"
-                    app:pv_autostart="true"
-                    app:pv_circular="true"
+				</RelativeLayout>
 
-                    app:pv_progressMode="indeterminate"
-                    app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle" />
+				<android.support.v7.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:minHeight="?attr/actionBarSize"
+					app:contentInsetLeft="0dp"
+					app:contentInsetStart="0dp"
+					app:layout_collapseMode="pin">
 
-            </RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/toolbar_lay"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/requests_to_this_gift_lay"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true">
+						<ImageView
+							android:id="@+id/share_ic"
+							android:layout_width="48dp"
+							android:layout_height="56dp"
+							android:layout_alignParentLeft="true"
+							android:layout_centerVertical="true"
+							android:scaleType="center"
+							android:src="@mipmap/ic_action_social_share"
+							android:visibility="gone"/>
 
-                <RelativeLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@color/divider" />
+						<ImageView
+							android:id="@+id/bookmark_ic"
+							android:layout_width="48dp"
+							android:layout_height="56dp"
+							android:layout_centerVertical="true"
 
-                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+							android:layout_toRightOf="@id/share_ic"
+							android:scaleType="center"
+							android:src="@mipmap/ic_action_action_bookmark_outline"
+							android:visibility="invisible"/>
 
-                    android:text="درخواست‌ها"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
+						<ImageView
+							android:id="@+id/first_right_icon_ic"
+							android:layout_width="48dp"
+							android:layout_height="56dp"
+							android:layout_alignParentRight="true"
+							android:layout_centerVertical="true"
+							android:scaleType="center"
+							android:src="@mipmap/ic_back"/>
 
-            </RelativeLayout>
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+							android:id="@+id/toolbar_title_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="56dp"
+							android:layout_marginRight="4dp"
+							android:layout_toLeftOf="@id/first_right_icon_ic"
+							android:layout_toRightOf="@id/bookmark_ic"
+							android:gravity="center"
+							android:text="عنوان"
+							android:textColor="@color/white"
+							android:textSize="14sp"/>
 
-        </LinearLayout>
+					</RelativeLayout>
+				</android.support.v7.widget.Toolbar>
+				<!--<com.antonioleiva.materializeyourapp.widgets.SquareImageView-->
+				<!--android:id="@+id/image"-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="wrap_content"-->
+				<!--android:scaleType="centerCrop"-->
+				<!---->
+				<!--app:layout_collapseMode="parallax"/>-->
 
-        <RelativeLayout
-            android:id="@+id/request_lay"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent"
-            android:visibility="invisible">
+			</android.support.design.widget.CollapsingToolbarLayout>
 
-            <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                android:id="@+id/btn_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="درخواست"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
+		</android.support.design.widget.AppBarLayout>
 
-            <com.rey.material.widget.ProgressView
-                android:id="@+id/request_progressView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerInParent="true"
+		<android.support.v4.widget.NestedScrollView
+			android:id="@+id/scroll"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/grey_300"
+			android:clipToPadding="false"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                android:visibility="invisible"
-                app:cpd_strokeSize="2dp"
-                app:pv_autostart="true"
-                app:pv_circular="true"
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/grey_300"
+				android:orientation="vertical">
 
-                app:pv_progressMode="indeterminate"
-                app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle" />
+				<!--<FrameLayout-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="wrap_content">-->
 
-        </RelativeLayout>
+				<!--<android.support.v7.widget.CardView-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="wrap_content"-->
+				<!--android:layout_marginTop="24dp"-->
+				<!--app:cardElevation="@dimen/spacing_medium"-->
+				<!--app:cardUseCompatPadding="true">-->
 
-        <RelativeLayout
-            android:id="@+id/contact_lay"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent"
-            android:visibility="gone">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/white"
+					android:orientation="vertical">
 
-            <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
-                android:id="@+id/contact_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="4dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="4dp"
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/detail_title_tv"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/spacing_large"
+						android:layout_marginRight="@dimen/spacing_large"
+						android:layout_marginTop="4dp"
+						android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+						android:textColor="@color/colorAccent"/>
 
-                android:text="ارتباط با هدیه دهنده:"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/detail_register_time_tv"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_margin="@dimen/spacing_large"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/contact_text"
-                android:visibility="visible">
+				</LinearLayout>
 
-                <!--<RelativeLayout-->
-                <!--android:id="@+id/divider_lay"-->
-                <!--android:layout_width="2dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:background="@color/horizontal_divider"/>-->
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="2dp"
+					android:layout_marginRight="2dp"
+					android:layout_marginTop="2dp"
+					android:background="@color/white">
 
-                <ImageView
-                    android:id="@+id/call_iv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:src="@mipmap/ic_phone_white_36dp" />
+					<LinearLayout
+						android:id="@+id/detail_txt_lay"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/sms_iv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:src="@mipmap/ic_message_white_36dp" />
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_category_txt"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_centerVertical="true"
+							android:gravity="right"
+							android:padding="2dp"
+							android:text="دسته‌بندی"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+							android:textColor="@color/grey_700"/>
 
-            </LinearLayout>
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_place_txt"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentRight="true"
+							android:layout_centerVertical="true"
+							android:gravity="right"
+							android:padding="2dp"
+							android:text="محل"
 
-        </RelativeLayout>
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+							android:textColor="@color/grey_700"/>
 
-    </RelativeLayout>
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_price_txt"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentRight="true"
+							android:layout_centerVertical="true"
+							android:gravity="right"
+							android:padding="2dp"
+							android:text="قیمت تقریبی(تومان)"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+							android:textColor="@color/grey_700"
+							android:visibility="gone"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/detail_tv_lay"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginRight="8dp"
+						android:layout_toLeftOf="@id/detail_txt_lay"
+
+						android:orientation="vertical">
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_category_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="right"
+							android:padding="2dp"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_place_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="right"
+							android:padding="2dp"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/detail_price_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="right"
+							android:padding="2dp"
+							android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+							android:visibility="gone"/>
+
+					</LinearLayout>
+
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/new_ornot_lay"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:background="@color/white"
+					android:padding="8dp">
+
+					<RadioGroup
+						android:id="@+id/old_new_radiogr"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="right"
+						android:orientation="horizontal">
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/old_txt"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+
+							android:gravity="right|center_vertical"
+							android:text="دسته‌دو"
+							android:textColor="@color/text_primary"
+							android:textSize="16dp"/>
+
+						<com.rey.material.widget.RadioButton
+							android:id="@+id/old_radiobtn"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:enabled="false"
+
+							android:gravity="right"
+							android:text=""/>
+
+						<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+							android:id="@+id/new_txt"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+
+							android:gravity="center_vertical|right"
+							android:text="نو"
+							android:textColor="@color/text_primary"
+							android:textSize="16dp"/>
+
+						<com.rey.material.widget.RadioButton
+							android:id="@+id/new_radiobtn"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+
+							android:layout_gravity="center_horizontal"
+							android:enabled="false"
+							android:text=""/>
+
+					</RadioGroup>
+
+				</RelativeLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="2dp"
+					android:layout_marginRight="2dp"
+					android:layout_marginTop="2dp"
+					android:background="@color/white"
+					android:orientation="vertical">
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/detail_description_tv"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_margin="@dimen/spacing_large"
+						android:text="@string/lorem_ipsum"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+				</LinearLayout>
+
+				<RelativeLayout
+					android:id="@+id/report_lay"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="12dp">
+
+					<ImageView
+						android:id="@+id/report_iv"
+						android:layout_width="36dp"
+						android:layout_height="36dp"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="8dp"
+						android:src="@mipmap/ic_action_content_report"/>
+
+
+					<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+						android:id="@+id/report_tv"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_centerVertical="true"
+						android:layout_marginRight="6dp"
+						android:layout_toLeftOf="@id/report_iv"
+						android:text="گزارش تخلف"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+				</RelativeLayout>
+
+				<FrameLayout
+					android:id="@+id/requests_to_gift_fragment"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+				</FrameLayout>
+				<!--</android.support.v7.widget.CardView>-->
+
+				<!--</FrameLayout>-->
+			</LinearLayout>
+		</android.support.v4.widget.NestedScrollView>
+
+		<!--<android.support.design.widget.FloatingActionButton-->
+		<!--android:id="@+id/fab"-->
+		<!--style="@style/FabStyle"-->
+		<!--app:layout_anchor="@id/scroll"-->
+		<!--app:layout_anchorGravity="bottom"/>-->
+
+
+	</android.support.design.widget.CoordinatorLayout>
+
+	<RelativeLayout
+		android:id="@+id/bottomLay"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+
+		<LinearLayout
+			android:id="@+id/edit_delete_lay"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorAccent"
+			android:orientation="horizontal"
+			android:visibility="invisible">
+
+
+			<RelativeLayout
+				android:id="@+id/delete_lay"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1">
+
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+					android:id="@+id/delete_tv"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+
+					android:gravity="center"
+					android:text="@string/delete_gift"
+					android:textColor="@color/white"
+					android:textSize="16dp"/>
+
+				<com.rey.material.widget.ProgressView
+					android:id="@+id/delete_progressView"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:layout_centerInParent="true"
+
+					android:visibility="invisible"
+					app:cpd_strokeSize="2dp"
+					app:pv_autostart="true"
+					app:pv_circular="true"
+
+					app:pv_progressMode="indeterminate"
+					app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:id="@+id/edit_lay"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_centerHorizontal="true"
+				android:layout_weight="1">
+
+				<RelativeLayout
+					android:layout_width="1dp"
+					android:layout_height="match_parent"
+					android:layout_alignParentLeft="true"
+					android:background="@color/divider"/>
+
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+					android:id="@+id/edit_tv"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+
+					android:text="@string/edit_gift"
+					android:textColor="@color/white"
+					android:textSize="16dp"/>
+
+				<com.rey.material.widget.ProgressView
+					android:id="@+id/edit_progressView"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:layout_centerInParent="true"
+
+					android:visibility="invisible"
+					app:cpd_strokeSize="2dp"
+					app:pv_autostart="true"
+					app:pv_circular="true"
+
+					app:pv_progressMode="indeterminate"
+					app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:id="@+id/requests_to_this_gift_lay"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_centerHorizontal="true"
+				android:layout_weight="1">
+
+				<RelativeLayout
+					android:layout_width="1dp"
+					android:layout_height="match_parent"
+					android:layout_alignParentLeft="true"
+					android:background="@color/divider"/>
+
+				<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+
+					android:text="درخواست‌ها"
+					android:textColor="@color/white"
+					android:textSize="16dp"/>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+		<RelativeLayout
+			android:id="@+id/request_lay"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorAccent"
+			android:visibility="invisible">
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/btn_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:text="درخواست"
+				android:textColor="@color/white"
+				android:textSize="16dp"/>
+
+			<com.rey.material.widget.ProgressView
+				android:id="@+id/request_progressView"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_centerInParent="true"
+
+				android:visibility="invisible"
+				app:cpd_strokeSize="2dp"
+				app:pv_autostart="true"
+				app:pv_circular="true"
+
+				app:pv_progressMode="indeterminate"
+				app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"/>
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/contact_lay"
+			android:layout_width="match_parent"
+			android:layout_height="66dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorAccent"
+			android:visibility="gone">
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/contact_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:layout_marginBottom="4dp"
+				android:layout_marginRight="6dp"
+				android:layout_marginTop="4dp"
+
+				android:text="ارتباط با هدیه دهنده:"
+				android:textColor="@color/white"
+				android:textSize="16dp"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="56dp"
+				android:layout_below="@id/contact_text"
+				android:visibility="visible">
+
+				<!--<RelativeLayout-->
+				<!--android:id="@+id/divider_lay"-->
+				<!--android:layout_width="2dp"-->
+				<!--android:layout_height="match_parent"-->
+				<!--android:layout_centerHorizontal="true"-->
+				<!--android:background="@color/horizontal_divider"/>-->
+
+				<ImageView
+					android:id="@+id/call_iv"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:padding="2dp"
+					android:src="@mipmap/ic_phone_white_36dp"/>
+
+				<ImageView
+					android:id="@+id/sms_iv"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:padding="2dp"
+					android:src="@mipmap/ic_message_white_36dp"/>
+
+			</LinearLayout>
+
+		</RelativeLayout>
+
+	</RelativeLayout>
 
 </RelativeLayout>
