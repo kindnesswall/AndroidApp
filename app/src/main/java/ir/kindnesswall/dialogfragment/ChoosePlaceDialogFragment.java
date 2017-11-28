@@ -1,6 +1,8 @@
 package ir.kindnesswall.dialogfragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 
@@ -40,6 +43,12 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 
 	@Bind(R.id.choose_place_et)
 	EditTextIranSans editTextIranSans;
+
+	@Bind(R.id.no_result_lay)
+	RelativeLayout noResultLay;
+
+	@Bind(R.id.aware_us_btn)
+	RelativeLayout awareUsBtn;
 
 	private Places level2;
 	private Places level2Original;
@@ -171,6 +180,18 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 	}
 
 	private void setListeners() {
+
+		awareUsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent telegram = new Intent(
+						Intent.ACTION_VIEW ,
+						Uri.parse("https://telegram.me/Kindness_Wall_Admin")
+				);
+				startActivity(telegram);
+			}
+		});
+
 		editTextIranSans.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -196,6 +217,18 @@ public class ChoosePlaceDialogFragment extends DialogFragment {
 						}
 					}
 				}
+
+				if (
+						(level2 == null || level2.getPlaces() == null || level2.getPlaces().size()<=0) &&
+								(level4 == null || level4.getPlaces() == null || level4.getPlaces().size() <=0)
+						){
+					noResultLay.setVisibility(View.VISIBLE);
+				}else {
+					noResultLay.setVisibility(View.INVISIBLE);
+				}
+
+
+
 				choosePlaceAdapter.notifyDataSetChanged();
 
 			}

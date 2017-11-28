@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+>
 
 	<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 		android:id="@+id/choose_place_text"
@@ -64,5 +65,62 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_below="@id/divider_iv"/>
+
+	<RelativeLayout
+		android:id="@+id/no_result_lay"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/divider_iv"
+		android:padding="16dp"
+		android:visibility="invisible">
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/info_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:text="در صورتی که شهر یا منطقه مورد نظر شما در لیست موجود نیست، به ما اطلاع دهید"/>
+
+		<RelativeLayout
+			android:id="@+id/aware_us_btn"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/button_height_2"
+
+			android:layout_below="@id/info_text"
+
+			android:layout_marginTop="12dp"
+
+			android:background="@drawable/button_selector"
+			android:clickable="true">
+
+			<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+				android:id="@+id/aware_us_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:layout_centerInParent="true"
+				android:text="تماس با ما(تلگرام)"
+				android:textColor="@color/white"
+				android:textSize="16dp"/>
+
+			<!--<com.rey.material.widget.ProgressView-->
+			<!--android:id="@+id/progressView"-->
+			<!--android:layout_width="24dp"-->
+			<!--android:layout_height="24dp"-->
+			<!--android:layout_centerInParent="true"-->
+
+			<!--android:visibility="invisible"-->
+			<!--app:cpd_strokeSize="2dp"-->
+			<!--app:pv_autostart="true"-->
+			<!--app:pv_circular="true"-->
+
+			<!--app:pv_progressMode="indeterminate"-->
+			<!--app:pv_progressStyle="@style/InDeterminateWhiteCircularProgressDrawableStyle"-->
+			<!--/>-->
+
+		</RelativeLayout>
+
+
+	</RelativeLayout>
 
 </RelativeLayout>
