@@ -626,7 +626,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 		category.title = myGift.category;
 		changeUIAfterCategorySelect();
 
-		if (myGift.locationId != null) {
+		if (myGift.locationId != null && !myGift.locationId.equals("")) {
 			city = new Place();
 			city.id = myGift.locationId;
 
@@ -634,19 +634,20 @@ public class RegisterGiftActivity extends AppCompatActivity
 //			if (myGift.location!=null && !myGift.location.equals("")) {
 			mChooseCityBtnTxt.setText(getPlaceNameById(myGift.locationId));
 //			}
-		}
 
-		if (myGift.regionId != null) {
-			region = new Place();
-			region.id = myGift.regionId;
+			if (myGift.regionId != null && !myGift.regionId.equals("")) {
+				region = new Place();
+				region.id = myGift.regionId;
 
-			region.name = getPlaceNameById(myGift.regionId);
+				region.name = getPlaceNameById(myGift.regionId);
 //            if (myGift.region != null && !myGift.region.equals("")) {
-			mChooseRegionBtnTxt.setText(getPlaceNameById(myGift.regionId));
+				mChooseRegionBtnTxt.setText(getPlaceNameById(myGift.regionId));
 //            }
+			}
+
+			findCityRegion();
 		}
 
-		findCityRegion();
 		giftGalleryAdapter = new GiftGalleryAdapter(this, myGift.giftImages);
 		mRecyclerView.setAdapter(giftGalleryAdapter);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
