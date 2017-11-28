@@ -246,7 +246,7 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 				replaceFragment(
 						HomeFragment.newInstance(Constants.CATEGORY_PAGETYPE, category),
-						HomeFragment.class.getName() + CategoriesGridFragment.class.getName()
+						HomeFragment.class.getName()
 				);
 			}
 			menuItemIdSelected = menuItemId;
