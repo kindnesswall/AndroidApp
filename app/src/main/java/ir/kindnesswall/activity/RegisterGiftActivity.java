@@ -143,14 +143,14 @@ public class RegisterGiftActivity extends AppCompatActivity
 	@Bind(R.id.recycler_view)
 	RecyclerView mRecyclerView;
 
-	@Bind(R.id.old_new_radiogr)
-	RadioGroup mOldNewRadiogr;
-
 	@Bind(R.id.old_txt)
 	TextView mOldTxt;
 
 	@Bind(R.id.new_txt)
 	TextView mNewTxt;
+
+	@Bind(R.id.old_new_radiogr)
+	RadioGroup old_new_radiogr;
 
 	@Bind(R.id.old_radiobtn)
 	RadioButton mOldRadiobtn;
@@ -185,6 +185,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 	private Place region;
 	private boolean editVersion;
 	private int CROP_ACTIVITY = 2;
+	private boolean isNew;
 
 	public static Intent createIntent(Gift gift) {
 		Intent intent = new Intent(AppController.getAppContext(), RegisterGiftActivity.class);
@@ -229,6 +230,21 @@ public class RegisterGiftActivity extends AppCompatActivity
 	}
 
 	void setListeners() {
+
+		old_new_radiogr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+				switch (checkedId){
+					case R.id.new_radiobtn:
+						isNew = true;
+						break;
+					case R.id.old_radiobtn:
+						isNew = false;
+						break;
+				}
+			}
+		});
+
 
 		mPriceEt.addTextChangedListener(new TextWatcher() {
 			boolean isEdiging;
@@ -303,6 +319,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 						category.categoryId,
 						city.id,
 						(region == null ? "0" : region.id),
+						isNew,
 						myGift.giftImages
 				);
 
@@ -554,6 +571,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 			UCrop.Options options = new UCrop.Options();
 			options.setToolbarTitle("ویرایش تصویر");
 			options.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+			options.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
 			String destinationFileName = "temp.jpg";
 			UCrop.of(imageUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)))
@@ -569,6 +587,8 @@ public class RegisterGiftActivity extends AppCompatActivity
 		AppController.storeBoolean(Constants.MY_GIFT_SAVED, true);
 
 		AppController.storeString(Constants.MY_GIFT_TITLE, mTitleEt.getText().toString());
+		AppController.storeBoolean(Constants.MY_GIFT_IS_NEW, isNew);
+
 		AppController.storeString(Constants.MY_GIFT_PRICE, myGift.price);
 		AppController.storeString(Constants.MY_GIFT_ADDRESS, myGift.address);
 		AppController.storeString(Constants.MY_GIFT_DESCRIPTION, mDescriptionEt.getText().toString());
@@ -599,6 +619,8 @@ public class RegisterGiftActivity extends AppCompatActivity
 		mPriceEt.setText(myGift.price);
 		mDescriptionEt.setText(myGift.description);
 
+		setRadioBtn();
+
 		category = new Category();
 		category.categoryId = myGift.categoryId;
 		category.title = myGift.category;
@@ -623,6 +645,7 @@ public class RegisterGiftActivity extends AppCompatActivity
 			mChooseRegionBtnTxt.setText(getPlaceNameById(myGift.regionId));
 //            }
 		}
+
 		findCityRegion();
 		giftGalleryAdapter = new GiftGalleryAdapter(this, myGift.giftImages);
 		mRecyclerView.setAdapter(giftGalleryAdapter);
@@ -636,6 +659,9 @@ public class RegisterGiftActivity extends AppCompatActivity
 	private void loadMyGiftFromPreference() {
 		myGift.title = AppController.getStoredString(Constants.MY_GIFT_TITLE) != null ?
 				AppController.getStoredString(Constants.MY_GIFT_TITLE) : "";
+
+		myGift.isNew = AppController.getStoredBoolean(Constants.MY_GIFT_IS_NEW, false);
+		setRadioBtn();
 
 		myGift.price = AppController.getStoredString(Constants.MY_GIFT_PRICE) != null ?
 				AppController.getStoredString(Constants.MY_GIFT_PRICE) : "";
@@ -670,6 +696,14 @@ public class RegisterGiftActivity extends AppCompatActivity
 		int numberOfMyImages = AppController.getStoredInt(Constants.MY_GIFT_IMAGE_NUMBER);
 		for (int i = 0; i < numberOfMyImages; i++) {
 			myGift.giftImages.add(AppController.getStoredString(Constants.MY_GIFT_IMAGE + "_" + i));
+		}
+	}
+
+	private void setRadioBtn() {
+		if (myGift.isNew){
+			mNewRadiobtn.setChecked(true);
+		}else {
+			mOldRadiobtn.setChecked(true);
 		}
 	}
 

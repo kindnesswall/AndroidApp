@@ -27,6 +27,7 @@ public class Constants {
 	public static final String MY_GIFT_REGION_NAME = "MY_GIFT_REGION_NAME";
 	public static final String MY_GIFT_LOCATION_ID = "MY_GIFT_LOCATION_ID";
 	public static final String MY_GIFT_LOCATION_NAME = "MY_GIFT_LOCATION_NAME";
+	public static final String MY_GIFT_IS_NEW = "MY_GIFT_IS_NEW";
 
 //    public static final String MY_GIFT_IMAGE_1 = "MY_GIFT_IMAGE_1";
 //    public static final String MY_GIFT_IMAGE_2 = "MY_GIFT_IMAGE_2";

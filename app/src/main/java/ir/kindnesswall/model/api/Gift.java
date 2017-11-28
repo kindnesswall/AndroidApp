@@ -100,6 +100,7 @@ public class Gift implements Parcelable {
 		createDateTime = in.readString();
 		createDate = in.readString();
 		createTime = in.readString();
+		isNew = in.readByte() != 0;
 	}
 
 	public Gift(String description,
@@ -109,6 +110,7 @@ public class Gift implements Parcelable {
 	            String categoryId,
 	            String locationId,
 	            String regionId,
+	            boolean isNew,
 	            ArrayList<String> giftImages) {
 
 		this.description = description;
@@ -118,6 +120,7 @@ public class Gift implements Parcelable {
 		this.categoryId = categoryId;
 		this.regionId = regionId;
 		this.locationId = locationId;
+		this.isNew = isNew;
 		this.giftImages = giftImages;
 	}
 
@@ -149,5 +152,6 @@ public class Gift implements Parcelable {
 		parcel.writeString(createDateTime);
 		parcel.writeString(createDate);
 		parcel.writeString(createTime);
+		parcel.writeByte((byte) (isNew ? 1 : 0));
 	}
 }
