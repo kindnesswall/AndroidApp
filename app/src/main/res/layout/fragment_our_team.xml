@@ -12,7 +12,7 @@
 		android:layout_height="48dp"
 		android:layout_alignParentTop="true"
 		android:layout_margin="8dp"
-		android:background="@color/colorPrimary">
+		android:background="@color/colorAccent">
 
 		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
 			android:id="@+id/btn_tv"

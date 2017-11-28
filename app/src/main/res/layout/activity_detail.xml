@@ -361,7 +361,7 @@
             android:layout_height="48dp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:visibility="invisible">
 
 
@@ -468,7 +468,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:visibility="invisible">
 
             <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
@@ -501,7 +501,7 @@
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:visibility="gone">
 
             <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
