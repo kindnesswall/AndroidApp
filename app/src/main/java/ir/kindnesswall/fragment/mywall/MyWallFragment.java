@@ -240,8 +240,10 @@ public class MyWallFragment extends BaseFragment implements UpdateCheckerInterfa
 				null,
 				appInfoOutput.updateInfo.changes);
 
-		if (isForcedUpdate ||
-				DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion)) {
+		if (Integer.valueOf(appInfoOutput.updateInfo.version) > DeviceInfo.getAppVersionCode()
+			&&
+		(isForcedUpdate ||
+				DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion))) {
 
 			//Notify Update
 			Intent[] intents = new Intent[1];

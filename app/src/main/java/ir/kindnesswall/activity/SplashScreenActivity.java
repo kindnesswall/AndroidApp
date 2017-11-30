@@ -101,8 +101,10 @@ public class SplashScreenActivity extends AppCompatActivity implements ApiReques
                 null,
                 appInfoOutput.updateInfo.changes);
 
-        if (isForcedUpdate ||
-                DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion)) {
+        if (Integer.valueOf(appInfoOutput.updateInfo.version) > DeviceInfo.getAppVersionCode()
+        && (isForcedUpdate ||
+                DeviceInfo.getAppVersionCode() < Integer.valueOf(updateChecker.mUpdateDetail.latestVersion))
+                ) {
 
             //Notify Update
             Intent[] intents = new Intent[1];
