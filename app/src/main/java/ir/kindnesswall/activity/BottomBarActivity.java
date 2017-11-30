@@ -140,14 +140,15 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 			new ArrayList<Type>(Arrays.asList(
 					Type.myRequests,
 					Type.bookmarks,
-					Type.logout,
 					Type.divider,
 					Type.statistics,
 					Type.updateApp,
 					Type.contactUs,
 					Type.aboutKindnessWall,
 					Type.ourTeam,
-					Type.reportBugs
+					Type.reportBugs,
+					Type.divider,
+					Type.logout
 			));
 
 	private ArrayList<Type> guestDrawerList =
