@@ -573,7 +573,7 @@
 				android:layout_marginRight="6dp"
 				android:layout_marginTop="4dp"
 
-				android:text="ارتباط با هدیه دهنده:"
+				android:text=""
 				android:textColor="@color/white"
 				android:textSize="16dp"/>
 

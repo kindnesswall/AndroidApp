@@ -110,6 +110,9 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	@Bind(R.id.contact_lay)
 	RelativeLayout mContactLay;
 
+	@Bind(R.id.contact_text)
+	TextView contact_text;
+
 	@Bind(R.id.requests_to_gift_fragment)
 	FrameLayout mRequestsToGiftFragment;
 
@@ -435,12 +438,16 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 					break;
 
 				case GiftStatus.DONATED_TO_ME:
-					setCallSmsBtn();
+					setCallSmsBtn("ارتباط با هدیه دهنده:" , gift.user);
 					break;
 
 				case GiftStatus.DONATED_TO_SOMEONE_ELSE:
 //					hideAllBottomBtns();
-					setDisableBtn("(این هدیه اهدا شده است)");
+					if (gift.userId.equals(AppController.getStoredString(Constants.USER_ID))) {
+						setCallSmsBtn("ارتباط با دریافت کننده:" , gift.receivedUser);
+					}else {
+						setDisableBtn("(این هدیه اهدا شده است)");
+					}
 //					mDetailTitleTv.setText(" (این هدیه اهدا شده است)" + gift.title);
 
 					break;
@@ -508,22 +515,25 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 	}
 
-	private void setCallSmsBtn(){
+	private void setCallSmsBtn(String title, final String phoneNumber){
 		mContactLay.setVisibility(View.VISIBLE);
 		mRequestLay.setVisibility(View.GONE);
 		mEditDeleteLay.setVisibility(View.GONE);
+
+		contact_text.setText(title);
 
 		mCallBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
-				String uri = "tel:" + gift.user;//"00000000000";
+				String uri = "tel:" + phoneNumber;//"00000000000";
 				Intent intent = new Intent(Intent.ACTION_DIAL);
 				intent.setData(Uri.parse(uri));
 				mContext.startActivity(intent);
 
 			}
 		});
+		
 		mSmsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -531,7 +541,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 				mContext.startActivity(
 						new Intent(
 								Intent.ACTION_VIEW,
-								Uri.fromParts("sms", gift.user, null)
+								Uri.fromParts("sms", phoneNumber, null)
 						)
 				);
 			}
