@@ -42,6 +42,7 @@ public class AppIntro extends IntroActivity {
             setPageScrollInterpolator(android.R.interpolator.fast_out_slow_in);
         }
 
+
 		addSlide(new SimpleSlide.Builder()
 				.title("فرهنگ دیوار مهربانی")
 				.description("نیاز داری، بردار. نیاز نداری، بذار :)")
@@ -51,14 +52,24 @@ public class AppIntro extends IntroActivity {
 				.layout(R.layout.activity_app_into)
 				.build());
 
-//		addSlide(new SimpleSlide.Builder()
-//				.title("مشابه برنامه دیوار")
-//				.description("به دلیل تعداد زیاد کاربران برنامه دیوار، برای راحتی کاربرها ظاهر این برنامه مشابه برنامه دیوار طراحی شده است.")
-//				.image(R.drawable.intro_img_3)
-//				.background(R.color.colorPrimary)
-//				.backgroundDark(R.color.colorPrimary)
-//				.layout(R.layout.activity_app_into)
-//				.build());
+		addSlide(new SimpleSlide.Builder()
+				.title("ادغام تیم رایگان‌بخشی")
+				.description("به منظور هم افزایی عملیاتی هر چه بیشتر، تیم رایگان بخشی که اختصاص به گسترش فرهنگ اهدا و هبه دارد به دیوار مهربانی پیوست")
+				.image(R.drawable.intro_img_6)
+				.background(R.color.colorPrimary)
+				.backgroundDark(R.color.colorAccent)
+				.layout(R.layout.activity_app_into)
+				.build());
+
+		addSlide(new SimpleSlide.Builder()
+				.title("با همکاری دونیت")
+				.description("دونِیت یک پلتفرم جذب سرمایه جمعی ایرانی است که در حال حاضر بر روی تامین سرمایه پروژه هایی که تاثیرات اجتماعی دارند، تمرکز کرده است.\n" +
+						"\n")
+				.image(R.drawable.intro_img_5)
+				.background(R.color.colorPrimary)
+				.backgroundDark(R.color.colorAccent)
+				.layout(R.layout.activity_app_into)
+				.build());
 
 		addSlide(new SimpleSlide.Builder()
 				.title("همیشه رایگان")
