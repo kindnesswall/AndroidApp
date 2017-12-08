@@ -533,7 +533,7 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 
 			}
 		});
-		
+
 		mSmsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
