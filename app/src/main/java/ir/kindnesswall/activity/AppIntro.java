@@ -63,7 +63,8 @@ public class AppIntro extends IntroActivity {
 
 		addSlide(new SimpleSlide.Builder()
 				.title("با همکاری دونیت")
-				.description("دونِیت یک پلتفرم جذب سرمایه جمعی ایرانی است که در حال حاضر بر روی تامین سرمایه پروژه هایی که تاثیرات اجتماعی دارند، تمرکز کرده است.\n" +
+				.description(
+						"دونِیت یک پلتفرم جذب سرمایه جمعی ایرانی است که در حال حاضر بر روی تامین سرمایه پروژه هایی که تاثیرات اجتماعی دارند، تمرکز کرده است.\n" +
 						"\n")
 				.image(R.drawable.intro_img_5)
 				.background(R.color.colorPrimary)

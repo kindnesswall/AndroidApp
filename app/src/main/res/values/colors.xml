@@ -7,6 +7,10 @@
 
 	<color name="silver">#999EA9</color>
 
+	<color name="background_light">#F3F4F8</color>
+	<color name="background_dark">#DFE2E6</color>
+	<color name="light_blue_gray">#BFC5CC</color>
+
 	<!-- color from cropImageView -->
 
 	<color name="windowBackground">#1C1C1C</color>

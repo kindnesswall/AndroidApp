@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_list_main_content"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:maxHeight="86dp"
+    android:minHeight="56dp"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <com.andexert.library.RippleView
+        android:id="@+id/ripple_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:rv_color="@color/background_dark"
+        app:rv_rippleDuration="@integer/rv_rippleDuration">
+
+        <ImageView
+            android:id="@+id/img_emoji_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/img_emoji_ic"
+            android:layout_toRightOf="@+id/text_time"
+            android:orientation="vertical"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text=" "
+                    android:textColor="@color/light_black"
+                    android:textSize="11dp" />
+
+
+                <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+                    android:id="@+id/text_discontinued_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_toLeftOf="@+id/text_name"
+                    android:maxLines="1"
+                    android:text=" "
+                    android:textColor="@color/light_blue_gray"
+                    android:textSize="9dp"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+            <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+                android:id="@+id/text_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="0dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/silver"
+                android:textSize="10dp"
+                android:layout_marginLeft="40dp"/>
+
+        </LinearLayout>
+
+        <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text=""
+            android:textColor="@color/light_blue_gray"
+            android:textSize="9dp"
+            android:visibility="visible"/>
+
+        <RelativeLayout
+            android:id="@+id/lay_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_below="@+id/text_time"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/notifbackground"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+                android:id="@+id/tv_noti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/img_emoji_ic"
+            android:background="@color/background_dark" />
+
+    </com.andexert.library.RippleView>
+
+</RelativeLayout>

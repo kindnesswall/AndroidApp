@@ -280,7 +280,8 @@ public class LoginActivity extends AppCompatActivity implements ApiRequest.Liste
 
 			String deviceID = DeviceInfo.getDeviceID(this);
 			Log.d("deviceID", deviceID);
-			apiRequest.setDevice(
+			apiRequest.
+					setDevice(
 					new SetDeviceInput(
 							AppController.getStoredString(Constants.FIREBASE_REG_TOKEN),
 							deviceID
