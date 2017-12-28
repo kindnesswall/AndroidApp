@@ -472,7 +472,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 			case myRequests:
 //				Toasti.showS("myRequests");
-				startActivity(MyRequestsActivity.createIntent());
+//				startActivity(MyRequestsActivity.createIntent());
+				startActivity(ChatActivity.createIntent());
 
 				break;
 			case bookmarks:
@@ -815,7 +816,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //						replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
 //						mToolbarTitleTextView.setText("درخواستهای دریافتی");
 
-						startActivity(MyRequestsActivity.createIntent());
+//						startActivity(MyRequestsActivity.createIntent());
+						startActivity(ChatActivity.createIntent());
 
 						dialog.dismiss();
 					}

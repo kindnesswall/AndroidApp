@@ -18,12 +18,13 @@
         app:rv_rippleDuration="@integer/rv_rippleDuration">
 
         <ImageView
-            android:id="@+id/img_emoji_ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/avatar_imageview"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:src="@drawable/charity_mehregan"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/img_emoji_ic"
+            android:layout_toLeftOf="@+id/avatar_imageview"
             android:layout_toRightOf="@+id/text_time"
             android:orientation="vertical"
             android:paddingBottom="4dp"
@@ -46,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text=" "
+                    android:text="نام"
                     android:textColor="@color/light_black"
                     android:textSize="11dp" />
 
@@ -58,7 +59,7 @@
                     android:layout_marginRight="6dp"
                     android:layout_toLeftOf="@+id/text_name"
                     android:maxLines="1"
-                    android:text=" "
+                    android:text="وضعیت"
                     android:textColor="@color/light_blue_gray"
                     android:textSize="9dp"
                     android:visibility="visible" />
@@ -74,7 +75,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:gravity="right"
-                android:text=""
+                android:text="متن چت"
                 android:textColor="@color/silver"
                 android:textSize="10dp"
                 android:layout_marginLeft="40dp"/>
@@ -89,7 +90,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:text=""
+            android:text="زمان"
             android:textColor="@color/light_blue_gray"
             android:textSize="9dp"
             android:visibility="visible"/>
@@ -123,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/img_emoji_ic"
+            android:layout_alignRight="@+id/avatar_imageview"
             android:background="@color/background_dark" />
 
     </com.andexert.library.RippleView>
