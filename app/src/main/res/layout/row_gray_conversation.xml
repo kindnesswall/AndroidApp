@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   android:gravity="right"
+    android:layout_gravity="right">
+
+    <RelativeLayout
+        android:id="@+id/chat_conversation_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/chat_white_conversation_bg"
+        android:gravity="right">
+
+        <ir.fam.vc.customview.textview.TextViewIranSansRegular
+            android:id="@+id/chat_gray_conversation_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="right"
+            android:text="چگونه میتوان در دوره ی فیزیک شرکت کرد؟ چگونه میتوان در دوره ی فیزیک شرکت کرد؟ چگونه میتوان در دوره ی فیزیک شرکت کرد؟"
+            android:textColor="@color/light_black"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/chat_conversation_lay"
+        android:layout_below="@+id/chat_conversation_lay"
+        android:layout_marginTop="-12dp"
+        android:src="@mipmap/ic_dialoge_arrow_gray" />
+
+    <ir.fam.vc.customview.textview.TextViewIranSansRegular
+        android:id="@+id/time_pm_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/chat_conversation_lay"
+        android:layout_below="@+id/chat_conversation_lay"
+        android:layout_marginRight="12dp"
+        android:gravity="right"
+        android:text="22:30"
+        android:textColor="@color/light_blue_gray"
+        android:textSize="9dp" />
+
+</RelativeLayout>

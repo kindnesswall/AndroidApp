@@ -1,4 +1,4 @@
-package ir.kindnesswall.fragment;
+package ir.kindnesswall.fragment.chat;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
-import ir.kindnesswall.adapter.ChatListAdapter;
+import ir.kindnesswall.adapter.chat.ChatListAdapter;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.fragment.BaseFragment;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.model.Chat;
 import retrofit2.Call;

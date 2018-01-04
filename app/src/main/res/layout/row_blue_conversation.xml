@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/chat_conversation_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/chat_blue_conversation_bg"
+        android:gravity="center">
+
+        <ir.fam.vc.customview.textview.TextViewIranSansRegular
+            android:id="@+id/chat_blue_conversation_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="right"
+            android:text="احوال شما؟"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/dot_unseen_ic"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_alignRight="@+id/chat_conversation_lay"
+        android:layout_alignTop="@+id/chat_conversation_lay"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/dot_unseen"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chat_conversation_lay"
+        android:layout_below="@+id/chat_conversation_lay"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-12dp"
+        android:src="@mipmap/ic_dialoge_arrow_blue" />
+
+    <ir.fam.vc.customview.textview.TextViewIranSansRegular
+        android:id="@+id/time_pm_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chat_conversation_lay"
+        android:layout_below="@+id/chat_conversation_lay"
+        android:layout_marginLeft="12dp"
+        android:gravity="right"
+        android:text="22:30"
+        android:textColor="@color/light_blue_gray"
+        android:textSize="9dp" />
+
+</RelativeLayout>

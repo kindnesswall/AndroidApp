@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import ir.kindnesswall.app.AppController;
-import ir.kindnesswall.fragment.ChatListFragment;
+import ir.kindnesswall.fragment.chat.ChatListFragment;
 
 public class ChatActivity extends BaseActivity {
 

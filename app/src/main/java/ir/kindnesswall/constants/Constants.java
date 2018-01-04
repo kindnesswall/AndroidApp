@@ -83,6 +83,11 @@ public class Constants {
 
 	public static final String VERSION_SKIP_UPDATE = "VERSION_SKIP_UPDATE";
 	public static final String HIDE_INFO_LAY = "HIDE_INFO_LAY";
+	public static final String UNBLOCK = "UNBLOCK";
+	public static final String CHAT_ID = "CHAT_ID";
+	public static final String COUNT_UNSEEN = "COUNT_UNSEEN";
+	public static final String SEND_MESSAGE = "SEND_MESSAGE";
+	public static final String SEE_CONVERSATION = "SEE_CONVERSATION";
 
 	public static String URI = "uri";
 }
