@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,11 +18,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.ChatActivity;
 import ir.kindnesswall.adapter.chat.ChatConversationAdapter;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
+import ir.kindnesswall.fragment.BaseFragment;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
 import ir.kindnesswall.model.JalaliCalendar;
@@ -35,11 +36,10 @@ import retrofit2.Response;
  * Created by Mahshad on 12/31/2016 AD.
  */
 
-public class ChatConversationFragment extends Fragment implements ApiRequest.Listener {
+public class ChatConversationFragment extends BaseFragment implements ApiRequest.Listener {
 
 	private static final String TAG = "ChatConversationFragment";
 	private static final int RUNNING = 1;
-	public static int positionSelected = -1;
 	private RecyclerView mRecyclerView;
 	private ChatConversationAdapter chatConversationAdapter;
 	private Context mContext;
@@ -50,8 +50,7 @@ public class ChatConversationFragment extends Fragment implements ApiRequest.Lis
 	private int startIndex = 0;
 	private String userID, status, chatID;
 	private String streamUrl = "";
-	private Runnable runnable;
-	private Handler handler;
+
 	private EditTextIranSans mQuestionEditText;
 	private TextViewIranSansRegular emptyTextView;
 	private ImageView mIconSendBtn;
@@ -61,7 +60,7 @@ public class ChatConversationFragment extends Fragment implements ApiRequest.Lis
 	private boolean scrollFlag = false;
 	private LastMessage lastMessage;
 
-	public static ChatConversationFragment newInstance(String chatId, String userID, int position, String countUnseen) {
+	public static ChatConversationFragment newInstance(String chatId, String userID, String countUnseen) {
 
 		ChatConversationFragment chatConversationFragment = new ChatConversationFragment();
 
@@ -70,10 +69,15 @@ public class ChatConversationFragment extends Fragment implements ApiRequest.Lis
 		args.putString(Constants.USER_ID, userID);
 		args.putString(Constants.COUNT_UNSEEN, countUnseen);
 
-		positionSelected = position;
 		chatConversationFragment.setArguments(args);
 
 		return chatConversationFragment;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		((ChatActivity) context).hideFab();
 	}
 
 	private void extractDataFromBundle() {
@@ -146,7 +150,7 @@ public class ChatConversationFragment extends Fragment implements ApiRequest.Lis
 		mQuestionEditText.setVisibility(View.VISIBLE);
 	}
 
-	void init() {
+	protected void init() {
 		extractDataFromBundle();
 		seen = false;
 		mContext = this.getActivity();
@@ -362,19 +366,6 @@ public class ChatConversationFragment extends Fragment implements ApiRequest.Lis
 		savedInstanceState.putString("chatID", chatID);
 
 	}
-
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (handler != null) {
-			if (runnable != null) {
-				handler.removeCallbacks(runnable);
-			}
-			handler.removeMessages(RUNNING);
-		}
-	}
-
 
 	//////////mitra
 	public void displayNewMessage(String chatID, String messageText) {

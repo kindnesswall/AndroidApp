@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.ChatActivity;
 import ir.kindnesswall.adapter.chat.ChatListAdapter;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.fragment.BaseFragment;
@@ -46,6 +47,12 @@ public class ChatListFragment extends BaseFragment {
 	private ChatListAdapter adapter;
 	private LinearLayoutManager linearLayoutManager;
 	private int startIndex = 0;
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		((ChatActivity) context).showFab();
+	}
 
 	@Override
 	protected void init() {

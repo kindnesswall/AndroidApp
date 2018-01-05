@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ir.kindnesswall.R;
+import ir.kindnesswall.activity.ChatActivity;
+import ir.kindnesswall.fragment.chat.ChatConversationFragment;
 import ir.kindnesswall.holder.ChatListHolder;
 import ir.kindnesswall.model.Chat;
 
@@ -37,6 +39,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListHolder> {
 	@Override
 	public void onBindViewHolder(final ChatListHolder holder, final int position) {
 
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				((ChatActivity) mContext).hideFab();
+				((ChatActivity) mContext).replaceFragment(
+						ChatConversationFragment.newInstance("1", "2", "3"),
+						ChatConversationFragment.class.getName()
+				);
+			}
+		});
 
 	}
 

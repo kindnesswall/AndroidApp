@@ -2,6 +2,7 @@ package ir.kindnesswall.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import butterknife.ButterKnife;
 import ir.kindnesswall.app.AppController;
@@ -22,7 +23,14 @@ public class ChatActivity extends BaseActivity {
 		replaceFragment(
 				new ChatListFragment(), ChatListFragment.class.getName()
 		);
+	}
 
+	public void hideFab() {
+		fab.setVisibility(View.INVISIBLE);
+	}
+
+	public void showFab(){
+		fab.setVisibility(View.VISIBLE);
 	}
 
 }
