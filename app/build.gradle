@@ -28,6 +28,7 @@ android {
 		versionName "1.6.0"
 	}
 
+	
 	signingConfigs {
 		release {
 			storeFile file("key.jks")
