@@ -56,3 +56,38 @@
 #-----------
 -dontwarn okhttp3.*
 -dontwarn com.squareup.okhttp.**
+
+#-----------
+
+-keepattributes Signature
+-keepattributes *Annotation*
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+-dontwarn sun.misc.**
+-keep class * implements ir.tapsell.gson.TypeAdapterFactory
+-keep class * implements ir.tapsell.gson.JsonSerializer
+-keep class * implements ir.tapsell.gson.JsonDeserializer
+
+-keepclassmembers enum * { *; }
+-keep class **.R$* { *; }
+-keep interface ir.tapsell.sdk.NoProguard
+-keep interface ir.tapsell.sdk.NoNameProguard
+-keep class * implements ir.tapsell.sdk.NoProguard { *; }
+-keep interface * extends ir.tapsell.sdk.NoProguard { *; }
+-keep enum * implements ir.tapsell.sdk.NoProguard { *; }
+-keepnames class * implements ir.tapsell.sdk.NoNameProguard { *; }
+-keepnames class * extends android.app.Activity
+
+-keep class ir.tapsell.sdk.nativeads.TapsellNativeVideoAdLoader$Builder {*;}
+-keep class ir.tapsell.sdk.nativeads.TapsellNativeBannerAdLoader$Builder {*;}
+
+-keepclasseswithmembers class * {
+    native ;
+}
+
+-keepclasseswithmembers class * {
+    public (android.content.Context, android.util.AttributeSet);
+}
+

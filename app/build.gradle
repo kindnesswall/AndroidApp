@@ -111,6 +111,9 @@ dependencies {
 
 	compile 'com.github.yalantis:ucrop:2.2.1'
 	compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+	// Android Studio 3.0 and above
+	compile 'ir.tapsell.sdk:tapsell-sdk-android:4.0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'
