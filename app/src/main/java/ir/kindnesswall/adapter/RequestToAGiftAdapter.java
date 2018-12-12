@@ -257,9 +257,8 @@ public class RequestToAGiftAdapter extends RecyclerView.Adapter<RequestToAGiftHo
             public void onComplete(RippleView rippleView) {
 //                        Toasti.showS("giftPageRv");
 
-                mContext.startActivity(GiftDetailActivity.createIntent(
-                        requestModels.get(position).giftId)
-                );
+                GiftDetailActivity.start(mContext,requestModels.get(position).giftId);
+
             }
         });
 

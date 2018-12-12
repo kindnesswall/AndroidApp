@@ -114,7 +114,7 @@
 			android:screenOrientation="portrait"/>
 
 		<activity android:name="ir.tapsell.sdk.TapsellAdActivity"
-			android:configChanges="keyboardHidden|orientation|screenSize" >
+			android:configChanges="keyboardHidden|orientation|screenSize">
 		</activity>
 
 	</application>

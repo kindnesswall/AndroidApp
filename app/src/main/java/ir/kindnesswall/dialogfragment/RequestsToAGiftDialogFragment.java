@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
 import ir.kindnesswall.adapter.RequestToAGiftAdapter;
+import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.helper.ApiRequest;
 import ir.kindnesswall.helper.EndlessRecyclerViewScrollListener;
@@ -111,9 +112,7 @@ public class RequestsToAGiftDialogFragment extends DialogFragment implements Api
 		mInfoLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				getActivity().startActivity(
-						GiftDetailActivity.createIntent(giftId)
-				);
+				GiftDetailActivity.start(getActivity(),giftId);
 			}
 		});
 

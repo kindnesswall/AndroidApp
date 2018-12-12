@@ -2,6 +2,7 @@ package ir.kindnesswall.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,15 @@ import java.util.ArrayList;
 
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
+import ir.kindnesswall.app.AppController;
+import ir.kindnesswall.constants.TapSellConstants;
 import ir.kindnesswall.model.api.Gift;
+import ir.tapsell.sdk.Tapsell;
+import ir.tapsell.sdk.TapsellAd;
+import ir.tapsell.sdk.TapsellAdRequestListener;
+import ir.tapsell.sdk.TapsellAdRequestOptions;
+import ir.tapsell.sdk.TapsellAdShowListener;
+import ir.tapsell.sdk.TapsellShowOptions;
 
 /**
  * Created by 5 on 4/26/2016.
@@ -25,7 +34,7 @@ public class ShowcaseMoreInfoAdapter extends RecyclerView.Adapter<ShowcaseMoreIn
     private Context mContext;
     private ArrayList<Gift> gifts;
 
-    public ShowcaseMoreInfoAdapter(Context mContext, ArrayList<Gift> gifts) {
+    public ShowcaseMoreInfoAdapter(final Context mContext, ArrayList<Gift> gifts) {
         this.mContext = mContext;
         this.gifts = gifts;
     }
@@ -84,9 +93,7 @@ public class ShowcaseMoreInfoAdapter extends RecyclerView.Adapter<ShowcaseMoreIn
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(
-                        GiftDetailActivity.createIntent(gifts.get(i))
-                );
+                GiftDetailActivity.start(mContext,gifts.get(i));
             }
         });
     }

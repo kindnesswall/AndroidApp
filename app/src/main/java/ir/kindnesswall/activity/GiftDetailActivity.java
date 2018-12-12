@@ -159,6 +159,32 @@ public class GiftDetailActivity extends AppCompatActivity implements ApiRequest.
 	private String giftId;
 	private String giftStatus;
 
+	public static void start(Context ctx, String giftId){
+		if (AppController.getInstance().didISawAdInLast24Hour() ||
+				!AppController.getInstance().isVideoInterstitialADAvailable()){
+
+			ctx.startActivity(
+					GiftDetailActivity.createIntent(giftId)
+			);
+
+		}else {
+			AppController.getInstance().showVideoInterstitialAd();
+		}
+	}
+
+	public static void start(Context ctx, Gift gift){
+		if (AppController.getInstance().didISawAdInLast24Hour() ||
+				!AppController.getInstance().isVideoInterstitialADAvailable()){
+
+			ctx.startActivity(
+					GiftDetailActivity.createIntent(gift)
+			);
+
+		}else {
+			AppController.getInstance().showVideoInterstitialAd();
+		}
+	}
+
 	public static Intent createIntent(Gift gift) {
 		Intent intent = new Intent(AppController.getAppContext(), GiftDetailActivity.class);
 		intent.putExtra(Constants.GIFT, gift);

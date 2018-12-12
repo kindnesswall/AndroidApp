@@ -4,17 +4,26 @@ import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.aspsine.multithreaddownload.DownloadConfiguration;
 import com.aspsine.multithreaddownload.DownloadManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.constants.TapSellConstants;
+import ir.tapsell.sdk.Tapsell;
+import ir.tapsell.sdk.TapsellAd;
+import ir.tapsell.sdk.TapsellAdRequestListener;
+import ir.tapsell.sdk.TapsellAdRequestOptions;
+import ir.tapsell.sdk.TapsellAdShowListener;
+import ir.tapsell.sdk.TapsellShowOptions;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,6 +68,91 @@ public class AppController extends Application {
 	private Retrofit longTimeOutRetrofit;
 	private OkHttpClient longTimeOutHttpClient;
 
+	public int secondsInTwentyFourHour = 24 * 60 * 60;
+
+	public boolean isVideoInterstitialADAvailable() {
+		return videoInterstitialAD != null;
+	}
+
+	private TapsellAd videoInterstitialAD;
+
+	public void requestVideoInterstitialAd(){
+		TapsellAdRequestOptions options = new TapsellAdRequestOptions();
+		options.setCacheType(TapsellAdRequestOptions.CACHE_TYPE_CACHED);
+
+		Tapsell.requestAd(getAppContext(), TapSellConstants.ZoneID.VideoInterstitial, options, new TapsellAdRequestListener() {
+			@Override
+			public void onError (String error)
+			{
+				Log.d(TAG, "onError: "+error);
+			}
+
+			@Override
+			public void onAdAvailable (TapsellAd ad)
+			{
+				videoInterstitialAD = ad;
+			}
+
+			@Override
+			public void onNoAdAvailable ()
+			{
+				Log.d(TAG, "onNoAdAvailable: ");
+				requestVideoInterstitialAd();
+			}
+
+			@Override
+			public void onNoNetwork ()
+			{
+				Log.d(TAG, "onNoNetwork: ");
+				requestVideoInterstitialAd();
+			}
+
+			@Override
+			public void onExpiring (TapsellAd ad)
+			{
+				Log.d(TAG, "onExpiring: ");
+				requestVideoInterstitialAd();
+			}
+		});
+	}
+
+	public boolean didISawAdInLast24Hour() {
+
+		long lastTimeISawAd = AppController.getStoredLong(Constants.LastTimeISawAd);
+
+		long currentTimeInSeconds = (new Date()).getTime() / 1000;
+		if (currentTimeInSeconds - secondsInTwentyFourHour > lastTimeISawAd){
+			return false;
+		}
+
+		return true;
+	}
+
+	public void iSeeAnAd() {
+		long currentTimeInSeconds = (new Date()).getTime() / 1000;
+		AppController.storeLong(Constants.LastTimeISawAd, currentTimeInSeconds);
+	}
+
+	public void showVideoInterstitialAd (){
+		TapsellShowOptions showOptions = new TapsellShowOptions();
+
+		videoInterstitialAD.show(getAppContext(), showOptions, new TapsellAdShowListener() {
+			@Override
+			public void onOpened (TapsellAd ad)
+			{
+				iSeeAnAd();
+				Log.d(TAG, "onOpened: ");
+			}
+			@Override
+			public void onClosed (TapsellAd ad)
+			{
+				Log.d(TAG, "onClosed: ");
+
+			}
+		});
+		videoInterstitialAD = null;
+	}
+
 	public static NotificationManager getNotificationManager() {
 		return notificationManager;
 	}
@@ -87,6 +181,15 @@ public class AppController extends Application {
 	public static void storeInt(String key, Integer value) {
 		editor.putInt(key, value);
 		editor.apply();
+	}
+
+	public static void storeLong(String key, long value) {
+		editor.putLong(key, value);
+		editor.apply();
+	}
+
+	public static long getStoredLong(String key) {
+		return preferences.getLong(key, 0);
 	}
 
 	public static void storeBoolean(String key, boolean value) {
@@ -135,6 +238,8 @@ public class AppController extends Application {
 		super.onCreate();
 //		Fabric.with(this, new Crashlytics());
 
+		Tapsell.initialize(this, TapSellConstants.KEY);
+
 		mInstance = this;
 		AppController.context = getApplicationContext();
 
@@ -150,6 +255,8 @@ public class AppController extends Application {
 
 		retrofitInitialization();
 		longTimeoutRetrofitInitialization();
+
+		requestVideoInterstitialAd();
 	}
 
 	private void retrofitInitialization() {

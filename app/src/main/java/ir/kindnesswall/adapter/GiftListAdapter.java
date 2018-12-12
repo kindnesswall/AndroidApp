@@ -3,6 +3,7 @@ package ir.kindnesswall.adapter;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,12 @@ import java.util.ArrayList;
 
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.GiftDetailActivity;
+import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.holder.GiftHolder;
 import ir.kindnesswall.model.api.Gift;
+import ir.tapsell.sdk.TapsellAd;
+import ir.tapsell.sdk.TapsellAdShowListener;
+import ir.tapsell.sdk.TapsellShowOptions;
 
 /**
  * Created by HamedGh on 3/8/2016.
@@ -68,9 +73,7 @@ public class GiftListAdapter extends RecyclerView.Adapter<GiftHolder> {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mContext.startActivity(
-								GiftDetailActivity.createIntent(gifts.get(i))
-						);
+						GiftDetailActivity.start(mContext, gifts.get(i));
 					}
 				}
 

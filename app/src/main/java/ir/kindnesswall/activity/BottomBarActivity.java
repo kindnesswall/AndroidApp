@@ -40,6 +40,7 @@ import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.bottombar.BottomBar;
 import ir.kindnesswall.bottombar.OnMenuTabClickListener;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.constants.TapSellConstants;
 import ir.kindnesswall.fragment.HomeCategoryFragment;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
@@ -472,8 +473,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 
 			case myRequests:
 //				Toasti.showS("myRequests");
-//				startActivity(MyRequestsActivity.createIntent());
-				startActivity(ChatActivity.createIntent());
+				startActivity(MyRequestsActivity.createIntent());
+//				startActivity(ChatActivity.createIntent());
 
 				break;
 			case bookmarks:
@@ -816,8 +817,8 @@ public class BottomBarActivity extends AppCompatActivity implements ApiRequest.L
 //						replaceFragment(receivedRequestsFragment, ReceivedRequestsFragment.class.getName());
 //						mToolbarTitleTextView.setText("درخواستهای دریافتی");
 
-//						startActivity(MyRequestsActivity.createIntent());
-						startActivity(ChatActivity.createIntent());
+						startActivity(MyRequestsActivity.createIntent());
+//						startActivity(F.createIntent());
 
 						dialog.dismiss();
 					}

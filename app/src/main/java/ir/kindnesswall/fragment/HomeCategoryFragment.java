@@ -1,5 +1,6 @@
 package ir.kindnesswall.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.kindnesswall.R;
 import ir.kindnesswall.adapter.HomeCategoriesAdapter;
+import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.customviews.textviews.TextViewIranSansRegular;
 import ir.kindnesswall.model.api.Category;
 import retrofit2.Call;
@@ -27,98 +29,100 @@ import retrofit2.Response;
 
 public class HomeCategoryFragment extends BaseFragment {
 
-	@Bind(R.id.message_textview)
-	TextViewIranSansRegular messageTextview;
+    private final String TAG = HomeCategoryFragment.class.getSimpleName();
 
-	@Bind(R.id.recycler_view)
-	RecyclerView mRecyclerView;
+    @Bind(R.id.message_textview)
+    TextViewIranSansRegular messageTextview;
 
-	@Bind(R.id.fragment_progressBar)
-	ProgressView mProgressView;
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
-	@Bind(R.id.swipeRefreshLayout)
-	SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.fragment_progressBar)
+    ProgressView mProgressView;
 
-	private View rootView;
-	ArrayList<Category> categories = new ArrayList<>();
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-	HomeCategoriesAdapter homeCategoriesAdapter;
-	private LinearLayoutManager linearLayoutManager;
+    private View rootView;
+    ArrayList<Category> categories = new ArrayList<>();
 
-	public static HomeCategoryFragment newInstance() {
-		HomeCategoryFragment fragment = new HomeCategoryFragment();
-		Bundle args = new Bundle();
+    HomeCategoriesAdapter homeCategoriesAdapter;
+    private LinearLayoutManager linearLayoutManager;
+
+    public static HomeCategoryFragment newInstance() {
+        HomeCategoryFragment fragment = new HomeCategoryFragment();
+        Bundle args = new Bundle();
 //		args.putString(Constants.PAGETYPE, pageType);
 //		args.putParcelable(Constants.CATEGORY_PARCELABLE, category);
-		fragment.setArguments(args);
-		return fragment;
-	}
+        fragment.setArguments(args);
+        return fragment;
+    }
 
-	@Override
-	protected void init() {
-		super.init();
+    @Override
+    protected void init() {
+        super.init();
 
-		apiRequest.getCategories();
+        apiRequest.getCategories();
 
-	}
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		if (rootView != null) {
-			if (rootView.getParent() != null)
-				((ViewGroup) rootView.getParent()).removeView(rootView);
-			return rootView;
-		}
-		rootView = inflater.inflate(R.layout.fragment_information, container, false);
-		ButterKnife.bind(this, rootView);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (rootView != null) {
+            if (rootView.getParent() != null)
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
+            return rootView;
+        }
+        rootView = inflater.inflate(R.layout.fragment_information, container, false);
+        ButterKnife.bind(this, rootView);
 
-		init();
-		setListeners();
+        init();
+        setListeners();
 
-		return rootView;
-	}
+        return rootView;
+    }
 
-	private void setListeners() {
-
-
-		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				// Refresh gifts
-				apiRequest.getCategories();
-			}
-		});
-	}
+    private void setListeners() {
 
 
-	@Override
-	public void onResponse(Call call, Response response) {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh gifts
+                apiRequest.getCategories();
+            }
+        });
+    }
 
-		mRecyclerView.setVisibility(View.VISIBLE);
-		mProgressView.setVisibility(View.INVISIBLE);
-		messageTextview.setVisibility(View.INVISIBLE);
-		mSwipeRefreshLayout.setRefreshing(false);
 
-		ArrayList<Category> categories = (ArrayList<Category>) response.body();
-		this.categories.clear();
-		int i = 0;
-		for (;i < categories.size(); i++) {
-			if (categories.get(i).title.equals("کتاب"))
-				break;
-		}
-		categories.remove(i);
+    @Override
+    public void onResponse(Call call, Response response) {
 
-		this.categories.addAll(categories);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mProgressView.setVisibility(View.INVISIBLE);
+        messageTextview.setVisibility(View.INVISIBLE);
+        mSwipeRefreshLayout.setRefreshing(false);
 
-		homeCategoriesAdapter = new HomeCategoriesAdapter(context, this.categories);
-		mRecyclerView.setAdapter(homeCategoriesAdapter);
-		linearLayoutManager = new LinearLayoutManager(context);
-		mRecyclerView.setLayoutManager(linearLayoutManager);
+        ArrayList<Category> categories = (ArrayList<Category>) response.body();
+        this.categories.clear();
+        int i = 0;
+        for (; i < categories.size(); i++) {
+            if (categories.get(i).title.equals("کتاب"))
+                break;
+        }
+        categories.remove(i);
+
+        this.categories.addAll(categories);
+
+        homeCategoriesAdapter = new HomeCategoriesAdapter(context, this.categories);
+        mRecyclerView.setAdapter(homeCategoriesAdapter);
+        linearLayoutManager = new LinearLayoutManager(context);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
 
 //		homeCategoriesAdapter.notifyDataSetChanged();
 
-	}
+    }
 
 }

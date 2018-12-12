@@ -102,9 +102,9 @@ public class RequestsToAGiftFragment extends BaseFragment {
 		mInfoLay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				getActivity().startActivity(
-						GiftDetailActivity.createIntent(giftId)
-				);
+
+				GiftDetailActivity.start(getActivity(),giftId);
+
 			}
 		});
 

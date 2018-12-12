@@ -90,4 +90,6 @@ public class Constants {
 	public static final String SEE_CONVERSATION = "SEE_CONVERSATION";
 
 	public static String URI = "uri";
+
+	public static String LastTimeISawAd = "LastTimeISawAd";
 }

@@ -92,7 +92,7 @@ public class SentRequestAdapter extends RecyclerView.Adapter<SentRequestItemHold
 			@Override
 			public void onClick(View view) {
 				Log.d("Test", "onClick: ");
-				mContext.startActivity(GiftDetailActivity.createIntent(requestModels.get(i).giftId));
+				GiftDetailActivity.start(mContext,requestModels.get(i).giftId);
 			}
 		});
 
