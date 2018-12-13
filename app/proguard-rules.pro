@@ -84,10 +84,9 @@
 -keep class ir.tapsell.sdk.nativeads.TapsellNativeBannerAdLoader$Builder {*;}
 
 -keepclasseswithmembers class * {
-    native ;
+    native <methods>;
 }
 
 -keepclasseswithmembers class * {
-    public (android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet);
 }
-

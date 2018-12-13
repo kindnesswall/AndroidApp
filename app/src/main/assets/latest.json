@@ -62,6 +62,10 @@
 
   {"name": "\u067E\u0644\u062F\u062E\u062A\u0631", "level": "place2", "container_id": 0, "slug": "pol-e dokhtar", "id": 722},
 
-  {"name": "\u067E\u06CC\u0631\u0627\u0646\u0634\u0647\u0631", "level": "place2", "container_id": 0, "slug": "piranshahr", "id": 723}
+  {"name": "\u067E\u06CC\u0631\u0627\u0646\u0634\u0647\u0631", "level": "place2", "container_id": 0, "slug": "piranshahr", "id": 723},
+
+  {"name": "\u0686\u0627\u0644\u0648\u0633", "level": "place2", "container_id": 0, "slug": "chalos", "id": 724},
+
+  {"name": "\u0646\u0648\u0634\u0647\u0631", "level": "place2", "container_id": 0, "slug": "noshahr", "id": 725}
 
 ]}
