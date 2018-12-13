@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,6 +30,7 @@ import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.adapter.GiftListAdapter;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.constants.TapSellConstants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewDivarIcons;
 import ir.kindnesswall.dialogfragment.HomeFilteringDialogFragment;
@@ -39,6 +41,8 @@ import ir.kindnesswall.model.GetGiftPathQuery;
 import ir.kindnesswall.model.Place;
 import ir.kindnesswall.model.api.Category;
 import ir.kindnesswall.model.api.Gift;
+import ir.tapsell.sdk.AdRequestCallback;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerManager;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -122,6 +126,35 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 					break;
 			}
 		}
+	}
+
+	private void getTapsellAd() {
+		TapsellNativeBannerManager.getAd(context, TapSellConstants.ZoneID.NativeBanner,
+				new AdRequestCallback() {
+					@Override
+					public void onResponse(String[] strings) {
+						onAdResponse(strings);
+					}
+
+					@Override
+					public void onFailed(String s) {
+						Log.e(getClass().getName(), "get ad fail");
+					}
+				});
+	}
+
+	private void onAdResponse(String[] adsId) {
+		Gift gift = new Gift();
+
+		gift.giftId = adsId[0];
+		gift.isAd = true;
+
+		gifts.add(gift);
+
+		progressView.setVisibility(View.INVISIBLE);
+		adapter.notifyDataSetChanged();
+		mRecyclerView.setVisibility(View.VISIBLE);
+		mMessageTextView.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -289,6 +322,13 @@ public class HomeFragment extends BaseFragment implements HomeFilteringCallback 
 	}
 
 	private void getGifts() {
+		if (gifts.isEmpty()){
+			getTapsellAd();
+		}
+		if (gifts.size() > 0 && !gifts.get(gifts.size()-1).isAd){
+			getTapsellAd();
+		}
+
 		apiRequest.getGifts(
 				new GetGiftPathQuery(
 

@@ -155,7 +155,7 @@ public class SearchActivity extends AppCompatActivity implements HomeFilteringCa
 		if (gifts.isEmpty()){
 			getTapsellAd();
 		}
-		if (gifts.size() > 0 && gifts.get(gifts.size()-1).isAd == false){
+		if (gifts.size() > 0 && !gifts.get(gifts.size()-1).isAd){
 			getTapsellAd();
 		}
 		apiRequest.getGifts(
