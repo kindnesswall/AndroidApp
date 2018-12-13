@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Gift implements Parcelable {
 
+	public boolean isAd = false;
+
 	public static final Creator<Gift> CREATOR = new Creator<Gift>() {
 		@Override
 		public Gift createFromParcel(Parcel in) {

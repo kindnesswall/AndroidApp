@@ -18,12 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 import ir.kindnesswall.constants.Constants;
 import ir.kindnesswall.constants.TapSellConstants;
+import ir.tapsell.sdk.CacheSize;
 import ir.tapsell.sdk.Tapsell;
 import ir.tapsell.sdk.TapsellAd;
 import ir.tapsell.sdk.TapsellAdRequestListener;
 import ir.tapsell.sdk.TapsellAdRequestOptions;
 import ir.tapsell.sdk.TapsellAdShowListener;
 import ir.tapsell.sdk.TapsellShowOptions;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerManager;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -256,7 +258,13 @@ public class AppController extends Application {
 		retrofitInitialization();
 		longTimeoutRetrofitInitialization();
 
+		initAdCache();
 		requestVideoInterstitialAd();
+	}
+
+	private void initAdCache() {
+		TapsellNativeBannerManager.createCache(this,
+				TapSellConstants.ZoneID.NativeBanner, CacheSize.MEDIUM);
 	}
 
 	private void retrofitInitialization() {

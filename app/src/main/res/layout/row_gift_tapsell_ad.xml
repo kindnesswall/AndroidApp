@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+	<RelativeLayout
+		android:id="@+id/adContainer"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginBottom="4dp"
+	                android:layout_marginLeft="4dp"
+	                android:layout_marginRight="4dp"
+	                android:layout_marginTop="4dp"
+	                android:background="@color/white">
+
+		<ImageView
+			android:id="@+id/tapsell_nativead_logo"
+			android:layout_width="118dp"
+			android:layout_height="118dp"
+			android:layout_alignParentRight="true"/>
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/tapsell_nativead_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignTop="@id/tapsell_nativead_logo"
+			android:layout_marginLeft="12dp"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="4dp"
+			android:layout_toRightOf="@+id/sponsor_tv"
+			android:layout_toLeftOf="@id/tapsell_nativead_logo"
+
+			android:ellipsize="end"
+			android:gravity="right"
+
+			android:text="یک عنوان بسیار طولانی که چند خط بشه داریم تست میکنیم"
+			android:textColor="@color/black"
+			android:textSize="14sp"/>
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/sponsor_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:layout_alignTop="@id/tapsell_nativead_logo"
+
+			android:layout_marginLeft="0dp"
+			android:layout_marginRight="8dp"
+
+			android:layout_alignParentLeft="true"
+
+			android:gravity="left"
+
+			android:text="  اسپانسر  "
+			android:textColor="@color/white"
+			android:background="@color/orange_700"
+			android:textSize="14sp"
+			/>
+
+		<!--<ImageView-->
+			<!--android:id="@+id/row_ad_gift_location_icon"-->
+			<!--android:layout_width="18dp"-->
+			<!--android:layout_height="18dp"-->
+
+			<!--android:layout_alignRight="@id/row_title_textview"-->
+			<!--android:layout_below="@id/row_title_textview"-->
+			<!--android:layout_marginTop="8dp"-->
+			<!--android:src="@mipmap/ic_location_on_black_18dp"/>-->
+
+		<!--<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular-->
+			<!--android:id="@+id/row_ad_gift_location_tv"-->
+			<!--android:layout_width="match_parent"-->
+			<!--android:layout_height="wrap_content"-->
+
+			<!--android:layout_alignBottom="@id/row_ad_gift_location_icon"-->
+			<!--android:layout_marginLeft="4dp"-->
+			<!--android:layout_marginRight="4dp"-->
+
+			<!--android:layout_toLeftOf="@id/row_ad_gift_location_icon"-->
+
+			<!--android:ellipsize="end"-->
+			<!--android:gravity="right"-->
+
+			<!--android:text="عباس آباد"-->
+			<!--android:textColor="@color/grey_600"-->
+			<!--android:textSize="11sp"/>-->
+
+
+		<ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+			android:id="@+id/tapsell_nativead_description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:layout_alignBottom="@id/tapsell_nativead_logo"
+			android:layout_toLeftOf="@id/tapsell_nativead_logo"
+
+			android:layout_marginLeft="4dp"
+			android:layout_marginRight="12dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginTop="12dp"
+
+			android:ellipsize="end"
+			android:gravity="right"
+
+			android:text="دقایقی پیش"
+			android:textColor="@color/grey_600"
+			android:textSize="12sp"/>
+
+		<Button
+			android:id="@id/tapsell_nativead_cta"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/tapsell_nativead_description"
+			android:layout_alignStart="@+id/tapsell_nativead_description"
+			android:layout_below="@+id/tapsell_nativead_title"
+			android:visibility="invisible"
+			android:text="" />
+
+	</RelativeLayout>
+
+</RelativeLayout>

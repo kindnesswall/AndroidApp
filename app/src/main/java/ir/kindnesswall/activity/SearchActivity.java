@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ import ir.kindnesswall.R;
 import ir.kindnesswall.adapter.GiftListAdapter;
 import ir.kindnesswall.app.AppController;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.constants.TapSellConstants;
 import ir.kindnesswall.customviews.edit_text.EditTextIranSans;
 import ir.kindnesswall.customviews.textviews.TextViewDivarIcons;
 import ir.kindnesswall.dialogfragment.HomeFilteringDialogFragment;
@@ -42,6 +44,8 @@ import ir.kindnesswall.model.GetGiftPathQuery;
 import ir.kindnesswall.model.Place;
 import ir.kindnesswall.model.api.Category;
 import ir.kindnesswall.model.api.Gift;
+import ir.tapsell.sdk.AdRequestCallback;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerManager;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -112,12 +116,48 @@ public class SearchActivity extends AppCompatActivity implements HomeFilteringCa
 
 		getGifts();
 	}
+
+	private void getTapsellAd() {
+		TapsellNativeBannerManager.getAd(this, TapSellConstants.ZoneID.NativeBanner,
+				new AdRequestCallback() {
+					@Override
+					public void onResponse(String[] strings) {
+						onAdResponse(strings);
+					}
+
+					@Override
+					public void onFailed(String s) {
+						Log.e(getClass().getName(), "get ad fail");
+					}
+				});
+	}
+
+	private void onAdResponse(String[] adsId) {
+		Gift gift = new Gift();
+
+		gift.giftId = adsId[0];
+		gift.isAd = true;
+
+		gifts.add(gift);
+
+		progressView.setVisibility(View.INVISIBLE);
+		adapter.notifyDataSetChanged();
+		mRecyclerView.setVisibility(View.VISIBLE);
+		mMessageTextView.setVisibility(View.INVISIBLE);
+	}
+
 	private void setBackspaceSearchtxtIcon() {
 		Drawable myIcon = getResources().getDrawable(R.mipmap.ic_backspace_black_24dp);
 		myIcon.setColorFilter(getResources().getColor(R.color.dark_white), PorterDuff.Mode.SRC_ATOP);
 		mSearchBackspaceBtn.setImageDrawable(myIcon);
 	}
 	private void getGifts() {
+		if (gifts.isEmpty()){
+			getTapsellAd();
+		}
+		if (gifts.size() > 0 && gifts.get(gifts.size()-1).isAd == false){
+			getTapsellAd();
+		}
 		apiRequest.getGifts(
 				new GetGiftPathQuery(
 
@@ -344,11 +384,11 @@ public class SearchActivity extends AppCompatActivity implements HomeFilteringCa
 
 	@Override
 	public void onResponse(Call call, Response response) {
-		progressView.setVisibility(View.INVISIBLE);
 
 		List<Gift> responseGifts = (List<Gift>) response.body();
 		gifts.addAll(responseGifts);
 
+		progressView.setVisibility(View.INVISIBLE);
 		if (gifts.size() == 0) {
 			mRecyclerView.setVisibility(View.INVISIBLE);
 			mMessageTextView.setVisibility(View.VISIBLE);
