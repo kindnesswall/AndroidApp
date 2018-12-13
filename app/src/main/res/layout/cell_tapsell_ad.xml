@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adContainer"
+
+    android:layout_width="104dp"
+    android:layout_height="150dp"
+    android:background="@color/white"
+    android:paddingLeft="4dp">
+
+    <ImageView
+        android:id="@+id/tapsell_nativead_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:id="@+id/lay_info_pack"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@id/tapsell_nativead_logo"
+        android:layout_alignRight="@id/tapsell_nativead_logo"
+        android:layout_below="@id/tapsell_nativead_logo"
+
+        android:background="@color/divider"
+
+        android:paddingBottom="4dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="2dp">
+
+    </RelativeLayout>
+
+    <ir.kindnesswall.customviews.textviews.TextViewIranSansBold
+        android:id="@+id/tapsell_nativead_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tapsell_nativead_logo"
+        android:layout_alignLeft="@id/tapsell_nativead_logo"
+        android:layout_alignRight="@id/tapsell_nativead_logo"
+
+        android:ellipsize="end"
+        android:maxLines="1"
+
+        android:text="پدر خوانده"
+
+        android:textColor="@color/text_primary"
+        android:background="@color/divider"
+
+        android:textSize="11sp"
+
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="2dp"
+        />
+
+    <ir.kindnesswall.customviews.textviews.TextViewIranSansRegular
+        android:id="@+id/sponsor_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+
+        android:background="@color/orange_700"
+
+        android:gravity="left"
+        android:text="  اسپانسر  "
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@id/tapsell_nativead_cta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="invisible" />
+
+</RelativeLayout>

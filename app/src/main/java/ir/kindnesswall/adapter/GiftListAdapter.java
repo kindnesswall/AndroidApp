@@ -40,7 +40,6 @@ public class GiftListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		}else {
 			return 1;
 		}
-
 	}
 
 	@Override

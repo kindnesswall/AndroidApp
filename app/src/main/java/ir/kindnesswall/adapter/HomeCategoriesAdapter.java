@@ -3,6 +3,7 @@ package ir.kindnesswall.adapter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.Map;
 import ir.kindnesswall.R;
 import ir.kindnesswall.activity.BottomBarActivity;
 import ir.kindnesswall.constants.Constants;
+import ir.kindnesswall.constants.TapSellConstants;
 import ir.kindnesswall.fragment.HomeFragment;
 import ir.kindnesswall.fragment.category.CategoriesGridFragment;
 import ir.kindnesswall.helper.ApiRequest;
@@ -28,6 +30,8 @@ import ir.kindnesswall.model.GiftListModel;
 import ir.kindnesswall.model.Place;
 import ir.kindnesswall.model.api.Category;
 import ir.kindnesswall.model.api.Gift;
+import ir.tapsell.sdk.AdRequestCallback;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerManager;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -131,8 +135,40 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 
 	}
 
+	private void getTapsellAd(final int position) {
+		TapsellNativeBannerManager.getAd(mContext, TapSellConstants.ZoneID.NativeBanner,
+				new AdRequestCallback() {
+					@Override
+					public void onResponse(String[] strings) {
+						onAdResponse(strings,position);
+					}
+
+					@Override
+					public void onFailed(String s) {
+						Log.e(getClass().getName(), "get ad fail");
+					}
+				});
+	}
+
+	private void onAdResponse(String[] adsId,final int position) {
+		Gift gift = new Gift();
+
+		gift.giftId = adsId[0];
+		gift.isAd = true;
+
+		mGiftPositionMap.get(position).gifts.add(gift);
+	}
+
 	private void getGifts(final int position,
 	                      int startIndex) {
+
+		if (Math.random() < 0.5){
+			getTapsellAd(position);
+		}
+//		if (mGiftPositionMap.get(position).gifts.size() > 0 &&
+//				!mGiftPositionMap.get(position).gifts.get(mGiftPositionMap.get(position).gifts.size()-1).isAd){
+//			getTapsellAd(position);
+//		}
 
 		apiRequest.getGifts(
 				new GetGiftPathQuery(
